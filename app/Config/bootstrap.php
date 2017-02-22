@@ -112,3 +112,4 @@ CakeLog::config('error', array(
 
 CakePlugin::load('DebugKit');
 CakePlugin::load('AclExtras');
+CakePlugin::load('Upload');
