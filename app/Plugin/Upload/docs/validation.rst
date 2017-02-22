@@ -1,86 +1,28 @@
-Validation
-==========
-
-By default, no validation rules are loaded or attached to the table. You must
-explicitly load the validation provider(s) and attach each rule if needed.
-
-Installation
-------------
-
-This plugin allows you to only load the validation rules that cover your needs.
-At this point there are 3 validation providers:
-
-    - UploadValidation (validation rules useful for any upload)
-    - ImageValidation (validation rules specifically for images)
-    - DefaultValidation (loads all of the above)
-
-Since by default, no validation rules are loaded, you should start with that:
-
-.. code:: php
-
-    <?php
-
-        $validator->provider('upload', \Josegonzalez\Upload\Validation\UploadValidation::class);
-        // OR
-        $validator->provider('upload', \Josegonzalez\Upload\Validation\ImageValidation::class);
-        // OR
-        $validator->provider('upload', \Josegonzalez\Upload\Validation\DefaultValidation::class);
-
-    ?>
-
-Afterwards, you can use its rules like:
-
-.. code:: php
-
-    <?php
-
-        $validator->add('file', 'customName', [
-            'rule' => 'nameOfTheRule',
-            'message' => 'yourErrorMessage',
-            'provider' => 'upload'
-        ]);
-
-    ?>
-
-It might come in handy to only use a validation rule when there actually is an uploaded file:
-
-.. code:: php
-
-    <?php
-
-        $validator->add('file', 'customName', [
-            'rule' => 'nameOfTheRule',
-            'message' => 'yourErrorMessage',
-            'provider' => 'upload',
-            'on' => function($context) {
-                return !empty($context['data']['file']) && $context['data']['file']['error'] == UPLOAD_ERR_OK;
-            }
-        ]);
-
-    ?>
-
-More information on conditional validation can be found `here <http://book.cakephp.org/3.0/en/core-libraries/validation.html#conditional-validation>`__.
-
-UploadValidation
+Validation rules
 ----------------
 
-**isUnderPhpSizeLimit**
+By default, no validation rules are attached to the model. You must
+explicitly attach each rule if needed. Rules not referring to PHP upload
+errors are configurable but fallback to the behavior configuration.
+
+isUnderPhpSizeLimit
+^^^^^^^^^^^^^^^^^^^
 
 Check that the file does not exceed the max file size specified by PHP
 
 .. code:: php
 
     <?php
-
-        $validator->add('file', 'fileUnderPhpSizeLimit', [
+    public $validate = array(
+        'photo' => array(
             'rule' => 'isUnderPhpSizeLimit',
-            'message' => 'This file is too large',
-            'provider' => 'upload'
-        ]);
-
+            'message' => 'File exceeds upload filesize limit'
+        )
+    );
     ?>
 
-**isUnderFormSizeLimit**
+isUnderFormSizeLimit
+^^^^^^^^^^^^^^^^^^^^
 
 Check that the file does not exceed the max file size specified in the
 HTML Form
@@ -88,64 +30,263 @@ HTML Form
 .. code:: php
 
     <?php
-
-        $validator->add('file', 'fileUnderFormSizeLimit', [
+    public $validate = array(
+        'photo' => array(
             'rule' => 'isUnderFormSizeLimit',
-            'message' => 'This file is too large',
-            'provider' => 'upload'
-        ]);
-
+            'message' => 'File exceeds form upload filesize limit'
+        )
+    );
     ?>
 
-**isCompletedUpload**
+isCompletedUpload
+^^^^^^^^^^^^^^^^^
 
 Check that the file was completely uploaded
 
 .. code:: php
 
     <?php
-
-        $validator->add('file', 'fileCompletedUpload', [
+    public $validate = array(
+        'photo' => array(
             'rule' => 'isCompletedUpload',
-            'message' => 'This file could not be uploaded completely',
-            'provider' => 'upload'
-        ]);
-
+            'message' => 'File was not successfully uploaded'
+        )
+    );
     ?>
 
-**isFileUpload**
+isFileUpload
+^^^^^^^^^^^^
 
 Check that a file was uploaded
 
 .. code:: php
 
     <?php
-
-        $validator->add('file', 'fileFileUpload', [
+    public $validate = array(
+        'photo' => array(
             'rule' => 'isFileUpload',
-            'message' => 'There was no file found to upload',
-            'provider' => 'upload'
-        ]);
-
+            'message' => 'File was missing from submission'
+        )
+    );
     ?>
 
-**isSuccessfulWrite**
+isFileUploadOrHasExistingValue
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Check that either a file was uploaded, or the existing value in the
+database is not blank
+
+.. code:: php
+
+    <?php
+    public $validate = array(
+        'photo' => array(
+            'rule' => 'isFileUploadOrHasExistingValue',
+            'message' => 'File was missing from submission'
+        )
+    );
+    ?>
+
+tempDirExists
+^^^^^^^^^^^^^
+
+Check that the PHP temporary directory is missing
+
+.. code:: php
+
+    <?php
+    public $validate = array(
+        'photo' => array(
+            'rule' => 'tempDirExists',
+            'message' => 'The system temporary directory is missing'
+        )
+    );
+    ?>
+
+If the argument ``$requireUpload`` is passed, we can skip this check
+when a file is not uploaded:
+
+.. code:: php
+
+    <?php
+    public $validate = array(
+        'photo' => array(
+            'rule' => array('tempDirExists', false),
+            'message' => 'The system temporary directory is missing'
+        )
+    );
+    ?>
+
+In the above, the variable ``$requireUpload`` has a value of false. By
+default, ``requireUpload`` is set to true.
+
+isSuccessfulWrite
+^^^^^^^^^^^^^^^^^
 
 Check that the file was successfully written to the server
 
 .. code:: php
 
     <?php
-
-        $validator->add('file', 'fileSuccessfulWrite', [
+    public $validate = array(
+        'photo' => array(
             'rule' => 'isSuccessfulWrite',
-            'message' => 'This upload failed',
-            'provider' => 'upload'
-        ]);
-
+            'message' => 'File was unsuccessfully written to the server'
+        )
+    );
     ?>
 
-**isBelowMaxSize**
+If the argument ``$requireUpload`` is passed, we can skip this check
+when a file is not uploaded:
+
+.. code:: php
+
+    <?php
+    public $validate = array(
+        'photo' => array(
+            'rule' => array('isSuccessfulWrite', false),
+            'message' => 'File was unsuccessfully written to the server'
+        )
+    );
+    ?>
+
+In the above, the variable ``$requireUpload`` has a value of false. By
+default, ``requireUpload`` is set to true.
+
+noPhpExtensionErrors
+^^^^^^^^^^^^^^^^^^^^
+
+Check that a PHP extension did not cause an error
+
+.. code:: php
+
+    <?php
+    public $validate = array(
+        'photo' => array(
+            'rule' => 'noPhpExtensionErrors',
+            'message' => 'File was not uploaded because of a faulty PHP extension'
+        )
+    );
+    ?>
+
+If the argument ``$requireUpload`` is passed, we can skip this check
+when a file is not uploaded:
+
+.. code:: php
+
+    <?php
+    public $validate = array(
+        'photo' => array(
+            'rule' => array('noPhpExtensionErrors', false),
+            'message' => 'File was not uploaded because of a faulty PHP extension'
+        )
+    );
+    ?>
+
+In the above, the variable ``$requireUpload`` has a value of false. By
+default, ``requireUpload`` is set to true.
+
+isValidMimeType
+^^^^^^^^^^^^^^^
+
+Check that the file is of a valid mimetype
+
+.. code:: php
+
+    <?php
+    public $validate = array(
+        'photo' => array(
+            'rule' => array('isValidMimeType', array('application/pdf', 'image/png')),
+            'message' => 'File is not a pdf or png'
+        )
+    );
+    ?>
+
+If the argument ``$requireUpload`` is passed, we can skip this check
+when a file is not uploaded:
+
+.. code:: php
+
+    <?php
+    public $validate = array(
+        'photo' => array(
+            'rule' => array('isValidMimeType', array('application/pdf', 'image/png'), false),
+            'message' => 'File is not a pdf or png'
+        )
+    );
+    ?>
+
+In the above, the variable ``$requireUpload`` has a value of false. By
+default, ``requireUpload`` is set to true.
+
+isWritable
+^^^^^^^^^^
+
+Check that the upload directory is writable
+
+.. code:: php
+
+    <?php
+    public $validate = array(
+        'photo' => array(
+            'rule' => array('isWritable'),
+            'message' => 'File upload directory was not writable'
+        )
+    );
+    ?>
+
+If the argument ``$requireUpload`` is passed, we can skip this check
+when a file is not uploaded:
+
+.. code:: php
+
+    <?php
+    public $validate = array(
+        'photo' => array(
+            'rule' => array('isWritable', false),
+            'message' => 'File upload directory was not writable'
+        )
+    );
+    ?>
+
+In the above, the variable ``$requireUpload`` has a value of false. By
+default, ``requireUpload`` is set to true.
+
+isValidDir
+^^^^^^^^^^
+
+Check that the upload directory exists
+
+.. code:: php
+
+    <?php
+    public $validate = array(
+        'photo' => array(
+            'rule' => array('isValidDir'),
+            'message' => 'File upload directory does not exist'
+        )
+    );
+    ?>
+
+If the argument ``$requireUpload`` is passed, we can skip this check
+when a file is not uploaded:
+
+.. code:: php
+
+    <?php
+    public $validate = array(
+        'photo' => array(
+            'rule' => array('isValidDir', false),
+            'message' => 'File upload directory does not exist'
+        )
+    );
+    ?>
+
+In the above, the variable ``$requireUpload`` has a value of false. By
+default, ``requireUpload`` is set to true.
+
+isBelowMaxSize
+^^^^^^^^^^^^^^
 
 Check that the file is below the maximum file upload size (checked in
 bytes)
@@ -153,16 +294,33 @@ bytes)
 .. code:: php
 
     <?php
-
-        $validator->add('file', 'fileBelowMaxSize', [
-            'rule' => ['isBelowMaxSize', 1024],
-            'message' => 'This file is too large',
-            'provider' => 'upload'
-        ]);
-
+    public $validate = array(
+        'photo' => array(
+            'rule' => array('isBelowMaxSize', 1024),
+            'message' => 'File is larger than the maximum filesize'
+        )
+    );
     ?>
 
-**isAboveMinSize**
+If the argument ``$requireUpload`` is passed, we can skip this check
+when a file is not uploaded:
+
+.. code:: php
+
+    <?php
+    public $validate = array(
+        'photo' => array(
+            'rule' => array('isBelowMaxSize', 1024, false),
+            'message' => 'File is larger than the maximum filesize'
+        )
+    );
+    ?>
+
+In the above, the variable ``$requireUpload`` has a value of false. By
+default, ``requireUpload`` is set to true.
+
+isAboveMinSize
+^^^^^^^^^^^^^^
 
 Check that the file is above the minimum file upload size (checked in
 bytes)
@@ -170,19 +328,66 @@ bytes)
 .. code:: php
 
     <?php
-
-        $validator->add('file', 'fileAboveMinSize', [
-            'rule' => ['isAboveMinSize', 1024],
-            'message' => 'This file is too small',
-            'provider' => 'upload'
-        ]);
-
+    public $validate = array(
+        'photo' => array(
+            'rule' => array('isAboveMinSize', 1024),
+            'message' => 'File is below the mimimum filesize'
+        )
+    );
     ?>
 
-ImageValidation
----------------
+If the argument ``$requireUpload`` is passed, we can skip this check
+when a file is not uploaded:
 
-**isAboveMinHeight**
+.. code:: php
+
+    <?php
+    public $validate = array(
+        'photo' => array(
+            'rule' => array('isAboveMinSize', 1024, false),
+            'message' => 'File is below the mimimum filesize'
+        )
+    );
+    ?>
+
+In the above, the variable ``$requireUpload`` has a value of false. By
+default, ``requireUpload`` is set to true.
+
+isValidExtension
+^^^^^^^^^^^^^^^^
+
+Check that the file has a valid extension
+
+.. code:: php
+
+    <?php
+    public $validate = array(
+        'photo' => array(
+            'rule' => array('isValidExtension', array('pdf', 'png', 'txt')),
+            'message' => 'File does not have a pdf, png, or txt extension'
+        )
+    );
+    ?>
+
+If the argument ``$requireUpload`` is passed, we can skip this check
+when a file is not uploaded:
+
+.. code:: php
+
+    <?php
+    public $validate = array(
+        'photo' => array(
+            'rule' => array('isValidExtension', array('pdf', 'png', 'txt'), false),
+            'message' => 'File does not have a pdf, png, or txt extension'
+        )
+    );
+    ?>
+
+In the above, the variable ``$requireUpload`` has a value of false. By
+default, ``requireUpload`` is set to true.
+
+isAboveMinHeight
+^^^^^^^^^^^^^^^^
 
 Check that the file is above the minimum height requirement (checked in
 pixels)
@@ -190,16 +395,33 @@ pixels)
 .. code:: php
 
     <?php
-
-        $validator->add('file', 'fileAboveMinHeight', [
-            'rule' => ['isAboveMinHeight', 200],
-            'message' => 'This image should at least be 200px high',
-            'provider' => 'upload'
-        ]);
-
+    public $validate = array(
+        'photo' => array(
+            'rule' => array('isAboveMinHeight', 150),
+            'message' => 'File is below the minimum height'
+        )
+    );
     ?>
 
-**isBelowMaxHeight**
+If the argument ``$requireUpload`` is passed, we can skip this check
+when a file is not uploaded:
+
+.. code:: php
+
+    <?php
+    public $validate = array(
+        'photo' => array(
+            'rule' => array('isAboveMinHeight', 150, false),
+            'message' => 'File is below the minimum height'
+        )
+    );
+    ?>
+
+In the above, the variable ``$requireUpload`` has a value of false. By
+default, ``requireUpload`` is set to true.
+
+isBelowMaxHeight
+^^^^^^^^^^^^^^^^
 
 Check that the file is below the maximum height requirement (checked in
 pixels)
@@ -207,16 +429,33 @@ pixels)
 .. code:: php
 
     <?php
-
-        $validator->add('file', 'fileBelowMaxHeight', [
-            'rule' => ['isBelowMaxHeight', 200],
-            'message' => 'This image should not be higher than 200px',
-            'provider' => 'upload'
-        ]);
-
+    public $validate = array(
+        'photo' => array(
+            'rule' => array('isBelowMaxHeight', 150),
+            'message' => 'File is above the maximum height'
+        )
+    );
     ?>
 
-**isAboveMinWidth**
+If the argument ``$requireUpload`` is passed, we can skip this check
+when a file is not uploaded:
+
+.. code:: php
+
+    <?php
+    public $validate = array(
+        'photo' => array(
+            'rule' => array('isBelowMaxHeight', 150, false),
+            'message' => 'File is above the maximum height'
+        )
+    );
+    ?>
+
+In the above, the variable ``$requireUpload`` has a value of false. By
+default, ``requireUpload`` is set to true.
+
+isAboveMinWidth
+^^^^^^^^^^^^^^^
 
 Check that the file is above the minimum width requirement (checked in
 pixels)
@@ -224,16 +463,33 @@ pixels)
 .. code:: php
 
     <?php
-
-        $validator->add('file', 'fileAboveMinWidth', [
-            'rule' => ['isAboveMinWidth', 200],
-            'message' => 'This image should at least be 200px wide',
-            'provider' => 'upload'
-        ]);
-
+    public $validate = array(
+        'photo' => array(
+            'rule' => array('isAboveMinWidth', 150),
+            'message' => 'File is below the minimum width'
+        )
+    );
     ?>
 
-**isBelowMaxWidth**
+If the argument ``$requireUpload`` is passed, we can skip this check
+when a file is not uploaded:
+
+.. code:: php
+
+    <?php
+    public $validate = array(
+        'photo' => array(
+            'rule' => array('isAboveMinWidth', 150, false),
+            'message' => 'File is below the minimum width'
+        )
+    );
+    ?>
+
+In the above, the variable ``$requireUpload`` has a value of false. By
+default, ``requireUpload`` is set to true.
+
+isBelowMaxWidth
+^^^^^^^^^^^^^^^
 
 Check that the file is below the maximum width requirement (checked in
 pixels)
@@ -241,11 +497,27 @@ pixels)
 .. code:: php
 
     <?php
-
-        $validator->add('file', 'fileBelowMaxWidth', [
-            'rule' => ['isBelowMaxWidth', 200],
-            'message' => 'This image should not be wider than 200px',
-            'provider' => 'upload'
-        ]);
-
+    public $validate = array(
+        'photo' => array(
+            'rule' => array('isBelowMaxWidth', 150),
+            'message' => 'File is above the maximum width'
+        )
+    );
     ?>
+
+If the argument ``$requireUpload`` is passed, we can skip this check
+when a file is not uploaded:
+
+.. code:: php
+
+    <?php
+    public $validate = array(
+        'photo' => array(
+            'rule' => array('isBelowMaxWidth', 150, false),
+            'message' => 'File is above the maximum width'
+        )
+    );
+    ?>
+
+In the above, the variable ``$requireUpload`` has a value of false. By
+default, ``requireUpload`` is set to true.

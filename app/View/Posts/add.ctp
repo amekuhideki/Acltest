@@ -8,6 +8,14 @@
 		echo $this->Form->input('title');
 		echo $this->Form->input('body');
 	?>
+	<?php echo $this->Form->create('User', array('type' => 'file')); ?>
+<!-- nameフィールドもあると仮定します。 -->
+<?php echo $this->Form->input('Image.0.name', array('type' => 'file')); ?>
+<!-- インデックス0をつけてモデル名を指定してあげるのがポイント -->
+<?php echo $this->Form->hidden('Image.0.model', array('value'=>'Person'));?>
+<!-- ファイルを選択するボタン -->
+<?php echo $this->Form->input('Image.0.photo_person', array('type' => 'file')); ?>
+
 	</fieldset>
 <?php echo $this->Form->end(__('Submit')); ?>
 </div>

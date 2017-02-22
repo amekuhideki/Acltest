@@ -47,6 +47,16 @@ class Post extends AppModel {
  *
  * @var array
  */
+	public $hasMany = array(
+		'Image' => array(
+			'className' => 'Attachment',
+			'foreignKey' => 'foreign_key',
+			'conditions' => array(
+				'Attachment.model' => 'Post'
+			),
+		),
+	);
+
 	public $belongsTo = array(
 		'User' => array(
 			'className' => 'User',

@@ -6,6 +6,28 @@ App::uses('AppModel', 'Model');
  */
 class Attachment extends AppModel {
 
+	public $actsAs = array(
+		'Upload.Upload' => array(
+			'photo_user' => array(
+				'thumbnailSizes' => array(
+					'thumb150' => '150*150',
+					'thumb80' => '80*80',
+				),
+				'thumbnailMehod' => 'php',
+				'fields' => array('dir' => 'dir', 'type' => 'type', 'size' => 'size'),
+				'mimetypes' => array('image/jpeg', 'image/gif', 'image/png'),
+				'extensions' => array('jpg', 'jpeg', 'JPG', 'JPEG', 'gif', 'GIF', 'png', 'PNG'),
+				'maxSize' => 209715,
+			),
+			'photo_menu' => array(
+				'thumbnailSizes' => array(
+					'thumb' => '100*100'
+				),
+				'thumbnailMethod' => 'php',
+				'fields' => array('dir' => 'dir', 'type' => 'type', 'size' => 'size')
+			),
+		),
+	);
 /**
  * Validation rules
  *
@@ -31,6 +53,13 @@ class Attachment extends AppModel {
 				//'last' => false, // Stop validation after this rule
 				//'on' => 'create', // Limit validation to 'create' or 'update' operations
 			),
+		),
+	);
+
+	public $belongsTo = array(
+		'Post' => array(
+			'className' => 'Post',
+			'foreignKey' => 'foreign_key',
 		),
 	);
 }
