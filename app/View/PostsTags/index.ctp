@@ -19,7 +19,7 @@
 			<?php echo $this->Html->link($postsTag['Post']['title'], array('controller' => 'posts', 'action' => 'view', $postsTag['Post']['id'])); ?>
 		</td>
 		<td>
-			<?php echo $this->Html->link($postsTag['Tag']['id'], array('controller' => 'tags', 'action' => 'view', $postsTag['Tag']['id'])); ?>
+			<?php echo $this->Html->link($postsTag['Tag']['tag'], array('controller' => 'tags', 'action' => 'view', $postsTag['Tag']['id'])); ?>
 		</td>
 		<td><?php echo h($postsTag['PostsTag']['created']); ?>&nbsp;</td>
 		<td><?php echo h($postsTag['PostsTag']['modified']); ?>&nbsp;</td>

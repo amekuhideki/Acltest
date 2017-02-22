@@ -26,6 +26,13 @@
 			<?php echo h($post['Post']['body']); ?>
 			&nbsp;
 		</dd>
+		<dt><?php echo __('Tag'); ?></dt>
+		<dd>
+		<?php foreach ($post['Tag'] as $tag): ?>
+			<?php echo '#' . h($tag['tag']); ?>
+		<?php endforeach; ?>
+		&nbsp;
+		</dd>
 		<dt><?php echo __('Created'); ?></dt>
 		<dd>
 			<?php echo h($post['Post']['created']); ?>
