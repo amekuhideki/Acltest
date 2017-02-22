@@ -7,13 +7,17 @@ App::uses('AppController', 'Controller');
  * @property PaginatorComponent $Paginator
  */
 class AttachmentsController extends AppController {
+	public function beforeFilter() {
+    parent::beforeFilter();
 
+    $this->Auth->allow();
+}
 /**
  * Components
  *
  * @var array
  */
-	public $components = array('Paginator');
+	public $components = array('Paginator', 'Flash');
 
 /**
  * index method
