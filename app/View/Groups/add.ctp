@@ -15,5 +15,13 @@
 		<li><?php echo $this->Html->link(__('List Groups'), array('action' => 'index')); ?></li>
 		<li><?php echo $this->Html->link(__('List Users'), array('controller' => 'users', 'action' => 'index')); ?> </li>
 		<li><?php echo $this->Html->link(__('New User'), array('controller' => 'users', 'action' => 'add')); ?> </li>
+		<li><?php echo $this->Html->link(__('List Posts'), array('controller' => 'posts', 'action' => 'index')); ?> </li>
+		<li><?php echo $this->Html->link(__('New Post'), array('controller' => 'posts', 'action' => 'add')); ?> </li>
+		<li><?php echo $this->Html->link(__('List Category'), array('controller' => 'categories', 'action' => 'index')); ?> </li>
+		<li><?php echo $this->Html->link(__('New Category'), array('controller' => 'categories', 'action' => 'add')); ?> </li>
+		<li><?php echo $this->Html->link(__('List Tags'), array('controller' => 'tags', 'action' => 'index')); ?> </li>
+		<li><?php echo $this->Html->link(__('New Tags'), array('controller' => 'tags', 'action' => 'add')); ?> </li>
+		<li><?php echo $this->Html->link(__('List PostsTag'), array('controller' => 'posts_tags', 'action' => 'index')); ?> </li>
+		<li><?php echo $this->Html->link(__('New PostsTags'), array('controller' => 'posts_tags', 'action' => 'add')); ?> </li>
 	</ul>
 </div>
