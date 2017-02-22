@@ -39,6 +39,7 @@
 	<tr>
 		<th><?php echo __('Id'); ?></th>
 		<th><?php echo __('User Id'); ?></th>
+		<th><?php echo __('Category_id'); ?></th>
 		<th><?php echo __('Title'); ?></th>
 		<th><?php echo __('Body'); ?></th>
 		<th><?php echo __('Created'); ?></th>
@@ -49,6 +50,7 @@
 		<tr>
 			<td><?php echo $post['id']; ?></td>
 			<td><?php echo $post['user_id']; ?></td>
+			<td><?php echo $post['category_id'] ?></td>
 			<td><?php echo $post['title']; ?></td>
 			<td><?php echo $post['body']; ?></td>
 			<td><?php echo $post['created']; ?></td>
