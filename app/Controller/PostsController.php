@@ -10,6 +10,7 @@ class PostsController extends AppController {
 	public function beforeFilter() {
 	    parent::beforeFilter();
 	    $this->Auth->allow('index', 'view');
+
 	}
 /**
  * Components
@@ -51,7 +52,14 @@ class PostsController extends AppController {
 	public function add() {
 		if ($this->request->is('post')) {
 			$this->Post->create();
-			if ($this->Post->save($this->request->data)) {
+				//  try {
+				// 		 $this->Post->createWithAttachments($this->request->data);
+				// 		 $this->Session->setFlash(__('The message has been saved'));
+				//  } catch (Exception $e) {
+				// 		 $this->Session->setFlash($e->getMessage());
+				//  }
+
+			if ($this->Post->saveAll($this->request->data)) {
 				$this->Flash->success(__('The post has been saved.'));
 				return $this->redirect(array('action' => 'index'));
 			} else {
@@ -61,7 +69,7 @@ class PostsController extends AppController {
 		$users = $this->Post->User->find('list');
 		$categories = $this->Post->Category->find('list');
 		$this->set(compact('users', 'categories'));
-	}
+ }
 
 /**
  * edit method
