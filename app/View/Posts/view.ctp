@@ -1,4 +1,6 @@
 <div class="posts view">
+
+	<?php echo $this->Html->image( "/files/post/photo/" . $post['Post']["photo_dir"] . "/" . $post['Post']["photo"] ); ?>
 <h2><?php echo __('Post'); ?></h2>
 	<dl>
 		<dt><?php echo __('Id'); ?></dt>

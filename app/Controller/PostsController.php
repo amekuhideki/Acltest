@@ -58,6 +58,8 @@ class PostsController extends AppController {
 				//  } catch (Exception $e) {
 				// 		 $this->Session->setFlash($e->getMessage());
 				//  }
+				// pr($this->request->data);
+				// exit;
 
 			if ($this->Post->saveAll($this->request->data)) {
 				$this->Flash->success(__('The post has been saved.'));

@@ -22,27 +22,27 @@ class Attachment extends AppModel {
  * @var array
  */
 
-	// public $validate = array(
-	// 	'model' => array(
-	// 		'notBlank' => array(
-	// 			'rule' => array('notBlank'),
-	// 			//'message' => 'Your custom message here',
-	// 			//'allowEmpty' => false,
-	// 			//'required' => false,
-	// 			//'last' => false, // Stop validation after this rule
-	// 			//'on' => 'create', // Limit validation to 'create' or 'update' operations
-	// 		),
-	// 	),
-	// 	'foreign_key' => array(
-	// 		'numeric' => array(
-	// 			'rule' => array('numeric'),
-	// 			//'message' => 'Your custom message here',
-	// 			//'allowEmpty' => false,
-	// 			//'required' => false,
-	// 			//'last' => false, // Stop validation after this rule
-	// 			//'on' => 'create', // Limit validation to 'create' or 'update' operations
-	// 		),
-	// 	),
+	public $validate = array(
+		'model' => array(
+			'notBlank' => array(
+				'rule' => array('notBlank'),
+				//'message' => 'Your custom message here',
+				//'allowEmpty' => false,
+				//'required' => false,
+				//'last' => false, // Stop validation after this rule
+				//'on' => 'create', // Limit validation to 'create' or 'update' operations
+			),
+		),
+		'foreign_key' => array(
+			'numeric' => array(
+				'rule' => array('numeric'),
+				//'message' => 'Your custom message here',
+				//'allowEmpty' => false,
+				//'required' => false,
+				//'last' => false, // Stop validation after this rule
+				//'on' => 'create', // Limit validation to 'create' or 'update' operations
+			),
+		),
 	// 	'attachment' => array(
 	// 		'notBlank' => array(
 	// 			'rule' => array('notBlank'),
@@ -53,7 +53,7 @@ class Attachment extends AppModel {
 	// 			//'on' => 'create', // Limit validation to 'create' or 'update' operations
 	// 		),
 	// 	),
-	// );
+	);
 	public $belongsTo = array(
 		'Post' => array(
 			'className' => 'Post',
