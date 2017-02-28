@@ -28,3 +28,8 @@
 Icon?
 ehthumbs.db
 Thumbs.db
+
+#add
+#####################
+*.jpg
+*.png
