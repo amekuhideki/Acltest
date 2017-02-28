@@ -1,6 +1,8 @@
 <div class="posts view">
 	<?php if(!empty($post['Image'])): ?>
-		<?php echo $this->Html->image( "/files/image/attachment/" . $post['Image'][0]["dir"] . "/" . $post['Image'][0]["attachment"] ); ?>
+		<?php foreach ($post['Image'] as $image): ?>
+			<?php echo $this->Html->image( "/files/image/attachment/" . $image["dir"] . "/" . $image["attachment"] ); ?>
+	  <?php endforeach; ?>
 	<?php endif; ?>
 <h2><?php echo __('Post'); ?></h2>
 	<dl>
@@ -11,12 +13,12 @@
 		</dd>
 		<dt><?php echo __('User'); ?></dt>
 		<dd>
-			<?php echo $this->Html->link($post['User']['id'], array('controller' => 'users', 'action' => 'view', $post['User']['id'])); ?>
+			<?php echo $this->Html->link($post['User']['username'], array('controller' => 'users', 'action' => 'view', $post['User']['id'])); ?>
 			&nbsp;
 		</dd>
 		<dt><?php echo __('Category'); ?></dt>
 		<dd>
-			<?php echo $this->Html->link($post['Category']['id'], array('controller' => 'categories', 'action' => 'view', $post['Category']['id'])); ?>
+			<?php echo $this->Html->link($post['Category']['category'], array('controller' => 'categories', 'action' => 'view', $post['Category']['id'])); ?>
 			&nbsp;
 		</dd>
 		<dt><?php echo __('Title'); ?></dt>

@@ -1,16 +1,19 @@
 <div class="posts form">
-<?php echo $this->Form->create('Post'); ?>
+<?php echo $this->Form->create('Post', array('type' => 'file')); ?>
 	<fieldset>
 		<legend><?php echo __('Edit Post'); ?></legend>
-	<?php
-		echo $this->Form->input('id');
-		echo $this->Form->input('user_id');
-		echo $this->Form->input('category_id');
-		echo $this->Form->input('title');
-		echo $this->Form->input('body');
-	?>
-	</fieldset>
-<?php echo $this->Form->end(__('Submit')); ?>
+		<?php
+			echo $this->Form->input('id');
+			echo $this->Form->input('user_id');
+			echo $this->Form->input('category_id');
+			echo $this->Form->input('title');
+			echo $this->Form->input('body');
+			echo $this->Form->input('Image.0.attachment', array('type' => 'file', 'label' => 'Image'));
+			echo $this->Form->input('Image.0.model', array('type' => 'hidden', 'value' => 'Post'));
+
+		?>
+		</fieldset>
+	<?php echo $this->Form->end(__('Submit')); ?>
 </div>
 <div class="actions">
 	<h3><?php echo __('Actions'); ?></h3>

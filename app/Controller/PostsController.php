@@ -52,15 +52,6 @@ class PostsController extends AppController {
 	public function add() {
 		if ($this->request->is('post')) {
 			$this->Post->create();
-				//  try {
-				// 		 $this->Post->createWithAttachments($this->request->data);
-				// 		 $this->Session->setFlash(__('The message has been saved'));
-				//  } catch (Exception $e) {
-				// 		 $this->Session->setFlash($e->getMessage());
-				//  }
-				// pr($this->request->data);
-				// exit;
-
 			if ($this->Post->saveAll($this->request->data)) {
 				$this->Flash->success(__('The post has been saved.'));
 				return $this->redirect(array('action' => 'index'));
@@ -84,8 +75,24 @@ class PostsController extends AppController {
 		if (!$this->Post->exists($id)) {
 			throw new NotFoundException(__('Invalid post'));
 		}
+		$post = $this->Post->findById($id);
+		if (!$post) {
+			throw new NotFoundException(__('Invalid post'));
+		}
+
 		if ($this->request->is(array('post', 'put'))) {
-			if ($this->Post->save($this->request->data)) {
+			// $this->Post->id = $id;
+			// if (isset($this->request->data['Image'])){
+			// 	$image_count = count($this->request->data['Image']);
+			//
+			// 	for ($i = 0; $i < $image_count; $i++){
+			// 		if (!$this->request->data['Image'][$i]['attachment']['name']) {
+			// 			unset($this->request->data['Image'][$i]);
+			// 		}
+			// 	}
+			// }
+
+			if ($this->Post->saveAll($this->request->data)) {
 				$this->Flash->success(__('The post has been saved.'));
 				return $this->redirect(array('action' => 'index'));
 			} else {
@@ -95,10 +102,19 @@ class PostsController extends AppController {
 			$options = array('conditions' => array('Post.' . $this->Post->primaryKey => $id));
 			$this->request->data = $this->Post->find('first', $options);
 		}
-		$users = $this->Post->User->find('list');
-		$categories = $this->Post->Category->find('list');
 
-		$this->set(compact('users', 'categories'));
+		$users = $this->Post->User->find('list', array(
+			'fields' => array('User.username')
+		));
+		$categories = $this->Post->Category->find('list', array(
+			'fields' => array('Category.category')
+		));
+
+		$images = $this->Post->Image->find('list', array(
+			'conditions' => array('foreign_key' => $id),
+			'fields' => array('Image.dir', 'Image.attachment')
+		));
+		$this->set(compact('users', 'categories', 'images'));
 	}
 
 /**
