@@ -6,8 +6,8 @@
 			<th><?php echo $this->Paginator->sort('id'); ?></th>
 			<th><?php echo $this->Paginator->sort('model'); ?></th>
 			<th><?php echo $this->Paginator->sort('foreign_key'); ?></th>
-			<th><?php echo $this->Paginator->sort('photo_user'); ?></th>
-			<th><?php echo $this->Paginator->sort('photo_menu'); ?></th>
+			<th><?php echo $this->Paginator->sort('name'); ?></th>
+			<th><?php echo $this->Paginator->sort('attachment'); ?></th>
 			<th><?php echo $this->Paginator->sort('dir'); ?></th>
 			<th><?php echo $this->Paginator->sort('type'); ?></th>
 			<th><?php echo $this->Paginator->sort('size'); ?></th>
@@ -21,8 +21,8 @@
 		<td><?php echo h($attachment['Attachment']['id']); ?>&nbsp;</td>
 		<td><?php echo h($attachment['Attachment']['model']); ?>&nbsp;</td>
 		<td><?php echo h($attachment['Attachment']['foreign_key']); ?>&nbsp;</td>
-		<td><?php echo h($attachment['Attachment']['photo_user']); ?>&nbsp;</td>
-		<td><?php echo h($attachment['Attachment']['photo_menu']); ?>&nbsp;</td>
+		<td><?php echo h($attachment['Attachment']['name']); ?>&nbsp;</td>
+		<td><?php echo h($attachment['Attachment']['attachment']); ?>&nbsp;</td>
 		<td><?php echo h($attachment['Attachment']['dir']); ?>&nbsp;</td>
 		<td><?php echo h($attachment['Attachment']['type']); ?>&nbsp;</td>
 		<td><?php echo h($attachment['Attachment']['size']); ?>&nbsp;</td>

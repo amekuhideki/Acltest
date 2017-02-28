@@ -6,8 +6,8 @@
 		echo $this->Form->input('id');
 		echo $this->Form->input('model');
 		echo $this->Form->input('foreign_key');
-		echo $this->Form->input('photo_user');
-		echo $this->Form->input('photo_menu');
+		echo $this->Form->input('name');
+		echo $this->Form->input('attachment');
 		echo $this->Form->input('dir');
 		echo $this->Form->input('type');
 		echo $this->Form->input('size');

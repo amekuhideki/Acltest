@@ -10,11 +10,11 @@ class AttachmentFixture extends CakeTestFixture {
  * @var array
  */
 	public $fields = array(
-		'id' => array('type' => 'integer', 'null' => false, 'default' => null, 'unsigned' => false, 'key' => 'primary'),
+		'id' => array('type' => 'integer', 'null' => false, 'default' => null, 'length' => 10, 'unsigned' => true, 'key' => 'primary'),
 		'model' => array('type' => 'string', 'null' => false, 'default' => null, 'length' => 20, 'collate' => 'utf8_general_ci', 'charset' => 'utf8'),
 		'foreign_key' => array('type' => 'integer', 'null' => false, 'default' => null, 'unsigned' => false),
-		'photo_user' => array('type' => 'string', 'null' => true, 'default' => null, 'collate' => 'utf8_general_ci', 'charset' => 'utf8'),
-		'photo_menu' => array('type' => 'string', 'null' => true, 'default' => null, 'collate' => 'utf8_general_ci', 'charset' => 'utf8'),
+		'name' => array('type' => 'string', 'null' => false, 'default' => null, 'length' => 32, 'collate' => 'utf8_general_ci', 'charset' => 'utf8'),
+		'attachment' => array('type' => 'string', 'null' => false, 'default' => null, 'collate' => 'utf8_general_ci', 'charset' => 'utf8'),
 		'dir' => array('type' => 'string', 'null' => true, 'default' => null, 'collate' => 'utf8_general_ci', 'charset' => 'utf8'),
 		'type' => array('type' => 'string', 'null' => true, 'default' => null, 'collate' => 'utf8_general_ci', 'charset' => 'utf8'),
 		'size' => array('type' => 'integer', 'null' => true, 'default' => '0', 'unsigned' => false),
@@ -35,8 +35,8 @@ class AttachmentFixture extends CakeTestFixture {
 			'id' => 1,
 			'model' => 'Lorem ipsum dolor ',
 			'foreign_key' => 1,
-			'photo_user' => 'Lorem ipsum dolor sit amet',
-			'photo_menu' => 'Lorem ipsum dolor sit amet',
+			'name' => 'Lorem ipsum dolor sit amet',
+			'attachment' => 'Lorem ipsum dolor sit amet',
 			'dir' => 'Lorem ipsum dolor sit amet',
 			'type' => 'Lorem ipsum dolor sit amet',
 			'size' => 1,

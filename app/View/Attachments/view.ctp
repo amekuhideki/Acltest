@@ -16,14 +16,14 @@
 			<?php echo h($attachment['Attachment']['foreign_key']); ?>
 			&nbsp;
 		</dd>
-		<dt><?php echo __('Photo User'); ?></dt>
+		<dt><?php echo __('Name'); ?></dt>
 		<dd>
-			<?php echo h($attachment['Attachment']['photo_user']); ?>
+			<?php echo h($attachment['Attachment']['name']); ?>
 			&nbsp;
 		</dd>
-		<dt><?php echo __('Photo Menu'); ?></dt>
+		<dt><?php echo __('Attachment'); ?></dt>
 		<dd>
-			<?php echo h($attachment['Attachment']['photo_menu']); ?>
+			<?php echo h($attachment['Attachment']['attachment']); ?>
 			&nbsp;
 		</dd>
 		<dt><?php echo __('Dir'); ?></dt>

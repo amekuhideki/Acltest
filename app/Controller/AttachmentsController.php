@@ -8,10 +8,10 @@ App::uses('AppController', 'Controller');
  */
 class AttachmentsController extends AppController {
 	public function beforeFilter() {
-    parent::beforeFilter();
+	    parent::beforeFilter();
+	    $this->Auth->allow();
 
-    $this->Auth->allow();
-}
+	}
 /**
  * Components
  *
