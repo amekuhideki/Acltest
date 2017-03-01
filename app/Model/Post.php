@@ -6,6 +6,19 @@ App::uses('AppModel', 'Model');
  * @property User $User
  */
 class Post extends AppModel {
+ //SearchPluginの利用
+ 	public $order = array('Post.id DESC');
+	public $actsAs = array('Search.Searchable');
+	public $filterArgs = array(
+		'category' => array(
+			'type' => 'like',
+			'field' => 'Category.category'
+		),
+		'title' => array(
+			'type' => 'like',
+			'field' => 'Post.title'
+		),
+	);
 
 /**
  * Validation rules

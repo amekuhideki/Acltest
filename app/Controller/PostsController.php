@@ -16,16 +16,36 @@ class PostsController extends AppController {
  *
  * @var array
  */
-	public $components = array('Paginator', 'Flash');
-
+	public $components = array('Paginator', 'Flash', 'Search.Prg');
+	public $presetVars = true;
 /**
  * index method
  *
  * @return void
  */
 	public function index() {
+
+		unset($this->Post->validate['title']);
+		unset($this->Post->validate['category_id']);
+		unset($this->Post->validate['tag']);
+
 		$this->Post->recursive = 0;
-		$this->set('posts', $this->Paginator->paginate());
+		// $this->set('posts', $this->paginate());
+
+		//SearchPlugin
+		$this->Prg->commonProcess();
+		$this->paginate = array(
+			'conditions' =>
+				$this->Post->parseCriteria($this->passedArgs)
+		);
+
+		$tag_list = $this->Post->Tag->find('list', array(
+			'fields' => array('Tag.tag')
+		));
+		// pr($this->paginate());
+		// exit;
+		$this->set('posts', $this->paginate());
+
 	}
 
 /**
