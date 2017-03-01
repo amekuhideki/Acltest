@@ -1,4 +1,16 @@
 <div class="posts index">
+	<div class="section form_search">
+		<h2>検索項目</h2>
+		<?php echo $this->Form->create('Post', array('novalidate' => true, 'url' => array_merge(
+			array('action' => 'index'), $this->params['pass']) )); ?>
+		<?php
+			echo $this->Form->input('category', array('label' => 'カテゴリー', 'empty' => true, 'placeholder' => '例）検索ワードを入力してください。', 'label' => false));
+			echo $this->Form->input('title', array('label' => 'タイトル', 'empty' => true, 'style' => "width:250px;"));
+			echo $this->Form->input('tag', array('label' => 'タグ', 'empty' => true, 'style' => "width:250px;"));
+			echo $this->Form->submit('検索');
+			echo $this->Form->end();
+		?>
+	</div>
 	<h2><?php echo __('Posts'); ?></h2>
 	<table cellpadding="0" cellspacing="0">
 	<thead>
