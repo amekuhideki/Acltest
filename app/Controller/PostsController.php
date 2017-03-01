@@ -81,16 +81,17 @@ class PostsController extends AppController {
 		}
 
 		if ($this->request->is(array('post', 'put'))) {
-			// $this->Post->id = $id;
-			// if (isset($this->request->data['Image'])){
-			// 	$image_count = count($this->request->data['Image']);
-			//
-			// 	for ($i = 0; $i < $image_count; $i++){
-			// 		if (!$this->request->data['Image'][$i]['attachment']['name']) {
-			// 			unset($this->request->data['Image'][$i]);
-			// 		}
-			// 	}
-			// }
+			$this->Post->id = $id;
+
+			if (isset($this->request->data['Image'])){
+				$image_count = count($this->request->data['Image']);
+
+				for ($i = 0; $i < $image_count; $i++){
+					if (!$this->request->data['Image'][$i]['attachment']['name']) {
+						unset($this->request->data['Image'][$i]);
+					}
+				}
+			}
 
 			if ($this->Post->saveAll($this->request->data)) {
 				$this->Flash->success(__('The post has been saved.'));
@@ -110,11 +111,11 @@ class PostsController extends AppController {
 			'fields' => array('Category.category')
 		));
 
-		$images = $this->Post->Image->find('list', array(
-			'conditions' => array('foreign_key' => $id),
-			'fields' => array('Image.dir', 'Image.attachment')
-		));
-		$this->set(compact('users', 'categories', 'images'));
+		// $file_dir = $this->Post->Image->find('list', array(
+		// 	'conditions' => array('foreign_key' => $id),
+		// 	'fields' => array('Image.dir')
+		// ));
+		$this->set(compact('users', 'categories', 'post'));
 	}
 
 /**

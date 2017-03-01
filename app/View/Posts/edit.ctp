@@ -10,9 +10,16 @@
 			echo $this->Form->input('body');
 			echo $this->Form->input('Image.0.attachment', array('type' => 'file', 'label' => 'Image'));
 			echo $this->Form->input('Image.0.model', array('type' => 'hidden', 'value' => 'Post'));
-
 		?>
+		<?php foreach ($post['Image'] as $image):?>
+			<?php echo $this->Html->image( "/files/image/attachment/" . $image["dir"] . "/" . $image["attachment"] ); ?>
+			<!-- <?php
+			echo $this->Form->create('Image', array('type' => 'file'));
+			echo $this->Form->input('Image.file.remove', array('type' => 'checkbox', 'label' => 'Remove existing file'));
+			?> -->
+		<?php endforeach; ?>
 		</fieldset>
+
 	<?php echo $this->Form->end(__('Submit')); ?>
 </div>
 <div class="actions">
