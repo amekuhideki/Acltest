@@ -10,7 +10,6 @@ class PostsController extends AppController {
 	public function beforeFilter() {
 	    parent::beforeFilter();
 	    $this->Auth->allow('index', 'view');
-
 	}
 /**
  * Components
@@ -79,7 +78,6 @@ class PostsController extends AppController {
 		if (!$post) {
 			throw new NotFoundException(__('Invalid post'));
 		}
-
 		if ($this->request->is(array('post', 'put'))) {
 			$this->Post->id = $id;
 
@@ -138,4 +136,22 @@ class PostsController extends AppController {
 		}
 		return $this->redirect(array('action' => 'index'));
 	}
+
+	public function deleteImage($id = null, $post_id = null){
+		if (!$this->Post->Image->exists($id)) {
+			throw new NotFoundException(__('Invalid post'));
+		}
+		$this->request->allowMethod('post', 'delete');
+		$post = $this->Post->Image->findById($id);
+		if (!$post) {
+			throw new NotFoundException(__('Invalid post'));
+		}
+		if ($this->Post->Image->delete($id)) {
+			$this->Flash->success(__('The post has been deleted.'));
+		} else {
+			$this->Flash->error(__('The post could not be deleted. Please, try again.'));
+		}
+		return $this->redirect(array('action' => 'edit/'. $post_id));
+	}
+
 }
