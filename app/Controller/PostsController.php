@@ -11,6 +11,8 @@ class PostsController extends AppController {
 	    parent::beforeFilter();
 	    $this->Auth->allow('index', 'view');
 	}
+	var $uses = array('Post', 'User', 'Category', 'Tag', 'PostsTag', 'Attachment');
+	// public $uses = array('Post', 'Category', 'Tag', 'Attachment', 'PostsTag',);
 /**
  * Components
  *
@@ -25,9 +27,10 @@ class PostsController extends AppController {
  */
 	public function index() {
 
-		unset($this->Post->validate['title']);
-		unset($this->Post->validate['category_id']);
-		unset($this->Post->validate['tag']);
+		// unset($this->Post->validate['title']);
+		// unset($this->Post->validate['category_id']);
+		// unset($this->Post->validate['tag']);
+		// unset($this->Post->validate['posts_tags']);
 
 		$this->Post->recursive = 0;
 		// $this->set('posts', $this->paginate());
@@ -38,13 +41,17 @@ class PostsController extends AppController {
 			'conditions' =>
 				$this->Post->parseCriteria($this->passedArgs)
 		);
-
-		$tag_list = $this->Post->Tag->find('list', array(
+		
+		$this->set('posts', $this->paginate());
+		$tags = $this->Post->Tag->find('list', array(
 			'fields' => array('Tag.tag')
 		));
-		// pr($this->paginate());
-		// exit;
-		$this->set('posts', $this->paginate());
+		$this->set('tags', $tags);
+
+		$categories = $this->Post->Category->find('list', array(
+			'fields' => array('Category.category')
+		));
+		$this->set('categories', $categories);
 
 	}
 

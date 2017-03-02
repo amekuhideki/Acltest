@@ -59,4 +59,5 @@ class PostsTag extends AppModel {
 			'order' => ''
 		)
 	);
+
 }

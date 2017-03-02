@@ -11,15 +11,34 @@ class Post extends AppModel {
 	public $actsAs = array('Search.Searchable');
 	public $filterArgs = array(
 		'category' => array(
-			'type' => 'like',
-			'field' => 'Category.category'
+			'type' => 'value',
+			'field' => 'Category.id'
 		),
 		'title' => array(
 			'type' => 'like',
 			'field' => 'Post.title'
 		),
+    'tag' => array(
+      'type' => 'subquery',
+      'method' => 'searchTag',
+      'field' => 'Post.id',
+    ),
 	);
 
+  function searchTag($data = array()) {
+
+    $this->PostsTag->Behaviors->attach('Containable', array('autoFields' => false));
+    $this->PostsTag->Behaviors->attach('Search.Searchable');
+
+    // $cond = explode('|', $data['tag_id']);
+    $query = $this->PostsTag->getQuery('all', array(
+      'conditions' => array('PostsTag.tag_id' => $data['tag']),
+      'fields' => array('post_id'),
+      'contain' => array('Tag')
+      )
+    );
+    return $query;
+  }
 /**
  * Validation rules
  *
@@ -52,6 +71,7 @@ class Post extends AppModel {
 			),
 		),
 	);
+
 
 	// The Associations below have been created with all possible keys, those that are not needed can be removed
 
@@ -89,11 +109,12 @@ class Post extends AppModel {
 
 	public $hasAndBelongsToMany = array(
 		'Tag' => array(
-			'className' => 'tag',
+			'className' => 'Tag',
 			'joinTable' => 'posts_tags',
 			'foreignKey' => 'post_id',
 			'associationForeignKey' => 'tag_id',
 			'unique' => true,
+      'with' => 'PostsTag',
 			'conditions' => '',
 			'fields' => '',
 			'order' => '',

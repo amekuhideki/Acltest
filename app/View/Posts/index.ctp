@@ -1,12 +1,16 @@
+<script type="text/javascript">
+
+});
+</script>
 <div class="posts index">
 	<div class="section form_search">
 		<h2>検索項目</h2>
 		<?php echo $this->Form->create('Post', array('novalidate' => true, 'url' => array_merge(
 			array('action' => 'index'), $this->params['pass']) )); ?>
 		<?php
-			echo $this->Form->input('category', array('label' => 'カテゴリー', 'empty' => true, 'placeholder' => '例）検索ワードを入力してください。', 'label' => false));
-			echo $this->Form->input('title', array('label' => 'タイトル', 'empty' => true, 'style' => "width:250px;"));
-			echo $this->Form->input('tag', array('label' => 'タグ', 'empty' => true, 'style' => "width:250px;"));
+			echo $this->Form->input('title', array('label' => 'タイトル', 'empty' => true, 'placeholder' => '例）検索ワードを入力してください。', 'style' => "width:250px;"));
+			echo $this->Form->input('category', array('label' => 'カテゴリー', 'class' => 'selectpicker_pre', 'empty' => true, 'options' => $categories));
+			echo $this->Form->input('tag', array('label' => 'タグ', 'empty' => true, 'options' => $tags, 'multiple' => true));
 			echo $this->Form->submit('検索');
 			echo $this->Form->end();
 		?>
@@ -22,6 +26,8 @@
 			<th><?php echo $this->Paginator->sort('body'); ?></th>
 			<th><?php echo $this->Paginator->sort('created'); ?></th>
 			<th><?php echo $this->Paginator->sort('modified'); ?></th>
+			<th><?php echo $this->Paginator->sort('tag'); ?></th>
+
 			<th class="actions"><?php echo __('Actions'); ?></th>
 	</tr>
 	</thead>
