@@ -42,7 +42,13 @@ class AppController extends Controller {
         ),
         'Session'
     );
-    public $helpers = array('Html', 'Form', 'Session');
+    public $helpers = array(
+      'Html' => array('className' => 'TwitterBootstrap.BootstrapHtml'),
+      'Form' => array('className' => 'TwitterBootstrap.BootstrapForm'),
+      'Paginator' => array('className' => 'TwitterBootstrap.BootstrapPaginator'),
+      'Session'
+    );
+    public $layout = 'TwitterBootstrap.default';
 
     public function beforeFilter() {
         // AuthComponent の設定
