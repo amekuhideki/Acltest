@@ -33,7 +33,7 @@
   <body>
 
     <?php echo $this->Session->flash(); ?>
-
+    <?php echo $this->element('header'); ?>
     <?php echo $this->fetch('content'); ?>
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
