@@ -48,7 +48,7 @@ class AppController extends Controller {
       'Paginator' => array('className' => 'TwitterBootstrap.BootstrapPaginator'),
       'Session'
     );
-    public $layout = 'TwitterBootstrap.default';
+    // public $layout = 'TwitterBootstrap.default';
 
     public function beforeFilter() {
         // AuthComponent の設定
@@ -62,7 +62,7 @@ class AppController extends Controller {
         );
         $this->Auth->loginRedirect = array(
           'controller' => 'posts',
-          'action' => 'add'
+          'action' => 'index'
         );
 
         $this->Auth->allow('display');
