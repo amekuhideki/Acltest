@@ -31,7 +31,6 @@ class PostsController extends AppController {
 		// unset($this->Post->validate['category_id']);
 		// unset($this->Post->validate['tag']);
 		// unset($this->Post->validate['posts_tags']);
-
 		$this->Post->recursive = 0;
 		// $this->set('posts', $this->paginate());
 
@@ -41,7 +40,7 @@ class PostsController extends AppController {
 			'conditions' =>
 				$this->Post->parseCriteria($this->passedArgs)
 		);
-		
+
 		$this->set('posts', $this->paginate());
 		$tags = $this->Post->Tag->find('list', array(
 			'fields' => array('Tag.tag')
