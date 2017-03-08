@@ -1,7 +1,7 @@
 <div class="tags index">
 	<?php echo $this->element('header'); ?>
 	<h2><?php echo __('Tags'); ?></h2>
-	<table cellpadding="0" cellspacing="0">
+	<table cellpadding="0" cellspacing="0" class="table table-striped">
 	<thead>
 	<tr>
 			<th><?php echo $this->Paginator->sort('id'); ?></th>
@@ -21,9 +21,13 @@
 		<td><?php echo h($tag['Tag']['created']); ?>&nbsp;</td>
 		<td><?php echo h($tag['Tag']['modified']); ?>&nbsp;</td>
 		<td class="actions">
-			<?php echo $this->Html->link(__('View'), array('action' => 'view', $tag['Tag']['id'])); ?>
-			<?php echo $this->Html->link(__('Edit'), array('action' => 'edit', $tag['Tag']['id'])); ?>
-			<?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $tag['Tag']['id']), array('confirm' => __('Are you sure you want to delete # %s?', $tag['Tag']['id']))); ?>
+			<?php echo $this->Html->link(__('View'), array('action' => 'view', $tag['Tag']['id']),
+																							 array('type' => "button", 'class' => "btn btn-primary")); ?>
+			<?php echo $this->Html->link(__('Edit'), array('action' => 'edit', $tag['Tag']['id']),
+																							 array('type' => "button", 'class' => "btn btn-primary")); ?>
+			<?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $tag['Tag']['id']),
+			 																							 array('confirm' => __('Are you sure you want to delete # %s?', $tag['Tag']['id']),
+																									 				 'type' => "button", 'class' => "btn btn-danger")); ?>
 		</td>
 	</tr>
 <?php endforeach; ?>
