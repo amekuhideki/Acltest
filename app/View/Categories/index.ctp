@@ -23,7 +23,10 @@
 			 																				 array('type' => "button", 'class' => "btn btn-primary")); ?>
 			<?php echo $this->Html->link(__('Edit'), array('action' => 'edit', $category['Category']['id']),
 																							 array('type' => 'button', 'class' => "btn btn-primary")); ?>
-			<?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $category['Category']['id']), array('confirm' => __('Are you sure you want to delete # %s?', $category['Category']['id']))); ?>
+			<?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $category['Category']['id']),
+			 																							 array('confirm' => __('Are you sure you want to delete # %s?', $category['Category']['id']),
+																									 				 'type' => "button",
+																													 'class' => "btn btn-danger")); ?>
 		</td>
 	</tr>
 <?php endforeach; ?>
