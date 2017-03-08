@@ -1,5 +1,6 @@
 
 <div class="posts index">
+	<?php echo $this->element('header'); ?>
 	<div class="section form_search">
 		<fieldset>
 			<legend>検索</legend>
@@ -19,44 +20,44 @@
 	<table class="table table-striped">
 		<thead>
 			<tr>
-					<th>Id</th>
-					<th>Title</th>
-					<th>Category</th>
-					<th>Tag</th>
-					<th>Action</th>
-					<th>Created</th>
-					<th>Modified</th>
+					<th>記事番号</th>
+					<th>ユーザ</th>
+					<th>カテゴリ</th>
+					<th>タイトル</th>
+					<th>記事内容</th>
+					<th>作成日</th>
+					<th>変更日</th>
 
 					<th class="actions"><?php echo __('Actions'); ?></th>
 			</tr>
 		</thead>
-	<tbody>
-		<?php foreach ($posts as $post): ?>
-			<tr>
-				<td><?php echo h($post['Post']['id']); ?>&nbsp;</td>
-				<td>
-					<?php echo $this->Html->link($post['User']['username'], array('controller' => 'users', 'action' => 'view', $post['User']['id'])); ?>
-				</td>
-				<td>
-					<?php echo $this->Html->link($post['Category']['category'], array('controller' => 'categories', 'action' => 'view', $post['Category']['id'])); ?>
-				</td>
-				<td><?php echo h($post['Post']['title']); ?>&nbsp;</td>
-				<td><?php echo h($post['Post']['body']); ?>&nbsp;</td>
-				<td><?php echo h($post['Post']['created']); ?>&nbsp;</td>
-				<td><?php echo h($post['Post']['modified']); ?>&nbsp;</td>
-				<td class="actions">
-					<?php echo $this->Html->link(__('View'), array('action' => 'view', $post['Post']['id']),
-					 																				 array('type' => "button", 'class' => "btn btn-primary")); ?>
-					<?php echo $this->Html->link(__('Edit'), array('action' => 'edit', $post['Post']['id']),
-																									 array('type' => "button", 'class' => "btn btn-primary")); ?>
-					<?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $post['Post']['id']),
-					 																							 array('confirm' => __('Are you sure you want to delete # %s?', $post['Post']['id']),
-																												  										 'type' => 'button',
-																																							 'class' => "btn btn-danger")); ?>
-				</td>
-			</tr>
-		<?php endforeach; ?>
-	</tbody>
+		<tbody>
+			<?php foreach ($posts as $post): ?>
+				<tr>
+					<td><?php echo h($post['Post']['id']); ?>&nbsp;</td>
+					<td>
+						<?php echo $this->Html->link($post['User']['username'], array('controller' => 'users', 'action' => 'view', $post['User']['id'])); ?>
+					</td>
+					<td>
+						<?php echo $this->Html->link($post['Category']['category'], array('controller' => 'categories', 'action' => 'view', $post['Category']['id'])); ?>
+					</td>
+					<td><?php echo h($post['Post']['title']); ?>&nbsp;</td>
+					<td><?php echo h($post['Post']['body']); ?>&nbsp;</td>
+					<td><?php echo h($post['Post']['created']); ?>&nbsp;</td>
+					<td><?php echo h($post['Post']['modified']); ?>&nbsp;</td>
+					<td class="actions">
+						<?php echo $this->Html->link(__('View'), array('action' => 'view', $post['Post']['id']),
+						 																				 array('type' => "button", 'class' => "btn btn-primary")); ?>
+						<?php echo $this->Html->link(__('Edit'), array('action' => 'edit', $post['Post']['id']),
+																										 array('type' => "button", 'class' => "btn btn-primary")); ?>
+						<?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $post['Post']['id']),
+						 																							 array('confirm' => __('Are you sure you want to delete # %s?', $post['Post']['id']),
+																													  										 'type' => 'button',
+																																								 'class' => "btn btn-danger")); ?>
+					</td>
+				</tr>
+			<?php endforeach; ?>
+		</tbody>
 	</table>
 	<p>
 	<?php
@@ -74,10 +75,6 @@
 	             ?>
 	  </ul>
 	</nav>
-	<div>
-	<?php echo $this->Html->Link(__('Logout'), array('controller' => 'users', 'action' => 'logout'),
-																						 array('confirm' => __('本当にログアウトしますか？'), 'type' => "button", 'class' => "btn btn-success")); ?>
-	</div>
 </div>
 <!-- <div class="actions">
 	<h3><?php echo __('Actions'); ?></h3>

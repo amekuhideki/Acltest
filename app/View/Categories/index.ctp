@@ -1,6 +1,7 @@
 <div class="categories index">
+	<?php echo $this->element('header'); ?>
 	<h2><?php echo __('Categories'); ?></h2>
-	<table cellpadding="0" cellspacing="0">
+	<table class="table table-striped">
 	<thead>
 	<tr>
 			<th><?php echo $this->Paginator->sort('id'); ?></th>
@@ -18,8 +19,10 @@
 		<td><?php echo h($category['Category']['created']); ?>&nbsp;</td>
 		<td><?php echo h($category['Category']['modified']); ?>&nbsp;</td>
 		<td class="actions">
-			<?php echo $this->Html->link(__('View'), array('action' => 'view', $category['Category']['id'])); ?>
-			<?php echo $this->Html->link(__('Edit'), array('action' => 'edit', $category['Category']['id'])); ?>
+		  <?php echo $this->Html->link(__('View'), array('action' => 'view', $category['Category']['id']),
+			 																				 array('type' => "button", 'class' => "btn btn-primary")); ?>
+			<?php echo $this->Html->link(__('Edit'), array('action' => 'edit', $category['Category']['id']),
+																							 array('type' => 'button', 'class' => "btn btn-primary")); ?>
 			<?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $category['Category']['id']), array('confirm' => __('Are you sure you want to delete # %s?', $category['Category']['id']))); ?>
 		</td>
 	</tr>
@@ -32,13 +35,15 @@
 		'format' => __('Page {:page} of {:pages}, showing {:current} records out of {:count} total, starting on record {:start}, ending on {:end}')
 	));
 	?>	</p>
-	<div class="paging">
-	<?php
-		echo $this->Paginator->prev('< ' . __('previous'), array(), null, array('class' => 'prev disabled'));
-		echo $this->Paginator->numbers(array('separator' => ''));
-		echo $this->Paginator->next(__('next') . ' >', array(), null, array('class' => 'next disabled'));
-	?>
-	</div>
+	<nav>
+		<ul class="pagination">
+	         <?php
+	             echo $this->Paginator->prev(__('前へ'), array('tag' => 'li'), null, array('tag' => 'li','class' => 'disabled','disabledTag' => 'a'));
+	             echo $this->Paginator->numbers(array('separator' => '','currentTag' => 'a', 'currentClass' => 'active','tag' => 'li','first' => 1));
+	             echo $this->Paginator->next(__('次へ'), array('tag' => 'li','currentClass' => 'disabled'), null, array('tag' => 'li','class' => 'disabled','disabledTag' => 'a'));
+	             ?>
+	  </ul>
+	</nav>
 </div>
 <div class="actions">
 	<h3><?php echo __('Actions'); ?></h3>

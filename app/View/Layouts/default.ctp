@@ -15,7 +15,8 @@
 	<!-- Le styles -->
 	<style>
     body {
-      padding-top: 50px;
+      /*padding-top: 50px;*/
+      padding: 100px;
     }
     .starter-template {
       padding: 40px 15px;
@@ -33,9 +34,8 @@
   <body>
 
     <?php echo $this->Session->flash(); ?>
-    <?php echo $this->element('header'); ?>
     <?php echo $this->fetch('content'); ?>
-
+    <?php echo $this->element('footer'); ?>
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->

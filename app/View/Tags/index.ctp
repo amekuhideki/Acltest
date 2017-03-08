@@ -1,4 +1,5 @@
 <div class="tags index">
+	<?php echo $this->element('header'); ?>
 	<h2><?php echo __('Tags'); ?></h2>
 	<table cellpadding="0" cellspacing="0">
 	<thead>
@@ -34,13 +35,15 @@
 		'format' => __('Page {:page} of {:pages}, showing {:current} records out of {:count} total, starting on record {:start}, ending on {:end}')
 	));
 	?>	</p>
-	<div class="paging">
-	<?php
-		echo $this->Paginator->prev('< ' . __('previous'), array(), null, array('class' => 'prev disabled'));
-		echo $this->Paginator->numbers(array('separator' => ''));
-		echo $this->Paginator->next(__('next') . ' >', array(), null, array('class' => 'next disabled'));
-	?>
-	</div>
+	<nav>
+		<ul class="pagination">
+	         <?php
+	             echo $this->Paginator->prev(__('前へ'), array('tag' => 'li'), null, array('tag' => 'li','class' => 'disabled','disabledTag' => 'a'));
+	             echo $this->Paginator->numbers(array('separator' => '','currentTag' => 'a', 'currentClass' => 'active','tag' => 'li','first' => 1));
+	             echo $this->Paginator->next(__('次へ'), array('tag' => 'li','currentClass' => 'disabled'), null, array('tag' => 'li','class' => 'disabled','disabledTag' => 'a'));
+	             ?>
+	  </ul>
+	</nav>
 </div>
 <div class="actions">
 	<h3><?php echo __('Actions'); ?></h3>
