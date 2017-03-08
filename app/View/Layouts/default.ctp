@@ -16,7 +16,10 @@
 	<style>
     body {
       /*padding-top: 50px;*/
-      padding: 100px;
+      padding-left: 100px;
+      padding-right: 100px;
+      padding-bottom: 100px;
+      padding-top: 10px;
     }
     .starter-template {
       padding: 40px 15px;
