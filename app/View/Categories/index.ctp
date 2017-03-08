@@ -1,6 +1,6 @@
 <div class="categories index">
 	<?php echo $this->element('header'); ?>
-	<h2><?php echo __('Categories'); ?></h2>
+	<h3><?php echo __('カテゴリ一覧'); ?></h3>
 	<table class="table table-striped">
 	<thead>
 	<tr>

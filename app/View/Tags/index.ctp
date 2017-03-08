@@ -1,6 +1,6 @@
 <div class="tags index">
 	<?php echo $this->element('header'); ?>
-	<h2><?php echo __('Tags'); ?></h2>
+	<h3><?php echo __('タグ一覧'); ?></h3>
 	<table cellpadding="0" cellspacing="0" class="table table-striped">
 	<thead>
 	<tr>
