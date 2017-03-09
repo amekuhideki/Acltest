@@ -1,7 +1,8 @@
 <div class="posts form">
+<?php echo $this->element('header'); ?>
 <?php echo $this->Form->create('Post', array('type' => 'file')); ?>
 	<fieldset>
-		<legend><?php echo __('Edit Post'); ?></legend>
+		<legend><?php echo __('記事編集'); ?></legend>
 		<?php
 			echo $this->Form->input('id');
 			echo $this->Form->input('user_id');
