@@ -7,12 +7,6 @@ $(document).ready(function(){
 });
 
 </script>
-<style>
-/*.button{
-  margin-top: 20px;
-  padding: 20px;
-}*/
-</style>
 <nav class="navbar navbar-default">
   <div class="navbar-header">
    <a class="navbar-brand">AMEブロ！</a>
