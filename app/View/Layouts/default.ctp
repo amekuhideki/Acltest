@@ -8,13 +8,13 @@
 		<?php echo __('CakePHP: the rapid development php framework:'); ?>
 		<?php echo $title_for_layout; ?>
 	</title>
-
     <!-- Bootstrap -->
 	<?php echo $this->Html->css('bootstrap.min'); ?>
 
   <!-- JQuery -->
+  <?php echo $this->Html->css('lightbox.css') ?>
   <script type="text/javascript" src="http://code.jquery.com/jquery-1.9.0.js"></script>
-	<!-- Le styles -->
+  <!-- Le styles -->
 	<style>
     body {
       /*padding-top: 50px;*/
@@ -46,5 +46,6 @@
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <?php echo $this->Html->script('bootstrap.min'); ?>
     <?php echo $this->fetch('script'); ?>
+    <?php echo $this->Html->script('lightbox.js')?>
   </body>
 </html>

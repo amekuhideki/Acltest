@@ -72,9 +72,11 @@
 							 															. $image["dir"] . "/" . $image["attachment"],
 																					 	array('class' => "largeImage", 'width' => "800")); ?> -->
 						  <div class="image">
-								<img src=
+								<a href=<?php echo '../../files/image/attachment/' . $image["dir"] . "/" . $image["attachment"]; ?>
+									 data-lightbox="group01" data-title=""/>
+									 <img src=
 								<?php echo '../../files/image/attachment/' . $image["dir"] . "/" . $image["attachment"]; ?>
-								width="256">
+								width="256"></a>
 							</div>
 							<div class="back-curtain">
 									<div class="largeImage">
@@ -115,63 +117,63 @@
 		<li><?php echo $this->Html->link(__('New User'), array('controller' => 'users', 'action' => 'add')); ?> </li>
 	</ul>
 </div> -->
-<script>
+<!-- <script>
 var img_width;
 var img_height;
 var img_ratio;
 
-jQuery.event.add(window, "load", function() {
-	var el = $('.largeImage img');
-			var img = new Image();
-			img.src = el.attr('src');
-			img_width = img.width;
-			img_height = img.height;
-	img_ratio = img_height/img_width;
-});
-
-$('.image img').click(function(e) {
-	e.preventDefault();
-
-	disp();
-	$('.largeImage img').fadeIn();
-});
-
-jQuery.event.add(window, "resize", function(){disp();});
-
-$('.back-curtain, .largeImage').click(function() {
-	$('.largeImage img').fadeOut('slow', function() {$('.back-curtain').hide();});
-});
-
-function disp(){
-	$('.back-curtain')
-		 .css({
-				 'width' : $(window).width(),    // ウィンドウ幅
-				 'height': $(window).height()    // 同 高さ
-		 })
-		 .show();
-
- var win_ratio = $(window).height() / $(window).width(); // ウィンドウの幅高比
- var w;  var h;      // 幅、高さ
- const margin=50;    // 上下左右の最低マージン
-
- if(img_ratio > win_ratio ){      // 画像の方がウィンドウより縦長
-		 h= $(window).height()-2*margin; // 画像の高さ　ウィンドウに合わせる
-		 if( h < $(window).height() ) h=$(window).height()-2*margin;
-		 w=h/img_ratio;
- }else{                  //  ウィンドウの方が縦長
-		 w=$(window).width()-2*margin;   // 画像幅　元の画像に合わせる
-		 if( w < $(window).width() ) w=$(window).width()-2*margin;
-		 h=w * img_ratio;
- }
-
- $('.largeImage img').css({
-		 'position': 'absolute',
-		 'left': ($(window).width()-w)/2+'px',
-		 'top' : ($(window).height()-h)/2+'px',
-		 'width' :w+'px',
-		 'height':h+'px'
- });
-}
+// jQuery.event.add(window, "load", function() {
+// 	var el = $('.largeImage img');
+// 			var img = new Image();
+// 			img.src = el.attr('src');
+// 			img_width = img.width;
+// 			img_height = img.height;
+// 	img_ratio = img_height/img_width;
+// });
+//
+// $('.image img').click(function(e) {
+// 	e.preventDefault();
+//
+// 	disp();
+// 	$('.largeImage img').fadeIn();
+// });
+//
+// jQuery.event.add(window, "resize", function(){disp();});
+//
+// $('.back-curtain, .largeImage').click(function() {
+// 	$('.largeImage img').fadeOut('slow', function() {$('.back-curtain').hide();});
+// });
+//
+// function disp(){
+// 	$('.back-curtain')
+// 		 .css({
+// 				 'width' : $(window).width(),    // ウィンドウ幅
+// 				 'height': $(window).height()    // 同 高さ
+// 		 })
+// 		 .show();
+//
+//  var win_ratio = $(window).height() / $(window).width(); // ウィンドウの幅高比
+//  var w;  var h;      // 幅、高さ
+//  const margin=50;    // 上下左右の最低マージン
+//
+//  if(img_ratio > win_ratio ){      // 画像の方がウィンドウより縦長
+// 		 h= $(window).height()-2*margin; // 画像の高さ　ウィンドウに合わせる
+// 		 if( h < $(window).height() ) h=$(window).height()-2*margin;
+// 		 w=h/img_ratio;
+//  }else{                  //  ウィンドウの方が縦長
+// 		 w=$(window).width()-2*margin;   // 画像幅　元の画像に合わせる
+// 		 if( w < $(window).width() ) w=$(window).width()-2*margin;
+// 		 h=w * img_ratio;
+//  }
+//
+//  $('.largeImage img').css({
+// 		 'position': 'absolute',
+// 		 'left': ($(window).width()-w)/2+'px',
+// 		 'top' : ($(window).height()-h)/2+'px',
+// 		 'width' :w+'px',
+// 		 'height':h+'px'
+//  });
+// }
 // jQuery(document).ready(function() {
 // 	$(".image").click(function(e){
 // 		$(".back-curtain")
@@ -196,4 +198,4 @@ function disp(){
 // 		});
 // 	});
 // });
-</script>
+// </script> -->
