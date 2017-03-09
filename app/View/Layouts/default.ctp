@@ -12,6 +12,8 @@
     <!-- Bootstrap -->
 	<?php echo $this->Html->css('bootstrap.min'); ?>
 
+  <!-- JQuery -->
+  <script type="text/javascript" src="http://code.jquery.com/jquery-1.9.0.js"></script>
 	<!-- Le styles -->
 	<style>
     body {
