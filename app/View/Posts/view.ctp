@@ -1,3 +1,67 @@
+<style>
+html, body{
+	margin: 0;　　　　　　　
+	padding: 0;　　　　　　
+	height: 100%;　　　　　
+}
+#mom_layer{
+	display: none;
+	position: fixed;
+	top: 0;
+	left: 0;
+	height: 100%;
+	width: 100%;
+	background: black;
+	opacity: 0.60;
+}
+#kids_layer{
+	display: none;
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	margin-top: -240px;
+	margin-left: -320px;
+}
+#modal_window h4{
+	margin: 20px 50px;
+	font-size: large;
+	border-left: 10px solid #7BAEB5;
+	border-bottom: 1px solid #7BAEB5;
+	padding: 10px;
+	width: 600px;
+}
+#modal_window ul{
+	width: 700px;
+	list-style-type: none;
+}
+#modal_window ul li{
+	float: left;
+}
+#modal_window ul li img{
+  border: 0;
+  margin: 10px;
+}
+
+</style>
+<script>
+$(function(){
+    $("body").append("<div id='mom_layer'></div><div id='kids_layer'></div>");
+    $("#mom_layer").click(function(){
+      $(this).fadeOut();
+      $("#kids_layer").fadeOut();
+　  });
+    $("a.modal_picture").click(function(){
+      $("#mom_layer").fadeIn();
+      $("#kids_layer").fadeIn().html("<img src='../../images/close.png' class='close'/>"+
+																	 "<img src='"+$(this).attr("href")+"' width='400'>");
+			$("#kids_layer img.close").click(function(){
+				$("#kids_layer").fadeOut();
+				$("#mom_layer").fadeOut();
+			});
+      return false;
+    });
+  });
+</script>
 <div class="posts view">
 	<?php echo $this->element('header'); ?>
 <h2><?php echo __('記事内容'); ?></h2>
@@ -45,18 +109,16 @@
 		</tr>
 		<?php if(!empty($post['Image'])): ?>
 		<tr>
-			<td><?php echo __('画像一覧'); ?></td>
-			<td>
+			<div id="modal_window">
+				<h4><?php echo __('画像一覧'); ?></h4>
+				<ul>
 					<?php foreach ($post['Image'] as $image): ?>
-							<!-- <a><?php echo $this->Html->image( "/files/image/attachment/"
-																						. $image["dir"] . "/" . $image["attachment"],
-																					 	array('class' => "image", 'width' => "250")); ?></a> -->
-					  <a href=<?php echo '../../files/image/attachment/' . $image["dir"] . "/" . $image["attachment"]; ?>
-							 data-lightbox="group01" data-title=""/>
-							 <img src=<?php echo '../../files/image/attachment/' . $image["dir"] . "/" . $image["attachment"]; ?>
-							 width="256"></a>
+					  <li><a href=<?php echo '../../files/image/attachment/' . $image["dir"] . "/" . $image["attachment"]; ?> class="modal_picture">
+						<img src=<?php echo '../../files/image/attachment/' . $image["dir"] . "/" . $image["attachment"]; ?>
+								 width="250"></a></li>
 					<?php endforeach; ?>
-			</td>
+				</ul>
+			</div>
 		</tr>
 		<?php endif; ?>
 		<tr>
@@ -76,14 +138,3 @@
 	</table>
 	<p><?php echo $this->Html->link(__('記事一覧に戻る'), array('action' => "index")); ?></p>
 </div>
-<!-- <div class="actions">
-	<h3><?php echo __('Actions'); ?></h3>
-	<ul>
-		<li><?php echo $this->Html->link(__('Edit Post'), array('action' => 'edit', $post['Post']['id'])); ?> </li>
-		<li><?php echo $this->Form->postLink(__('Delete Post'), array('action' => 'delete', $post['Post']['id']), array('confirm' => __('Are you sure you want to delete # %s?', $post['Post']['id']))); ?> </li>
-		<li><?php echo $this->Html->link(__('List Posts'), array('action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Post'), array('action' => 'add')); ?> </li>
-		<li><?php echo $this->Html->link(__('List Users'), array('controller' => 'users', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New User'), array('controller' => 'users', 'action' => 'add')); ?> </li>
-	</ul>
-</div> -->

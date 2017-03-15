@@ -12,7 +12,7 @@
 	<?php echo $this->Html->css('bootstrap.min'); ?>
 
   <!-- JQuery -->
-  <?php echo $this->Html->css('lightbox.css') ?>
+  <!-- <?php echo $this->Html->css('lightbox.css') ?> -->
   <script type="text/javascript" src="http://code.jquery.com/jquery-1.9.0.js"></script>
   <!-- Le styles -->
 	<style>
@@ -46,6 +46,6 @@
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <?php echo $this->Html->script('bootstrap.min'); ?>
     <?php echo $this->fetch('script'); ?>
-    <?php echo $this->Html->script('lightbox.js')?>
+    <!-- <?php echo $this->Html->script('lightbox.js')?> -->
   </body>
 </html>
