@@ -13,6 +13,7 @@ html, body{
 	width: 100%;
 	background: black;
 	opacity: 0.60;
+	z-index: 1;
 }
 #kids_layer{
 	display: none;
@@ -21,6 +22,7 @@ html, body{
 	left: 50%;
 	margin-top: -240px;
 	margin-left: -320px;
+	z-index: 2;
 }
 #modal_window h4{
 	margin: 20px 50px;
@@ -41,25 +43,97 @@ html, body{
   border: 0;
   margin: 10px;
 }
+.slide {
+	margin: 100px;
+  width: 400px;
+  height: 400px;
+  /*border: 10px solid black;*/
+  float: left;
+	pointer-events: none;
+}
+.slider {
+	margin-top: 100px;
+	margin-left: 200px;
+  width: 600px;
+  height: 600px;
+  overflow: hidden;
+  position: absolute;
+	display: none;
+	z-index: 2;
+
+}
+.slideSet {
+  position: absolute;
+}
+.slider-next{
+	top: 300px;
+	right: 60px;
+	position: absolute;
+	z-index: 3;
+}
+.slider-prev{
+	top: 300px;
+	left: 60px;
+	position: absolute;
+	z-index: 3;
+}
+.slider-close{
+	top: 100px;
+	right: 70px;
+	position: absolute;
+	z-index: 3;
+}
 
 </style>
 <script>
 $(function(){
-    $("body").append("<div id='mom_layer'></div><div id='kids_layer'></div>");
-    $("#mom_layer").click(function(){
+    $("body").append("<div id='mom_layer'></div><div class='slider'></div>");
+    $("#mom_layer").on('click', function(){
       $(this).fadeOut();
-      $("#kids_layer").fadeOut();
+      $(".slider").fadeOut();
 　  });
-    $("a.modal_picture").click(function(){
+    $("a.modal_picture").on('click',function(){
       $("#mom_layer").fadeIn();
-      $("#kids_layer").fadeIn().html("<img src='../../images/close.png' class='close'/>"+
-																	 "<img src='"+$(this).attr("href")+"' width='400'>");
-			$("#kids_layer img.close").click(function(){
-				$("#kids_layer").fadeOut();
+			$(".slider").fadeIn();
+			var slideCurrent = $("#modal_window li a").index(this);
+			console.log(slideCurrent);
+			$('.slideSet').stop().animate({
+				left: slideCurrent * -slideWidth
+			});
+			// $(".slider").append("<button class='slider-prev'>前へ</button><button class='slider-next'>次へ</button>")
+      // $("#kids_layer").fadeIn().html("<img src='../../images/close.png' class='close'/>"+
+			// 														 "<img src='"+$(this).attr("href")+"' width='400'>");
+
+
+			$(".slider-close").on('click', function(){
+				$(".slider").fadeOut();
 				$("#mom_layer").fadeOut();
 			});
       return false;
     });
+		var slideWidth = $('.slide').outerWidth()+200;
+		var slideNum = $('.slide').length;
+		var slideSetWidth = slideWidth * slideNum;
+		$('.slideSet').css('width', slideSetWidth);
+		var slideCurrent = '';
+		var sliding = function(){
+			if (slideCurrent < 0 ){
+				slideCurrent = slideNum - 1;
+			} else if (slideCurrent > slideNum - 1){
+					slideCurrent = 0;
+				}
+			$('.slideSet').stop().animate({
+				left: slideCurrent * -slideWidth
+			});
+		}
+		$('.slider-prev').click(function(){
+			slideCurrent--;
+			sliding();
+		})
+		$('.slider-next').click(function(){
+			slideCurrent++;
+			sliding();
+		});
   });
 </script>
 <div class="posts view">
@@ -112,15 +186,38 @@ $(function(){
 			<div id="modal_window">
 				<h4><?php echo __('画像一覧'); ?></h4>
 				<ul>
+					<?php $i = 0; ?>
 					<?php foreach ($post['Image'] as $image): ?>
-					  <li><a href=<?php echo '../../files/image/attachment/' . $image["dir"] . "/" . $image["attachment"]; ?> class="modal_picture">
+					  <li><a href=<?php echo '../../files/image/attachment/' . $image["dir"] . "/" . $image["attachment"]; ?> class="modal_picture" img_group=<?php echo $i; $i++?>>
 						<img src=<?php echo '../../files/image/attachment/' . $image["dir"] . "/" . $image["attachment"]; ?>
-								 width="250"></a></li>
+								 width="250" class="picture"></a></li>
 					<?php endforeach; ?>
 				</ul>
 			</div>
 		</tr>
 		<?php endif; ?>
+
+		<?php if(!empty($post['Image'])): ?>
+			<div class="slider">
+				<div>
+				<div class="slideSet">
+					<?php foreach ($post['Image'] as $image): ?>
+						<div class="slide">
+							<a href=<?php echo '../../files/image/attachment/' . $image["dir"] . "/" . $image["attachment"]; ?>>
+							<img src=<?php echo '../../files/image/attachment/' . $image["dir"] . "/" . $image["attachment"]; ?>
+								 width="400"></a>
+						</div>
+					<?php endforeach; ?>
+				</div>
+			</div>
+			<p class="slider-close"><img src="../../images/close.png" ></p>
+			<p class="slider-prev"><img src="../../images/prev.png" width="20" height="100"></p>
+			<p class="slider-next"><img src="../../images/next.png" width="20" height="100"></p>
+		</div>
+
+		</tr>
+		<?php endif; ?>
+
 		<tr>
 			<td><?php echo __('作成日'); ?></td>
 			<td>
