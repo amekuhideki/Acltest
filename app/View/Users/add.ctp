@@ -1,29 +1,56 @@
-<div class="users form">
-<?php echo $this->Form->create('User'); ?>
-	<fieldset>
-		<legend><?php echo __('Add User'); ?></legend>
-	<?php
-		echo $this->Form->input('username');
-		echo $this->Form->input('password');
-		echo $this->Form->input('group_id');
-	?>
-	</fieldset>
-<?php echo $this->Form->end(__('Submit')); ?>
-</div>
-<div class="actions">
-	<h3><?php echo __('Actions'); ?></h3>
-	<ul>
+<script src="https://ajaxzip3.github.io/ajaxzip3.js" charset="UTF-8"></script>
+<style>
+	.container{
+		width: 300px;
+		padding-top: 100px;
+	}
+	.center   {
+			width: 120%;
+			margin: 0 auto;
+			padding: 15px;
+			border: solid 1px;
+	}
+	h2{
+		text-align: center;
+	}
+	.text{
+		text-align: center;
+	}
 
-		<li><?php echo $this->Html->link(__('List Users'), array('action' => 'index')); ?></li>
-		<li><?php echo $this->Html->link(__('List Groups'), array('controller' => 'groups', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Group'), array('controller' => 'groups', 'action' => 'add')); ?> </li>
-		<li><?php echo $this->Html->link(__('List Posts'), array('controller' => 'posts', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Post'), array('controller' => 'posts', 'action' => 'add')); ?> </li>
-		<li><?php echo $this->Html->link(__('List Category'), array('controller' => 'categories', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Category'), array('controller' => 'categories', 'action' => 'add')); ?> </li>
-		<li><?php echo $this->Html->link(__('List Tags'), array('controller' => 'tags', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Tags'), array('controller' => 'tags', 'action' => 'add')); ?> </li>
-		<li><?php echo $this->Html->link(__('List PostsTag'), array('controller' => 'posts_tags', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New PostsTags'), array('controller' => 'posts_tags', 'action' => 'add')); ?> </li>
-	</ul>
+</style>
+<div class="users form">
+	<div class="container">
+		<div class="center">
+			<?php echo $this->Form->create('User'); ?>
+			<fieldset>
+				<div class="form-group">
+					<legend><h2><?php echo __('アカウント作成'); ?></h2></legend>
+				</div>
+				<div class="form-group">
+					<?php
+						echo $this->Form->input('username', array('label' => "アカウント名", 'class' => "form-control"));
+					?>
+				</div>
+				<div class="form-group">
+					<?php
+						echo $this->Form->input('password', array('label' => "パスワード", 'class' => "form-control"));
+					?>
+				</div>
+				<div class="form-group">
+					<?php
+						echo $this->Form->input('group_id', array('label' => "権限", 'class' => "form-control"));
+					?>
+				</div>
+			</fieldset>
+		<!-- <?php echo $this->Form->end(__('Submit')); ?> -->
+			<div class="form-group">
+				<?php echo $this->Form->end(array('label' => "アカウント作成", 'class' => "btn btn-primary form-control")) ?>
+			</div>
+			<div>
+				<div class="text">
+					<?php echo $this->Html->link(__('サインイン'), array('action' => 'login')) ?>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>

@@ -16,7 +16,7 @@
   <script type="text/javascript" src="http://code.jquery.com/jquery-1.9.0.js"></script>
   <!-- Le styles -->
 	<style>
-    body {
+    html,body {
       /*padding-top: 50px;*/
       padding-left: 100px;
       padding-right: 100px;
@@ -27,6 +27,18 @@
       padding: 40px 15px;
       text-align: center;
     }
+    .footer {
+      margin: 20px;
+    }
+    /*.footer {
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      height: 100%;
+    }
+    .content {
+      padding-bottom: 100px;
+    }*/
 	</style>
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
