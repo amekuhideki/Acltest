@@ -1,6 +1,6 @@
 
 <div class="posts index">
-	<?php echo $this->element('header'); ?>
+	<?php echo $this->element('indexheader'); ?>
 	<!-- <div class="section form_search">
 		<fieldset>
 			<legend>検索</legend>
