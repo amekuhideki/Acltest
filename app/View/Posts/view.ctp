@@ -95,11 +95,11 @@ $(function(){
     $("a.modal_picture").on('click',function(){
       $("#mom_layer").fadeIn();
 			$(".slider").fadeIn();
-			var slideCurrent = $("#modal_window li a").index(this);
-			console.log(slideCurrent);
+		  slideCurrent = $("#modal_window li a").index(this);
 			$('.slideSet').stop().animate({
 				left: slideCurrent * -slideWidth
 			});
+
 			// $(".slider").append("<button class='slider-prev'>前へ</button><button class='slider-next'>次へ</button>")
       // $("#kids_layer").fadeIn().html("<img src='../../images/close.png' class='close'/>"+
 			// 														 "<img src='"+$(this).attr("href")+"' width='400'>");
@@ -108,9 +108,11 @@ $(function(){
 			$(".slider-close").on('click', function(){
 				$(".slider").fadeOut();
 				$("#mom_layer").fadeOut();
+				var slideCurrent = 0;
 			});
       return false;
     });
+
 		var slideWidth = $('.slide').outerWidth()+200;
 		var slideNum = $('.slide').length;
 		var slideSetWidth = slideWidth * slideNum;
