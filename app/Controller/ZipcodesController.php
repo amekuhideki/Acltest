@@ -9,14 +9,16 @@ App::uses('AppController', 'Controller');
 class ZipcodesController extends AppController {
 	public $helpers = array('Html', 'Form', 'Flash');
 	public $presetVars = true;
+	public $components = array('Paginator', 'Flash');
+	var $uses = array('Post', 'User', 'Category', 'Tag', 'PostsTag', 'Attachment', 'Zipcode');
 
 	public function beforeFilter() {
 	    parent::beforeFilter();
-	    $this->Auth->allow('index', 'getdata');
+	    $this->Auth->allow('index', 'getdata', 'add');
 	}
-	var $uses = array('Post', 'User', 'Category', 'Tag', 'PostsTag', 'Attachment', 'Zipcode');
 
 	public function index() {
+		$this->Zipcode->recursive = 0;
 
 
 	}
