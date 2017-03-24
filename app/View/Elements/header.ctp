@@ -1,7 +1,7 @@
 <script>
 $(document).ready(function(){
-  $('.button').prevAll().hide();
-  $('.button').click(function(){
+  $('.search-button').prevAll().hide();
+  $('.search-button').click(function(){
     $('.target').slideToggle();
   });
 });
@@ -26,7 +26,7 @@ $(document).ready(function(){
             ?>
           </ul>
           </div>
-          <a class="button"><span class="btn-lg glyphicon glyphicon-search" aria-hidden="true"></span></a>
+          <a class="search-button"><span class="btn-lg glyphicon glyphicon-search" aria-hidden="true"></span></a>
         </div>
         <!-- <form class="navbar-form navbar-left" role="search">
           <div class="form-group">
