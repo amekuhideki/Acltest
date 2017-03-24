@@ -1,7 +1,7 @@
 
 <div class="posts index">
 	<?php echo $this->element('header'); ?>
-	<div class="section form_search">
+	<!-- <div class="section form_search">
 		<fieldset>
 			<legend>検索</legend>
 			<?php echo $this->Form->create('Post', array('novalidate' => true, 'url' => array_merge(
@@ -13,7 +13,7 @@
 				echo $this->Form->end(array('label' => '検索', 'class' => "btn btn-default"));
 			?>
 		<fieldset>
-	</div>
+	</div> -->
 	<h3><?php echo __('記事一覧'); ?></h3>
 	<?php echo $this->Paginator->counter(array('format' => __('記事件数:{:count}件 表示件数:{:start}件~{:end}件'))); ?>
 
