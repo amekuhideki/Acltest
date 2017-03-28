@@ -48,7 +48,7 @@
 					<td class="actions">
 						<?php echo $this->Html->link(__('詳細'), array('action' => 'view', $post['Post']['id']),
 						 																				 array('type' => "button", 'class' => "btn btn-primary")); ?>
-						<?php if ($username == $post['User']['username']): ?>
+						<?php if ($user_auth['user_group'] == 1 || $user_auth['user_name'] == $post['User']['username']): ?>
 						<?php echo $this->Html->link(__('編集'), array('action' => 'edit', $post['Post']['id']),
 																										 array('type' => "button", 'class' => "btn btn-primary")); ?>
 						<?php echo $this->Form->postLink(__('削除'), array('action' => 'delete', $post['Post']['id']),

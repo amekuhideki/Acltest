@@ -26,7 +26,11 @@ class PostsController extends AppController {
  * @return void
  */
 	public function index() {
-
+		$user = $this->Auth->user();
+		$user_group = $user['group_id'];
+		$user_name = $user['username'];
+		$user_auth = ['user_group' => $user_group, 'user_name' => $user_name];
+		$this->set('user_auth', $user_auth);
 		// unset($this->Post->validate['title']);
 		// unset($this->Post->validate['category_id']);
 		// unset($this->Post->validate['tag']);
@@ -104,6 +108,13 @@ class PostsController extends AppController {
 		if (!$post) {
 			throw new NotFoundException(__('Invalid post'));
 		}
+		// var_dump($this->Auth->user()['id']);
+		// echo"<pre>";
+		// var_dump($post['User']['id']);
+		// exit;
+		if (!($this->Auth->user()['id'] == $post['User']['id'])) {
+			return $this->redirect(array('action' => 'index'));
+		}
 		if ($this->request->is(array('post', 'put'))) {
 			$this->Post->id = $id;
 
@@ -154,7 +165,11 @@ class PostsController extends AppController {
 		if (!$this->Post->exists()) {
 			throw new NotFoundException(__('Invalid post'));
 		}
-		$this->request->allowMethod('post', 'delete');
+		//もしGETでリクエストされた場合の対処
+		$post = $this->Post->findById($id);
+		if (!($this->Auth->user()['id'] == $post['User']['id'])) {
+			return $this->redirect(array('action' => 'index'));
+		}
 		if ($this->Post->delete()) {
 			$this->Flash->success(__('The post has been deleted.'));
 		} else {

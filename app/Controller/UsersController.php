@@ -7,8 +7,12 @@ App::uses('AppController', 'Controller');
  * @property PaginatorComponent $Paginator
  */
 class UsersController extends AppController {
+	var $users = array('User', 'Group');
+	// var $uses = array('Post', 'User', 'Category', 'Tag', 'PostsTag', 'Attachment', 'Groups');
+
 	public function beforeFilter() {
     parent::beforeFilter();
+		// $this->Auth->allow('add', 'logout', 'login');
 
     // CakePHP 2.0
     // $this->Auth->allow('*');
@@ -35,6 +39,7 @@ class UsersController extends AppController {
 	//     $this->Acl->allow($group, 'controllers/Posts/edit');
 	//     $this->Acl->allow($group, 'controllers/Widgets/add');
 	//     $this->Acl->allow($group, 'controllers/Widgets/edit');
+	// 		$this->Acl->allow($group, 'controllers/Posts/delete');
 	//     //馬鹿げた「ビューが見つからない」というエラーメッセージを表示させないために exit を追加します
 	//     echo "all done";
 	//     exit;
@@ -42,7 +47,7 @@ class UsersController extends AppController {
 	public function login() {
 			if ($this->Session->read('Auth.User')) {
 				$this->Session->setFlash('You are logged in!');
-				$this->redirect('/', null, false);
+				$this->redirect('/posts', null, false);
 			}
 	    if ($this->request->is('post')) {
 	        if ($this->Auth->login()) {
@@ -68,8 +73,23 @@ class UsersController extends AppController {
  * @return void
  */
 	public function index() {
+		$user = $this->Auth->user();
+		$user_group = $user['group_id'];
+		$user_name = $user['username'];
+		$user_auth = ['user_group' => $user_group, 'user_name' => $user_name];
+		$this->set('user_auth', $user_auth);
+
 		$this->User->recursive = 0;
 		$this->set('users', $this->Paginator->paginate());
+
+		// $tags = $this->Post->Tag->find('list', array(
+		// 	'fields' => array('Tag.tag')
+		// ));
+		// $this->set('tags', $tags);
+		// $categories = $this->Post->Category->find('list', array(
+		// 	'fields' => array('Category.category')
+		// ));
+		// $this->set('categories', $categories);
 	}
 
 /**
