@@ -12,7 +12,8 @@ $(document).ready(function(){
    <a class="navbar-brand">AMEブロ！</a>
    </div>
   	<ul class="nav nav-tabs">
-
+      <li><?php echo $this->Html->link(__('記事作成'), array('controller' => 'posts', 'action' => 'add'),
+                                                      array('role' => "presentation")); ?></li>
   		<li><?php echo $this->Html->link(__('記事一覧'), array('controller' => 'posts','action' => 'index'),
                                                      array('role' => "presentation")); ?></li>
   		<li><?php echo $this->Html->link(__('ユーザ一覧'), array('controller' => 'users', 'action' => 'index'),
