@@ -6,7 +6,6 @@
 				<tr>
 						<th>id</th>
 						<th>username</th>
-						<th>password</th>
 						<th>group_id</th>
 						<th>created</th>
 						<th>modified</th>
@@ -18,7 +17,6 @@
 				<tr>
 					<td><?php echo h($user['User']['id']); ?>&nbsp;</td>
 					<td><?php echo h($user['User']['username']); ?>&nbsp;</td>
-					<td><?php echo h($user['User']['password']); ?>&nbsp;</td>
 					<td>
 						<?php echo $this->Html->link($user['Group']['name'], array('controller' => 'groups', 'action' => 'view', $user['Group']['id'])); ?>
 					</td>

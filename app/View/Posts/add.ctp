@@ -1,4 +1,5 @@
 <div class="posts form">
+	<?php echo $this->element('header'); ?>
 <?php echo $this->Form->create('Post', array('type' => 'file')); ?>
 	<fieldset>
 		<legend><?php echo __('Add Post'); ?></legend>
