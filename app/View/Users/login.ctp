@@ -1,10 +1,10 @@
 <style>
   .container {
       width: 300px;
-      padding-top: 100px; 
+      padding-top: 100px;
   }
   .center   {
-      width: 120%;
+      width: 100%;
       margin: 0 auto;
       padding: 15px;
       border: solid 1px;
@@ -46,7 +46,7 @@
     </div>
     <div class="form-group">
       <div class="text">
-        <?php echo $this->Html->link(__('アカウントを作成'), array('action' => 'add', 'class' => "center")); ?>
+        <?php echo $this->Html->link(__('アカウントを作成'), array('action' => 'add')); ?>
       </div>
     </div>
 

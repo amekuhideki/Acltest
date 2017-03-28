@@ -1,6 +1,6 @@
 <div class="users index">
 	<?php echo $this->element('header'); ?>
-	<h3><?php echo __('ユーザ一覧'); ?></h3>
+	<h3><?php echo __('ユーザー一覧'); ?></h3>
 		<table class="table table-striped">
 			<thead>
 				<tr>
@@ -25,12 +25,14 @@
 					<td><?php echo h($user['User']['created']); ?>&nbsp;</td>
 					<td><?php echo h($user['User']['modified']); ?>&nbsp;</td>
 					<td class="actions">
-						<?php echo $this->Html->link(__('View'), array('action' => 'view', $user['User']['id']),
+						<?php echo $this->Html->link(__('詳細'), array('action' => 'view', $user['User']['id']),
 																										 array('type' => "button", 'class' => "btn btn-primary")); ?>
-						<?php echo $this->Html->link(__('Edit'), array('action' => 'edit', $user['User']['id']),
+					　<?php if ($user_auth['user_group'] == 1 || $user_auth['user_name'] == $user['User']['username']): ?>
+						<?php echo $this->Html->link(__('編集'), array('action' => 'edit', $user['User']['id']),
 																										 array('type' => "button", 'class' => "btn btn-primary")); ?>
-						<?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $user['User']['id']),
+						<?php echo $this->Form->postLink(__('削除'), array('action' => 'delete', $user['User']['id']),
 						 																							 array('confirm' => __('Are you sure you want to delete # %s?', $user['User']['id']), 'type' => "button", 'class' => "btn btn-danger")); ?>
+						<?php endif; ?>
 					</td>
 				</tr>
 				<?php endforeach; ?>
@@ -51,20 +53,4 @@
 	             ?>
 	  </ul>
 	</nav>
-</div>
-<div class="actions">
-	<h3><?php echo __('Actions'); ?></h3>
-	<ul>
-		<li><?php echo $this->Html->link(__('New User'), array('action' => 'add')); ?></li>
-		<li><?php echo $this->Html->link(__('List Groups'), array('controller' => 'groups', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Group'), array('controller' => 'groups', 'action' => 'add')); ?> </li>
-		<li><?php echo $this->Html->link(__('List Posts'), array('controller' => 'posts', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Post'), array('controller' => 'posts', 'action' => 'add')); ?> </li>
-		<li><?php echo $this->Html->link(__('List Category'), array('controller' => 'categories', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Category'), array('controller' => 'categories', 'action' => 'add')); ?> </li>
-		<li><?php echo $this->Html->link(__('List Tags'), array('controller' => 'tags', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Tags'), array('controller' => 'tags', 'action' => 'add')); ?> </li>
-		<li><?php echo $this->Html->link(__('List PostsTag'), array('controller' => 'posts_tags', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New PostsTags'), array('controller' => 'posts_tags', 'action' => 'add')); ?> </li>
-	</ul>
 </div>

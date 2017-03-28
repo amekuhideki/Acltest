@@ -1,3 +1,13 @@
+<style>
+.footer{
+    width: 400px;
+    margin: 0 auto;
+    padding: 15px;
+}
+p{
+  text-align: center;
+}
+</style>
 <div class="footer">
-  <p align="center">Copyright © 2017 Hideki Ameku All Right Reserved.</p>
+  <p>Copyright © 2017 Hideki Ameku All Right Reserved.</p>
 </div>

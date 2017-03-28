@@ -28,7 +28,7 @@
 					<th>作成日</th>
 					<th>変更日</th>
 
-					<th class="actions"><?php echo __('Actions'); ?></th>
+					<th class="actions"><?php echo __('詳細'); ?></th>
 			</tr>
 		</thead>
 		<tbody>
@@ -46,14 +46,16 @@
 					<td><?php echo h($post['Post']['created']); ?>&nbsp;</td>
 					<td><?php echo h($post['Post']['modified']); ?>&nbsp;</td>
 					<td class="actions">
-						<?php echo $this->Html->link(__('View'), array('action' => 'view', $post['Post']['id']),
+						<?php echo $this->Html->link(__('詳細'), array('action' => 'view', $post['Post']['id']),
 						 																				 array('type' => "button", 'class' => "btn btn-primary")); ?>
-						<?php echo $this->Html->link(__('Edit'), array('action' => 'edit', $post['Post']['id']),
+						<?php if ($username == $post['User']['username']): ?>
+						<?php echo $this->Html->link(__('編集'), array('action' => 'edit', $post['Post']['id']),
 																										 array('type' => "button", 'class' => "btn btn-primary")); ?>
-						<?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $post['Post']['id']),
+						<?php echo $this->Form->postLink(__('削除'), array('action' => 'delete', $post['Post']['id']),
 						 																							 array('confirm' => __('Are you sure you want to delete # %s?', $post['Post']['id']),
 																													  										 'type' => 'button',
 																																								 'class' => "btn btn-danger")); ?>
+						<?php endif; ?>
 					</td>
 				</tr>
 			<?php endforeach; ?>

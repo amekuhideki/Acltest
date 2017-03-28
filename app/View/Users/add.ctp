@@ -4,8 +4,8 @@
 		width: 300px;
 		padding-top: 100px;
 	}
-	.center   {
-			width: 120%;
+	.center{
+			width: 100%;
 			margin: 0 auto;
 			padding: 15px;
 			border: solid 1px;

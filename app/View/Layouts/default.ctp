@@ -27,9 +27,7 @@
       padding: 40px 15px;
       text-align: center;
     }
-    .footer {
-      margin: 20px;
-    }
+
     /*.footer {
       position: absolute;
       bottom: 0;
