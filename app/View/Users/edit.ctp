@@ -1,4 +1,5 @@
 <div class="users form">
+	<?php echo $this->element('header'); ?>
 <?php echo $this->Form->create('User'); ?>
 	<fieldset>
 		<legend><?php echo __('Edit User'); ?></legend>
