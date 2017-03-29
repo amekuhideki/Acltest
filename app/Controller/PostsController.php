@@ -80,6 +80,14 @@ class PostsController extends AppController {
  */
 	public function add() {
 		if ($this->request->is('post')) {
+			if(isset($this->request->data['Image'])) {
+				$count = count($this->request->data['Image']);
+				for ($i = 0; $i < $count; $i++){
+					if (!$this->request->data['Image'][$i]['attachment']['name']) {
+						unset($this->request->data['Image'][$i]);
+					}
+				}
+			}
 			$this->Post->create();
 			if ($this->Post->saveAll($this->request->data)) {
 				$this->Flash->success(__('The post has been saved.'));
@@ -88,8 +96,12 @@ class PostsController extends AppController {
 				$this->Flash->error(__('The post could not be saved. Please, try again.'));
 			}
 		}
-		$users = $this->Post->User->find('list');
-		$categories = $this->Post->Category->find('list');
+		$users = $this->Auth->user()['id'];
+		// $users = $this->Post->User->find('list');
+
+		$categories = $this->Post->Category->find('list', array(
+			'fields' => array('Category.category')
+		));
 		$this->set(compact('users', 'categories'));
  }
 
