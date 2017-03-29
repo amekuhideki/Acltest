@@ -137,6 +137,9 @@ class UsersController extends AppController {
 		if (!$this->User->exists($id)) {
 			throw new NotFoundException(__('Invalid user'));
 		}
+		if(!($this->Auth->user()['id'] == $id || $this->Auth->user()['group_id'] == 1)){
+			return $this->redirect(array('action' => 'index'));
+		}
 		if ($this->request->is(array('post', 'put'))) {
 			if ($this->User->save($this->request->data)) {
 				$this->Flash->success(__('The user has been saved.'));
@@ -163,6 +166,11 @@ class UsersController extends AppController {
 		$this->User->id = $id;
 		if (!$this->User->exists()) {
 			throw new NotFoundException(__('Invalid user'));
+		}
+
+		$user = $this->User->findById($id);
+		if (!($this->Auth->user()['id'] == $user['User']['id'] || $this->Auth->user()['group_id'] == 1)){
+			return $this->redirect(array('action' => 'index'));
 		}
 		$this->request->allowMethod('post', 'delete');
 		if ($this->User->delete()) {

@@ -112,7 +112,8 @@ class PostsController extends AppController {
 		// echo"<pre>";
 		// var_dump($post['User']['id']);
 		// exit;
-		if (!($this->Auth->user()['id'] == $post['User']['id'])) {
+
+		if (!($this->Auth->user()['id'] == $post['User']['id'] || ($this->Auth->user()['group_id'] == 1))) {
 			return $this->redirect(array('action' => 'index'));
 		}
 		if ($this->request->is(array('post', 'put'))) {
@@ -167,9 +168,10 @@ class PostsController extends AppController {
 		}
 		//もしGETでリクエストされた場合の対処
 		$post = $this->Post->findById($id);
-		if (!($this->Auth->user()['id'] == $post['User']['id'])) {
+		if (!($this->Auth->user()['id'] == $post['User']['id'] || ($this->Auth->user()['group_id'] == 1))) {
 			return $this->redirect(array('action' => 'index'));
 		}
+		$this->request->allowMethod('post', 'delete');
 		if ($this->Post->delete()) {
 			$this->Flash->success(__('The post has been deleted.'));
 		} else {
