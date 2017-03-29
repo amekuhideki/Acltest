@@ -12,13 +12,13 @@ class UsersController extends AppController {
 
 	public function beforeFilter() {
     parent::beforeFilter();
-		// $this->Auth->allow('add', 'logout', 'login');
+		$this->Auth->allow('add', 'logout', 'login', 'index', 'view');
 
     // CakePHP 2.0
     // $this->Auth->allow('*');
 
     // CakePHP 2.1以上
-    $this->Auth->allow();
+    // $this->Auth->allow();
 }
 	// public function initDB() {
 	//     $group = $this->User->Group;
@@ -33,13 +33,14 @@ class UsersController extends AppController {
 	//     $this->Acl->allow($group, 'controllers/Widgets');
 	//
 	//     //ユーザグループには posts と widgets に対する追加と編集を許可する
-	//     $group->id = 3;
+	    // $group->id = 3;
 	//     $this->Acl->deny($group, 'controllers');
 	//     $this->Acl->allow($group, 'controllers/Posts/add');
 	//     $this->Acl->allow($group, 'controllers/Posts/edit');
 	//     $this->Acl->allow($group, 'controllers/Widgets/add');
 	//     $this->Acl->allow($group, 'controllers/Widgets/edit');
 	// 		$this->Acl->allow($group, 'controllers/Posts/delete');
+			// $this->Acl->allow($group, 'controllers/Posts/deleteImage');
 	//     //馬鹿げた「ビューが見つからない」というエラーメッセージを表示させないために exit を追加します
 	//     echo "all done";
 	//     exit;
