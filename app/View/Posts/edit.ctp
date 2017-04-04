@@ -11,7 +11,7 @@
 		<table class="table">
 			<tr>
 				<th>
-					<label class="col-sm-3">タイトル</label>
+					<label class="col-sm-3"><?php echo(__('タイトル')); ?></label>
 				</th>
 				<td>
 					<div class="col-sm-9">
@@ -23,7 +23,7 @@
 			</tr>
 			<tr>
 				<th>
-					<label class="col-sm-3">カテゴリー</label>
+					<label class="col-sm-3"><?php echo(__('カテゴリー')); ?></label>
 				</th>
 				<td>
 					<div class="col-sm-9">
@@ -35,7 +35,7 @@
 			</tr>
 			<tr>
 				<th>
-					<label class="col-sm-3">本文</label>
+					<label class="col-sm-3"><?php echo(__('本文')); ?></label>
 				</th>
 				<td>
 					<div class="col-sm-9">
@@ -47,7 +47,7 @@
 			</tr>
 			<tr>
 				<th>
-					<label class="col-sm-3">画像ファイルの追加</label>
+					<label class="col-sm-3"><?php echo(__('画像ファイルの追加')); ?></label>
 				</th>
 				<td>
 					<div class="col-sm-9">
@@ -64,7 +64,7 @@
 			?>
 		</table>
 		<div align="center">
-			<?php echo $this->Form->end(array('label' => '再投稿する', 'class' => 'btn btn-primary')); ?><br>
+			<?php echo $this->Form->submit(__('投稿する'), array('class' => 'btn btn-primary')); ?><br>
 		</div>
 		<?php if(!empty($post['Image'])): ?>
 			<legend><h4><?php echo (__('画像一覧')); ?></h4></legend>

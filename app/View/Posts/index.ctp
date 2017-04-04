@@ -20,13 +20,13 @@
 	<table class="table table-striped">
 		<thead>
 			<tr>
-					<th>記事番号</th>
-					<th>ユーザ</th>
-					<th>カテゴリ</th>
-					<th>タイトル</th>
-					<th>記事内容</th>
-					<th>作成日</th>
-					<th>変更日</th>
+					<th><?php echo(__('記事番号')); ?></th>
+					<th><?php echo(__('ユーザ')); ?></th>
+					<th><?php echo(__('カテゴリ')); ?></th>
+					<th><?php echo(__('タイトル')); ?></th>
+					<th><?php echo(__('記事内容')); ?></th>
+					<th><?php echo(__('作成日')); ?></th>
+					<th><?php echo(__('変更日')); ?></th>
 
 					<th class="actions"><?php echo __('詳細'); ?></th>
 			</tr>

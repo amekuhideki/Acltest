@@ -41,7 +41,7 @@
     </div>
     <div class="form-group">
       <?php
-        echo $this->Form->end(array('label' => 'サインイン', 'class' => "btn btn-lg btn-primary btn-block"));
+        echo $this->Form->submit(__('サインイン'), array('class' => "btn btn-lg btn-primary btn-block"));
       ?>
     </div>
     <div class="form-group">
