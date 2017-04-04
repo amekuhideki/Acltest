@@ -1,19 +1,71 @@
+<style>
+	#wrapper{
+		width: 960px;
+		margin: 0 auto;
+	}
 
-<div class="posts index">
-	<?php echo $this->element('indexheader'); ?>
-	<!-- <div class="section form_search">
-		<fieldset>
-			<legend>検索</legend>
-			<?php echo $this->Form->create('Post', array('novalidate' => true, 'url' => array_merge(
-				array('action' => 'index'), $this->params['pass']) )); ?>
-			<?php
-				echo $this->Form->input('title', array('label' => 'タイトル', 'empty' => true, 'placeholder' => '例）検索ワードを入力してください。', 'style' => "width:250px;"));
-				echo $this->Form->input('category', array('label' => 'カテゴリー', 'class' => 'selectpicker_pre', 'empty' => true, 'options' => $categories));
-				echo $this->Form->input('tag', array('label' => 'タグ', 'empty' => true, 'options' => $tags, 'multiple' => true, 'class' => "form-control", 'style' => "width:250px;"));
-				echo $this->Form->end(array('label' => '検索', 'class' => "btn btn-default"));
-			?>
-		<fieldset>
-	</div> -->
+	#content{
+		width: 960px;
+		margin: 0 auto;
+	}
+
+	#content_details{
+		margin: 100px;
+	}
+
+	.post_title{
+		font-size: 25px;
+		text-align: left;
+		background: linear-gradient(transparent 60%, #ff0 0%);/*　タイトルの下線*/
+	}
+
+	.post_body{
+		font-size: 15px;
+		text-align: center;
+	}
+
+	.action_view{
+		text-align: right;
+	}
+
+</style>
+<div id="wrapper">
+	<div class="posts index">
+		<?php echo $this->element('header2'); ?>
+
+		<div id="contents">
+			<?php foreach ($posts as $post): ?>
+				<div id="content_details">
+					<div class="post_title">
+						<?php echo h($post['Post']['title']); ?><br>
+					</div>
+
+					<div class="post_date">
+						<?php $post_date = date('Y年m月d日', strtotime($post['Post']['created']));
+						      echo h('□'.$post_date);
+						 ?>
+					</div>
+
+					<div class="post_body">
+						<?php
+							$body = $post['Post']['body'];
+							$limit_body = mb_substr($body, 0, 30, 'utf-8');
+							if (mb_strlen($body, 'utf-8') > '30'){
+								$limit_body = $limit_body . '...';
+							}
+						 echo h($limit_body); ?>
+					 </div>
+
+					 <div class="action_view">
+						<?php echo $this->Html->link(__('続きを読む＞'), array('action' => "view", $post['Post']['id'])) ?><br>
+					</div>
+				</div>
+			<?php endforeach; ?>
+		</div>
+
+	</div>
+</div>
+<!-- <div class="posts index">
 	<h3><?php echo __('記事一覧'); ?></h3>
 	<?php echo $this->Paginator->counter(array('format' => __('記事件数:{:count}件 表示件数:{:start}件~{:end}件'))); ?>
 
@@ -77,14 +129,4 @@
 	             ?>
 	  </ul>
 	</nav>
-</div>
-<!-- <div class="actions">
-	<h3><?php echo __('Actions'); ?></h3>
-	<ul>
-		<li><?php echo $this->Html->link(__('New Post'), array('action' => 'add')); ?></li>
-		<li><?php echo $this->Html->link(__('List Users'), array('controller' => 'users', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New User'), array('controller' => 'users', 'action' => 'add')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Category'), array('controller' => 'categories', 'action' => 'add')); ?> </li>
-		<li><?php echo $this->Html->link(__('List Categories'), array('controller' => 'categories', 'action' => 'index')); ?> </li>
-	</ul>
 </div> -->

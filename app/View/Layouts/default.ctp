@@ -22,6 +22,13 @@
       padding-right: 100px;
       padding-bottom: 100px;
       padding-top: 10px;
+     background: #ebe6d3 url(images/bg.jpg) repeat-x;
+     font: 16px/20px "ヒラギノ角ゴ Pro W3","Hiragino Kaku Gothic Pro",'メイリオ',Meiryo,Helvetica,Arial,Sans-Serif;
+     color: #666;
+}
+
+a{ color: #69c;}
+     a:hover{color:#069;}
     }
     .starter-template {
       padding: 40px 15px;

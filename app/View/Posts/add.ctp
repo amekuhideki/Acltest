@@ -4,7 +4,7 @@ label {
 }
 </style>
 <div class="posts form">
-	<?php echo $this->element('header'); ?>
+	<?php echo $this->element('header2'); ?>
 	<?php echo $this->Form->create('Post', array('type' => 'file')); ?>
 	<div class="center">
 		<h3><?php echo __('記事作成'); ?></h3>

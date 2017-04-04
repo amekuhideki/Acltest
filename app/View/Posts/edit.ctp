@@ -64,7 +64,8 @@
 			?>
 		</table>
 		<div align="center">
-			<?php echo $this->Form->submit(__('投稿する'), array('class' => 'btn btn-primary')); ?><br>
+			<?php echo $this->Form->submit(__('投稿する'), array('class' => 'btn btn-primary')); ?>
+			<?php echo $this->Form->end(); ?><br>
 		</div>
 		<?php if(!empty($post['Image'])): ?>
 			<legend><h4><?php echo (__('画像一覧')); ?></h4></legend>
