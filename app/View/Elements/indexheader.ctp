@@ -22,6 +22,8 @@ $(document).ready(function(){
                                                       array('role' => "presentation")); ?> </li>
   		<li><?php echo $this->Html->link(__('Tag'), array('controller' => 'tags', 'action' => 'index'),
                                                   array('role' => "presentation")); ?> </li>
+      <li><?php echo $this->Html->link(__('Contact'), array('controller' => 'contacts', 'action' => 'contact'),
+                                                  array('role' => "presentation")); ?> </li>
       <li><?php echo $this->Html->link(__('Logout'), array('controller' => 'users', 'action' => 'logout'),
                                                      array('confirm' => __('本当にログアウトしますか？'))); ?> </li>
                                                      <li>
