@@ -58,9 +58,6 @@ class ZipcodesController extends AppController {
 
 	public function add(){
 		if ($this->request->is('post')){
-			echo"<pre>";
-			var_dump($this->request->data);
-			exit;
 			$Member = ClassRegistry::init('Members');
 			$Member->create();
 			if ($Member->saveAll($this->request->data)) {
