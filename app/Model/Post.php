@@ -9,21 +9,24 @@ class Post extends AppModel {
  //SearchPluginの利用
  	public $order = array('Post.id DESC');
 	public $actsAs = array('Search.Searchable');
-	public $filterArgs = array(
-		'category' => array(
-			'type' => 'value',
-			'field' => 'Category.id'
-		),
-		'title' => array(
-			'type' => 'like',
-			'field' => 'Post.title'
-		),
-    'tag' => array(
-      'type' => 'subquery',
-      'method' => 'searchTag',
-      'field' => 'Post.id',
-    ),
-	);
+	// public $filterArgs = array(
+	// 	'category' => array(
+	// 		'type' => 'value',
+	// 		'field' => 'Category.id'
+	// 	),
+	// 	'title' => array(
+	// 		'type' => 'like',
+	// 		'field' => 'Post.title'
+	// 	),
+  //   'tag' => array(
+  //     'type' => 'subquery',
+  //     'method' => 'searchTag',
+  //     'field' => 'Post.id',
+  //   ),
+	// );
+  public $filterArgs = array(
+    'keyword' => array('type' => 'like', 'field' => array('Post.title', 'Post.body', 'Category.category')),
+  );
 
   function searchTag($data = array()) {
 
