@@ -9,6 +9,12 @@ $(document).ready(function(){
       }
     });
     $("#lookup").click(function(){
+      if($('#select_address').size()){
+        $('#select_address').remove();
+      }
+      if($('#address').size()){
+        $('#address').val('');
+      }
         var zip1 = $.trim($('#zip1').val());
         var zip2 = $.trim($('#zip2').val());
         var zipcode = zip1 + zip2;
@@ -23,29 +29,60 @@ $(document).ready(function(){
             crossDomain: false,
             dataType : "json",
             scriptCharset: 'utf-8'
-        }).done(function(data){
-            if(data[0] == ""){
+        }).then(function(data){
+          // console.log($.isArray(data[1]));
+          if($.isArray(data[1])){
+            var select = '<select name="select_address" id="select_address" height="20px">';
+            select += '<option>以下から選択してください</option>'
+            var address = '';
+            $(data).each(function(index, val){
+              // $('#address').remove();
+              address = data[index][0] + data[index][1] + data[index][2];
+              // console.log(address);
+              select += '<option value="'+address+'">'+address+'</option>';
+              // $('#address').val(data[index][0] + data[index][1] + data[index][2]);
+            })
+            select += '</select>';
+            // console.log(select);
+            $('.address_name').prepend(select);
+            $('#select_address').change(function(){
+              if($('#select_address').val() === '以下から選択してください'){
+                $('#address').val('');
+              } else {
+                var new_address = $('#select_address').val();
+                $('#address').val(new_address);
+                $('#select_address').remove();
+              }
+            });
+            // $('#select_address').change(function(){
+            //   var str = $('this').val();
+            //   $("#select_address div").text(str);
+            // }).change();
+
+          } else {
+            if(data[0][0] == ""){
                 alert('見つかりませんでした。');
             } else {
-                $('#address').val(data[0] + data[1] + data[2]);
+                $('#address').val(data[0][0] + data[0][1] + data[0][2]);
             }
+          }
           });
         // }).fail(function(XMLHttpRequest, textStatus, errorThrown){
         //     alert(errorThrown);
         // });
      });
      //郵便番号の結合
-     $('#zip1' && '#zip2').change(function(){
-       var zip1 = $.trim($('#zip1').val());
-       var zip2 = $.trim($('#zip2').val());
-       var zipcode = zip1 + zip2;
-       console.log(zipcode)
-       $('<input>').attr({
-         type: 'hidden',
-         name: 'post_code',
-         value: zipcode
-       }).appendTo('.zipcode');
-     });
+    //  $('#zip1' && '#zip2').change(function(){
+    //    var zip1 = $.trim($('#zip1').val());
+    //    var zip2 = $.trim($('#zip2').val());
+    //    var zipcode = zip1 + zip2;
+    //   //  console.log(zipcode)
+    //    $('<input>').attr({
+    //      type: 'hidden',
+    //      name: 'post_code',
+    //      value: zipcode
+    //    }).appendTo('.zipcode');
+    //  });
      //パスワード表示・非表示
      $('#masking').click(function(){
        var pass = $('#password').val();
@@ -68,6 +105,12 @@ $(document).ready(function(){
        });
   });
 
+  $('#form').submit(function(){
+      var zip1 = $('#zip1').val();
+      var zip2 = $('#zip2').val();
+      var zip1zip2 = zip1 + zip2;
+      $('#zip1zip2').val(zip1zip2);
+  });
 
 });
 </script>
@@ -78,7 +121,7 @@ $(document).ready(function(){
 </style>
 <?php echo $this->element('header'); ?>
 
-<form class="form-horizontal" action="Zipcodes/add" method="post">
+<form id="form" class="form-horizontal" action="Zipcodes/add" method="post">
   <div class="form-group">
     <div class="col-sm-12 center">
       <h1>ユーザ情報の入力</h1>
@@ -127,13 +170,13 @@ $(document).ready(function(){
     <div class="col-sm-7 zipcode">
       <input type="text" name="zip1" id="zip1" class="number" size="3" maxlength="3" placeholder="123" required>-
       <input type="text" name="zip2" id="zip2" class="number" size="4" maxlength="4" placeholder="4567" required>
-      <input type="hidden" name="post_code" value="zip1zip2"/>
+      <input type="hidden" name="post_code" id="zip1zip2" value="zip1zip2"/>
       <input type="button" id="lookup" value="住所検索">
     </div>
   </div>
   <div class="form-group">
     <label for="address" class="col-sm-5 control-label">住所:</label>
-    <div class="col-sm-7">
+    <div class="col-sm-7 address_name">
       <input size="50" type="text" name="address" id="address" required>
     </div>
   </div>
@@ -145,6 +188,6 @@ $(document).ready(function(){
   </div>
   <div class="col-sm-5"></div>
   <div class="col-sm-7">
-    <input type="submit" class="btn btn-primary" value="ユーザ情報を登録">
+    <input type="submit" class="btn btn-primary" id='submit' value="ユーザ情報を登録">
   </div>
 </form>

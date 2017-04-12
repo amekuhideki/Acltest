@@ -29,20 +29,38 @@ class ZipcodesController extends AppController {
 			// $params = array('東京', '葛飾区', '金町');
 			$data = $this->Zipcode->find('all', array('conditions' => array('Zipcode.postal_code'
 																										=> $this->request->data['zipcode'])));
-			// $data = $data[0];
-			$data = array_shift($data[0]);
-			$prefecture = $data['prefecture'];
-			$city = $data['city'];
-			$municipality = $data['municipality'];
-			$params = array($prefecture, $city, $municipality);
-			// header('Content-type: application/json; charset=utf-8');
-			echo json_encode($params);
-			exit;
+			// $data = $this->Zipcode->find('all', array('conditions' => array('Zipcode.postal_code'
+			// 																							=> '9070000')));
+			if (count($data)>1) {
+				foreach ($data as $value) {
+					$prefecture = $value['Zipcode']['prefecture'];
+					$city = $value['Zipcode']['city'];
+					$municipality = $value['Zipcode']['municipality'];
+					$params[] = array($prefecture, $city, $municipality);
+
+				}
+				echo json_encode($params);
+				exit;
+			} else {
+				// $data = $data[0];
+				$data = array_shift($data[0]);
+				$prefecture = $data['prefecture'];
+				$city = $data['city'];
+				$municipality = $data['municipality'];
+				$params[] = array($prefecture, $city, $municipality);
+				// header('Content-type: application/json; charset=utf-8');
+				echo json_encode($params);
+				exit;
+			}
+			// exit;
 		}
 	}
 
 	public function add(){
 		if ($this->request->is('post')){
+			echo"<pre>";
+			var_dump($this->request->data);
+			exit;
 			$Member = ClassRegistry::init('Members');
 			$Member->create();
 			if ($Member->saveAll($this->request->data)) {
