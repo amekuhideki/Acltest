@@ -10,6 +10,8 @@ class PostsController extends AppController {
 	public function beforeFilter() {
 	    parent::beforeFilter();
 	    $this->Auth->allow('index', 'view');
+			// $this->Auth->allow();
+
 	}
 	var $uses = array('Post', 'User', 'Category', 'Tag', 'PostsTag', 'Attachment');
 	// public $uses = array('Post', 'Category', 'Tag', 'Attachment', 'PostsTag',);
@@ -42,13 +44,16 @@ class PostsController extends AppController {
 		$this->Prg->commonProcess();
 		$this->paginate = array(
 			'conditions' =>
-				$this->Post->parseCriteria($this->passedArgs)
+				array($this->Post->parseCriteria($this->passedArgs), 'Post.status' => 0),//'Post.status' => 0 で論理削除
+			'order' => array('Post.modified' => 'desc')//日付順で表示
 		);
 
 		$this->set('posts', $this->paginate());
-		$tags = $this->Post->Tag->find('list', array(
-			'fields' => array('Tag.tag')
-		));
+		// $tags = $this->Post->Tag->find('list', array(
+		// 	'fields' => array('Tag.tag')
+		// ));
+		$tags = $this->Post->Tag->find('all');
+
 		$this->set('tags', $tags);
 
 		$categories = $this->Post->Category->find('list', array(
@@ -176,12 +181,14 @@ class PostsController extends AppController {
 			throw new NotFoundException(__('Invalid post'));
 		}
 		//もしGETでリクエストされた場合の対処
+
 		$post = $this->Post->findById($id);
 		if (!($this->Auth->user()['id'] == $post['User']['id'] || ($this->Auth->user()['group_id'] == 1))) {
 			return $this->redirect(array('action' => 'index'));
 		}
-		$this->request->allowMethod('post', 'delete');
-		if ($this->Post->delete()) {
+		// $this->request->allowMethod('post', 'delete');
+		$data = array('Post' => array('id' => $id, 'status' => 1));
+		if ($this->Post->save($data)) {
 			$this->Flash->success(__('The post has been deleted.'));
 		} else {
 			$this->Flash->error(__('The post could not be deleted. Please, try again.'));
