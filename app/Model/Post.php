@@ -91,6 +91,10 @@ class Post extends AppModel {
 				'Image.model' => 'Post',
 			),
 		),
+    'Comment' => array(
+      'className' => 'Comment',
+      'foreignKey' => 'post_id',
+    )
 	);
 
 	public $belongsTo = array(
