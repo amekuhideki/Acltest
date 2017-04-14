@@ -14,24 +14,48 @@
 	}
 
 	.post_title{
-		font-size: 25px;
+		margin: 20px;
+		font-size: 30px;
 		text-align: left;
-		background: linear-gradient(transparent 60%, #ff0 0%);/*　タイトルの下線*/
+		/*padding-left: 10px;*/
+		padding: 20px;
+		border-left: 10px solid #7BAEB5;
+		border-bottom: 1px solid #7BAEB5;
 	}
 
 	.post_body{
-		font-size: 15px;
+		margin: auto;
+		padding: 40px;
+		font-size: 18px;
 		text-align: center;
 	}
 
 	.action_view{
 		text-align: right;
 	}
+	.header{
+		border-bottom: 1px solid #000;
+	}
 
+	#post_header{
+		margin: auto;
+		padding: 10px;
+	}
+
+	.post_date{
+		float:left;
+		font-size: 14px;
+	}
+	.post_tags{
+		float: left;
+		font-size: 14px;
+	}
 </style>
 <div id="wrapper">
 	<div class="posts index">
-		<?php echo $this->element('header2'); ?>
+		<div class="header">
+			<?php echo $this->element('header2'); ?>
+		</div>
 
 		<div id="contents">
 			<?php foreach ($posts as $post): ?>
@@ -40,11 +64,23 @@
 						<?php echo h($post['Post']['title']); ?><br>
 					</div>
 
-					<div class="post_date">
-						<?php $post_date = date('Y年m月d日', strtotime($post['Post']['created']));
-						      echo h('□'.$post_date);
-						 ?>
-					</div>
+					<ul id="post_header">
+						<li class="post_date">
+							<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+							<?php $post_date = date('Y年m月d日', strtotime($post['Post']['modified']));
+							      echo h($post_date);
+							 ?>
+							 &nbsp;&nbsp;
+						</li>
+						<li class="post_tags">
+							<span class="glyphicon glyphicon-tag" aria-hidden="true"></span>
+							<?php foreach ($tags as $tag): ?>
+								<?php if(!empty($tag['Post'][0]) && $tag['Post'][0]['id'] == $post['Post']['id']): ?>
+									<?php echo $this->Html->link(__($tag['Tag']['tag']), array('controller' => "tags", 'action' => "view", $tag['Tag']['id'])); ?>
+								<?php endif; ?>
+							<?php  endforeach; ?>
+						</li>
+					</ul>
 
 					<div class="post_body">
 						<?php
@@ -57,7 +93,7 @@
 					 </div>
 
 					 <div class="action_view">
-						<?php echo $this->Html->link(__('続きを読む＞'), array('action' => "view", $post['Post']['id'])) ?><br>
+						<?php echo $this->Html->link(__('続きを読む＞'), array('action' => "view", $post['Post']['id'])); ?><br>
 					</div>
 				</div>
 			<?php endforeach; ?>
