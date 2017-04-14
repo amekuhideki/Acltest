@@ -12,14 +12,14 @@ class Comment extends AppModel {
 		),
 	);
 
-  // public $validate = array(
-  //   'title' => array(
-  //     'rule' => 'notEmpty',
-  //     'message' => '記入してください。'
-  //   ),
-  //   'body' => array(
-  //     'rule' => 'nootEmpty'
-  //   )
-  // );
+  public $validate = array(
+    'commenter' => array(
+      'rule' => 'notBlank',
+      'message' => '記入してください。',
+    ),
+    'body' => array(
+      'rule' => 'notBlank',
+    )
+  );
 
 }

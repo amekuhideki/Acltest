@@ -13,13 +13,6 @@ class CommentsController extends AppController {
 
   public function add() {
     $this->Comment->create();
-    // echo "<pre>";
-    // var_dump($this->request->data);
-    // exit;
-
-    // echo '<pre>';
-    // var_dump($this->request->data);
-    // exit;
     if ($this->request->is('Post')) {
       $this->Comment->create();
       if ($this->Comment->save($this->request->data)) {
