@@ -7,6 +7,7 @@ html, body{
 #wrapper{
 	width: 960px;
 	margin: 0 auto;
+	line-height: 24px;
 }
 
 .header{
@@ -93,13 +94,15 @@ html, body{
 	z-index: 3;
 }
 
-
-.post_date{
-	font-size: 14px;
-}
 #post_header{
 	margin: auto;
-	padding: 10px;
+	padding: 1px;
+	padding-top: 10px;
+	padding-bottom: 20px;
+}
+#list{
+	margin: auto;
+	padding-left: 1px;
 }
 .post_date{
 	float:left;
@@ -131,14 +134,28 @@ html, body{
 	border-bottom: 1px solid #7BAEB5;
 }
 #add_comment{
-	margin: auto;
+	margin: 0 auto;
 	padding: 10px;
+}
+#add_comment_contain{
+	margin: 0 auto;
 }
 .comment_header{
 	text-align: left;
 	border-bottom: 1px solid black;
 	padding-top: 30px;
 	padding-bottom: 10px;
+	font-weight: 900;
+}
+.comment_preview{
+	padding-top: 8px;
+	padding-left: 10px;
+	padding-bottom: 20px;
+	border-bottom: 1px dashed black;
+	font-size: 14px;
+}
+#not_comment{
+	padding-left: 10px;
 }
 </style>
 <script>
@@ -187,6 +204,74 @@ $(function(){
 			slideCurrent++;
 			sliding();
 		});
+
+		var comment_page = 1 ;
+		if (comment_page === <?php echo $comment_page ?>){
+			$(".previous").hide();
+		}
+		var post_id = <?php echo $post['Post']['id']; ?>;
+		var div;
+		//コメント欄の次へを押した時の動作
+		$('.next').click(function(){
+			$.ajax({
+				type:"POST",
+				url:"http://blog.dev/AclTest/Posts/getComment/",
+				crossDomain: false,
+				data: {'comment_page': comment_page + 1,
+							 'post_id': post_id
+						  },
+				dataType: 'json',
+				scriptCharset: 'utf-8',
+			}).then(function(data){
+					$(".comment_preview").remove();
+					$.each(data[0], function(index, comment){
+					  div = '<div class="comment_preview">'
+						div += comment['Comment']['commenter'] + "&nbsp;&nbsp;";
+						div += comment['Comment']['created'] + "<br>";
+						div += comment['Comment']['body'] + "<br>";
+						div += '</div>';
+						$(".comment_header").after(div);
+					});
+					comment_page += 1;
+					if (data[1] > 1) {
+						$(".previous").show();
+					}
+					if (comment_page >= data[3]){
+						$(".next").hide();
+					}
+				});
+			});
+			//コメント欄の前へを押した時の動作
+			$('.previous').click(function(){
+				$.ajax({
+					type:"POST",
+					url: "http://blog.dev/AclTest/Posts/getComment/",
+					crossDomain: false,
+					data: {'comment_page': comment_page - 1,
+								 'post_id': post_id
+							 	},
+					dataType: 'json',
+					scriptCharset: 'utf-8',
+				}).then(function(data){
+					$(".comment_preview").remove();
+					$.each(data[0], function(index, comment){
+						div = '<div class="comment_preview">'
+						div += comment['Comment']['commenter'] + "&nbsp;&nbsp;";
+						div += comment['Comment']['created'] + "<br>";
+						div += comment['Comment']['body'] + "<br>";
+						div += '</div>';
+						$(".comment_header").after(div);
+					});
+					comment_page -= 1;
+					if (data[1] <= 1) {
+						$(".previous").hide();
+					}
+					if (comment_page < data[3]) {
+						$(".next").show()
+					}
+				});
+			});
+
   });
 </script>
 <div id="wrapper">
@@ -201,7 +286,7 @@ $(function(){
 			</div>
 		</div>
 		<div id="post_header">
-			<ul>
+			<ul id="list">
 				<li class="post_date">
 					<?php $post_date = date('Y年m月d日 H:i:s', strtotime($post['Post']['modified']));
 								echo h($post_date);
@@ -233,31 +318,45 @@ $(function(){
 		</div>
 
 		<div id="post_comment">
-			<p class='comment_header'><?php echo __('コメント'); ?></p>
-			<?php if (isset($post['Comment'][0])): ?>
-				<?php foreach($post['Comment'] as $comment): ?>
-					<?php echo $comment['body']; ?><br>
-					<?php echo $comment['commenter']; ?>
-					<?php echo $comment['created']; ?><br>
+			<h4 class='comment_header'><?php echo __('コメント'); ?></h4>
+			<?php if (isset($comments[0])): ?>
+				<?php foreach($comments as $comment): ?>
+					<div class="comment_preview">
+						<?php echo $comment['Comment']['commenter']; ?>&nbsp;&nbsp;
+						<?php echo $comment['Comment']['created']; ?><br>
+						<?php echo $comment['Comment']['body']; ?><br>
+					</div>
 				<?php endforeach; ?>
 			<?php else: ?>
-				<?php echo __('コメントはまだありません。'); ?>
+				&nbsp;&nbsp;
+				<div id="not_comment">
+					<?php echo __('コメントはまだありません。'); ?>
+				</div>
 			<?php endif; ?>
+
+			<ul class="pagination">
+					<li class="previous"><a>前のページ</a></li>
+				<?php if (($comment_page * 10) < $comment_total): ?>
+					<li class="next"><a>次のページ</a></li>
+				<?php endif; ?>
+			</ul>
 		</div>
 
 		<div id='add_comment'>
-			<h4>コメントを書く</h4>
-			<?php
-			echo $this->Form->create('Comment', array('url' => array(
-																						'controller' => 'comments', 'action' => 'add'),
-																						));
-			echo $this->Form->input('commenter', array('label' => '名前'));
-			echo $this->Form->input('body', array('label' => '本文', 'row'=>3));
-			echo $this->Form->input('Comment.post_id', array('type'=>'hidden', 'value'=>$post['Post']['id']));
-			echo $this->Form->end('投稿する');
-			?>
+			<div class="add_comment_contain">
+				<h4>コメントを書く</h4>
+				<?php
+				echo $this->Form->create('Comment', array('url' => array(
+																							'controller' => 'comments', 'action' => 'add'),
+																							));
+				echo $this->Form->input('commenter', array('label' => '名前'));
+				echo $this->Form->input('body', array('label' => '本文', 'row'=>3));
+				echo $this->Form->input('Comment.post_id', array('type'=>'hidden', 'value'=>$post['Post']['id']));
+				echo $this->Form->input('status', array('type' => 'hidden', 'value' => 0));
+				echo $this->Form->end('投稿する');
+				?>
+			</div>
 		</div>
-<?php echo $this->element('sql_dump'); ?>
 		<table class="table">
 				<?php if(!empty($post['Image'])): ?>
 				<tr>
