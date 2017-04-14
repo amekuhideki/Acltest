@@ -115,7 +115,7 @@ html, body{
 	margin-right: 200px;
 }
 .post_body{
-	border-bottom: 1px dashed black;
+	/*border-bottom: 1px dashed black;*/
 	padding-bottom: 40px; /* 内容と線との間隔量 */
 }
 #content{

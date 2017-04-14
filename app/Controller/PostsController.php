@@ -9,11 +9,11 @@ App::uses('AppController', 'Controller');
 class PostsController extends AppController {
 	public function beforeFilter() {
 	    parent::beforeFilter();
-	    $this->Auth->allow('index', 'view');
-			// $this->Auth->allow();
+	    // $this->Auth->allow('index', 'view');
+			$this->Auth->allow();
 
 	}
-	var $uses = array('Post', 'User', 'Category', 'Tag', 'PostsTag', 'Attachment');
+	var $uses = array('Post', 'User', 'Category', 'Tag', 'PostsTag', 'Attachment', 'Comment');
 	// public $uses = array('Post', 'Category', 'Tag', 'Attachment', 'PostsTag',);
 /**
  * Components
@@ -70,14 +70,46 @@ class PostsController extends AppController {
  * @param string $id
  * @return void
  */
-	public function view($id = null) {
+	public function view($id = null, $comment_page = null) {
 		if (!$this->Post->exists($id)) {
 			throw new NotFoundException(__('Invalid post'));
 		}
 		$options = array('conditions' => array('Post.' . $this->Post->primaryKey => $id));
+
 		$this->set('post', $this->Post->find('first', $options));
+		if ($comment_page === null){
+			$comment_page = 1;
+		}
+		$comments = $this->Post->Comment->find('all', array(
+																			'limit' => ($comment_page * 10),
+																			'offset' => (($comment_page - 1) * 10),
+																			'conditions' => array('Comment.post_id' => $id),
+																			'order' => array('Comment.created DESC')));
+		$comment_total = count($this->Post->Comment->find('all', array('conditions' => array('Comment.post_id' => $id))));
+
+		$this->set(compact('comments', 'comment_page', 'comment_total'));
 	}
 
+	public function getComment() {
+		$this->Comment->auto_Render = FALSE;
+		if ($this->request->is('ajax')) {
+			$comment_page = $this->request->data['comment_page'];
+			$post_id = $this->request->data['post_id'];
+
+			$comment = $this->Post->Comment->find('all', array(
+																						'limit' => ($comment_page * 10),
+																						'offset' => (($comment_page - 1) * 10),
+																						'conditions' => array('Comment.post_id' => $post_id),
+																						'order' => array('Comment.created DESC')));
+			$comment_total = count($this->Post->Comment->find('all', array('conditions' => array('Comment.post_id' => $post_id))));
+			$comment_total_page = ceil($comment_total / 10);
+			$params = array($comment, $comment_page, $comment_total, $comment_total_page);
+			echo json_encode($params);
+			$this->set(compact('comments', 'comment_page', 'comment_total'));
+
+		}
+		exit;
+	}
 /**
  * add method
  *
