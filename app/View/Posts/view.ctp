@@ -154,6 +154,16 @@ html, body{
 	border-bottom: 1px dashed black;
 	font-size: 14px;
 }
+.comment_commenter{
+	float: left;
+}
+li.previous{
+	float: left;
+}
+li.next{
+	margin-left: 20px;
+	float:left;
+}
 #not_comment{
 	padding-left: 10px;
 }
@@ -210,68 +220,57 @@ $(function(){
 			$(".previous").hide();
 		}
 		var post_id = <?php echo $post['Post']['id']; ?>;
+		var comment_total_page = <?php echo $comment_total_page; ?>;
 		var div;
 		//コメント欄の次へを押した時の動作
 		$('.next').click(function(){
 			$.ajax({
 				type:"POST",
-				url:"http://blog.dev/AclTest/Posts/getComment/",
+				url:"http://blog.dev/AclTest/Posts/comment/",
 				crossDomain: false,
 				data: {'comment_page': comment_page + 1,
 							 'post_id': post_id
 						  },
-				dataType: 'json',
+				dataType: 'html',
 				scriptCharset: 'utf-8',
 			}).then(function(data){
-					$(".comment_preview").remove();
-					$.each(data[0], function(index, comment){
-					  div = '<div class="comment_preview">'
-						div += comment['Comment']['commenter'] + "&nbsp;&nbsp;";
-						div += comment['Comment']['created'] + "<br>";
-						div += comment['Comment']['body'] + "<br>";
-						div += '</div>';
-						$(".comment_header").after(div);
-					});
-					comment_page += 1;
-					if (data[1] > 1) {
-						$(".previous").show();
-					}
-					if (comment_page >= data[3]){
-						$(".next").hide();
-					}
+				$(".comment_preview").remove();
+				console.log(data);
+				$(".comment_comment").after().html(data);
 				});
+				comment_page += 1;
+				if(comment_page > 1){
+					$('.previous').show();
+				}
+				if (comment_page >= comment_total_page){
+					$('.next').hide();
+				}
 			});
 			//コメント欄の前へを押した時の動作
 			$('.previous').click(function(){
 				$.ajax({
 					type:"POST",
-					url: "http://blog.dev/AclTest/Posts/getComment/",
+					url: "http://blog.dev/AclTest/Posts/comment/",
 					crossDomain: false,
 					data: {'comment_page': comment_page - 1,
 								 'post_id': post_id
 							 	},
-					dataType: 'json',
+					dataType: 'html',
 					scriptCharset: 'utf-8',
 				}).then(function(data){
 					$(".comment_preview").remove();
-					$.each(data[0], function(index, comment){
-						div = '<div class="comment_preview">'
-						div += comment['Comment']['commenter'] + "&nbsp;&nbsp;";
-						div += comment['Comment']['created'] + "<br>";
-						div += comment['Comment']['body'] + "<br>";
-						div += '</div>';
-						$(".comment_header").after(div);
+					console.log(data);
+					$(".comment_comment").after().html(data);
 					});
 					comment_page -= 1;
-					if (data[1] <= 1) {
-						$(".previous").hide();
+					if (comment_page <= 1){
+						$('.previous').hide();
 					}
-					if (comment_page < data[3]) {
-						$(".next").show()
+					if(comment_page < comment_total_page){
+						$('.next').show();
 					}
 				});
-			});
-
+			// });
   });
 </script>
 <div id="wrapper">
@@ -319,28 +318,38 @@ $(function(){
 
 		<div id="post_comment">
 			<h4 class='comment_header'><?php echo __('コメント'); ?></h4>
-			<?php if (isset($comments[0])): ?>
-				<?php foreach($comments as $comment): ?>
-					<div class="comment_preview">
-						<?php echo $comment['Comment']['commenter']; ?>&nbsp;&nbsp;
-						<?php echo $comment['Comment']['created']; ?><br>
-						<?php echo $comment['Comment']['body']; ?><br>
-					</div>
-				<?php endforeach; ?>
-			<?php else: ?>
+			<div class="comment">
+				<div class="comment_comment">
+					<?php if (isset($comments[0])): ?>
+						<?php foreach($comments as $comment): ?>
+							<div class="comment_preview">
+								<div class="comment_commenter">
+									<?php echo $comment['Comment']['commenter']; ?>&nbsp;&nbsp;
+								</div>
+								<div class="comment_created">
+									<?php echo $comment['Comment']['created']; ?><br>
+								</div>
+								<div class="comment_body">
+									<?php echo $comment['Comment']['body']; ?><br>
+								</div>
+							</div>
+						<?php endforeach; ?>
+					<?php else: ?>
+				</div>
 				&nbsp;&nbsp;
 				<div id="not_comment">
 					<?php echo __('コメントはまだありません。'); ?>
 				</div>
-			<?php endif; ?>
-
-			<ul class="pagination">
-					<li class="previous"><a>前のページ</a></li>
-				<?php if (($comment_page * 10) < $comment_total): ?>
-					<li class="next"><a>次のページ</a></li>
 				<?php endif; ?>
-			</ul>
-		</div>
+			</div>
+			<div class="comment_pagination">
+				<ul class="pagination">
+					<li class="previous"><a>前のページ</a></li>&nbsp;
+					<?php if (($comment_page * 10) < $comment_total): ?>
+					<li class="next"><a>次のページ</a></li>
+					<?php endif; ?>
+				</ul>
+			</div>
 
 		<div id='add_comment'>
 			<div class="add_comment_contain">

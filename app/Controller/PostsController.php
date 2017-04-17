@@ -86,29 +86,32 @@ class PostsController extends AppController {
 																			'conditions' => array('Comment.post_id' => $id),
 																			'order' => array('Comment.created DESC')));
 		$comment_total = count($this->Post->Comment->find('all', array('conditions' => array('Comment.post_id' => $id))));
+		$comment_total_page = ceil($comment_total / 10);
 
-		$this->set(compact('comments', 'comment_page', 'comment_total'));
+		$this->set(compact('comments', 'comment_page', 'comment_total', 'comment_total_page'));
 	}
 
-	public function getComment() {
-		$this->Comment->auto_Render = FALSE;
+	public function comment() {
+		$this->autoLayout = false;
+		// $this->Comment->auto_Render = FALSE;
 		if ($this->request->is('ajax')) {
 			$comment_page = $this->request->data['comment_page'];
 			$post_id = $this->request->data['post_id'];
 
-			$comment = $this->Post->Comment->find('all', array(
-																						'limit' => ($comment_page * 10),
-																						'offset' => (($comment_page - 1) * 10),
+			$comments = $this->Post->Comment->find('all', array(
+																						'limit' => 10,
+																						// 'offset' => (($comment_page - 1) * 10),
+																						'page' => $comment_page,
 																						'conditions' => array('Comment.post_id' => $post_id),
 																						'order' => array('Comment.created DESC')));
 			$comment_total = count($this->Post->Comment->find('all', array('conditions' => array('Comment.post_id' => $post_id))));
 			$comment_total_page = ceil($comment_total / 10);
-			$params = array($comment, $comment_page, $comment_total, $comment_total_page);
-			echo json_encode($params);
-			$this->set(compact('comments', 'comment_page', 'comment_total'));
-
+			// $params = array($comment, $comment_page, $comment_total, $comment_total_page);
+			// echo json_encode($params);
+			$params = $this->set(compact('comments', 'comment_page', 'comment_total'));
+			$this->render('/Posts/comment', $params);
 		}
-		exit;
+		// exit;
 	}
 /**
  * add method
