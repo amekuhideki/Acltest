@@ -71,6 +71,8 @@ class PostsController extends AppController {
  * @return void
  */
 	public function view($id = null, $comment_page = null) {
+		$user = $this->Auth->user();
+
 		if (!$this->Post->exists($id)) {
 			throw new NotFoundException(__('Invalid post'));
 		}
@@ -83,15 +85,16 @@ class PostsController extends AppController {
 		$comments = $this->Post->Comment->find('all', array(
 																			'limit' => ($comment_page * 10),
 																			'offset' => (($comment_page - 1) * 10),
-																			'conditions' => array('Comment.post_id' => $id),
+																			'conditions' => array('Comment.post_id' => $id, 'Comment.status' => 0),
 																			'order' => array('Comment.created DESC')));
-		$comment_total = count($this->Post->Comment->find('all', array('conditions' => array('Comment.post_id' => $id))));
+		$comment_total = count($this->Post->Comment->find('all', array('conditions' => array('Comment.post_id' => $id, 'Comment.status' => 0))));
 		$comment_total_page = ceil($comment_total / 10);
 
-		$this->set(compact('comments', 'comment_page', 'comment_total', 'comment_total_page'));
+		$this->set(compact('comments', 'comment_page', 'comment_total', 'comment_total_page', 'user'));
 	}
 
 	public function comment() {
+		$user = $this->Auth->user();
 		$this->autoLayout = false;
 		// $this->Comment->auto_Render = FALSE;
 		if ($this->request->is('ajax')) {
@@ -108,7 +111,7 @@ class PostsController extends AppController {
 			$comment_total_page = ceil($comment_total / 10);
 			// $params = array($comment, $comment_page, $comment_total, $comment_total_page);
 			// echo json_encode($params);
-			$params = $this->set(compact('comments', 'comment_page', 'comment_total'));
+			$params = $this->set(compact('comments', 'comment_page', 'comment_total', 'user'));
 			$this->render('/Posts/comment', $params);
 		}
 		// exit;

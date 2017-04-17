@@ -6,7 +6,7 @@ class CommentsController extends AppController {
 
   public function beforeFilter() {
 	    parent::beforeFilter();
-      $this->Auth->allow('add');
+      $this->Auth->allow('add', 'delete');
 	}
 
   public $components = array('Paginator', 'Flash', 'Search.Prg');
@@ -23,5 +23,23 @@ class CommentsController extends AppController {
         return $this->redirect(array('controller' => 'posts', 'action' => 'view', $this->data['Comment']['post_id']));
       }
     }
+  }
+
+  public function delete($id = null) {
+    $this->Comment->id = $id;
+    if (!$this->Comment->exists()) {
+      throw new NotFoundException(__('Invalid post'));
+    }
+    $comment = $this->Comment->findById($id);
+    if (!($this->Auth->user()['id'] == $comment['Comment']['user_id'] || ($this->Auth->user()['group_id'] == 1))) {
+      return $this->redirect(array('controller' => 'posts', 'action' => 'index'));
+    }
+    $data = array('Comment' => array('id' => $id, 'status' => 1));
+    if ($this->Comment->save($data)) {
+      $this->Flash->success(__('The post has been deleted.'));
+    } else {
+      $this->Flash->error(__('The post could not be deleted. Please, try again.'));
+    }
+		return $this->redirect(array('controller' => 'posts', 'action' => 'view/' . $comment['Comment']['post_id']));
   }
 }
