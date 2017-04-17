@@ -63,9 +63,14 @@
 				// echo $this->Form->hidden('Post.post_id', array('value' => $post['Post']['id']));
 			?>
 		</table>
-		<div align="center">
-			<?php echo $this->Form->submit(__('投稿する'), array('class' => 'btn btn-primary')); ?>
-			<?php echo $this->Form->end(); ?><br>
+		<!-- <div align="center"> -->
+		<div class="col-sm-2">
+			<?php echo $this->Form->submit(__('投稿する'), array('class' => "btn btn-primary")); ?>
+			<?php echo $this->Form->end(); ?>
+		</div>
+		<div class="col-sm-10">
+			<?php echo $this->Form->postLink(__('削除'), array('action' => "delete", $post['Post']['id']),
+																									array('confirm' => __('Are you sure you want to delete # %s?', $post['Post']['id']), 'type' => "button", 'class' =>"btn btn-danger")); ?>
 		</div>
 		<?php if(!empty($post['Image'])): ?>
 			<legend><h4><?php echo (__('画像一覧')); ?></h4></legend>

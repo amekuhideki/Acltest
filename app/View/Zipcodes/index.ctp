@@ -54,10 +54,6 @@ $(document).ready(function(){
                 $('#select_address').remove();
               }
             });
-            // $('#select_address').change(function(){
-            //   var str = $('this').val();
-            //   $("#select_address div").text(str);
-            // }).change();
 
           } else {
             if(data[0][0] == ""){
@@ -67,9 +63,7 @@ $(document).ready(function(){
             }
           }
           });
-        // }).fail(function(XMLHttpRequest, textStatus, errorThrown){
-        //     alert(errorThrown);
-        // });
+
      });
      //郵便番号の結合
     //  $('#zip1' && '#zip2').change(function(){

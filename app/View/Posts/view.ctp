@@ -332,6 +332,10 @@ $(function(){
 								<div class="comment_body">
 									<?php echo $comment['Comment']['body']; ?><br>
 								</div>
+								<?php if ($user['id'] === $comment['Comment']['user_id']): ?>
+									<?php echo $this->Html->link(__('削除'), array('controller' => 'comments', 'action' => 'delete', $comment['Comment']['id']),
+																													array('confirm' => __('Are you sure you want to delete'))); ?>
+								<?php endif; ?>
 							</div>
 						<?php endforeach; ?>
 					<?php else: ?>
@@ -354,6 +358,9 @@ $(function(){
 		<div id='add_comment'>
 			<div class="add_comment_contain">
 				<h4>コメントを書く</h4>
+				<?php if (!isset($user['id'])): ?>
+					<?php $user['id'] = -1; ?>
+				<?php endif;?>
 				<?php
 				echo $this->Form->create('Comment', array('url' => array(
 																							'controller' => 'comments', 'action' => 'add'),
@@ -362,49 +369,52 @@ $(function(){
 				echo $this->Form->input('body', array('label' => '本文', 'row'=>3));
 				echo $this->Form->input('Comment.post_id', array('type'=>'hidden', 'value'=>$post['Post']['id']));
 				echo $this->Form->input('status', array('type' => 'hidden', 'value' => 0));
+				echo $this->Form->input('user_id', array('type' => 'hidden', 'value' => $user['id']));
 				echo $this->Form->end('投稿する');
 				?>
 			</div>
 		</div>
-		<table class="table">
+
+			<p><?php echo $this->Html->link(__('記事一覧に戻る'), array('action' => "index")); ?></p>
+		</div>
+
+
+		<div class="post_image">
+			<div class="image">
 				<?php if(!empty($post['Image'])): ?>
-				<tr>
-					<div id="modal_window">
-						<h4><?php echo __('画像一覧'); ?></h4>
-						<ul>
-							<?php $i = 0; ?>
-							<?php foreach ($post['Image'] as $image): ?>
-							  <li><a href=<?php echo '../../files/image/attachment/' . $image["dir"] . "/" . $image["attachment"]; ?> class="modal_picture" img_group=<?php echo $i; $i++?>>
+				<div id="modal_window">
+					<h4><?php echo __('画像一覧'); ?></h4>
+					<ul>
+						<?php $i = 0; ?>
+						<?php foreach ($post['Image'] as $image): ?>
+						<li><a href=<?php echo '../../files/image/attachment/' . $image["dir"] . "/" . $image["attachment"]; ?> class="modal_picture" img_group=<?php echo $i; $i++?>>
 								<img src=<?php echo '../../files/image/attachment/' . $image["dir"] . "/" . $image["attachment"]; ?>
 										 width="250" class="picture"></a></li>
-							<?php endforeach; ?>
-						</ul>
-					</div>
-				</tr>
+						<?php endforeach; ?>
+					</ul>
+				</div>
 				<?php endif; ?>
 
 				<?php if(!empty($post['Image'])): ?>
-					<div class="slider">
-						<div>
+				<div class="slider">
+					<div>
 						<div class="slideSet">
-							<?php foreach ($post['Image'] as $image): ?>
-								<div class="slide">
-									<a href=<?php echo '../../files/image/attachment/' . $image["dir"] . "/" . $image["attachment"]; ?>>
-									<img src=<?php echo '../../files/image/attachment/' . $image["dir"] . "/" . $image["attachment"]; ?>
+						<?php foreach ($post['Image'] as $image): ?>
+							<div class="slide">
+								<a href=<?php echo '../../files/image/attachment/' . $image["dir"] . "/" . $image["attachment"]; ?>>
+								<img src=<?php echo '../../files/image/attachment/' . $image["dir"] . "/" . $image["attachment"]; ?>
 										 width="400"></a>
-								</div>
-							<?php endforeach; ?>
+							</div>
+						<?php endforeach; ?>
 						</div>
 					</div>
 					<p class="slider-close"><img src="../../images/close.png" ></p>
 					<p class="slider-prev"><img src="../../images/prev.png" width="20" height="100"></p>
 					<p class="slider-next"><img src="../../images/next.png" width="20" height="100"></p>
 				</div>
-
-				</tr>
 				<?php endif; ?>
-			</table>
-			<p><?php echo $this->Html->link(__('記事一覧に戻る'), array('action' => "index")); ?></p>
+			</div>
 		</div>
+		
 	</div>
 </div>
