@@ -34,7 +34,6 @@ $(function(){
   }
 </style>
 <header>
-  <?php var_dump(Router::url()); ?>
   <div class="header_title col-sm-3">
     <a>AMEブロ！</a>
   </div>
@@ -72,11 +71,21 @@ $(function(){
       <li><a><?php echo $this->Html->link(__('Contact'), array('controller' => 'contacts', 'action' => 'contact'),
                                                   array('role' => "presentation")); ?> </a></li>
       <?php if ($_SESSION['lang'] === 'eng'): ?>
-        <li><a><?php echo $this->Html->link(__('japanese'), array('controller' => 'posts', 'action' => 'index', 'parameter' => 'jpn'),
-                                                      array('role' => 'presentation', 'class' => 'language')); ?></a></li>
+        <?php if ($this->action === 'view' || $this->action === 'edit'): ?>
+          <li><a><?php echo $this->Html->link(__('japanese'), array('controller' => $this->name, 'action' => $this->action . "/" . $post['Post']['id'], 'parameter' => 'jpn'),
+                                                        array('role' => 'presentation', 'class' => 'language')); ?></a></li>
+        <?php else: ?>
+          <li><a><?php echo $this->Html->link(__('japanese'), array('controller' => $this->name, 'action' => $this->action, 'parameter' => 'jpn'),
+                                                        array('role' => 'presentation', 'class' => 'language')); ?></a></li>
+        <?php endif; ?>
       <?php else: ?>
-        <li><a><?php echo $this->Html->link(__('English'), array('controller' => 'posts', 'action' => 'index', 'parameter' => 'eng'),
+        <?php if ($this->action === 'view' || $this->action === 'edit'): ?>
+          <li><a><?php echo $this->Html->link(__('English'), array('controller' => $this->name, 'action' => $this->action . "/" . $post['Post']['id'], 'parameter' => 'eng'),
                                                       array('role' => 'presentation', 'class' => 'language')); ?></a></li>
+        <?php else: ?>
+          <li><a><?php echo $this->Html->link(__('English'), array('controller' => $this->name, 'action' => $this->action, 'parameter' => 'eng'),
+                                                      array('role' => 'presentation', 'class' => 'language')); ?></a></li>
+        <?php endif; ?>
       <?php endif; ?>
       <li><a><?php echo $this->Html->link(__('Logout'), array('controller' => 'users', 'action' => 'logout'),
                                                      array('confirm' => __('本当にログアウトしますか？'))); ?> </a></li>

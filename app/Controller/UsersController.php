@@ -59,6 +59,7 @@ class UsersController extends AppController {
 	}
 
 	public function logout() {
+		session_destroy();
 		$this->Session->setFlash('Good-Bye');
 		$this->redirect($this->Auth->logout());	}
 /**
