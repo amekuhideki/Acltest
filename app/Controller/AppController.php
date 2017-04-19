@@ -31,6 +31,7 @@ App::uses('Controller', 'Controller');
  */
 class AppController extends Controller {
     // var $components = array('DebugKit.Toolbar');
+    // var $language;
 
     public $components = array(
         'Acl',
@@ -65,5 +66,21 @@ class AppController extends Controller {
         );
 
         $this->Auth->allow('display');
+
+        //言語設定
+        if (isset($this->params['named']['parameter'])) {
+      		$lang = $this->params['named']['parameter'];
+
+      	} elseif ($this->Session->read('lang')) {
+          $lang = $this->Session->read('lang');
+
+      	} else {
+      		$lang = 'jpn';
+
+      	}
+        $this->Session->write('lang', $lang);
+
+        Configure::write('Config.language', $lang);
+
     }
 }
