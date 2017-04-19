@@ -50,6 +50,10 @@
 		float: left;
 		font-size: 14px;
 	}
+	#item {
+		float: right;
+		padding-right: 5px;
+	}
 </style>
 <div id="wrapper">
 	<div class="posts index">
@@ -95,7 +99,18 @@
 					 <div class="action_view">
 						<?php echo $this->Html->link(__('続きを読む＞'), array('action' => "view", $post['Post']['id'])); ?><br>
 					</div>
+
+					<div id="item">
+						<?php if ($user['id'] == $post['User']['id'] || $user['Group']['id'] == 1): ?>
+							<?php echo $this->Html->link(__('編集'), array('action' => 'edit', $post['Post']['id'])); ?>
+							・
+							<?php echo $this->Html->link(__('削除'), array('action' => 'delete', $post['Post']['id']),
+																											 array('confirm' => '本当にこの記事を削除しますか？')); ?>
+						<?php endif; ?>
+					</div>
+
 				</div>
+
 			<?php endforeach; ?>
 		</div>
 

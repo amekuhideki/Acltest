@@ -167,6 +167,11 @@ li.next{
 #not_comment{
 	padding-left: 10px;
 }
+#item {
+	margin: auto;
+	float: right;
+	padding-right: 5px;
+}
 </style>
 <script>
 $(function(){
@@ -316,6 +321,15 @@ $(function(){
 			&nbsp;
 		</div>
 
+		<div id="item">
+			<?php if ($user['id'] === $post['User']['id']): ?>
+				<?php echo $this->Html->link(__('編集'), array('action' => 'edit', $post['Post']['id'])); ?>
+				・
+				<?php echo $this->Html->link(__('削除'), array('action' => 'delete', $post['Post']['id']),
+																								 array('confirm' => '本当にこの記事を削除しますか？')); ?>
+			<?php endif; ?>
+		</div>
+
 		<div id="post_comment">
 			<h4 class='comment_header'><?php echo __('コメント'); ?></h4>
 			<div class="comment">
@@ -333,6 +347,8 @@ $(function(){
 									<?php echo $comment['Comment']['body']; ?><br>
 								</div>
 								<?php if ($user['id'] === $comment['Comment']['user_id']): ?>
+									<?php echo $this->Html->link(__('編集'), array('controller' => 'comments', 'action' => 'edit', $comment['Comment']['id'])) ?>
+									・
 									<?php echo $this->Html->link(__('削除'), array('controller' => 'comments', 'action' => 'delete', $comment['Comment']['id']),
 																													array('confirm' => __('Are you sure you want to delete'))); ?>
 								<?php endif; ?>
@@ -415,6 +431,6 @@ $(function(){
 				<?php endif; ?>
 			</div>
 		</div>
-		
+
 	</div>
 </div>

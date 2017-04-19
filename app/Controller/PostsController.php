@@ -29,6 +29,7 @@ class PostsController extends AppController {
  */
 	public function index() {
 		$user = $this->Auth->user();
+		$this->set('user', $user);
 		$user_group = $user['group_id'];
 		$user_name = $user['username'];
 		$user_auth = ['user_group' => $user_group, 'user_name' => $user_name];
@@ -105,9 +106,9 @@ class PostsController extends AppController {
 																						'limit' => 10,
 																						// 'offset' => (($comment_page - 1) * 10),
 																						'page' => $comment_page,
-																						'conditions' => array('Comment.post_id' => $post_id),
+																						'conditions' => array('Comment.post_id' => $post_id, 'Comment.status' => 0),
 																						'order' => array('Comment.created DESC')));
-			$comment_total = count($this->Post->Comment->find('all', array('conditions' => array('Comment.post_id' => $post_id))));
+			$comment_total = count($this->Post->Comment->find('all', array('conditions' => array('Comment.post_id' => $post_id, 'Comment.status' => 0))));
 			$comment_total_page = ceil($comment_total / 10);
 			// $params = array($comment, $comment_page, $comment_total, $comment_total_page);
 			// echo json_encode($params);
