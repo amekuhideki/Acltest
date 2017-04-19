@@ -6,7 +6,7 @@ class CommentsController extends AppController {
 
   public function beforeFilter() {
 	    parent::beforeFilter();
-      $this->Auth->allow('add', 'delete');
+      $this->Auth->allow('add', 'delete', 'edit');
 	}
 
   public $components = array('Paginator', 'Flash', 'Search.Prg');
@@ -23,6 +23,31 @@ class CommentsController extends AppController {
         return $this->redirect(array('controller' => 'posts', 'action' => 'view', $this->data['Comment']['post_id']));
       }
     }
+  }
+
+  public function edit($id = null) {
+    if (!$this->Comment->exists($id)){
+      throw new NotFoundException(__('Invalid post'));
+    }
+    if ($this->request->is(array('post', 'put'))) {
+      $post_data = $this->request->data['Comment'];
+  		$data = array('Comment' => array('id' => $id, 'commenter' => $post_data['commenter'], 'body' => $post_data['body']));
+			if ($this->Comment->save($data)) {
+        $post_id = $this->Comment->findById($id);
+				$this->Flash->success(__('The tag has been saved.'));
+				return $this->redirect(array('controller' => 'posts', 'action' => 'view/' . $post_id['Comment']['post_id']));
+			} else {
+				$this->Flash->error(__('The tag could not be saved. Please, try again.'));
+			}
+		} else {
+
+			$options = array('conditions' => array('Comment.id' . $this->Comment->id => $id));
+			$this->request->data = $this->Comment->find('first', $options);
+
+		}
+		$comments = $this->Comment->find('first', array('conditions' => array('Comment.id' => $id)));
+
+		$this->set(compact('comments'));
   }
 
   public function delete($id = null) {
