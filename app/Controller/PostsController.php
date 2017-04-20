@@ -42,14 +42,11 @@ class PostsController extends AppController {
 		foreach($html->find('.titlebody text') as $element){
 			$title[] = $element->outertext;
 		}
-		// foreach($html->find('titlebody img') as $element){
-		// 	$img = $element;
-		// 	echo($img);
-		// 	exit;
-		// }
-
+		foreach($html->find('.blogbody img') as $element){
+			$img[] = $element->src;
+		}
 		foreach ($url as $key) {
-			$news[] = ['url' => $key, 'title' => array_shift($title)];
+			$news[] = ['url' => $key, 'title' => array_shift($title), 'img' => array_shift($img)];
 		}
 		$this->set('news', $news);
 

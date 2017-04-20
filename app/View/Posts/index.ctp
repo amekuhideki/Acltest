@@ -62,17 +62,23 @@
 		width: 250px;
 		float: right;
 	}
-	/*#news {
-		width: 300px;
-	}*/
 	.news_contents {
 		margin: auto;
-		padding: 10px;
+		padding: 2px;
 		font-size: 14px;
 	}
 	#news h4 {
 		border-bottom: 1px solid;
 		padding-bottom: 5px;
+	}
+	.news_img{
+		margin: auto;
+		padding: 4px;
+	}
+	.news_content {
+		padding-top: 4px;
+		padding-bottom: 2px;
+		border-bottom: dashed 1px;
 	}
 </style>
 <div id="wrapper">
@@ -140,13 +146,18 @@
 				<?php $i = 1 ?>
 				<?php foreach ($news as $new): ?>
 					<div class="news_contents">
-						<?php echo $i;
-						$limit_title = mb_substr($new['title'], 0, 20, 'utf-8');
-						if (mb_strlen($new['title'], 'utf-8') > '30'){
-							$limit_title = $limit_title . '. . .';
-						} ?>
-						<?php echo $this->Html->link(__($limit_title), $new['url'], array('target' => '_blank')); ?><br>
-						<?php $i += 1; ?>
+						<div class="news_img">
+							<a href=<?php echo $new['url'];  ?>><img src="<?php echo $new['img']; ?>" width="140"> </a><br>
+						</div>
+						<div class="news_content">
+							<?php echo $i;
+							$limit_title = mb_substr($new['title'], 0, 20, 'utf-8');
+							if (mb_strlen($new['title'], 'utf-8') > '20'){
+								$limit_title = $limit_title . '. . .';
+							} ?>
+							<?php echo $this->Html->link(__($limit_title), $new['url'], array('target' => '_blank')); ?><br>
+							<?php $i += 1; ?>
+						</div>
 					</div>
 				<?php endforeach; ?>
 			</div>
