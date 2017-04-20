@@ -58,6 +58,17 @@ label {
 				</tr>
 				<tr>
 					<th>
+						<lavel class="col-sm-3"><?php echo(__('タグ')); ?></lavel>
+					</th>
+					<td>
+						<div class="col-sm-9">
+							<?php
+								echo $this->Form->input('Tag.tag', array('label' => false));
+								?>
+					</td>
+				</tr>
+				<tr>
+					<th>
 						<label class="col-sm-3"><?php echo(__('画像選択')); ?></label>
 					</th>
 					<td>
