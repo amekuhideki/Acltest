@@ -1,5 +1,8 @@
 <?php
 App::uses('AppController', 'Controller');
+App::import('Vendor', 'simple_html_dom');
+mb_language('Japanese');
+
 /**
  * Posts Controller
  *
@@ -28,6 +31,28 @@ class PostsController extends AppController {
  * @return void
  */
 	public function index() {
+		//まとめサイトのスクレイピング
+		$source = file_get_contents('http://blog.livedoor.jp/dqnplus/');
+		$source = mb_convert_encoding($source, 'utf8', 'auto');
+		$html = str_get_html($source);
+		sleep(1);
+		foreach($html->find('.titlebody a') as $element){
+			$url[] = $element->href;
+		}
+		foreach($html->find('.titlebody text') as $element){
+			$title[] = $element->outertext;
+		}
+		// foreach($html->find('titlebody img') as $element){
+		// 	$img = $element;
+		// 	echo($img);
+		// 	exit;
+		// }
+
+		foreach ($url as $key) {
+			$news[] = ['url' => $key, 'title' => array_shift($title)];
+		}
+		$this->set('news', $news);
+
 		$user = $this->Auth->user();
 		$this->set('user', $user);
 		$user_group = $user['group_id'];
@@ -133,6 +158,9 @@ class PostsController extends AppController {
 				}
 			}
 			$this->Post->create();
+			echo"<pre>";
+			var_dump($this->request->data);
+			exit;
 			if ($this->Post->saveAll($this->request->data)) {
 				$this->Flash->success(__('The post has been saved.'));
 				return $this->redirect(array('action' => 'index'));

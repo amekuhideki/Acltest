@@ -4,13 +4,15 @@
 		margin: 0 auto;
 	}
 
-	#content{
-		width: 960px;
+	#contents{
+		width: 700px;
 		margin: 0 auto;
+		float: left;
 	}
 
 	#content_details{
-		margin: 100px;
+		/*margin: 100px;*/
+		padding-top: 50px;
 	}
 
 	.post_title{
@@ -53,6 +55,24 @@
 	#item {
 		float: right;
 		padding-right: 5px;
+	}
+	.sidebar {
+		padding-top: 96px;
+		padding-left: 30px;
+		width: 250px;
+		float: right;
+	}
+	/*#news {
+		width: 300px;
+	}*/
+	.news_contents {
+		margin: auto;
+		padding: 10px;
+		font-size: 14px;
+	}
+	#news h4 {
+		border-bottom: 1px solid;
+		padding-bottom: 5px;
 	}
 </style>
 <div id="wrapper">
@@ -114,5 +134,22 @@
 			<?php endforeach; ?>
 		</div>
 
+		<div class="sidebar">
+			<div id="news">
+				<h4><?php echo __('まとめニュース'); ?></h4>
+				<?php $i = 1 ?>
+				<?php foreach ($news as $new): ?>
+					<div class="news_contents">
+						<?php echo $i;
+						$limit_title = mb_substr($new['title'], 0, 20, 'utf-8');
+						if (mb_strlen($new['title'], 'utf-8') > '30'){
+							$limit_title = $limit_title . '. . .';
+						} ?>
+						<?php echo $this->Html->link(__($limit_title), $new['url'], array('target' => '_blank')); ?><br>
+						<?php $i += 1; ?>
+					</div>
+				<?php endforeach; ?>
+			</div>
+		</div>
 	</div>
 </div>
