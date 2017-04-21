@@ -13,7 +13,8 @@ label {
 <?php echo $this->Html->script('tinymce/tinymce.min.js'); ?>
 <script>
 tinymce.init({
-	selector: "#text_box"
+	selector: "#text_box",
+	language: "ja",
 });
 </script>
 <div id="wrapper">
