@@ -47,10 +47,20 @@
 	.post_date{
 		float:left;
 		font-size: 14px;
+		padding-left: 10px;
+	}
+	.post_category{
+		float: left;
+		padding-left: 40px;
+		padding-right: 20px;
 	}
 	.post_tags{
-		float: left;
+		float: right;
 		font-size: 14px;
+		width: 535px;
+	}
+	.post_body{
+		clear: both;
 	}
 	#item {
 		float: right;
@@ -81,6 +91,16 @@
 		border-bottom: dashed 1px;
 	}
 </style>
+<script>
+$(function(){
+	// $(".glyphicon-tag").hide();
+	// if ($(".tag").size()){
+	// 	$(".glyphicon").show();
+	// } else {
+	// 	$(".glyphicon").hide();
+	// }
+});
+</script>
 <div id="wrapper">
 	<div class="posts index">
 		<div class="header">
@@ -102,6 +122,13 @@
 							 ?>
 							 &nbsp;&nbsp;
 						</li>
+						<li class="post_writer">
+							<?php echo __($post['User']['username']); ?>
+							&nbsp;&nbsp;
+						</li>
+						<li class="post_category">
+							<?php echo $this->Html->link(__($post['Category']['category']), array('controller' => 'categories', 'action' => 'view', $post['Category']['id'])) ?>
+						</li>
 						<li class="post_tags">
 							<span class="glyphicon glyphicon-tag" aria-hidden="true"></span>
 							<?php foreach ($tags as $tag): ?>
@@ -111,15 +138,14 @@
 							<?php  endforeach; ?>
 						</li>
 					</ul>
-
 					<div class="post_body">
 						<?php
-							$body = $post['Post']['body'];
+							$body = strip_tags($post['Post']['body']);
 							$limit_body = mb_substr($body, 0, 30, 'utf-8');
 							if (mb_strlen($body, 'utf-8') > '30'){
 								$limit_body = $limit_body . '...';
 							}
-						 echo h($limit_body); ?>
+						 echo ($limit_body); ?>
 					 </div>
 
 					 <div class="action_view">
