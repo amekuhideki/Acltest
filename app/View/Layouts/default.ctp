@@ -22,7 +22,7 @@
       padding-right: 100px;
       padding-bottom: 100px;
       padding-top: 10px;
-     background: #ebe6d3 url(images/bg.jpg) repeat-x;
+     background: #ebe6d3;
      font: 16px/20px "ヒラギノ角ゴ Pro W3","Hiragino Kaku Gothic Pro",'メイリオ',Meiryo,Helvetica,Arial,Sans-Serif;
      color: #666;
 }
