@@ -10,6 +10,12 @@ label {
 	border-bottom: 1px solid #000;
 }
 </style>
+<?php echo $this->Html->script('tinymce/tinymce.min.js'); ?>
+<script>
+tinymce.init({
+	selector: "#text_box"
+});
+</script>
 <div id="wrapper">
 	<div class="posts form">
 		<div class="header">
@@ -51,12 +57,12 @@ label {
 					<td>
 						<div class="col-sm-9">
 							<?php
-								echo $this->Form->input('Post.body', array('label' => false, 'style' => 'width:400px; height: 200px'));
+								echo $this->Form->input('Post.body', array('label' => false, 'style' => 'width:400px; height: 200px', 'id' => "text_box"));
 							?>
 						</div>
 					</td>
 				</tr>
-				<tr>
+				<!-- <tr>
 					<th>
 						<lavel class="col-sm-3"><?php echo(__('タグ')); ?></lavel>
 					</th>
@@ -66,7 +72,7 @@ label {
 								echo $this->Form->input('Tag.tag', array('label' => false));
 								?>
 					</td>
-				</tr>
+				</tr> -->
 				<tr>
 					<th>
 						<label class="col-sm-3"><?php echo(__('画像選択')); ?></label>

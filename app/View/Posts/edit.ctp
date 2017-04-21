@@ -24,6 +24,12 @@
 		border-bottom: solid;
 	}
 </style>
+<?php echo $this->Html->script('tinymce/tinymce.min.js'); ?>
+<script>
+tinymce.init({
+	selector: "#text_box"
+});
+</script>
 <div id="wrapper">
 	<div class="posts form">
 		<?php echo $this->element('header2'); ?>
@@ -62,7 +68,7 @@
 					<td>
 						<div class="col-sm-9">
 							<?php
-								echo $this->Form->input('body', array('label' => false, 'style' => 'width:400px; height:200px'));
+								echo $this->Form->input('body', array('label' => false, 'style' => 'width:400px; height:200px', 'id' => 'text_box'));
 							?>
 						</div>
 					</td>
