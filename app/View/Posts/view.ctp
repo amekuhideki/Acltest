@@ -317,7 +317,7 @@ $(function(){
 		</div>
 
 		<div class="post_body">
-			<?php echo h($post['Post']['body']); ?>
+			<?php echo ($post['Post']['body']); ?>
 			&nbsp;
 		</div>
 
