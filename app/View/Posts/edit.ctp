@@ -6,6 +6,9 @@
 	label {
 		white-space: nowrap;
 	}
+	.header{
+		border-bottom: 1px solid #000;
+	}
 	.center{
 		margin: 50px;
 		padding: 20px;
@@ -29,12 +32,44 @@
 tinymce.init({
 	selector: "#text_box",
 	language: "ja",
+	menubar: false,
+	statusbar: false,
+	toolbar: [
+		"undo redo | formatselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent",
+		"fontsizeselect forecolor image link"
+	],
+});
+
+$(function(){
+
+	$('#image').change(function(){
+		if ($('.thumbnail').size()) {
+			$('.thumbnail').remove();
+		}
+		var file = $(this).prop('files')[0];
+		if (! file.type.match('image.*')) {
+			$('this').val('');
+			$('span').html('');
+			return;
+		} else {
+			$('#image').after('<span class="thumbnail"></span>');
+		}
+
+		var reader = new FileReader();
+    reader.onload = function() {
+      var img_src = $('<img>').attr('src', reader.result);
+      $('.thumbnail').html(img_src);
+    }
+    reader.readAsDataURL(file);
+
+	});
 });
 </script>
 <div id="wrapper">
 	<div class="posts form">
-		<?php echo $this->element('header2'); ?>
-		<?php echo $this->Form->create('Post', array('type' => 'file')); ?>
+		<div class="header">
+			<?php echo $this->element('header2'); ?>
+		</div>		<?php echo $this->Form->create('Post', array('type' => 'file')); ?>
 		<div class="center">
 			<h3><?php echo __('記事編集'); ?></h3>
 			<table class="table">
@@ -69,7 +104,7 @@ tinymce.init({
 					<td>
 						<div class="col-sm-9">
 							<?php
-								echo $this->Form->input('body', array('label' => false, 'style' => 'width:400px; height:200px', 'id' => 'text_box'));
+								echo $this->Form->input('body', array('label' => false, 'style' => 'width:400px; height:200px;', 'id' => 'text_box'));
 							?>
 						</div>
 					</td>
@@ -81,7 +116,7 @@ tinymce.init({
 					<td>
 						<div class="col-sm-9">
 							<?php
-								echo $this->Form->input('Image.0.attachment', array('type' => 'file', 'label' => false));
+								echo $this->Form->input('Image.0.attachment', array('type' => 'file', 'label' => false, 'id' => 'image'));
 							?>
 						</div>
 					</td>

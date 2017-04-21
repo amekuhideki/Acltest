@@ -9,12 +9,41 @@ label {
 .header{
 	border-bottom: 1px solid #000;
 }
+.center{
+	margin: 50px;
+	padding: 20px;
+}
 </style>
 <?php echo $this->Html->script('tinymce/tinymce.min.js'); ?>
 <script>
 tinymce.init({
 	selector: "#text_box",
 	language: "ja",
+});
+
+$(function(){
+
+	$('#image').change(function(){
+		if ($('.thumbnail').size()) {
+			$('.thumbnail').remove();
+		}
+		var file = $(this).prop('files')[0];
+		if (! file.type.match('image.*')) {
+			$('this').val('');
+			$('span').html('');
+			return;
+		} else {
+			$('#image').after('<span class="thumbnail"></span>');
+		}
+
+		var reader = new FileReader();
+    reader.onload = function() {
+      var img_src = $('<img>').attr('src', reader.result);
+      $('.thumbnail').html(img_src);
+    }
+    reader.readAsDataURL(file);
+
+	});
 });
 </script>
 <div id="wrapper">
@@ -47,7 +76,7 @@ tinymce.init({
 						<div class="col-sm-9">
 							<?php
 								echo $this->Form->input('Post.category_id', array('label' => false));
-							?>
+							?>
 						</div>
 					</td>
 				</tr>
@@ -58,7 +87,7 @@ tinymce.init({
 					<td>
 						<div class="col-sm-9">
 							<?php
-								echo $this->Form->input('Post.body', array('label' => false, 'style' => 'width:400px; height: 200px', 'id' => "text_box"));
+								echo $this->Form->input('Post.body', array('label' => false, 'style' => 'width:400px; height: 200px;', 'id' => "text_box"));
 							?>
 						</div>
 					</td>
@@ -81,7 +110,7 @@ tinymce.init({
 					<td>
 						<div class="col-sm-9">
 							<?php
-								echo $this->Form->input('Image.0.attachment', array('type' => "file", 'label' => false));
+								echo $this->Form->input('Image.0.attachment', array('type' => "file", 'label' => false, 'accept' => "image/*", 'id' => 'image'));
 							?>
 						</div>
 					</td>
