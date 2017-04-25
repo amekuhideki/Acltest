@@ -23,6 +23,11 @@
 		padding: 20px;
 		border-left: 10px solid #7BAEB5;
 		border-bottom: 1px solid #7BAEB5;
+
+		width: 700px;
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
 	}
 
 	.post_body{
@@ -74,7 +79,7 @@
 	}
 	.news_contents {
 		margin: auto;
-		padding: 2px;
+		padding-top: 10px;
 		font-size: 14px;
 	}
 	#news h4 {
@@ -83,13 +88,13 @@
 	}
 	.news_img{
 		margin: auto;
-		padding: 4px;
 	}
 	.news_content {
 		padding-top: 4px;
 		padding-bottom: 2px;
 		border-bottom: dashed 1px;
 	}
+
 </style>
 <script>
 $(function(){
@@ -173,7 +178,7 @@ $(function(){
 				<?php foreach ($news as $new): ?>
 					<div class="news_contents">
 						<div class="news_img">
-							<a href=<?php echo $new['url'];  ?>><img src="<?php echo $new['img']; ?>" width="140"> </a><br>
+							<a href=<?php echo $new['url'];  ?>><img src="<?php echo $new['img']; ?>" width="220"> </a><br>
 						</div>
 						<div class="news_content">
 							<?php echo $i;
