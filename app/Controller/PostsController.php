@@ -12,8 +12,8 @@ mb_language('Japanese');
 class PostsController extends AppController {
 	public function beforeFilter() {
 	    parent::beforeFilter();
-	    // $this->Auth->allow('index', 'view');
-			$this->Auth->allow();
+	    $this->Auth->allow('index', 'view');
+			// $this->Auth->allow();
 
 	}
 	var $uses = array('Post', 'User', 'Category', 'Tag', 'PostsTag', 'Attachment', 'Comment');
@@ -36,18 +36,14 @@ class PostsController extends AppController {
 		$source = mb_convert_encoding($source, 'utf8', 'auto');
 		$html = str_get_html($source);
 		sleep(1);
-		foreach($html->find('.titlebody a') as $element){
-			$url[] = $element->href;
+
+		foreach ($html->find('.fullbody') as $element) {
+			$url = $element->find('.titlebody a', 0)->href;
+			$title = $element->find('.titlebody text', 0)->outertext;
+			$img = $element->find('.blogbody img', 0)->src;
+			$news[] = ['url' => $url, 'title' => $title, 'img' => $img];
 		}
-		foreach($html->find('.titlebody text') as $element){
-			$title[] = $element->outertext;
-		}
-		foreach($html->find('.blogbody img') as $element){
-			$img[] = $element->src;
-		}
-		foreach ($url as $key) {
-			$news[] = ['url' => $key, 'title' => array_shift($title), 'img' => array_shift($img)];
-		}
+
 		$this->set('news', $news);
 
 		$user = $this->Auth->user();
@@ -83,6 +79,9 @@ class PostsController extends AppController {
 			'fields' => array('Category.category')
 		));
 		$this->set('categories', $categories);
+
+		$images = $this->Post->Image->find('all');
+		$this->set('images', $images);
 
 	}
 
