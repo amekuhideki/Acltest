@@ -22,7 +22,7 @@
       padding-right: 100px;
       padding-bottom: 100px;
       padding-top: 10px;
-     background: #ebe6d3;
+     /*background: #ebe6d3;*/
      font: 16px/20px "ヒラギノ角ゴ Pro W3","Hiragino Kaku Gothic Pro",'メイリオ',Meiryo,Helvetica,Arial,Sans-Serif;
      color: #666;
 }
@@ -33,6 +33,9 @@ a{ color: #69c;}
     .starter-template {
       padding: 40px 15px;
       text-align: center;
+    }
+    #flash_message {
+      width: 960px;
     }
 
     /*.footer {
@@ -55,7 +58,9 @@ a{ color: #69c;}
   </head>
   <body>
 
-    <?php echo $this->Session->flash(); ?>
+    <div id='flash_message'>
+      <?php echo $this->Session->flash(); ?>
+    </div>
     <?php echo $this->fetch('content'); ?>
     <?php echo $this->element('footer'); ?>
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->

@@ -9,6 +9,8 @@
 }
 .search_section{
   float: right;
+  width: 285px;
+  height: auto;
 }
 .search_box{
   margin: auto;
@@ -16,14 +18,16 @@
 }
 .search_bottun{
   float: right;
-  padding-top: 14px;
+  padding-top: 16px;
 }
 
 .header_category{
   padding-top: 20px;
   clear: both;
 }
-
+  nav ul{
+    text-align: center;
+  }
   nav li{
     display: inline;
     margin-left: 26px;
@@ -35,8 +39,8 @@
   nav a:hover{
     color: #69c;
     position: relative;
-    top:3px;
-    left:3px;
+    top:2px;
+    left:2px;
   }
   header a{
     font-size: 18px;
@@ -80,12 +84,14 @@ $(function(){
   <div class="header_category">
     <nav>
       <ul>
+        <?php if (isset($_SESSION['Auth']['User']['username'])): ?>
+          <li><a><?php echo $this->Html->link(__('MyPage'), array('controller' => 'users', 'action' => 'view', $_SESSION['Auth']['User']['id']),
+                                                           array('role' => "presentation")); ?> </a></li>
+        <?php endif;?>
         <li><a><?php echo $this->Html->link(__('Article create'), array('controller' => 'posts', 'action' => 'add'),
                                                         array('role' => "presentation")); ?></a></li>
     		<li><a><?php echo $this->Html->link(__('List of articles'), array('controller' => 'posts','action' => 'index'),
                                                        array('role' => "presentation")); ?></a></li>
-    		<li><a><?php echo $this->Html->link(__('User'), array('controller' => 'users', 'action' => 'index'),
-                                                         array('role' => "presentation")); ?> </a></li>
     		<li><a><?php echo $this->Html->link(__('Category'), array('controller' => 'categories', 'action' => 'index'),
                                                         array('role' => "presentation")); ?> </a></li>
     		<li><a><?php echo $this->Html->link(__('Tag'), array('controller' => 'tags', 'action' => 'index'),
@@ -94,7 +100,13 @@ $(function(){
                                                     array('role' => "presentation")); ?> </a></li>
         <?php if ($_SESSION['lang'] === 'eng'): ?>
           <?php if ($this->action === 'view' || $this->action === 'edit'): ?>
-            <li><a><?php echo $this->Html->link(__('japanese'), array('controller' => $this->name, 'action' => $this->action . "/" . $post['Post']['id'], 'parameter' => 'jpn'),
+            <?php if (isset($post['Post']['id'])){
+                    $id = $post['Post']['id'];
+                  } elseif (isset($user['User']['id'])){
+                    $id = $user['User']['id'];
+                  }
+            ?>
+            <li><a><?php echo $this->Html->link(__('japanese'), array('controller' => $this->name, 'action' => $this->action . "/" . $id, 'parameter' => 'jpn'),
                                                           array('role' => 'presentation', 'class' => 'language')); ?></a></li>
           <?php else: ?>
             <li><a><?php echo $this->Html->link(__('japanese'), array('controller' => $this->name, 'action' => $this->action, 'parameter' => 'jpn'),
@@ -102,7 +114,13 @@ $(function(){
           <?php endif; ?>
         <?php else: ?>
           <?php if ($this->action === 'view' || $this->action === 'edit'): ?>
-            <li><a><?php echo $this->Html->link(__('English'), array('controller' => $this->name, 'action' => $this->action . "/" . $post['Post']['id'], 'parameter' => 'eng'),
+            <?php if (isset($post['Post']['id'])){
+                    $id = $post['Post']['id'];
+                  } elseif (isset($user['User']['id'])){
+                    $id = $user['User']['id'];
+                  }
+            ?>
+            <li><a><?php echo $this->Html->link(__('English'), array('controller' => $this->name, 'action' => $this->action . "/" . $id, 'parameter' => 'eng'),
                                                         array('role' => 'presentation', 'class' => 'language')); ?></a></li>
           <?php else: ?>
             <li><a><?php echo $this->Html->link(__('English'), array('controller' => $this->name, 'action' => $this->action, 'parameter' => 'eng'),

@@ -31,14 +31,16 @@
 	}
 
 	.post_body{
-		margin: auto;
-		padding: 40px;
+		width: 480px;
+		margin-top: 50px;
+		padding: 26px;
 		font-size: 18px;
-		text-align: center;
-	}
+		float: right;
+		text-align: left;
 
-	.action_view{
-		text-align: right;
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
 	}
 	.header{
 		border-bottom: 1px solid #000;
@@ -64,11 +66,24 @@
 		font-size: 14px;
 		width: 535px;
 	}
-	.post_body{
+	.image_body{
 		clear: both;
 	}
+	.post_image{
+		width: 180px;
+		float: left;
+		padding: 10px;
+		margin-top: 50px;
+	}
+
+	.contents_footer{
+		margin: auto;
+		padding: auto;
+		clear: both;
+		width: 700px;
+		text-align: right;
+	}
 	#item {
-		float: right;
 		padding-right: 5px;
 	}
 	.sidebar {
@@ -77,6 +92,11 @@
 		width: 250px;
 		float: right;
 	}
+	/*.fixBox {
+		position: fixed;
+		top: 0px;
+		right: 0px;
+	}*/
 	.news_contents {
 		margin: auto;
 		padding-top: 10px;
@@ -94,24 +114,31 @@
 		padding-bottom: 2px;
 		border-bottom: dashed 1px;
 	}
-
+	.paginate{
+		text-align: right;
+	}
 </style>
 <script>
-$(function(){
-	// $(".glyphicon-tag").hide();
-	// if ($(".tag").size()){
-	// 	$(".glyphicon").show();
-	// } else {
-	// 	$(".glyphicon").hide();
-	// }
-});
+// $(function(){
+// 	var navBox = $(".sidebar");
+// 	var navOst = navBox.offset().top;
+//
+// 	$(window).scroll(function(){
+// 		if ($(window).scrollTop() > navOst){
+// 			navBox.addClass("fixBox");
+// 		}
+// 		else {
+// 			navBox.removeClass("fixBox");
+// 		}
+// 	});
+
+// });
 </script>
 <div id="wrapper">
 	<div class="posts index">
 		<div class="header">
 			<?php echo $this->element('header2'); ?>
 		</div>
-
 		<div id="contents">
 			<?php foreach ($posts as $post): ?>
 				<div id="content_details">
@@ -143,33 +170,69 @@ $(function(){
 							<?php  endforeach; ?>
 						</li>
 					</ul>
-					<div class="post_body">
-						<?php
-							$body = strip_tags($post['Post']['body']);
-							$limit_body = mb_substr($body, 0, 30, 'utf-8');
-							if (mb_strlen($body, 'utf-8') > '30'){
-								$limit_body = $limit_body . '...';
-							}
-						 echo ($limit_body); ?>
+
+					<ul class="image_body">
+						<li>
+							<div class="post_image">
+								<?php $image_flag = 0; ?>
+								<?php foreach ($images as $image): ?>
+									<?php if ($image['Image']['foreign_key'] === $post['Post']['id']): ?>
+										<?php echo $this->Html->image('/files/image/attachment/'. $image['Image']['dir']. '/' . $image['Image']['attachment'], array('width' => '150')); ?>
+										<?php $image_flag = 1; break; ?>
+									<?php endif; ?>
+								<?php endforeach; ?>
+								<?php if ($image_flag === 0): ?>
+									<?php echo $this->Html->image('/images/Noimage.jpg', array('width' => '150')); ?>
+								<?php endif; ?>
+								<?php unset($image_flag); ?>
+							</div>
+						</li>
+						<li>
+							<div class="post_body">
+								<?php
+									$body = strip_tags($post['Post']['body']);
+									$limit_body = mb_substr($body, 0, 100, 'utf-8');
+									if (mb_strlen($body, 'utf-8') > '100'){
+										$limit_body = $limit_body . '...';
+									}
+								 echo ($limit_body); ?>
+							 </div>
+						 </li>
+					 </ul>
+
+					<div class="contents_footer">
+						<div class="action_view">
+						 <?php echo $this->Html->link(__('続きを読む＞'), array('action' => "view", $post['Post']['id'])); ?><br>
 					 </div>
 
-					 <div class="action_view">
-						<?php echo $this->Html->link(__('続きを読む＞'), array('action' => "view", $post['Post']['id'])); ?><br>
+						<div id="item">
+							<?php if ($user['id'] == $post['User']['id'] || $user['Group']['id'] == 1): ?>
+								<?php echo $this->Html->link(__('編集'), array('action' => 'edit', $post['Post']['id'])); ?>
+								・
+								<?php echo $this->Html->link(__('削除'), array('action' => 'delete', $post['Post']['id']),
+																												 array('confirm' => '本当にこの記事を削除しますか？')); ?>
+							<?php endif; ?>
+						</div>
 					</div>
-
-					<div id="item">
-						<?php if ($user['id'] == $post['User']['id'] || $user['Group']['id'] == 1): ?>
-							<?php echo $this->Html->link(__('編集'), array('action' => 'edit', $post['Post']['id'])); ?>
-							・
-							<?php echo $this->Html->link(__('削除'), array('action' => 'delete', $post['Post']['id']),
-																											 array('confirm' => '本当にこの記事を削除しますか？')); ?>
-						<?php endif; ?>
-					</div>
-
 				</div>
-
 			<?php endforeach; ?>
+			<nav>
+				<div class="paginate">
+					<ul class="pagination">
+						<li>
+						 	<?php echo $this->Paginator->prev('< ' . __('previous'), array(), null, array('class' => 'prev disabled')); ?>
+						</li>
+						<li>
+							<?php echo $this->Paginator->numbers(array('separator' => '')); ?>
+						</li>
+						<li>
+							<?php echo $this->Paginator->next(__('next') . ' >', array(), null, array('class' => 'next disabled')); ?>
+						</li>
+					</ul>
+			 	</div>
+			</nav>
 		</div>
+
 
 		<div class="sidebar">
 			<div id="news">

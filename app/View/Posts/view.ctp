@@ -37,8 +37,10 @@ html, body{
 #modal_window h4{
 	margin: 20px 50px;
 	font-size: large;
-	border-left: 10px solid #7BAEB5;
-	border-bottom: 1px solid #7BAEB5;
+	text-align: center;
+	border-bottom: solid 1px;
+	/*border-left: 10px solid #7BAEB5;
+	border-bottom: 1px solid #7BAEB5;*/
 	padding: 10px;
 	width: 600px;
 }
@@ -99,6 +101,7 @@ html, body{
 	padding: 1px;
 	padding-top: 10px;
 	padding-bottom: 20px;
+	overflow: hidden;
 }
 #list{
 	margin: auto;
@@ -132,6 +135,9 @@ html, body{
 	font-size: 30px;
 	border-left: 10px solid #7BAEB5;
 	border-bottom: 1px solid #7BAEB5;
+}
+#post_comment{
+	clear: both;
 }
 #add_comment{
 	margin: 0 auto;
@@ -330,6 +336,43 @@ $(function(){
 			<?php endif; ?>
 		</div>
 
+		<div class="post_image">
+			<div class="image">
+				<?php if(!empty($post['Image'])): ?>
+				<div id="modal_window">
+					<h4><?php echo __('画像一覧'); ?></h4>
+					<ul>
+						<?php $i = 0; ?>
+						<?php foreach ($post['Image'] as $image): ?>
+						<li><a href=<?php echo '../../files/image/attachment/' . $image["dir"] . "/" . $image["attachment"]; ?> class="modal_picture" img_group=<?php echo $i; $i++?>>
+								<img src=<?php echo '../../files/image/attachment/' . $image["dir"] . "/" . $image["attachment"]; ?>
+										 width="250" class="picture"></a></li>
+						<?php endforeach; ?>
+					</ul>
+				</div>
+				<?php endif; ?>
+
+				<?php if(!empty($post['Image'])): ?>
+				<div class="slider">
+					<div>
+						<div class="slideSet">
+						<?php foreach ($post['Image'] as $image): ?>
+							<div class="slide">
+								<a href=<?php echo '../../files/image/attachment/' . $image["dir"] . "/" . $image["attachment"]; ?>>
+								<img src=<?php echo '../../files/image/attachment/' . $image["dir"] . "/" . $image["attachment"]; ?>
+										 width="400"></a>
+							</div>
+						<?php endforeach; ?>
+						</div>
+					</div>
+					<p class="slider-close"><img src="../../images/close.png" ></p>
+					<p class="slider-prev"><img src="../../images/prev.png" width="20" height="100"></p>
+					<p class="slider-next"><img src="../../images/next.png" width="20" height="100"></p>
+				</div>
+				<?php endif; ?>
+			</div>
+		</div>
+
 		<div id="post_comment">
 			<h4 class='comment_header'><?php echo __('コメント'); ?></h4>
 			<div class="comment">
@@ -371,66 +414,31 @@ $(function(){
 				</ul>
 			</div>
 
-		<div id='add_comment'>
-			<div class="add_comment_contain">
-				<h4>コメントを書く</h4>
-				<?php if (!isset($user['id'])): ?>
-					<?php $user['id'] = -1; ?>
-				<?php endif;?>
-				<?php
-				echo $this->Form->create('Comment', array('url' => array(
-																							'controller' => 'comments', 'action' => 'add'),
-																							));
-				echo $this->Form->input('commenter', array('label' => '名前'));
-				echo $this->Form->input('body', array('label' => '本文', 'row'=>3));
-				echo $this->Form->input('Comment.post_id', array('type'=>'hidden', 'value'=>$post['Post']['id']));
-				echo $this->Form->input('status', array('type' => 'hidden', 'value' => 0));
-				echo $this->Form->input('user_id', array('type' => 'hidden', 'value' => $user['id']));
-				echo $this->Form->end('投稿する');
-				?>
+			<div id='add_comment'>
+				<div class="add_comment_contain">
+					<h4>コメントを書く</h4>
+					<?php if (!isset($user['id'])): ?>
+						<?php $user['id'] = -1; ?>
+					<?php endif;?>
+					<?php
+					echo $this->Form->create('Comment', array('url' => array(
+																								'controller' => 'comments', 'action' => 'add'),
+																								));
+					echo $this->Form->input('commenter', array('label' => '名前'));
+					echo $this->Form->input('body', array('label' => '本文', 'row'=>3));
+					echo $this->Form->input('Comment.post_id', array('type'=>'hidden', 'value'=>$post['Post']['id']));
+					echo $this->Form->input('status', array('type' => 'hidden', 'value' => 0));
+					echo $this->Form->input('user_id', array('type' => 'hidden', 'value' => $user['id']));
+					echo $this->Form->end('投稿する');
+					?>
+				</div>
 			</div>
-		</div>
 
 			<p><?php echo $this->Html->link(__('記事一覧に戻る'), array('action' => "index")); ?></p>
 		</div>
 
 
-		<div class="post_image">
-			<div class="image">
-				<?php if(!empty($post['Image'])): ?>
-				<div id="modal_window">
-					<h4><?php echo __('画像一覧'); ?></h4>
-					<ul>
-						<?php $i = 0; ?>
-						<?php foreach ($post['Image'] as $image): ?>
-						<li><a href=<?php echo '../../files/image/attachment/' . $image["dir"] . "/" . $image["attachment"]; ?> class="modal_picture" img_group=<?php echo $i; $i++?>>
-								<img src=<?php echo '../../files/image/attachment/' . $image["dir"] . "/" . $image["attachment"]; ?>
-										 width="250" class="picture"></a></li>
-						<?php endforeach; ?>
-					</ul>
-				</div>
-				<?php endif; ?>
 
-				<?php if(!empty($post['Image'])): ?>
-				<div class="slider">
-					<div>
-						<div class="slideSet">
-						<?php foreach ($post['Image'] as $image): ?>
-							<div class="slide">
-								<a href=<?php echo '../../files/image/attachment/' . $image["dir"] . "/" . $image["attachment"]; ?>>
-								<img src=<?php echo '../../files/image/attachment/' . $image["dir"] . "/" . $image["attachment"]; ?>
-										 width="400"></a>
-							</div>
-						<?php endforeach; ?>
-						</div>
-					</div>
-					<p class="slider-close"><img src="../../images/close.png" ></p>
-					<p class="slider-prev"><img src="../../images/prev.png" width="20" height="100"></p>
-					<p class="slider-next"><img src="../../images/next.png" width="20" height="100"></p>
-				</div>
-				<?php endif; ?>
-			</div>
-		</div>
 
 	</div>
 </div>
