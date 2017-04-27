@@ -1,55 +1,4 @@
-<style>
-.header_header{
-  padding-top: 20px;
-}
-.header_title{
-  float: left;
-  margin-top: auto;
-  padding-top: 14px;
-}
-.search_section{
-  float: right;
-  width: 285px;
-  height: auto;
-}
-.search_box{
-  margin: auto;
-  float: left;
-}
-.search_bottun{
-  float: right;
-  padding-top: 16px;
-}
-
-.header_category{
-  padding-top: 20px;
-  clear: both;
-}
-  nav ul{
-    text-align: center;
-  }
-  nav li{
-    display: inline;
-    margin-left: 26px;
-  }
-  nav a{
-    color: #666;
-    text-decoration: none;
-  }
-  nav a:hover{
-    color: #69c;
-    position: relative;
-    top:2px;
-    left:2px;
-  }
-  header a{
-    font-size: 18px;
-  }
-  ul{
-    list-style: none;
-  }
-
-</style>
+<?php echo $this->Html->css('elements/header2.css'); ?>
 <script>
 $(function(){
 
@@ -67,7 +16,7 @@ $(function(){
           array('action' => 'index'), $this->params['pass']) )); ?>
         <li class="search_box">
           <?php
-            echo $this->Form->input('keyword', array('label' => '', 'empty' => true, 'placeholder' => 'キーワード検索'));
+            echo $this->Form->input('keyword', array('label' => '', 'empty' => true, 'placeholder' => 'キーワード検索', 'size' => '25'));
             // echo $this->Form->input('category', array('label' => 'カテゴリー', 'class' => 'selectpicker_pre', 'empty' => true, 'options' => $categories));
             // echo $this->Form->input('tag', array('label' => 'タグ', 'empty' => true, 'options' => $tags, 'multiple' => true, 'class' => "form-control", 'style' => "width:250px;"));
           ?>

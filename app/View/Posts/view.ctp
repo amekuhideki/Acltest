@@ -1,14 +1,4 @@
 <style>
-html, body{
-	margin: 0;　　　　　　　
-	padding: 0;　　　　　　
-	height: 100%;　　　　　
-}
-#wrapper{
-	width: 960px;
-	margin: 0 auto;
-	line-height: 24px;
-}
 
 .header{
 	border-bottom: 1px solid #000;
@@ -135,6 +125,11 @@ html, body{
 	font-size: 30px;
 	border-left: 10px solid #7BAEB5;
 	border-bottom: 1px solid #7BAEB5;
+}
+#title h2 {
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
 }
 #post_comment{
 	clear: both;
@@ -292,7 +287,7 @@ $(function(){
 	<div id="content">
 		<div id="title">
 			<div>
-				<h2 align="left"><?php echo __($post['Post']['title']); ?></h2>
+				<h2 align="left"><?php echo h($post['Post']['title']); ?></h2>
 			</div>
 		</div>
 		<div id="post_header">

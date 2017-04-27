@@ -16,12 +16,12 @@
   <script type="text/javascript" src="http://code.jquery.com/jquery-1.9.0.js"></script>
   <!-- Le styles -->
 	<style>
-    html,body {
+    html {
       /*padding-top: 50px;*/
       padding-left: 100px;
       padding-right: 100px;
       padding-bottom: 100px;
-      padding-top: 10px;
+      /*padding-top: 10px;*/
      /*background: #ebe6d3;*/
      font: 16px/20px "ヒラギノ角ゴ Pro W3","Hiragino Kaku Gothic Pro",'メイリオ',Meiryo,Helvetica,Arial,Sans-Serif;
      color: #666;
@@ -37,7 +37,10 @@ a{ color: #69c;}
     #flash_message {
       width: 960px;
     }
-
+    #wrapper {
+      width: 960px;
+      margin: 0 auto;
+    }
     /*.footer {
       position: absolute;
       bottom: 0;
@@ -61,8 +64,10 @@ a{ color: #69c;}
     <div id='flash_message'>
       <?php echo $this->Session->flash(); ?>
     </div>
-    <?php echo $this->fetch('content'); ?>
-    <?php echo $this->element('footer'); ?>
+    <div id="wrapper">
+      <?php echo $this->fetch('content'); ?>
+      <?php echo $this->element('footer'); ?>
+    </div>
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->

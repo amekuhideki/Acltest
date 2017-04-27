@@ -1,10 +1,11 @@
 <style>
 .footer{
-    clear: both;
-    width: 500px;
-    /*height: 10px;*/
-    margin: 0 auto;
-    padding-top: 100px;
+  width: 100%;
+  clear: both;
+  max-width: 900px;
+  /*height: 10px;*/
+  margin: 0 auto;
+  padding-top: 100px;
 }
 
 p{
