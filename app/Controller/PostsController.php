@@ -35,8 +35,7 @@ class PostsController extends AppController {
 		$source = file_get_contents('http://blog.livedoor.jp/dqnplus/');
 		$source = mb_convert_encoding($source, 'utf8', 'auto');
 		$html = str_get_html($source);
-		sleep(1);
-
+		sleep(rand(0.1, 0.7));
 		foreach ($html->find('.fullbody') as $element) {
 			$url = $element->find('.titlebody a', 0)->href;
 			$title = $element->find('.titlebody text', 0)->outertext;
@@ -64,7 +63,8 @@ class PostsController extends AppController {
 		$this->paginate = array(
 			'conditions' =>
 				array($this->Post->parseCriteria($this->passedArgs), 'Post.status' => 0),//'Post.status' => 0 で論理削除
-			'order' => array('Post.modified' => 'desc')//日付順で表示
+			'order' => array('Post.modified' => 'desc'),//日付順で表示
+			'limit' => 10
 		);
 
 		$this->set('posts', $this->paginate());
@@ -257,6 +257,7 @@ class PostsController extends AppController {
 	}
 
 	public function deleteImage($id = null, $post_id = null){
+
 		if (!$this->Post->Image->exists($id)) {
 			throw new NotFoundException(__('Invalid post'));
 		}
