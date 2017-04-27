@@ -1,0 +1,55 @@
+<style>
+.header_header{
+  padding-top: 20px;
+}
+.header_title{
+  float: left;
+  margin-top: auto;
+  padding-top: 14px;
+}
+.search_section{
+  position: relative;
+  float: right;
+  width: 300px;
+  height: auto;
+}
+.search_box{
+  margin: auto;
+  float: left;
+}
+.search_bottun{
+  float: left;
+  padding-top: 16px;
+}
+
+.header_category{
+  padding-top: 20px;
+  clear: both;
+}
+  nav ul{
+    text-align: center;
+  }
+  nav li{
+    display: inline;
+    margin-left: 26px;
+  }
+  nav a{
+    color: #666;
+    text-decoration: none;
+  }
+  nav a:hover{
+    color: #69c;
+    position: relative;
+    top:2px;
+    left:2px;
+  }
+  header a{
+    font-size: 18px;
+  }
+  ul{
+    list-style: none;
+  }
+@media only screen and (max-width: 400px) {
+
+}
+</style>
