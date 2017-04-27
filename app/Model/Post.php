@@ -72,6 +72,10 @@ class Post extends AppModel {
 				//'last' => false, // Stop validation after this rule
 				//'on' => 'create', // Limit validation to 'create' or 'update' operations
 			),
+      'maxlen' => array(
+        'rule' => array('maxLength', 24),
+        'message' => '24文字以内で収めてください。'
+      )
 		),
 	);
 
