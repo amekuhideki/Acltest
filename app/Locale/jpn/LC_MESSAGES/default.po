@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2017-04-25 13:46+0900\n"
+"PO-Revision-Date: 2017-04-25 16:05+0900\n"
 "Last-Translator: NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
 "Language: ja\n"
@@ -365,7 +365,7 @@ msgstr ""
 #: View/PostsTags/edit.ctp:14 View/PostsTags/index.ctp:11;50
 #: View/PostsTags/view.ctp:32 View/Tags/add.ctp:14 View/Tags/edit.ctp:15
 #: View/Tags/index.ctp:19;60 View/Tags/view.ctp:32;54 View/Users/edit.ctp:16
-#: View/Users/index.ctp:20 View/Users/view.ctp:57 View/Widgets/add.ctp:14
+#: View/Users/index.ctp:20 View/Users/view.ctp:48 View/Widgets/add.ctp:14
 #: View/Widgets/edit.ctp:15 View/Widgets/index.ctp:10;44
 #: View/Widgets/view.ctp:27
 msgid "Actions"
@@ -385,7 +385,7 @@ msgstr ""
 #: View/Categories/view.ctp:61 View/Groups/edit.ctp:16 View/Groups/index.ctp:23
 #: View/Groups/view.ctp:61 View/PostsTags/edit.ctp:17
 #: View/PostsTags/index.ctp:29 View/Tags/edit.ctp:18 View/Tags/index.ctp:35
-#: View/Tags/view.ctp:68 View/Users/edit.ctp:19 View/Users/view.ctp:69
+#: View/Tags/view.ctp:68 View/Users/edit.ctp:19 View/Users/view.ctp:61
 #: View/Widgets/edit.ctp:18 View/Widgets/index.ctp:23
 msgid "Delete"
 msgstr ""
@@ -397,7 +397,7 @@ msgstr ""
 #: View/Posts/edit.ctp:138;152 View/PostsTags/edit.ctp:17
 #: View/PostsTags/index.ctp:29 View/PostsTags/view.ctp:35 View/Tags/edit.ctp:18
 #: View/Tags/index.ctp:36 View/Tags/view.ctp:35;68 View/Users/edit.ctp:19
-#: View/Users/index.ctp:40 View/Users/view.ctp:69 View/Widgets/edit.ctp:18
+#: View/Users/index.ctp:40 View/Users/view.ctp:61 View/Widgets/edit.ctp:18
 #: View/Widgets/index.ctp:23 View/Widgets/view.ctp:30
 msgid "Are you sure you want to delete # %s?"
 msgstr ""
@@ -409,14 +409,14 @@ msgstr ""
 #: View/Attachments/index.ctp:31 View/Categories/index.ctp:29
 #: View/Categories/view.ctp:59 View/Groups/index.ctp:21 View/Groups/view.ctp:59
 #: View/PostsTags/index.ctp:27 View/Tags/index.ctp:31 View/Tags/view.ctp:66
-#: View/Users/view.ctp:67 View/Widgets/index.ctp:21
+#: View/Users/view.ctp:59 View/Widgets/index.ctp:21
 msgid "View"
 msgstr ""
 
 #: View/Attachments/index.ctp:32 View/Categories/index.ctp:31
 #: View/Categories/view.ctp:60 View/Groups/index.ctp:22 View/Groups/view.ctp:60
 #: View/PostsTags/index.ctp:28 View/Tags/index.ctp:33 View/Tags/view.ctp:67
-#: View/Users/view.ctp:68 View/Widgets/index.ctp:22
+#: View/Users/view.ctp:60 View/Widgets/index.ctp:22
 msgid "Edit"
 msgstr ""
 
@@ -498,9 +498,9 @@ msgstr ""
 #: View/PostsTags/edit.ctp:20 View/PostsTags/index.ctp:54
 #: View/PostsTags/view.ctp:39 View/Tags/add.ctp:19 View/Tags/edit.ctp:21
 #: View/Tags/index.ctp:64 View/Tags/view.ctp:39;77 View/Users/edit.ctp:24
-#: View/Users/view.ctp:79
+#: View/Users/view.ctp:70
 msgid "New Post"
-msgstr ""
+msgstr "新規作成"
 
 #: View/Categories/add.ctp:17
 msgid "List Post"
@@ -536,17 +536,17 @@ msgid "List Post "
 msgstr ""
 
 #: View/Categories/view.ctp:2;9 View/Elements/header.ctp:12
-#: View/Elements/header2.ctp:89 View/Elements/indexheader.ctp:21
+#: View/Elements/header2.ctp:93 View/Elements/indexheader.ctp:21
 msgid "Category"
 msgstr "カテゴリー"
 
 #: View/Categories/view.ctp:14;45 View/Groups/view.ctp:14;46
-#: View/PostsTags/view.ctp:19 View/Tags/view.ctp:19;52 View/Users/view.ctp:31
+#: View/PostsTags/view.ctp:19 View/Tags/view.ctp:19;52
 msgid "Created"
 msgstr ""
 
 #: View/Categories/view.ctp:19;46 View/Groups/view.ctp:19;47
-#: View/PostsTags/view.ctp:24 View/Tags/view.ctp:24;53 View/Users/view.ctp:38
+#: View/PostsTags/view.ctp:24 View/Tags/view.ctp:24;53
 msgid "Modified"
 msgstr ""
 
@@ -574,51 +574,54 @@ msgstr ""
 msgid "Body"
 msgstr ""
 
-#: View/Elements/header.ctp:6 View/Elements/header2.ctp:83
+#: View/Elements/header.ctp:6 View/Elements/header2.ctp:89
 #: View/Elements/indexheader.ctp:15
 msgid "Article create"
 msgstr "記事作成"
 
-#: View/Elements/header.ctp:8 View/Elements/header2.ctp:85
+#: View/Elements/header.ctp:8 View/Elements/header2.ctp:91
 #: View/Elements/indexheader.ctp:17
 msgid "List of articles"
 msgstr "記事一覧"
 
-#: View/Elements/header.ctp:10 View/Elements/header2.ctp:87
-#: View/Elements/indexheader.ctp:19
+#: View/Elements/header.ctp:10 View/Elements/indexheader.ctp:19
 msgid "User"
 msgstr "ユーザー"
 
-#: View/Elements/header.ctp:14 View/Elements/header2.ctp:91
+#: View/Elements/header.ctp:14 View/Elements/header2.ctp:95
 #: View/Elements/indexheader.ctp:23 View/PostsTags/view.ctp:14
 #: View/Tags/view.ctp:2;9
 msgid "Tag"
 msgstr "タグ"
 
-#: View/Elements/header.ctp:16 View/Elements/header2.ctp:93
+#: View/Elements/header.ctp:16 View/Elements/header2.ctp:97
 #: View/Elements/indexheader.ctp:25
 msgid "Contact"
 msgstr "コンタクト"
 
-#: View/Elements/header.ctp:18 View/Elements/header2.ctp:115
+#: View/Elements/header.ctp:18 View/Elements/header2.ctp:131
 #: View/Elements/indexheader.ctp:27
 msgid "Logout"
 msgstr "ログアウト"
 
-#: View/Elements/header.ctp:19 View/Elements/header2.ctp:116
+#: View/Elements/header.ctp:19 View/Elements/header2.ctp:132
 #: View/Elements/indexheader.ctp:28
 msgid "本当にログアウトしますか？"
 msgstr "本当にログアウトしますか？"
 
-#: View/Elements/header2.ctp:97;100
+#: View/Elements/header2.ctp:86
+msgid "MyPage"
+msgstr "マイページ"
+
+#: View/Elements/header2.ctp:107;110
 msgid "japanese"
 msgstr ""
 
-#: View/Elements/header2.ctp:105;108
+#: View/Elements/header2.ctp:121;124
 msgid "English"
 msgstr ""
 
-#: View/Elements/header2.ctp:113
+#: View/Elements/header2.ctp:129
 msgid "Login"
 msgstr "ログイン"
 
@@ -683,7 +686,7 @@ msgstr ""
 msgid "New Group"
 msgstr ""
 
-#: View/Groups/view.ctp:2 View/Users/view.ctp:24
+#: View/Groups/view.ctp:2
 msgid "Group"
 msgstr ""
 
@@ -699,7 +702,7 @@ msgstr ""
 msgid "Username"
 msgstr ""
 
-#: View/Groups/view.ctp:44 View/Users/view.ctp:17
+#: View/Groups/view.ctp:44
 msgid "Password"
 msgstr ""
 
@@ -711,11 +714,11 @@ msgstr ""
 msgid "記事作成"
 msgstr ""
 
-#: View/Posts/add.ctp:61 View/Posts/edit.ctp:78 View/Users/view.ctp:54
+#: View/Posts/add.ctp:61 View/Posts/edit.ctp:78 View/Users/view.ctp:45
 msgid "タイトル"
 msgstr ""
 
-#: View/Posts/add.ctp:73 View/Posts/edit.ctp:90 View/Users/view.ctp:53
+#: View/Posts/add.ctp:73 View/Posts/edit.ctp:90 View/Users/view.ctp:44
 msgid "カテゴリー"
 msgstr ""
 
@@ -736,11 +739,11 @@ msgid "投稿する"
 msgstr ""
 
 #: View/Posts/comment.ctp:14 View/Posts/edit.ctp:137;150
-#: View/Posts/index.ctp:164 View/Posts/view.ctp:332;356 View/Users/index.ctp:39
+#: View/Posts/index.ctp:164 View/Posts/view.ctp:330;354 View/Users/index.ctp:39
 msgid "削除"
 msgstr ""
 
-#: View/Posts/comment.ctp:15 View/Posts/view.ctp:357
+#: View/Posts/comment.ctp:15 View/Posts/view.ctp:355
 msgid "Are you sure you want to delete"
 msgstr ""
 
@@ -752,7 +755,7 @@ msgstr ""
 msgid "画像ファイルの追加"
 msgstr ""
 
-#: View/Posts/edit.ctp:143 View/Posts/view.ctp:406
+#: View/Posts/edit.ctp:143 View/Posts/view.ctp:404
 msgid "画像一覧"
 msgstr ""
 
@@ -760,7 +763,7 @@ msgstr ""
 msgid "続きを読む＞"
 msgstr ""
 
-#: View/Posts/index.ctp:162 View/Posts/view.ctp:330;354 View/Users/index.ctp:37
+#: View/Posts/index.ctp:162 View/Posts/view.ctp:328;352 View/Users/index.ctp:37
 msgid "編集"
 msgstr ""
 
@@ -768,23 +771,23 @@ msgstr ""
 msgid "まとめニュース"
 msgstr ""
 
-#: View/Posts/view.ctp:313
+#: View/Posts/view.ctp:311
 msgid "投稿者:"
 msgstr ""
 
-#: View/Posts/view.ctp:317
+#: View/Posts/view.ctp:315
 msgid "カテゴリー："
 msgstr ""
 
-#: View/Posts/view.ctp:338
+#: View/Posts/view.ctp:336
 msgid "コメント"
 msgstr ""
 
-#: View/Posts/view.ctp:365
+#: View/Posts/view.ctp:363
 msgid "コメントはまだありません。"
 msgstr ""
 
-#: View/Posts/view.ctp:398
+#: View/Posts/view.ctp:396
 msgid "記事一覧に戻る"
 msgstr ""
 
@@ -879,31 +882,31 @@ msgstr ""
 msgid "アカウントを作成"
 msgstr ""
 
-#: View/Users/view.ctp:3
-msgid "ユーザー詳細"
-msgstr ""
-
-#: View/Users/view.ctp:6
+#: View/Users/view.ctp:18
 msgid "ユーザーID"
 msgstr ""
 
-#: View/Users/view.ctp:10
-msgid "ユーザーネーム"
+#: View/Users/view.ctp:22
+msgid "グループ"
 msgstr ""
 
-#: View/Users/view.ctp:48
-msgid "記事詳細"
+#: View/Users/view.ctp:29
+msgid "ユーザー作成日"
 msgstr ""
 
-#: View/Users/view.ctp:52
+#: View/Users/view.ctp:39
+msgid "記事一覧"
+msgstr ""
+
+#: View/Users/view.ctp:43
 msgid "記事ID"
 msgstr ""
 
-#: View/Users/view.ctp:55
+#: View/Users/view.ctp:46
 msgid "作成日"
 msgstr ""
 
-#: View/Users/view.ctp:56
+#: View/Users/view.ctp:47
 msgid "編集日"
 msgstr ""
 
