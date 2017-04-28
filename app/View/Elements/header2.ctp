@@ -1,14 +1,67 @@
-<?php echo $this->Html->css('elements/header2.css'); ?>
-<script>
-$(function(){
+<style>
+.header_header{
+  padding-top: 20px;
+}
+.header_title{
+  float: left;
+  margin-top: auto;
+  padding-top: 14px;
+}
+.search_section{
+  position: relative;
+  float: right;
+  width: 300px;
+  height: auto;
+}
+.search_box{
+  margin: auto;
+  float: left;
+}
+.search_bottun{
+  float: left;
+  padding-top: 16px;
+}
 
-});
+.header_category{
+  padding-top: 20px;
+  clear: both;
+}
+  nav ul{
+    text-align: center;
+  }
+  nav li{
+    display: inline;
+    margin-left: 26px;
+  }
+  nav a{
+    color: #666;
+    text-decoration: none;
+  }
+  nav a:hover{
+    color: #69c;
+    position: relative;
+    top:2px;
+    left:2px;
+  }
+  nav li a{
+    font-size: 18px;
+  }
+  #site_name {
+    font-size: 30px
 
-</script>
+  }
+  ul{
+    list-style: none;
+  }
+@media only screen and (max-width: 400px) {
+
+}
+
+</style>
 <header>
   <div class="header_header">
     <div class="header_title">
-      <a>AMEブロ！</a>
+      <h2 id="site_name">AMEブログ</h2>
     </div>
     <div class="search_section">
       <ul>

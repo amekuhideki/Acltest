@@ -44,11 +44,9 @@ class UsersController extends AppController {
 	    $this->Acl->allow($group, 'controllers/Widgets/add');
 	    $this->Acl->allow($group, 'controllers/Widgets/edit');
 			$this->Acl->allow($group, 'controllers/Posts');
-			// $this->Acl->allow($group, 'controllers/Posts/deleteImage');
 			$this->Acl->allow($group, 'controllers/Attachments');
-			$this->Acl->allow($group, 'controllers/categories');
-			$this->Acl->allow($group, 'controllers/Users/index');
-			$this->Acl->allow($group, 'controllers/Users/view');
+			$this->Acl->allow($group, 'controllers/categories/view');
+			$this->Acl->allow($group, 'controllers/Users');
 	    //馬鹿げた「ビューが見つからない」というエラーメッセージを表示させないために exit を追加します
 	    echo "all done";
 	    exit;
@@ -60,13 +58,15 @@ class UsersController extends AppController {
 			}
 	    if ($this->request->is('post')) {
 	        if ($this->Auth->login()) {
-	            return $this->redirect($this->Auth->redirect());
+						session_start();
+            return $this->redirect($this->Auth->redirect());
 	        }
 	        $this->Session->setFlash(__('Your username or password was incorrect.'));
 	    }
 	}
 
 	public function logout() {
+		$_SESSION = array();
 		session_destroy();
 		$this->Session->setFlash('Good-Bye');
 		$this->redirect($this->Auth->logout());	}
@@ -115,6 +115,11 @@ class UsersController extends AppController {
 		}
 		$options = array('conditions' => array('User.' . $this->User->primaryKey => $id));
 		$this->set('user', $this->User->find('first', $options));
+		#カテゴリの呼び出し
+		$this->loadModel('Category');
+		$categories = $this->Category->find('all');
+		$this->set('categories', $categories);
+
 	}
 
 /**
@@ -151,6 +156,8 @@ class UsersController extends AppController {
 			return $this->redirect(array('action' => 'index'));
 		}
 		if ($this->request->is(array('post', 'put'))) {
+			var_dump($this->request->data);
+			exit;
 			if ($this->User->save($this->request->data)) {
 				$this->Flash->success(__('The user has been saved.'));
 				return $this->redirect(array('action' => 'index'));
@@ -161,8 +168,11 @@ class UsersController extends AppController {
 			$options = array('conditions' => array('User.' . $this->User->primaryKey => $id));
 			$this->request->data = $this->User->find('first', $options);
 		}
+		$options = array('conditions' => array('User.' . $this->User->primaryKey => $id));
+		$user = $this->User->find('first', $options);
+
 		$groups = $this->User->Group->find('list');
-		$this->set(compact('groups'));
+		$this->set(compact('groups', 'user'));
 	}
 
 /**

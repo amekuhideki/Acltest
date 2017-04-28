@@ -64,7 +64,7 @@ class PostsController extends AppController {
 			'conditions' =>
 				array($this->Post->parseCriteria($this->passedArgs), 'Post.status' => 0),//'Post.status' => 0 で論理削除
 			'order' => array('Post.modified' => 'desc'),//日付順で表示
-			'limit' => 10
+			'limit' => 15
 		);
 
 		$this->set('posts', $this->paginate());

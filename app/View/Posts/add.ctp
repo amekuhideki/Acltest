@@ -59,7 +59,7 @@ $(function(){
 				<td>
 					<div class="col-sm-9">
 						<?php
-							echo $this->Form->input('Post.title', array('label' => false, 'style' => 'width:400px'));
+							echo $this->Form->input('Post.title', array('label' => false, 'style' => 'width:458px'));
 						?>
 					</div>
 				</td>

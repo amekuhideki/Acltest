@@ -1,12 +1,15 @@
 <div class="users form">
-	<?php echo $this->element('header'); ?>
+	<div class="header">
+		<?php echo $this->element('header2'); ?>
+	</div>
 <?php echo $this->Form->create('User'); ?>
 	<fieldset>
 		<legend><?php echo __('Edit User'); ?></legend>
 	<?php
 		echo $this->Form->input('id');
 		echo $this->Form->input('username');
-		echo $this->Form->input('password');
+		// echo $this->Form->input('password');
+		echo $this->Form->input('password', array('label' => 'パスワード', 'value' => ''));
 		echo $this->Form->input('group_id');
 	?>
 	</fieldset>
