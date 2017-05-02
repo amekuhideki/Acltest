@@ -123,7 +123,7 @@ table td {
 	<div class="details">
 		<div class="detail_top">
 			<div class="user_details">
-				<h2><?php echo $_SESSION['Auth']['User']['username'] . "さん"; ?></h2>
+				<h2><?php echo $user['User']['username'] . "さん"; ?></h2>
 				<table class="table">
 					<tr>
 						<th><?php echo __('ユーザID:'); ?></th>
