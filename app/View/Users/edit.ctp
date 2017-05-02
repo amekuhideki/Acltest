@@ -9,7 +9,9 @@
 		echo $this->Form->input('id');
 		echo $this->Form->input('username');
 		// echo $this->Form->input('password');
-		echo $this->Form->input('password', array('label' => 'パスワード', 'value' => ''));
+		echo $this->Form->input('password_edit', array('label' => 'パスワード', 'value' => ''));
+		// echo $this->Form->input('password_edit2', array('label' => 'パスワード', 'value' => ''));
+
 		echo $this->Form->input('group_id');
 	?>
 	</fieldset>

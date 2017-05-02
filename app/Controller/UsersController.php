@@ -156,11 +156,20 @@ class UsersController extends AppController {
 			return $this->redirect(array('action' => 'index'));
 		}
 		if ($this->request->is(array('post', 'put'))) {
-			var_dump($this->request->data);
-			exit;
-			if ($this->User->save($this->request->data)) {
+			$data = $this->request->data;
+			//パスワード変更
+			if(empty($data['User']['password_edit'])){
+				$data = array('User' => array('id' => $id, 'username' => $this->request->data['User']['username']));
+				$saveField = ['username'];
+				var_dump($data);
+			} else {
+				$data['User']['password'] = $this->request->data['User']['password_edit'];
+				$saveField = ['username', 'password'];
+				unset($this->request->data['User']['password_edit']);
+			}
+			if ($this->User->save($data, null, $saveField)) {
 				$this->Flash->success(__('The user has been saved.'));
-				return $this->redirect(array('action' => 'index'));
+				return $this->redirect(array('action' => 'view', $id));
 			} else {
 				$this->Flash->error(__('The user could not be saved. Please, try again.'));
 			}
