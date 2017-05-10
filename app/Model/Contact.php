@@ -51,7 +51,7 @@ class Contact extends AppModel
                 'required' => true,
             ),
         ),
-        'body' => array(
+        'ContactUs' => array(
             'notBlank' => array(
                 'rule' => array('notBlank'),
                 'message' => '未入力です。',

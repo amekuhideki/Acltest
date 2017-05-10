@@ -1,4 +1,9 @@
+<style>
+</style>
 <div class="categories view">
+  <div class="header">
+		<?php echo $this->element('header2'); ?>
+	</div>
 <h2><?php echo __('Category'); ?></h2>
 	<dl>
 		<dt><?php echo __('Id'); ?></dt>

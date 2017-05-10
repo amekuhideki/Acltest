@@ -106,6 +106,8 @@
                     $id = $post['Post']['id'];
                   } elseif (isset($user['User']['id'])){
                     $id = $user['User']['id'];
+                  } elseif (isset($category['Category']['id'])){
+                    $id = $category['Category']['id'];
                   }
             ?>
             <li><a><?php echo $this->Html->link(__('japanese'), array('controller' => $this->name, 'action' => $this->action . "/" . $id, 'parameter' => 'jpn'),
@@ -114,12 +116,14 @@
             <li><a><?php echo $this->Html->link(__('japanese'), array('controller' => $this->name, 'action' => $this->action, 'parameter' => 'jpn'),
                                                           array('role' => 'presentation', 'class' => 'language')); ?></a></li>
           <?php endif; ?>
-        <?php else: ?>
+          <?php else: ?>
           <?php if ($this->action === 'view' || $this->action === 'edit'): ?>
             <?php if (isset($post['Post']['id'])){
                     $id = $post['Post']['id'];
                   } elseif (isset($user['User']['id'])){
                     $id = $user['User']['id'];
+                  } elseif (isset($category['Category']['id'])){
+                    $id = $category['Category']['id'];
                   }
             ?>
             <li><a><?php echo $this->Html->link(__('English'), array('controller' => $this->name, 'action' => $this->action . "/" . $id, 'parameter' => 'eng'),

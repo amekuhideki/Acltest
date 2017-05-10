@@ -1,27 +1,62 @@
-<dl>
-<?php foreach ($this->request->data['Contact'] as $name => $val): ?>
-    <dt><?php echo h($name); ?></dt>
-    <dd><?php echo h($val); ?></dd>
-<?php endforeach; ?>
-</dl>
+<style>
+  #contact_form {
+    width: 400px;
+    margin: 0 auto;
+    margin-top: 40px;
+    text-align: center;
 
-<?php
-echo $this->Form->create('Contact');
+  }
+  #contact_details {
+    border: solid 1px;
+  }
+  .contact_name {
+    padding: 10px;
+    text-align: left;
+    background-color: #A9A9A9;
+  }
+  .contact_value{
+    padding: 20px;
+  }
+  #contact_bottun {
+    margin: 10px;
+  }
+</style>
+<div id="contact">
+  <div class="header">
+    <?php echo $this->element('header2'); ?>
+  </div>
+  <div id="contact_form">
+    <p>以下の内容で作成します。よろしいですか？</p>
+    <div id="contact_details">
+      <dl>
+      <?php foreach ($this->request->data['Contact'] as $name => $val): ?>
+          <dt class="contact_name"><?php echo h($name); ?></dt>
+          <dd class="contact_value"><?php echo h($val); ?></dd>
+      <?php endforeach; ?>
+      </dl>
+    </div>
+    <div id=contact_bottun>
+      <?php
+      echo $this->Form->create('Contact');
 
-foreach ($this->request->data['Contact'] as $name => $val) {
-    echo $this->Form->hidden($name, array('value' => $val));
-}
+      foreach ($this->request->data['Contact'] as $name => $val) {
+          echo $this->Form->hidden($name, array('value' => $val));
+      }
 
-echo $this->Form->button('修正する', array(
-        'type' => 'submit',
-        'name' => 'confirm',
-        'value' => 'revise'
-    ));
+      echo $this->Form->button('修正する', array(
+              'type' => 'submit',
+              'name' => 'confirm',
+              'value' => 'revise'
+          ));
 
-echo $this->Form->button('送信する', array(
-        'type' => 'submit',
-        'name' => 'confirm',
-        'value' => 'send'
-    ));
+      echo $this->Form->button('送信する', array(
+              'type' => 'submit',
+              'name' => 'confirm',
+              'value' => 'send'
+          ));
 
-echo $this->Form->end();
+      echo $this->Form->end();
+      ?>
+    </div>
+  </div>
+</div>
