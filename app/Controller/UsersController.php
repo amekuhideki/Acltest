@@ -157,14 +157,18 @@ class UsersController extends AppController {
 		}
 		if ($this->request->is(array('post', 'put'))) {
 			$data = $this->request->data;
+
 			//パスワード変更
 			if(empty($data['User']['password_edit'])){
-				$data = array('User' => array('id' => $id, 'username' => $this->request->data['User']['username']));
-				$saveField = ['username'];
-				var_dump($data);
+				$data = array('User' =>
+								array('id' => $id,
+											'username' => $this->request->data['User']['username'],
+											'introduction' => $this->request->data['User']['introduction']
+										 ));
+				$saveField = ['username', 'introduction'];
 			} else {
 				$data['User']['password'] = $this->request->data['User']['password_edit'];
-				$saveField = ['username', 'password'];
+				$saveField = ['username', 'password', 'introduction'];
 				unset($this->request->data['User']['password_edit']);
 			}
 			if ($this->User->save($data, null, $saveField)) {
@@ -201,12 +205,18 @@ class UsersController extends AppController {
 		if (!($this->Auth->user()['id'] == $user['User']['id'] || $this->Auth->user()['group_id'] == 1)){
 			return $this->redirect(array('action' => 'index'));
 		}
-		$this->request->allowMethod('post', 'delete');
+		// $this->request->allowMethod('post', 'delete');
+		// $data = array('id' => $id, 'status' => 1);
+
 		if ($this->User->delete()) {
 			$this->Flash->success(__('The user has been deleted.'));
 		} else {
 			$this->Flash->error(__('The user could not be deleted. Please, try again.'));
 		}
-		return $this->redirect(array('action' => 'index'));
+		if ($id === $this->Auth->user()['id']) {
+			return $this->redirect(array('action' => 'logout'));
+		} else {
+			return $this->redirect(array('action' => 'index'));
+		}
 	}
 }
