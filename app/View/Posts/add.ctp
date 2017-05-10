@@ -41,6 +41,44 @@ $(function(){
     reader.readAsDataURL(file);
 
 	});
+
+	$('.category').change(function(){
+		$('tr.sub_categories').remove();
+
+		var category_id = $(this).val();
+		// console.log(category_id);
+		$.ajax({
+			type: "post",
+			url: "http://blog.dev/AclTest/subcategories/getdata/",
+			data: {'category_id' : category_id},
+			crossDomain: false,
+			dataType: "json",
+			scriptCharset: "utf-8"
+		}).then(function(data){
+
+			if ($.isArray(data)){
+				var tag = '<tr class="sub_categories"><th><label class="col-sm-3"><?php echo(__('子カテゴリ')); ?></label></th>';
+				tag += '<td><div class="col-sm-9"><select name="data[Post][sub_category_id]">';
+				var key;
+				var value;
+				var array=[];
+				$(data).each(function(index, val){
+					key = val['SubCategory']['id'];
+					value = val['SubCategory']['sub_category'];
+					array += {key : value};
+					tag += '<option value="' + val['SubCategory']['id'] + '">' + val['SubCategory']['sub_category'] + '</option>';
+				});
+
+
+				tag += '</select></div></td></tr>';
+				$('.categories').after(tag);
+				console.log(tag);
+
+			} else if (data === 'false'){
+			}
+
+		});
+	});
 });
 </script>
 <div class="posts form">
@@ -59,19 +97,19 @@ $(function(){
 				<td>
 					<div class="col-sm-9">
 						<?php
-							echo $this->Form->input('Post.title', array('label' => false, 'style' => 'width:458px'));
+							echo $this->Form->input('Post.title', array('label' => false, 'style' => 'width:100%'));
 						?>
 					</div>
 				</td>
 			</tr>
-			<tr>
+			<tr class="categories">
 				<th>
-					<label class="col-sm-3"><?php echo(__('カテゴリー')); ?></label>
+					<label class="col-sm-3"><?php echo(__('カテゴリ')); ?></label>
 				</th>
 				<td>
 					<div class="col-sm-9">
 						<?php
-							echo $this->Form->input('Post.category_id', array('label' => false));
+							echo $this->Form->input('Post.category_id', array('label' => false, "class" => 'category', "empty" => '選択してください'));
 						?>
 					</div>
 				</td>
