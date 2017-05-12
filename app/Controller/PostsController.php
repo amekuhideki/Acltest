@@ -16,7 +16,7 @@ class PostsController extends AppController {
 			// $this->Auth->allow();
 
 	}
-	var $uses = array('Post', 'User', 'Category', 'Tag', 'PostsTag', 'Attachment', 'Comment');
+	var $uses = array('Post', 'User', 'Category', 'Tag', 'PostsTag', 'Attachment', 'Comment', 'SubCategory');
 	// public $uses = array('Post', 'Category', 'Tag', 'Attachment', 'PostsTag',);
 /**
  * Components
@@ -220,12 +220,13 @@ class PostsController extends AppController {
 		$categories = $this->Post->Category->find('list', array(
 			'fields' => array('Category.category')
 		));
+		$sub_categories = $this->SubCategory->find('all');
 
 		// $file_dir = $this->Post->Image->find('list', array(
 		// 	'conditions' => array('foreign_key' => $id),
 		// 	'fields' => array('Image.dir')
 		// ));
-		$this->set(compact('users', 'categories', 'post'));
+		$this->set(compact('users', 'categories', 'post', 'sub_categories'));
 	}
 
 /**

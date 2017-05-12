@@ -38,7 +38,6 @@ tinymce.init({
 });
 
 $(function(){
-
 	$('#image').change(function(){
 		if ($('.thumbnail').size()) {
 			$('.thumbnail').remove();
@@ -65,7 +64,8 @@ $(function(){
 <div class="posts form">
 	<div class="header">
 		<?php echo $this->element('header2'); ?>
-	</div>		<?php echo $this->Form->create('Post', array('type' => 'file')); ?>
+	</div>
+	<?php echo $this->Form->create('Post', array('type' => 'file')); ?>
 	<div class="center">
 		<h3><?php echo __('記事編集'); ?></h3>
 		<table class="table">
@@ -76,23 +76,75 @@ $(function(){
 				<td>
 					<div class="col-sm-9">
 						<?php
-							echo $this->Form->input('title', array('label' => false, 'style' => "width: 400px"));
+							echo $this->Form->input('title', array('label' => false, 'style' => "width: 100%"));
 						?>
 					</div>
 				</td>
 			</tr>
 			<tr>
 				<th>
-					<label class="col-sm-3"><?php echo(__('カテゴリー')); ?></label>
+					<label class="col-sm-3"><?php echo(__('カテゴリ')); ?></label>
 				</th>
 				<td>
 					<div class="col-sm-9">
 						<?php
-							echo $this->Form->input('category_id', array('label' => false));
+							echo $this->Form->input('category_id', array('label' => false,));
 						?>
 					</div>
 				</td>
 			</tr>
+			<?php
+				$this->Js->get('#PostCategoryId')->event(
+					'change',
+					$this->Js->request(
+						array('controller' => 'sub_categories','action' => 'getdata2'),
+						array(
+							'update' => '#SubCategory',
+							'dataExpression' => true,
+							'data' => '$("#PostCategoryId").val()',
+							'complete' => '$("#SubCategory2").show()',
+							'async' => true,
+							'evalScripts' => true,
+						)
+					)
+				);
+			?>
+			<div>
+					<tr id="SubCategory2">
+						<?php if (isset($post['Post']['sub_category_id'])): ?>
+						<th>
+							<label class="col-sm-3">
+								<?php echo(__('子カテゴリ')); ?>
+							</label>
+						</th>
+						<td id="SubCategory">
+							<div class="col-sm-9">
+								<select name="data[Post][sub_category_id]">
+								<?php foreach ($sub_categories as $sub_category): ?>
+									<?php if ($post['Post']['category_id'] == $sub_category['SubCategory']['category_id']): ?>
+										<?php if ($post['Post']['sub_category_id'] === $sub_category['SubCategory']['id']): ?>
+											<option value="<?php echo $sub_category['SubCategory']['id']; ?>" selected><?php echo $sub_category['SubCategory']['sub_category']; ?> </option>
+										<?php else: ?>
+											<option value="<?php echo $sub_category['SubCategory']['id']; ?>"><?php echo $sub_category['SubCategory']['sub_category']; ?> </option>
+										<?php endif; ?>
+										<?php var_dump($sub_category['SubCategory']['sub_category']); ?>
+									<?php endif; ?>
+								<?php endforeach; ?>
+							 </select>
+							</div>
+						</td>
+					<?php else: ?>
+							<th id="SubCategory2">
+								<label class="col-sm-3">
+									<?php echo(__('子カテゴリ')); ?>
+								</label>
+							</th>
+							<td id="SubCategory">
+							</td>
+					<?php endif;?>
+					</tr>
+
+			</div>
 			<tr>
 				<th>
 					<label class="col-sm-3"><?php echo(__('本文')); ?></label>

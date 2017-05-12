@@ -126,4 +126,17 @@ class SubCategoriesController extends AppController {
 		}
 
 	}
+
+	public function getdata2() {
+		$this->auto_Render = FALSE;
+		if ($this->request->is('ajax')) {
+			$data = $this->SubCategory->find('all', array('conditions' =>
+																										 array('category_id' => array_keys($this->params->query)[0])));
+			$this->set('getdata2', $data);
+			// echo json_encode($data);
+			// exit;
+
+		}
+
+	}
 }
