@@ -9,6 +9,7 @@ class Post extends AppModel {
  //SearchPluginの利用
  	public $order = array('Post.id DESC');
 	public $actsAs = array('Search.Searchable');
+  public $helpers = array('Js' => array('Jquery'));
 	// public $filterArgs = array(
 	// 	'category' => array(
 	// 		'type' => 'value',

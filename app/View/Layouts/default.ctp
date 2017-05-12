@@ -13,7 +13,8 @@
 
   <!-- JQuery -->
   <!-- <?php echo $this->Html->css('lightbox.css') ?> -->
-  <script type="text/javascript" src="http://code.jquery.com/jquery-1.9.0.js"></script>
+  <!-- <script type="text/javascript" src="http://code.jquery.com/jquery-1.9.0.js"></script> -->
+  <?php echo $this->Html->script('jquery-1.9.0.min'); ?>
   <!-- Le styles -->
 	<style>
     html {
@@ -60,7 +61,6 @@ a{ color: #69c;}
     <![endif]-->
   </head>
   <body>
-
     <div id='flash_message'>
       <?php echo $this->Session->flash(); ?>
     </div>
@@ -74,5 +74,6 @@ a{ color: #69c;}
     <?php echo $this->Html->script('bootstrap.min'); ?>
     <?php echo $this->fetch('script'); ?>
     <!-- <?php echo $this->Html->script('lightbox.js')?> -->
+    <?php echo $this->Js->writeBuffer(); ?>
   </body>
 </html>

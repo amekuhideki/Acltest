@@ -40,12 +40,14 @@ class AppController extends Controller {
                 'Actions' => array('actionPath' => 'controllers')
             )
         ),
+        'RequestHandler',
         'Session'
     );
     public $helpers = array(
       'Html' => array('className' => 'TwitterBootstrap.BootstrapHtml'),
       'Form' => array('className' => 'TwitterBootstrap.BootstrapForm'),
       'Paginator' => array('className' => 'TwitterBootstrap.BootstrapPaginator'),
+      'Js' => array('jQuery'),
       'Session'
     );
     // public $layout = 'TwitterBootstrap.default';
