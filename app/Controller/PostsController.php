@@ -201,7 +201,9 @@ class PostsController extends AppController {
 					}
 				}
 			}
-
+			if (!isset($this->request->data['Post']['sub_category_id'])) {
+				$this->request->data['Post']['sub_category_id'] = null;
+			}
 			if ($this->Post->saveAll($this->request->data)) {
 				$this->Flash->success(__('The post has been saved.'));
 				// return $this->redirect(array('action' => 'index'));

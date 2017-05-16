@@ -14,7 +14,11 @@
   <!-- JQuery -->
   <!-- <?php echo $this->Html->css('lightbox.css') ?> -->
   <!-- <script type="text/javascript" src="http://code.jquery.com/jquery-1.9.0.js"></script> -->
-  <?php echo $this->Html->script('jquery-1.9.0.min'); ?>
+  <!-- <?php echo $this->Html->script('jquery-1.9.0.min'); ?> -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+
   <!-- Le styles -->
 	<style>
     html {
@@ -69,7 +73,7 @@ a{ color: #69c;}
       <?php echo $this->element('footer'); ?>
     </div>
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script> -->
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <?php echo $this->Html->script('bootstrap.min'); ?>
     <?php echo $this->fetch('script'); ?>

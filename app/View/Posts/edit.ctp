@@ -99,10 +99,10 @@ $(function(){
 					$this->Js->request(
 						array('controller' => 'sub_categories','action' => 'getdata2'),
 						array(
-							'update' => '#SubCategory',
+							'update' => '.SubCategory',
 							'dataExpression' => true,
 							'data' => '$("#PostCategoryId").val()',
-							'complete' => '$("#SubCategory2").show()',
+							// 'complete' => '$("#SubCategory2")',
 							'async' => true,
 							'evalScripts' => true,
 						)
@@ -110,16 +110,17 @@ $(function(){
 				);
 			?>
 			<div>
-					<tr id="SubCategory2">
+					<tr>
 						<?php if (isset($post['Post']['sub_category_id'])): ?>
 						<th>
 							<label class="col-sm-3">
 								<?php echo(__('子カテゴリ')); ?>
 							</label>
 						</th>
-						<td id="SubCategory">
+						<td class="SubCategory">
 							<div class="col-sm-9">
 								<select name="data[Post][sub_category_id]">
+								<!-- <select name="" -->
 								<?php foreach ($sub_categories as $sub_category): ?>
 									<?php if ($post['Post']['category_id'] == $sub_category['SubCategory']['category_id']): ?>
 										<?php if ($post['Post']['sub_category_id'] === $sub_category['SubCategory']['id']): ?>
@@ -134,12 +135,12 @@ $(function(){
 							</div>
 						</td>
 					<?php else: ?>
-							<th id="SubCategory2">
+							<th>
 								<label class="col-sm-3">
 									<?php echo(__('子カテゴリ')); ?>
 								</label>
 							</th>
-							<td id="SubCategory">
+							<td class="SubCategory">
 							</td>
 					<?php endif;?>
 					</tr>

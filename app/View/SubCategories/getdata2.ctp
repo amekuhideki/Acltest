@@ -5,7 +5,7 @@
     </th> -->
     <td>
       <div class="col-sm-9">
-        <select name="data[Post][sub_category_id]">
+        <select name="data[Post][sub_category_id]">
           <?php foreach($getdata2 as $key => $val): ?>
             <option value="<?php echo $val['SubCategory']['id']; ?>"> <?php echo $val['SubCategory']['sub_category']; ?> </option>
           <?php endforeach; ?>
