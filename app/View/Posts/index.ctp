@@ -1,62 +1,85 @@
 <style>
-#contents{
-	width: 700px;
+.main {
+	width: 960px;
+	margin-left: 40px;
+	margin-right: 40px;
 	margin: 0 auto;
+}
+#contents{
+	/*width: 700px;*/
+	width: 650px;
+	margin: 0 auto;
+	margin-top: 40px;
 	float: left;
 }
+#contents_title {
+	width:650px;
+	margin: 0;
+	padding: 0;
+	height: 70px;
+	padding-top: 20px;
+	border-bottom: 2px dotted;
+	padding-bottom: 10px;
 
+}
+#contents_img {
+	float: left;
+}
+#list {
+	float: left;
+}
+#contents_title h3 {
+	padding-top: 8px;
+	margin: 0;
+	float:left;
+	/*border-bottom: 2px dotted ;*/
+}
 #content_details{
+	clear: left;
 	/*margin: 100px;*/
-	padding-top: 50px;
-  border-bottom: 1px solid;
-}
-
-.post_title{
-	margin: 20px;
-	font-size: 30px;
-	text-align: left;
-	/*padding-left: 10px;*/
-	padding: 10px;
-	border-left: 10px solid #7BAEB5;
-	border-bottom: 1px solid #7BAEB5;
-
-	width: 680px;
-	white-space: nowrap;
-	overflow: hidden;
-	text-overflow: ellipsis;
-}
-
-.post_body{
-	width: 480px;
 	margin-top: 50px;
-	padding: 26px;
-	font-size: 18px;
-	float: right;
-	text-align: left;
-
-	white-space: nowrap;
-	overflow: hidden;
-	text-overflow: ellipsis;
+  border: 1px solid;
+	background-color: white;
+	height: 200px;
 }
-.header{
-	border-bottom: 1px solid #000;
+.image {
+	float: left;
+	margin: 0 auto;
+	margin: 10px;
 }
-
-#post_header{
-	margin: auto;
+.post_contents {
+	float: left;
+}
+.post_image{
+	width: 180px;
+	float: left;
 	padding: 10px;
+	margin-top: 20px;
 }
 
+/*.header{
+	border-bottom: 1px solid #000;
+}*/
+
+.post_header{
+	margin: 0;
+	height: 60px;
+	padding: 0;
+	padding-top: 20px;
+	/*padding-bottom: 10px;*/
+	border-bottom: 1px dotted;
+}
+.post_category{
+	float: left;
+  font-size: 16px;
+}
 .post_date{
 	float:left;
 	font-size: 14px;
 	padding-left: 10px;
 }
-.post_category{
-	float: left;
-	padding-left: 10px;
-	/*padding-right: 20px;*/
-  font-size: 16px;
+.post_writer {
+	float: right;
 }
 .badge_category {
   padding: 3px 6px;
@@ -69,40 +92,53 @@
   white-space: nowrap;
   background-color: #4169E1;/*青色*/
 }
-
-.post_tags{
-	float: right;
-	font-size: 14px;
-	width: 535px;
-}
-.image_body{
+.post_title{
 	clear: both;
-}
-.post_image{
-	width: 180px;
-	float: left;
 	padding: 10px;
-	margin-top: 50px;
+	font-size: 16px;
+	font-weight: bold;
+	text-align: left;
+	border-bottom: 1px dotted;
+	width: 440px;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
 }
+.post_body{
+	/*width: 450px;*/
+	width: 440px;
+	padding: 10px;
+	font-size: 14px;
+	text-align: left;
+
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
 
 .contents_footer{
 	margin: auto;
 	padding: auto;
 	clear: both;
-	width: 700px;
+	/*width: 700px;*/
+	width: 440px;
 	text-align: right;
 }
 #item {
 	padding-right: 5px;
 }
 .sidebar {
-	padding-top: 96px;
+	padding-top: 	50px;
 	padding-left: 30px;
-	width: 250px;
+	width: 300px;
 	float: right;
 }
 #calender {
 	font-size: 12px;
+}
+#calender h4 {
+	border-bottom: 1px solid;
 }
 /*.fixBox {
 	position: fixed;
@@ -146,7 +182,7 @@ $(window).load(function () {
 
   if(sideH < mainH) { //メインの方が高ければ色々処理する
 	  //サイドバーの外枠をメインと同じ高さにしてrelaltiveに（#sideをポジションで上や下に固定するため）
-	  sideWrap.css({"height": mainH, "position": "relative", "float": "right", 'width': '250px'});
+	  sideWrap.css({"height": mainH, "position": "relative", "float": "right", 'width': '300px'});
 
 	  //サイドバーがウィンドウよりいくらはみ出してるか
 	  var sideOver = wd.height()-sideArea.height();
@@ -160,7 +196,7 @@ $(window).load(function () {
 	  wd.scroll(function() { //スクロール中の処理
 	    if(wd.height() < sideArea.height()){ //サイドメニューが画面より大きい場合
 	      if(starPoint < wd.scrollTop() && wd.scrollTop() + wd.height() < breakPoint){ //固定範囲内
-	            sideArea.css({"position": "fixed", "bottom": "20px", "width": '250px', "float": 'right'});
+	            sideArea.css({"position": "fixed", "bottom": "20px", "width": '300px', "float": 'right'});
 
 	      }else if(wd.scrollTop() + wd.height() >= breakPoint){ //固定解除位置を超えた時
 	            sideArea.css({"position": "absolute", "bottom": "0"});
@@ -186,11 +222,31 @@ $(window).load(function () {
 	};
 	//datepicker
 	$(function(){
+			$.ajax({
+				type: 'post',
+				url: "http://blog.dev/AclTest/posts/getdate/",
+				clossDomain: false,
+					dataType: "text",
+					scriptCharset: "utf-8"
+			}).then(function(result){
+				console.log(result);
+			});
+
+
+		var $date = new Date();
+		// console.log($date.getMonth());
     $("#calender").datepicker({
 			onSelect: function(dateText, inst) {
 				$("#date_val").val(dateText);
-			}
+			},
+			maxDate: $date,
 		});
+// 		$( "#calender" ).datepicker('option','beforeShowDay',function(date){
+//     var ret = [(date.getDay() != 1 && date.getDay() != 6)];
+// 		var month = date.getMonth() + 1;
+// 		console.log(date);
+//     return ret;
+// });
 	});
 });
 </script>
@@ -200,79 +256,85 @@ $(window).load(function () {
 	</div>
 	<div class="main">
 			<div id="contents">
+				<div id="contents_title">
+
+						<div id="contents_img">
+							<?php echo $this->Html->image('/images/shisa.png', array('width' => '50')); ?>
+						</div>
+						<div id="list">
+							<h3>記事一覧</h3>
+						</div>
+
+				</div>
 			<?php foreach ($posts as $post): ?>
 				<div id="content_details">
-					<div class="post_title">
-						<?php echo h($post['Post']['title']); ?><br>
-					</div>
-					<ul id="post_header">
-						<li class="post_date">
-							<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
-							<?php $post_date = date('Y年m月d日', strtotime($post['Post']['modified']));
-							      echo h($post_date);
-							 ?>
-							 &nbsp;&nbsp;
-						</li>
-						<li class="post_writer">
-							<?php echo __($post['User']['username']); ?>
-							&nbsp;&nbsp;
-						</li>
-						<li class="post_category">
-              <span class="badge_category">
-  							<?php echo ($post['Category']['category']) ?>
-              </span>
-						</li>
-						<!-- <li class="post_tags">
-							<span class="glyphicon glyphicon-tag" aria-hidden="true"></span>
-							<?php foreach ($tags as $tag): ?>
-								<?php if(!empty($tag['Post'][0]) && $tag['Post'][0]['id'] == $post['Post']['id']): ?>
-									<?php echo $this->Html->link(__($tag['Tag']['tag']), array('controller' => "tags", 'action' => "view", $tag['Tag']['id'])); ?>
+					<div class="image">
+						<div class="post_image">
+							<?php $image_flag = 0; ?>
+							<?php foreach ($images as $image): ?>
+								<?php if ($image['Image']['foreign_key'] === $post['Post']['id']): ?>
+									<?php echo $this->Html->image('/files/image/attachment/'. $image['Image']['dir']. '/' . $image['Image']['attachment'], array('width' => '150')); ?>
+									<?php $image_flag = 1; break; ?>
 								<?php endif; ?>
-							<?php  endforeach; ?>
-						</li> -->
-					</ul>
-
-					<ul class="image_body">
-						<li>
-							<div class="post_image">
-								<?php $image_flag = 0; ?>
-								<?php foreach ($images as $image): ?>
-									<?php if ($image['Image']['foreign_key'] === $post['Post']['id']): ?>
-										<?php echo $this->Html->image('/files/image/attachment/'. $image['Image']['dir']. '/' . $image['Image']['attachment'], array('width' => '150')); ?>
-										<?php $image_flag = 1; break; ?>
-									<?php endif; ?>
-								<?php endforeach; ?>
-								<?php if ($image_flag === 0): ?>
-									<?php echo $this->Html->image('/images/Noimage.jpg', array('width' => '150')); ?>
-								<?php endif; ?>
-								<?php unset($image_flag); ?>
-							</div>
-						</li>
-						<li>
-							<div class="post_body">
-								<?php
-									$body = strip_tags($post['Post']['body']);
-									$limit_body = mb_substr($body, 0, 100, 'utf-8');
-									if (mb_strlen($body, 'utf-8') > '100'){
-										$limit_body = $limit_body . '...';
-									}
-								 echo ($limit_body); ?>
-							 </div>
-						 </li>
-					 </ul>
-
-					<div class="contents_footer">
-						<div class="action_view">
-						 <?php echo $this->Html->link(__('続きを読む＞'), array('action' => "view", $post['Post']['id'])); ?><br>
-					 </div>
-
-						<div id="item">
-							<?php if ($user['id'] == $post['User']['id'] || $user['Group']['id'] == 1): ?>
-								<?php echo $this->Html->link(__('編集'), array('action' => 'edit', $post['Post']['id'])); ?>
-								・
-								<?php echo $this->Html->link(__('削除'), array('action' => 'delete', $post['Post']['id']),
-																												 array('confirm' => '本当にこの記事を削除しますか？')); ?>
+							<?php endforeach; ?>
+							<?php if ($image_flag === 0): ?>
+								<?php echo $this->Html->image('/images/Noimage.jpg', array('width' => '150')); ?>
 							<?php endif; ?>
+							<?php unset($image_flag); ?>
+						</div>
+					</div>
+					<div class="post_contents">
+						<ul class="post_header">
+							<li class="post_category">
+								<span class="badge_category">
+									<?php echo ($post['Category']['category']) ?>
+								</span>
+							</li>
+							<li class="post_date">
+								<span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
+								<?php $post_date = date('Y年m月d日', strtotime($post['Post']['modified']));
+											echo h($post_date);
+								 ?>
+								 &nbsp;&nbsp;
+							</li>
+							<li class="post_writer">
+								<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+								<?php if (isset($post['User']['username'])): ?>
+									<?php echo __($post['User']['username']); ?>
+								<?php else: ?>
+									<?php echo __('未登録者'); ?>
+								<?php endif; ?>
+								&nbsp;&nbsp;
+							</li>
+						</ul>
+
+						<div class="post_title">
+							<?php echo h($post['Post']['title']); ?><br>
+						</div>
+
+						<div class="post_body">
+							<?php
+								$body = strip_tags($post['Post']['body']);
+								$limit_body = mb_substr($body, 0, 100, 'utf-8');
+								if (mb_strlen($body, 'utf-8') > '100'){
+									$limit_body = $limit_body . '...';
+								}
+							 echo ($limit_body); ?>
+						 </div>
+
+						<div class="contents_footer">
+							<div class="action_view">
+							 <?php echo $this->Html->link(__('続きを読む＞'), array('action' => "view", $post['Post']['id'])); ?><br>
+						 </div>
+
+							<div id="item">
+								<?php if ($user['id'] == $post['User']['id'] || $user['Group']['id'] == 1): ?>
+									<?php echo $this->Html->link(__('編集'), array('action' => 'edit', $post['Post']['id'])); ?>
+									・
+									<?php echo $this->Html->link(__('削除'), array('action' => 'delete', $post['Post']['id']),
+																													 array('confirm' => '本当にこの記事を削除しますか？')); ?>
+								<?php endif; ?>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -298,10 +360,8 @@ $(window).load(function () {
 			<div class="sidebar">
 
 				<div id="calender">
-					<?php echo $this->Form->create('Post'); ?>
 					<h4 style="text-align:left;"><?php echo __('カレンダー'); ?></h4>
 						<input type=”text” name=”demo” id="date_val">
-					<?php echo $this->Form->end(); ?>
 				</div>
 
 				<div id="news">
@@ -310,7 +370,7 @@ $(window).load(function () {
 					<?php foreach ($news as $new): ?>
 						<div class="news_contents">
 							<div class="news_img">
-								<a href=<?php echo $new['url'];  ?>><img src="<?php echo $new['img']; ?>" width="220"> </a><br>
+								<a href=<?php echo $new['url'];  ?>><img src="<?php echo $new['img']; ?>" width="270"> </a><br>
 							</div>
 							<div class="news_content">
 								<?php echo $i;
