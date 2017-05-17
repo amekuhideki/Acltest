@@ -36,11 +36,16 @@ class PostsController extends AppController {
 		$source = mb_convert_encoding($source, 'utf8', 'auto');
 		$html = str_get_html($source);
 		sleep(rand(0.1, 0.7));
+		$i = 0;
 		foreach ($html->find('.fullbody') as $element) {
+			if ($i === 10) {
+				break;
+			}
 			$url = $element->find('.titlebody a', 0)->href;
 			$title = $element->find('.titlebody text', 0)->outertext;
 			$img = $element->find('.blogbody img', 0)->src;
 			$news[] = ['url' => $url, 'title' => $title, 'img' => $img];
+			$i += 1;
 		}
 
 		$this->set('news', $news);
@@ -277,4 +282,8 @@ class PostsController extends AppController {
 		return $this->redirect(array('action' => 'edit/'. $post_id));
 	}
 
+	public function getdate() {
+		echo ('a');
+		exit;
+	}
 }
