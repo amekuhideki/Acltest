@@ -55,7 +55,7 @@
 	width: 180px;
 	float: left;
 	padding: 10px;
-	margin-top: 20px;
+	margin-top: 5px;
 }
 
 .header{

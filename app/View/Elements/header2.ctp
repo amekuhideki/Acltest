@@ -9,17 +9,21 @@
   padding-top: 20px;
   background-image: url("/AclTest/images/syurijo.png"),
 										url("/AclTest/images/header_shisa.png"),
-										url("/AclTest/images/header_shisa2.png");
+										url("/AclTest/images/header_shisa2.png"),
+                    url("/AclTest/images/haibisukasu.png");
 	background-size: 400px 200px,
 									 140px 140px,
-									 140px 140px;
+									 140px 140px,
+                   180px 180px;
 	background-repeat: no-repeat,
-										 no-repeat
-										 no-repeat;
+										 no-repeat,
+										 no-repeat,
+                     no-repeat;
 	background-position: center,
 											 138px 56px,
-    									 684px 56px;
-	background-attachment: local,local,local;
+    									 684px 56px,
+                       10px 0px;
+	background-attachment: local,local,local,local;
 }
 .header_title{
   float: left;
@@ -53,17 +57,27 @@
   margin: 0 auto;
 }
   nav ul{
+    display: table;
+    table-layout: fixed;
+    width: 100%;
+    margin: 0;
     padding: 0;
-    padding-top: 8px;
-    padding-bottom: 8px;
     text-align: center;
+    table-layout:fixed
   }
   nav li{
-    display: inline;
+    display: table-cell;
+    vertical-align: middle;
+    /*display: inline;*/
     margin-left: 26px;
+    margin: 0;
+    padding: 10px;
+    border-left: 1px solid white;
+  }
+  .list_logout {
+    border-right: 1px solid white;
   }
   nav a{
-    color: white;
     text-decoration: none;
   }
   nav a:hover{
@@ -73,6 +87,7 @@
     left:2px;
   }
   nav li a{
+    color: white;
     font-size: 18px;
   }
   #site_name {
@@ -82,9 +97,7 @@
   ul{
     list-style: none;
   }
-@media only screen and (max-width: 400px) {
 
-}
 
 </style>
 <header>
@@ -117,19 +130,19 @@
       <nav>
         <ul>
           <?php if (isset($_SESSION['Auth']['User']['username'])): ?>
-            <li><a><?php echo $this->Html->link(__('MyPage'), array('controller' => 'users', 'action' => 'view', $_SESSION['Auth']['User']['id']),
-                                                             array('role' => "presentation")); ?> </a></li>
+            <li><?php echo $this->Html->link(__('MyPage'), array('controller' => 'users', 'action' => 'view', $_SESSION['Auth']['User']['id']),
+                                                             array('role' => "presentation")); ?> </li>
           <?php endif;?>
-          <li><a><?php echo $this->Html->link(__('Article create'), array('controller' => 'posts', 'action' => 'add'),
-                                                          array('role' => "presentation")); ?></a></li>
-      		<li><a><?php echo $this->Html->link(__('List of articles'), array('controller' => 'posts','action' => 'index'),
-                                                         array('role' => "presentation")); ?></a></li>
-      		<li><a><?php echo $this->Html->link(__('Category'), array('controller' => 'categories', 'action' => 'index'),
-                                                          array('role' => "presentation")); ?> </a></li>
-      		<li><a><?php echo $this->Html->link(__('Tag'), array('controller' => 'tags', 'action' => 'index'),
-                                                      array('role' => "presentation")); ?> </a></li>
-          <li><a><?php echo $this->Html->link(__('Contact'), array('controller' => 'contacts', 'action' => 'contact'),
-                                                      array('role' => "presentation")); ?> </a></li>
+          <li><?php echo $this->Html->link(__('Article create'), array('controller' => 'posts', 'action' => 'add'),
+                                                          array('role' => "presentation")); ?></li>
+      		<li><?php echo $this->Html->link(__('List of articles'), array('controller' => 'posts','action' => 'index'),
+                                                         array('role' => "presentation")); ?></li>
+      		<li><?php echo $this->Html->link(__('Category'), array('controller' => 'categories', 'action' => 'index'),
+                                                          array('role' => "presentation")); ?> </li>
+      		<li><?php echo $this->Html->link(__('Tag'), array('controller' => 'tags', 'action' => 'index'),
+                                                      array('role' => "presentation")); ?> </li>
+          <li><?php echo $this->Html->link(__('Contact'), array('controller' => 'contacts', 'action' => 'contact'),
+                                                      array('role' => "presentation")); ?> </li>
           <?php if ($_SESSION['lang'] === 'eng'): ?>
             <?php if ($this->action === 'view' || $this->action === 'edit'): ?>
               <?php if (isset($post['Post']['id'])){
@@ -140,11 +153,11 @@
                       $id = $category['Category']['id'];
                     }
               ?>
-              <li><a><?php echo $this->Html->link(__('japanese'), array('controller' => $this->name, 'action' => $this->action . "/" . $id, 'parameter' => 'jpn'),
-                                                            array('role' => 'presentation', 'class' => 'language')); ?></a></li>
+              <li><?php echo $this->Html->link(__('japanese'), array('controller' => $this->name, 'action' => $this->action . "/" . $id, 'parameter' => 'jpn'),
+                                                            array('role' => 'presentation', 'class' => 'language')); ?></li>
             <?php else: ?>
-              <li><a><?php echo $this->Html->link(__('japanese'), array('controller' => $this->name, 'action' => $this->action, 'parameter' => 'jpn'),
-                                                            array('role' => 'presentation', 'class' => 'language')); ?></a></li>
+              <li><?php echo $this->Html->link(__('japanese'), array('controller' => $this->name, 'action' => $this->action, 'parameter' => 'jpn'),
+                                                            array('role' => 'presentation', 'class' => 'language')); ?></li>
             <?php endif; ?>
             <?php else: ?>
             <?php if ($this->action === 'view' || $this->action === 'edit'): ?>
@@ -156,18 +169,18 @@
                       $id = $category['Category']['id'];
                     }
               ?>
-              <li><a><?php echo $this->Html->link(__('English'), array('controller' => $this->name, 'action' => $this->action . "/" . $id, 'parameter' => 'eng'),
-                                                          array('role' => 'presentation', 'class' => 'language')); ?></a></li>
+              <li><?php echo $this->Html->link(__('English'), array('controller' => $this->name, 'action' => $this->action . "/" . $id, 'parameter' => 'eng'),
+                                                          array('role' => 'presentation', 'class' => 'language')); ?></li>
             <?php else: ?>
-              <li><a><?php echo $this->Html->link(__('English'), array('controller' => $this->name, 'action' => $this->action, 'parameter' => 'eng'),
-                                                          array('role' => 'presentation', 'class' => 'language')); ?></a></li>
+              <li><?php echo $this->Html->link(__('English'), array('controller' => $this->name, 'action' => $this->action, 'parameter' => 'eng'),
+                                                          array('role' => 'presentation', 'class' => 'language')); ?></li>
             <?php endif; ?>
           <?php endif; ?>
           <?php if (!isset($_SESSION['Auth']['User']['username'])): ?>
-            <li><a><?php echo $this->Html->link(__('Login'), array('controller' => 'users', 'action' => 'login')) ?> </a></li>
+            <li class="list_logout"><?php echo $this->Html->link(__('Login'), array('controller' => 'users', 'action' => 'login')) ?></li>
           <?php else: ?>
-            <li><a><?php echo $this->Html->link(__('Logout'), array('controller' => 'users', 'action' => 'logout'),
-                                                           array('confirm' => __('本当にログアウトしますか？'))); ?> </a></li>
+            <li class="list_logout"><?php echo $this->Html->link(__('Logout'), array('controller' => 'users', 'action' => 'logout'),
+                                                           array('confirm' => __('本当にログアウトしますか？'))); ?></li>
           <?php endif; ?>
       	</ul>
       </nav>
