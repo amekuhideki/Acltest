@@ -139,33 +139,54 @@
 #calender {
 	font-size: 14px;
 }
-#calender_cal {
-	width: 270px;
-	height: 100px;
+#calender_header {
+	margin-bottom: 10px;
+	height: 40px;
 	padding-bottom: 1px;
 	border-bottom: 1px solid;
 
 }
 #calender_icon {
 	float: left;
+	/*padding-bottom: 4px;*/
 }
 #calender_title {
+	float: left;
 	margin: 0;
+	margin-bottom: 10px;
+}
+#calender h4 {
+	width: 200px;
+	margin: 0;
+	margin-top: 5px;
+}
+#news_header {
+	margin-top: 20px;
+	margin-bottom: 10px;
+	height: 40px;
+	padding-bottom: 1px;
+	border-bottom: 1px solid;
+}
+#news_icon {
 	float: left;
 }
-/*.fixBox {
-	position: fixed;
-	top: 0px;
-	right: 0px;
-}*/
+#news_title {
+	float: left;
+	margin: 0;
+	margin-bottom: 10px;
+}
+#news h4 {
+	width: 200px;
+	margin: 0;
+	margin-top: 5px;
+	/*border-bottom: 1px solid;
+	padding-bottom: 5px;*/
+}
 .news_contents {
+	clear: left;
 	margin: auto;
 	padding-top: 10px;
 	font-size: 14px;
-}
-#news h4 {
-	border-bottom: 1px solid;
-	padding-bottom: 5px;
 }
 .news_img{
 	margin: auto;
@@ -187,12 +208,15 @@ $(window).load(function () {
 	var mainArea = $("#contents"); //メインコンテンツ
 	var sideWrap = $(".wrapper_sidebar"); //サイドバーの外枠
 	var sideArea = $(".sidebar"); //サイドバー
+	var sideCale = $("#calender_cal");
+	console.log(sideCale.height());
   /*設定ここまで*/
   var wd = $(window); //ウィンドウ自体
   //メインとサイドの高さを比べる
   var mainH = mainArea.height();
   var sideH = sideArea.height();
 
+	console.log();
   if(sideH < mainH) { //メインの方が高ければ色々処理する
 	  //サイドバーの外枠をメインと同じ高さにしてrelaltiveに（#sideをポジションで上や下に固定するため）
 	  sideWrap.css({"height": mainH, "position": "relative", "float": "right", 'width': '300px'});
@@ -233,18 +257,18 @@ $(window).load(function () {
 	    }
 		});
 	};
-	//datepicker
-	// $(function(){
-	// 		$.ajax({
-	// 			type: 'post',
-	// 			url: "http://blog.dev/AclTest/posts/getdate/",
-	// 			clossDomain: false,
-	// 				dataType: "text",
-	// 				scriptCharset: "utf-8"
-	// 		}).then(function(result){
-	// 			console.log(result);
-	// 		});
-
+	// datepicker
+	$(document).ready(function(){
+			$.ajax({
+				type: 'post',
+				url: "http://blog.dev/AclTest/posts/getdate/",
+				clossDomain: false,
+				dataType: "json",
+				scriptCharset: "utf-8",
+			}).then(function(data){
+				console.log('成功');
+			});
+	});
 
 		var $date = new Date();
 		// console.log($date.getMonth());
@@ -260,29 +284,6 @@ $(window).load(function () {
 // 		console.log(date);
 //     return ret;
 // });
-	// });
-
-		$(function(){
-			$('#calender').datepicker({
-				beforeShowDay: function(date){
-						var month = String (date.getMonth() + 1);
-						var day = String (date.getDate());
-						if (month.length == 1) {
-							month = '0'+month;
-						}
-						if (day.length == 1) {
-							day = '0'+day;
-						}
-						var check_date == date.getFullYear()+"-"+month+"-"+day;
-						if (check_date == "2017-05-16"){
-							return true;
-						}
-						else {
-							return false;
-						}
-				}
-			})
-		})
 });
 </script>
 <div class="posts index">
@@ -395,7 +396,7 @@ $(window).load(function () {
 			<div class="sidebar">
 
 				<div id="calender">
-					<div id="calender_cale">
+					<div id="calender_header">
 						<div id="calender_icon">
 							<img src="/AclTest/images/sidebar_img.png", width="30">
 						</div>
@@ -407,7 +408,14 @@ $(window).load(function () {
 				</div>
 
 				<div id="news">
-					<h4><?php echo __('まとめニュース'); ?></h4>
+					<div id="news_header">
+						<div id="news_icon">
+							<img src="/AclTest/images/sidebar_img.png", width="30">
+						</div>
+						<div id="news_title">
+							<h4><?php echo __('まとめニュース'); ?></h4>
+						</div>
+					</div>
 					<?php $i = 1 ?>
 					<?php foreach ($news as $new): ?>
 						<div class="news_contents">
