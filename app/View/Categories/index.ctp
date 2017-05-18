@@ -1,12 +1,16 @@
 <style>
-#wrapper{
-	width: 960px;
+.main{
+	width: 650px;
 	margin: 0 auto;
+	margin-top: 40px;
 }
 </style>
-<div id="wrapper">
-	<div class="categories index">
+
+<div class="categories index">
+	<div class="header">
 		<?php echo $this->element('header2'); ?>
+	</div>
+	<div class="main">
 		<h3><?php echo __('カテゴリ一覧'); ?></h3>
 		<table class="table table-striped">
 		<thead>

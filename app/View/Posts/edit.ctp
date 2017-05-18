@@ -3,11 +3,13 @@
 		white-space: nowrap;
 	}
 	.header{
-		border-bottom: 1px solid #000;
+		/*border-bottom: 1px solid #000;*/
 	}
-	.center{
-		margin: 50px;
-		padding: 20px;
+	.main{
+		width: 960px;
+		margin-left: 40px;
+		margin-right: 40px;
+		margin: 0 auto;
 	}
 	.submit_button {
 		position: relative;
@@ -66,7 +68,7 @@ $(function(){
 		<?php echo $this->element('header2'); ?>
 	</div>
 	<?php echo $this->Form->create('Post', array('type' => 'file')); ?>
-	<div class="center">
+	<div class="main">
 		<h3><?php echo __('記事編集'); ?></h3>
 		<table class="table">
 			<tr>

@@ -1,6 +1,12 @@
 <style>
+.main {
+  width: 960px;
+  margin: auto;
+  margin-top: 40px;
+}
+
 #contact_details {
-  width: 400px;
+  width: 500px;
 	margin: 0 auto;
   margin-top: 40px;
   text-align: left;
@@ -11,12 +17,12 @@
   margin: 5px;
 }
 </style>
-<?php echo $this->Html->css('contacts/contact.css') ?>
+<!-- <?php echo $this->Html->css('contacts/contact.css') ?> -->
 <div id="contact">
   <div class="header">
     <?php echo $this->element('header2'); ?>
   </div>
-
+  <div class="main">
     <div id="contact_details">
     <legend><?php echo __('Contact'); ?></legend>
     <?php
@@ -44,7 +50,7 @@
 
       echo $this->Form->input('subject', array(
               'type' => 'text',
-              'label' => '・題名',
+              'label' => '・件名',
               'maxlength' => 255,
               'style' => 'width:300px;',
               'class' => 'text',
@@ -55,7 +61,7 @@
               'type' => 'textarea',
               'label' => '・お問い合わせ内容',
               'maxlength' => 3000,
-              'style' =>'width:300px;height:200px;',
+              'style' =>'width:400px;height:200px;',
               'class' => 'text',
               )
           );
@@ -70,4 +76,5 @@
       echo $this->Form->end();
     ?>
     </div>
+  </div>
 </div>

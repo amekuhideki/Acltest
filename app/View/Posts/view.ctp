@@ -1,4 +1,182 @@
-<?php echo $this->Html->css('posts/view.css'); ?>
+<!-- <?php echo $this->Html->css('posts/view.css'); ?> -->
+<style>
+.header{
+	/*border-bottom: 1px solid #000;*/
+}
+
+#mom_layer{
+	display: none;
+	position: fixed;
+	top: 0;
+	left: 0;
+	height: 100%;
+	width: 100%;
+	background: black;
+	opacity: 0.60;
+	z-index: 1;
+}
+#kids_layer{
+	display: none;
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	margin-top: -240px;
+	margin-left: -320px;
+	z-index: 2;
+}
+#modal_window h4{
+	margin: 20px 50px;
+	font-size: large;
+	text-align: center;
+	border-bottom: solid 1px;
+	/*border-left: 10px solid #7BAEB5;
+	border-bottom: 1px solid #7BAEB5;*/
+	padding: 10px;
+	width: 600px;
+}
+#modal_window ul{
+	width: 700px;
+	list-style-type: none;
+}
+#modal_window ul li{
+	float: left;
+}
+#modal_window ul li img{
+  border: 0;
+  margin: 10px;
+}
+.slide {
+	margin: 100px;
+  width: 400px;
+  height: 400px;
+  /*border: 10px solid black;*/
+  float: left;
+	pointer-events: none;
+}
+.slider {
+	margin-top: 100px;
+	margin-left: 200px;
+  width: 600px;
+  height: 600px;
+  overflow: hidden;
+  position: absolute;
+	display: none;
+	z-index: 2;
+
+}
+.slideSet {
+  position: absolute;
+}
+.slider-next{
+	top: 300px;
+	right: 60px;
+	position: absolute;
+	z-index: 3;
+}
+.slider-prev{
+	top: 300px;
+	left: 60px;
+	position: absolute;
+	z-index: 3;
+}
+.slider-close{
+	top: 100px;
+	right: 70px;
+	position: absolute;
+	z-index: 3;
+}
+
+#post_header{
+	margin: auto;
+	padding: 1px;
+	padding-top: 10px;
+	padding-bottom: 20px;
+	overflow: hidden;
+}
+#list{
+	margin: auto;
+	padding-left: 1px;
+}
+.post_date{
+	float:left;
+	font-size: 14px;
+}
+.post_tags{
+	float: left;
+	font-size: 14px;
+}
+.post_category{
+	float: auto;
+	font-size: 15px;
+	margin-right: 200px;
+}
+.post_body{
+	/*border-bottom: 1px dashed black;*/
+	padding-bottom: 40px; /* 内容と線との間隔量 */
+}
+#content{
+  width: 960px;
+	margin-left: 40px;
+	margin-right: 40px;
+	margin: 0 auto;
+}
+#title{
+	margin: auto;
+	float: auto;
+	padding: 1px;
+	padding-left: 20px;
+	font-size: 30px;
+	border-left: 10px solid #7BAEB5;
+	border-bottom: 1px solid #7BAEB5;
+}
+#title h2 {
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+#post_comment{
+	clear: both;
+}
+#add_comment{
+	margin: 0 auto;
+	padding: 10px;
+}
+#add_comment_contain{
+	margin: 0 auto;
+}
+.comment_header{
+	text-align: left;
+	border-bottom: 1px solid black;
+	padding-top: 30px;
+	padding-bottom: 10px;
+	font-weight: 900;
+}
+.comment_preview{
+	padding-top: 8px;
+	padding-left: 10px;
+	padding-bottom: 20px;
+	border-bottom: 1px dashed black;
+	font-size: 14px;
+}
+.comment_commenter{
+	float: left;
+}
+li.previous{
+	float: left;
+}
+li.next{
+	margin-left: 20px;
+	float:left;
+}
+#not_comment{
+	padding-left: 10px;
+}
+#item {
+	margin: auto;
+	float: right;
+	padding-right: 5px;
+}
+</style>
 <script>
 $(function(){
     $("body").append("<div id='mom_layer'></div><div class='slider'></div>");
@@ -105,153 +283,150 @@ $(function(){
   });
 </script>
 <div class="posts view">
-<div class="header">
-	<?php echo $this->element('header2'); ?>
-</div>
-<div id="content">
-	<div id="title">
-		<div>
-			<h2 align="left"><?php echo h($post['Post']['title']); ?></h2>
-		</div>
-	</div>
-	<div id="post_header">
-		<ul id="list">
-			<li class="post_date">
-				<?php $post_date = date('Y年m月d日 H:i:s', strtotime($post['Post']['modified']));
-							echo h($post_date);
-				 ?>
-				 							 &nbsp;&nbsp;
-			</li>
-			<li class="post_tag">
-				<span class="glyphicon glyphicon-tag" aria-hidden="true"></span>
-					<?php foreach ($post['Tag'] as $tag): ?>
-						<?php echo $this->Html->link(__($tag['tag']), array('controller' => 'tags', 'action' => 'view', $tag['id'])); ?>
-					<?php endforeach; ?>
-					&nbsp;
-			</li>
-			<li class="post_category">
-				<?php echo __('カテゴリー：');
-				      echo $this->Html->link($post['Category']['category'], array('controller' => 'categories', 'action' => 'view', $post['Category']['id'])); ?>
-			</li>
-		</ul>
-	</div>
+  <div class="header">
+  	<?php echo $this->element('header2'); ?>
+  </div>
+  <div id="content">
+  	<div id="title">
+  		<div>
+  			<h2 align="left"><?php echo h($post['Post']['title']); ?></h2>
+  		</div>
+  	</div>
+  	<div id="post_header">
+  		<ul id="list">
+  			<li class="post_date">
+  				<?php $post_date = date('Y年m月d日 H:i:s', strtotime($post['Post']['modified']));
+  							echo h($post_date);
+  				 ?>
+  				 							 &nbsp;&nbsp;
+  			</li>
+  			<li class="post_tag">
+  				<span class="glyphicon glyphicon-tag" aria-hidden="true"></span>
+  					<?php foreach ($post['Tag'] as $tag): ?>
+  						<?php echo $this->Html->link(__($tag['tag']), array('controller' => 'tags', 'action' => 'view', $tag['id'])); ?>
+  					<?php endforeach; ?>
+  					&nbsp;
+  			</li>
+  			<li class="post_category">
+  				<?php echo __('カテゴリー：');
+  				      echo $this->Html->link($post['Category']['category'], array('controller' => 'categories', 'action' => 'view', $post['Category']['id'])); ?>
+  			</li>
+  		</ul>
+  	</div>
 
-	<div class="post_body">
-		<?php echo ($post['Post']['body']); ?>
-		&nbsp;
-	</div>
+  	<div class="post_body">
+  		<?php echo ($post['Post']['body']); ?>
+  		&nbsp;
+  	</div>
 
-	<div id="item">
-		<?php if ($user['id'] === $post['User']['id']): ?>
-			<?php echo $this->Html->link(__('編集'), array('action' => 'edit', $post['Post']['id'])); ?>
-			・
-			<?php echo $this->Html->link(__('削除'), array('action' => 'delete', $post['Post']['id']),
-																							 array('confirm' => '本当にこの記事を削除しますか？')); ?>
-		<?php endif; ?>
-	</div>
+  	<div id="item">
+  		<?php if ($user['id'] === $post['User']['id']): ?>
+  			<?php echo $this->Html->link(__('編集'), array('action' => 'edit', $post['Post']['id'])); ?>
+  			・
+  			<?php echo $this->Html->link(__('削除'), array('action' => 'delete', $post['Post']['id']),
+  																							 array('confirm' => '本当にこの記事を削除しますか？')); ?>
+  		<?php endif; ?>
+  	</div>
 
-	<div class="post_image">
-		<div class="image">
-			<?php if(!empty($post['Image'])): ?>
-			<div id="modal_window">
-				<h4><?php echo __('画像一覧'); ?></h4>
-				<ul>
-					<?php $i = 0; ?>
-					<?php foreach ($post['Image'] as $image): ?>
-					<li><a href=<?php echo '../../files/image/attachment/' . $image["dir"] . "/" . $image["attachment"]; ?> class="modal_picture" img_group=<?php echo $i; $i++?>>
-							<img src=<?php echo '../../files/image/attachment/' . $image["dir"] . "/" . $image["attachment"]; ?>
-									 width="250" class="picture"></a></li>
-					<?php endforeach; ?>
-				</ul>
-			</div>
-			<?php endif; ?>
+  	<div class="post_image">
+  		<div class="image">
+  			<?php if(!empty($post['Image'])): ?>
+  			<div id="modal_window">
+  				<h4><?php echo __('画像一覧'); ?></h4>
+  				<ul>
+  					<?php $i = 0; ?>
+  					<?php foreach ($post['Image'] as $image): ?>
+  					<li><a href=<?php echo '../../files/image/attachment/' . $image["dir"] . "/" . $image["attachment"]; ?> class="modal_picture" img_group=<?php echo $i; $i++?>>
+  							<img src=<?php echo '../../files/image/attachment/' . $image["dir"] . "/" . $image["attachment"]; ?>
+  									 width="250" class="picture"></a></li>
+  					<?php endforeach; ?>
+  				</ul>
+  			</div>
+  			<?php endif; ?>
 
-			<?php if(!empty($post['Image'])): ?>
-			<div class="slider">
-				<div>
-					<div class="slideSet">
-					<?php foreach ($post['Image'] as $image): ?>
-						<div class="slide">
-							<a href=<?php echo '../../files/image/attachment/' . $image["dir"] . "/" . $image["attachment"]; ?>>
-							<img src=<?php echo '../../files/image/attachment/' . $image["dir"] . "/" . $image["attachment"]; ?>
-									 width="400"></a>
-						</div>
-					<?php endforeach; ?>
-					</div>
-				</div>
-				<p class="slider-close"><img src="../../images/close.png" ></p>
-				<p class="slider-prev"><img src="../../images/prev.png" width="20" height="100"></p>
-				<p class="slider-next"><img src="../../images/next.png" width="20" height="100"></p>
-			</div>
-			<?php endif; ?>
-		</div>
-	</div>
+  			<?php if(!empty($post['Image'])): ?>
+  			<div class="slider">
+  				<div>
+  					<div class="slideSet">
+  					<?php foreach ($post['Image'] as $image): ?>
+  						<div class="slide">
+  							<a href=<?php echo '../../files/image/attachment/' . $image["dir"] . "/" . $image["attachment"]; ?>>
+  							<img src=<?php echo '../../files/image/attachment/' . $image["dir"] . "/" . $image["attachment"]; ?>
+  									 width="400"></a>
+  						</div>
+  					<?php endforeach; ?>
+  					</div>
+  				</div>
+  				<p class="slider-close"><img src="../../images/close.png" ></p>
+  				<p class="slider-prev"><img src="../../images/prev.png" width="20" height="100"></p>
+  				<p class="slider-next"><img src="../../images/next.png" width="20" height="100"></p>
+  			</div>
+  			<?php endif; ?>
+  		</div>
+  	</div>
 
-	<div id="post_comment">
-		<h4 class='comment_header'><?php echo __('コメント'); ?></h4>
-		<div class="comment">
-			<div class="comment_comment">
-				<?php if (isset($comments[0])): ?>
-					<?php foreach($comments as $comment): ?>
-						<div class="comment_preview">
-							<div class="comment_commenter">
-								<?php echo $comment['Comment']['commenter']; ?>&nbsp;&nbsp;
-							</div>
-							<div class="comment_created">
-								<?php echo $comment['Comment']['created']; ?><br>
-							</div>
-							<div class="comment_body">
-								<?php echo $comment['Comment']['body']; ?><br>
-							</div>
-							<?php if ($user['id'] === $comment['Comment']['user_id']): ?>
-								<?php echo $this->Html->link(__('編集'), array('controller' => 'comments', 'action' => 'edit', $comment['Comment']['id'])) ?>
-								・
-								<?php echo $this->Html->link(__('削除'), array('controller' => 'comments', 'action' => 'delete', $comment['Comment']['id']),
-																												array('confirm' => __('Are you sure you want to delete'))); ?>
-							<?php endif; ?>
-						</div>
-					<?php endforeach; ?>
-				<?php else: ?>
-			</div>
-			&nbsp;&nbsp;
-			<div id="not_comment">
-				<?php echo __('コメントはまだありません。'); ?>
-			</div>
-			<?php endif; ?>
-		</div>
-		<div class="comment_pagination">
-			<ul class="pagination">
-				<li class="previous"><a>前のページ</a></li>&nbsp;
-				<?php if (($comment_page * 10) < $comment_total): ?>
-				<li class="next"><a>次のページ</a></li>
-				<?php endif; ?>
-			</ul>
-		</div>
+  	<div id="post_comment">
+  		<h4 class='comment_header'><?php echo __('コメント'); ?></h4>
+  		<div class="comment">
+  			<div class="comment_comment">
+  				<?php if (isset($comments[0])): ?>
+  					<?php foreach($comments as $comment): ?>
+  						<div class="comment_preview">
+  							<div class="comment_commenter">
+  								<?php echo $comment['Comment']['commenter']; ?>&nbsp;&nbsp;
+  							</div>
+  							<div class="comment_created">
+  								<?php echo $comment['Comment']['created']; ?><br>
+  							</div>
+  							<div class="comment_body">
+  								<?php echo $comment['Comment']['body']; ?><br>
+  							</div>
+  							<?php if ($user['id'] === $comment['Comment']['user_id']): ?>
+  								<?php echo $this->Html->link(__('編集'), array('controller' => 'comments', 'action' => 'edit', $comment['Comment']['id'])) ?>
+  								・
+  								<?php echo $this->Html->link(__('削除'), array('controller' => 'comments', 'action' => 'delete', $comment['Comment']['id']),
+  																												array('confirm' => __('Are you sure you want to delete'))); ?>
+  							<?php endif; ?>
+  						</div>
+  					<?php endforeach; ?>
+  				<?php else: ?>
+  			</div>
+  			&nbsp;&nbsp;
+  			<div id="not_comment">
+  				<?php echo __('コメントはまだありません。'); ?>
+  			</div>
+  			<?php endif; ?>
+  		</div>
+  		<div class="comment_pagination">
+  			<ul class="pagination">
+  				<li class="previous"><a>前のページ</a></li>&nbsp;
+  				<?php if (($comment_page * 10) < $comment_total): ?>
+  				<li class="next"><a>次のページ</a></li>
+  				<?php endif; ?>
+  			</ul>
+  		</div>
 
-		<div id='add_comment'>
-			<div class="add_comment_contain">
-				<h4>コメントを書く</h4>
-				<?php if (!isset($user['id'])): ?>
-					<?php $user['id'] = -1; ?>
-				<?php endif;?>
-				<?php
-				echo $this->Form->create('Comment', array('url' => array(
-																							'controller' => 'comments', 'action' => 'add'),
-																							));
-				echo $this->Form->input('commenter', array('label' => '名前'));
-				echo $this->Form->input('body', array('label' => '本文', 'row'=>3));
-				echo $this->Form->input('Comment.post_id', array('type'=>'hidden', 'value'=>$post['Post']['id']));
-				echo $this->Form->input('status', array('type' => 'hidden', 'value' => 0));
-				echo $this->Form->input('user_id', array('type' => 'hidden', 'value' => $user['id']));
-				echo $this->Form->end('投稿する');
-				?>
-			</div>
-		</div>
+  		<div id='add_comment'>
+  			<div class="add_comment_contain">
+  				<h4>コメントを書く</h4>
+  				<?php if (!isset($user['id'])): ?>
+  					<?php $user['id'] = -1; ?>
+  				<?php endif;?>
+  				<?php
+  				echo $this->Form->create('Comment', array('url' => array(
+  																							'controller' => 'comments', 'action' => 'add'),
+  																							));
+  				echo $this->Form->input('commenter', array('label' => '名前'));
+  				echo $this->Form->input('body', array('label' => '本文', 'row'=>3));
+  				echo $this->Form->input('Comment.post_id', array('type'=>'hidden', 'value'=>$post['Post']['id']));
+  				echo $this->Form->input('status', array('type' => 'hidden', 'value' => 0));
+  				echo $this->Form->input('user_id', array('type' => 'hidden', 'value' => $user['id']));
+  				echo $this->Form->end('投稿する');
+  				?>
+  			</div>
+  		</div>
 
-		<p><?php echo $this->Html->link(__('記事一覧に戻る'), array('action' => "index")); ?></p>
-	</div>
-
-
-
-
+  		<p><?php echo $this->Html->link(__('記事一覧に戻る'), array('action' => "index")); ?></p>
+  	</div>
+  </div>
 </div>

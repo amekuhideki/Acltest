@@ -1,16 +1,29 @@
 <style>
 .header_header{
+  height: 200px;
   width: 960px;
   margin-left: 40px;
   margin-right: 40px;
   margin: 0 auto;
   margin-top: 20px;
   padding-top: 20px;
-
+  background-image: url("/AclTest/images/syurijo.png"),
+										url("/AclTest/images/header_shisa.png"),
+										url("/AclTest/images/header_shisa2.png");
+	background-size: 400px 200px,
+									 140px 140px,
+									 140px 140px;
+	background-repeat: no-repeat,
+										 no-repeat
+										 no-repeat;
+	background-position: center,
+											 138px 56px,
+    									 684px 56px;
+	background-attachment: local,local,local;
 }
 .header_title{
   float: left;
-  margin-bottom: 30px;
+  margin-bottom: 100px;
   padding-top: 14px;
 }
 .search_section{

@@ -1,22 +1,13 @@
 <style>
-.header{
-	border-bottom: 1px solid #000;
+.details{
+	width: 960px;
+	margin-left: 40px;
+	margin-right: 40px;
+	margin: 0 auto;
 }
 .actions .btn {
 	margin: 3px;
 }
-/*
-table th {
-	font-size: 16px;
-}
-table td {
-	white-space: nowrap;
-	overflow: hidden;
-	text-overflow: ellipsis;
-}*/
-/*.details {
-	margin: 0 auto;
-}*/
 .user_details {
 	width: 280px;
 	padding: 20px;

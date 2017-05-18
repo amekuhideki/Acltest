@@ -5,6 +5,7 @@
 	margin-right: 40px;
 	margin: 0 auto;
 }
+
 #contents{
 	/*width: 700px;*/
 	width: 650px;
@@ -57,9 +58,9 @@
 	margin-top: 20px;
 }
 
-/*.header{
-	border-bottom: 1px solid #000;
-}*/
+.header{
+	margin: 0 auto;
+}
 
 .post_header{
 	margin: 0;
@@ -131,14 +132,26 @@
 .sidebar {
 	padding-top: 	50px;
 	padding-left: 30px;
+	padding-right: 10px;
 	width: 300px;
 	float: right;
 }
 #calender {
-	font-size: 12px;
+	font-size: 14px;
 }
-#calender h4 {
+#calender_cal {
+	width: 270px;
+	height: 100px;
+	padding-bottom: 1px;
 	border-bottom: 1px solid;
+
+}
+#calender_icon {
+	float: left;
+}
+#calender_title {
+	margin: 0;
+	float: left;
 }
 /*.fixBox {
 	position: fixed;
@@ -221,16 +234,16 @@ $(window).load(function () {
 		});
 	};
 	//datepicker
-	$(function(){
-			$.ajax({
-				type: 'post',
-				url: "http://blog.dev/AclTest/posts/getdate/",
-				clossDomain: false,
-					dataType: "text",
-					scriptCharset: "utf-8"
-			}).then(function(result){
-				console.log(result);
-			});
+	// $(function(){
+	// 		$.ajax({
+	// 			type: 'post',
+	// 			url: "http://blog.dev/AclTest/posts/getdate/",
+	// 			clossDomain: false,
+	// 				dataType: "text",
+	// 				scriptCharset: "utf-8"
+	// 		}).then(function(result){
+	// 			console.log(result);
+	// 		});
 
 
 		var $date = new Date();
@@ -247,7 +260,29 @@ $(window).load(function () {
 // 		console.log(date);
 //     return ret;
 // });
-	});
+	// });
+
+		$(function(){
+			$('#calender').datepicker({
+				beforeShowDay: function(date){
+						var month = String (date.getMonth() + 1);
+						var day = String (date.getDate());
+						if (month.length == 1) {
+							month = '0'+month;
+						}
+						if (day.length == 1) {
+							day = '0'+day;
+						}
+						var check_date == date.getFullYear()+"-"+month+"-"+day;
+						if (check_date == "2017-05-16"){
+							return true;
+						}
+						else {
+							return false;
+						}
+				}
+			})
+		})
 });
 </script>
 <div class="posts index">
@@ -360,8 +395,15 @@ $(window).load(function () {
 			<div class="sidebar">
 
 				<div id="calender">
-					<h4 style="text-align:left;"><?php echo __('カレンダー'); ?></h4>
-						<input type=”text” name=”demo” id="date_val">
+					<div id="calender_cale">
+						<div id="calender_icon">
+							<img src="/AclTest/images/sidebar_img.png", width="30">
+						</div>
+						<div id="calender_title">
+							<h4 style="text-align:left;"><?php echo __('カレンダー'); ?></h4>
+						</div>
+					</div>
+							<input type=”text” name=”demo” id="date_val">
 				</div>
 
 				<div id="news">
@@ -370,7 +412,7 @@ $(window).load(function () {
 					<?php foreach ($news as $new): ?>
 						<div class="news_contents">
 							<div class="news_img">
-								<a href=<?php echo $new['url'];  ?>><img src="<?php echo $new['img']; ?>" width="270"> </a><br>
+								<a href=<?php echo $new['url'];  ?>><img src="<?php echo $new['img']; ?>" width="260"> </a><br>
 							</div>
 							<div class="news_content">
 								<?php echo $i;

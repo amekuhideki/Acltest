@@ -3,12 +3,12 @@
 label {
 	white-space: nowrap;
 }
-.header{
-	border-bottom: 1px solid #000;
-}
+
 .center{
-	margin: 50px;
-	padding: 20px;
+	width: 960px;
+	margin-left: 40px;
+	margin-right: 40px;
+	margin: 0 auto;
 }
 </style>
 <?php echo $this->Html->script('tinymce/tinymce.min.js'); ?>

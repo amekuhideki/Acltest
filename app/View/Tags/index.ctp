@@ -1,12 +1,16 @@
 <style>
-#wrapper{
+.main{
 	width: 960px;
 	margin: 0 auto;
+	margin-top: 40px;
 }
 </style>
-<div id="wrapper">
-	<div class="tags index">
+
+<div class="tags index">
+	<div class="header">
 		<?php echo $this->element('header2'); ?>
+	</div>
+	<div class="main">
 		<h3><?php echo __('タグ一覧'); ?></h3>
 		<table cellpadding="0" cellspacing="0" class="table table-striped">
 		<thead>
@@ -56,5 +60,4 @@
 		  </ul>
 		</nav>
 	</div>
-
 </div>
