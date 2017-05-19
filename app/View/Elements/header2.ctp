@@ -80,7 +80,7 @@
   nav a{
     text-decoration: none;
   }
-  nav a:hover{
+  nav li:hover{
     color: #69c;
     position: relative;
     top:2px;
@@ -103,7 +103,7 @@
 <header>
   <div class="header_header">
     <div class="header_title">
-      <h2 id="site_name">AMEブログ</h2>
+      <h2 id="site_name">AMEブログ!!</h2>
     </div>
     <div class="search_section">
       <ul>
