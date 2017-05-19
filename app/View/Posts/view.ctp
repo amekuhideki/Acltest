@@ -90,49 +90,70 @@
 	margin: auto;
 	padding: 1px;
 	padding-top: 10px;
-	padding-bottom: 20px;
+	padding-bottom: 10px;
 	overflow: hidden;
+	border-bottom: 1px dotted;
 }
 #list{
 	margin: auto;
 	padding-left: 1px;
 }
+.post_category{
+	float: left;
+	font-size: 15px;
+}
 .post_date{
 	float:left;
 	font-size: 14px;
+	margin-left: 20px;
 }
 .post_tags{
 	float: left;
 	font-size: 14px;
 }
-.post_category{
-	float: auto;
-	font-size: 15px;
-	margin-right: 200px;
-}
 .post_body{
+	clear: left;
 	/*border-bottom: 1px dashed black;*/
 	padding-bottom: 40px; /* 内容と線との間隔量 */
+}
+.post_body p {
+	text-align: left;
 }
 #content{
   width: 960px;
 	margin-left: 40px;
 	margin-right: 40px;
 	margin: 0 auto;
+	margin-top: 40px;
+	padding: 40px;
+	border: 1px solid;
+	background-color: white;
 }
 #title{
-	margin: auto;
-	float: auto;
-	padding: 1px;
-	padding-left: 20px;
-	font-size: 30px;
-	border-left: 10px solid #7BAEB5;
-	border-bottom: 1px solid #7BAEB5;
+	padding: 20px;
+	margin-bottom: 30px;
+	border-bottom: 1px dotted;
+	/*border-left: 10px solid #7BAEB5;
+	border-bottom: 1px solid #7BAEB5;*/
 }
-#title h2 {
+#title h3 {
+	margin: 0;
+	font-weight: bold;
 	white-space: nowrap;
 	overflow: hidden;
 	text-overflow: ellipsis;
+}
+#social {
+	height: 100px;
+
+}
+#twitter {
+	float: left;
+	/*height: 80px;*/
+}
+#facebook {
+	margin-left: 10px;
+	float: left;
 }
 #post_comment{
 	clear: both;
@@ -282,37 +303,59 @@ $(function(){
 			// });
   });
 </script>
+<script>
+(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/ja_JP/sdk.js#xfbml=1&version=v2.9";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));
+</script>
+
+
 <div class="posts view">
   <div class="header">
   	<?php echo $this->element('header2'); ?>
   </div>
   <div id="content">
+		<div id="post_header">
+			<ul id="list">
+				<li class="post_category">
+					<?php echo $this->Html->link($post['Category']['category'], array('controller' => 'categories', 'action' => 'view', $post['Category']['id'])); ?>
+				</li>
+				<li class="post_date">
+					<?php $post_date = date('Y年m月d日 H:i:s', strtotime($post['Post']['modified']));
+								echo h($post_date);
+					 ?>
+												 &nbsp;&nbsp;
+				</li>
+				<li class="post_tag">
+					<span class="glyphicon glyphicon-tag" aria-hidden="true"></span>
+						<?php foreach ($post['Tag'] as $tag): ?>
+							<?php echo $this->Html->link(__($tag['tag']), array('controller' => 'tags', 'action' => 'view', $tag['id'])); ?>
+						<?php endforeach; ?>
+						&nbsp;
+				</li>
+			</ul>
+		</div>
+
   	<div id="title">
   		<div>
-  			<h2 align="left"><?php echo h($post['Post']['title']); ?></h2>
+  			<h3><?php echo h($post['Post']['title']); ?></h3>
   		</div>
   	</div>
-  	<div id="post_header">
-  		<ul id="list">
-  			<li class="post_date">
-  				<?php $post_date = date('Y年m月d日 H:i:s', strtotime($post['Post']['modified']));
-  							echo h($post_date);
-  				 ?>
-  				 							 &nbsp;&nbsp;
-  			</li>
-  			<li class="post_tag">
-  				<span class="glyphicon glyphicon-tag" aria-hidden="true"></span>
-  					<?php foreach ($post['Tag'] as $tag): ?>
-  						<?php echo $this->Html->link(__($tag['tag']), array('controller' => 'tags', 'action' => 'view', $tag['id'])); ?>
-  					<?php endforeach; ?>
-  					&nbsp;
-  			</li>
-  			<li class="post_category">
-  				<?php echo __('カテゴリー：');
-  				      echo $this->Html->link($post['Category']['category'], array('controller' => 'categories', 'action' => 'view', $post['Category']['id'])); ?>
-  			</li>
-  		</ul>
-  	</div>
+
+		<div id="social">
+			<div id="twitter">
+				<a href="https://twitter.com/share" class="twitter-share-button" data-lang="ja" data-count="vertical">ツイート</a>
+			  <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+			</div>
+			<div id="facebook">
+				<div id="fb-root"></div>
+				<div class="fb-like" data-href="http://blog.dev/AclTest/posts" data-layout="box_count" data-action="like" data-size="small" data-show-faces="true" data-share="true"></div>
+			</div>
+		</div>
 
   	<div class="post_body">
   		<?php echo ($post['Post']['body']); ?>
