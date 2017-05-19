@@ -25,17 +25,16 @@
 	z-index: 2;
 }
 #modal_window h4{
-	margin: 20px 50px;
+	margin: 0 auto;
 	font-size: large;
 	text-align: center;
 	border-bottom: solid 1px;
-	/*border-left: 10px solid #7BAEB5;
-	border-bottom: 1px solid #7BAEB5;*/
 	padding: 10px;
 	width: 600px;
 }
 #modal_window ul{
-	width: 700px;
+	margin: 0 auto;
+	width: 600px;
 	list-style-type: none;
 }
 #modal_window ul li{
@@ -102,17 +101,27 @@
 	float: left;
 	font-size: 15px;
 }
+.category_badge {
+	padding: 3px 6px;
+	margin-right: 8px;
+	margin-left: 1px;
+	font-size: 90%;
+	border-radius: 6px;
+	box-shadow: 0 0 3px #ddd;
+	white-space: nowrap;
+	background-color: #4169E1;
+}
 .post_date{
 	float:left;
 	font-size: 14px;
-	margin-left: 20px;
+	margin-left: 10px;
 }
 .post_tags{
 	float: left;
 	font-size: 14px;
 }
 .post_body{
-	clear: left;
+	clear: right;
 	/*border-bottom: 1px dashed black;*/
 	padding-bottom: 40px; /* 内容と線との間隔量 */
 }
@@ -125,7 +134,7 @@
 	margin-right: 40px;
 	margin: 0 auto;
 	margin-top: 40px;
-	padding: 40px;
+	padding: 50px;
 	border: 1px solid;
 	background-color: white;
 }
@@ -144,6 +153,7 @@
 	text-overflow: ellipsis;
 }
 #social {
+	float: right;
 	height: 100px;
 
 }
@@ -152,7 +162,15 @@
 	/*height: 80px;*/
 }
 #facebook {
-	margin-left: 10px;
+	margin-left: 20px;
+	float: left;
+}
+#bookmark {
+	margin-left: 20px;
+	float: left;
+}
+#googleplus {
+	margin-left: 20px;
 	float: left;
 }
 #post_comment{
@@ -322,7 +340,10 @@ $(function(){
 		<div id="post_header">
 			<ul id="list">
 				<li class="post_category">
-					<?php echo $this->Html->link($post['Category']['category'], array('controller' => 'categories', 'action' => 'view', $post['Category']['id'])); ?>
+					<span class="category_badge"><?php echo $this->Html->link($post['Category']['category'],
+																						 array('controller' => 'categories', 'action' => 'view', $post['Category']['id']), array('style' => 'color:white;'));
+																			 ?>
+		      </span>
 				</li>
 				<li class="post_date">
 					<?php $post_date = date('Y年m月d日 H:i:s', strtotime($post['Post']['modified']));
@@ -354,6 +375,13 @@ $(function(){
 			<div id="facebook">
 				<div id="fb-root"></div>
 				<div class="fb-like" data-href="http://blog.dev/AclTest/posts" data-layout="box_count" data-action="like" data-size="small" data-show-faces="true" data-share="true"></div>
+			</div>
+			<div id="bookmark">
+				<a href="http://b.hatena.ne.jp/entry/" class="hatena-bookmark-button" data-hatena-bookmark-layout="vertical-normal" data-hatena-bookmark-lang="ja" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a>
+				<script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+			</div>
+			<div id="googleplus">
+				<div class="g-plus" data-action="share" data-annotation="vertical-bubble" data-height="60" data-href="http://blog.dev/AclTest/posts"></div>
 			</div>
 		</div>
 
@@ -473,3 +501,6 @@ $(function(){
   	</div>
   </div>
 </div>
+<script src="https://apis.google.com/js/platform.js" async defer>
+  {lang: 'ja'}
+</script>
