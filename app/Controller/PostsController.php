@@ -283,7 +283,11 @@ class PostsController extends AppController {
 	}
 
 	public function getdate() {
-		echo ('a');
+		$this->auto_Render = false;
+		if ($this->request->is('ajax')) {
+			echo json_encode('a');
+			exit;
+		}
 		exit;
 	}
 }

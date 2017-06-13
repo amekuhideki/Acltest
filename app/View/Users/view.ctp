@@ -4,6 +4,9 @@
 	margin-left: 40px;
 	margin-right: 40px;
 	margin: 0 auto;
+	margin-top: 40px;
+	background-color: white;
+	border: 1px solid;
 }
 .actions .btn {
 	margin: 3px;

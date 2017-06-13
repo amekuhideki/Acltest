@@ -39,7 +39,7 @@
 	clear: left;
 	/*margin: 100px;*/
 	margin-top: 50px;
-  border: 1px solid;
+  border: 1px solid Silver;
 	background-color: white;
 	height: 200px;
 }
@@ -208,21 +208,20 @@ $(window).load(function () {
 	var mainArea = $("#contents"); //メインコンテンツ
 	var sideWrap = $(".wrapper_sidebar"); //サイドバーの外枠
 	var sideArea = $(".sidebar"); //サイドバー
-	var sideCale = $("#calender_cal");
-	console.log(sideCale.height());
+	var sideCale = $("#calender");
+	// console.log(sideCale.height());
   /*設定ここまで*/
   var wd = $(window); //ウィンドウ自体
   //メインとサイドの高さを比べる
   var mainH = mainArea.height();
-  var sideH = sideArea.height();
-
-	console.log();
+  var sideH = sideArea.outerHeight(true) + sideCale.outerHeight(true);
+	console.log(sideArea.offset().top);
   if(sideH < mainH) { //メインの方が高ければ色々処理する
 	  //サイドバーの外枠をメインと同じ高さにしてrelaltiveに（#sideをポジションで上や下に固定するため）
 	  sideWrap.css({"height": mainH, "position": "relative", "float": "right", 'width': '300px'});
 
 	  //サイドバーがウィンドウよりいくらはみ出してるか
-	  var sideOver = wd.height()-sideArea.height();
+	  var sideOver = wd.height()-(sideArea.outerHeight(true) + sideCale.outerHeight(true) + sideCale.innerHeight());
 
 	  //固定を開始する位置 = サイドバーの座標＋はみ出す距離
 	  var starPoint = sideArea.offset().top + (-sideOver);
@@ -231,7 +230,7 @@ $(window).load(function () {
 	  var breakPoint = sideArea.offset().top + mainH;
 
 	  wd.scroll(function() { //スクロール中の処理
-	    if(wd.height() < sideArea.height()){ //サイドメニューが画面より大きい場合
+	    if(wd.height() < sideArea.outerHeight(true) + sideCale.outerHeight(true)){ //サイドメニューが画面より大きい場合
 	      if(starPoint < wd.scrollTop() && wd.scrollTop() + wd.height() < breakPoint){ //固定範囲内
 	            sideArea.css({"position": "fixed", "bottom": "20px", "width": '300px', "float": 'right'});
 
@@ -244,7 +243,7 @@ $(window).load(function () {
 	      }
 
 	    }else{ //サイドメニューが画面より小さい場合
-	      var sideBtm = wd.scrollTop() + sideArea.height(); //サイドメニューの終点
+	      var sideBtm = wd.scrollTop() + sideArea.outerHeight(true) + sideCale.outerHeight(true); //サイドメニューの終点
 	      if(mainArea.offset().top < wd.scrollTop() && sideBtm < breakPoint){ //固定範囲内
 	              sideArea.css({"position": "fixed", "top": "0px", });
 	      }else if(sideBtm >= breakPoint){ //固定解除位置を超えた時
@@ -361,7 +360,7 @@ $(window).load(function () {
 						<div class="contents_footer">
 							<div class="action_view">
 							 <?php echo $this->Html->link(__('続きを読む＞'), array('action' => "view", $post['Post']['id'])); ?><br>
-						 </div>
+							</div>
 
 							<div id="item">
 								<?php if ($user['id'] == $post['User']['id'] || $user['Group']['id'] == 1): ?>

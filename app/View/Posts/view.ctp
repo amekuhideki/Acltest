@@ -120,6 +120,9 @@
 	float: left;
 	font-size: 14px;
 }
+.post_user {
+	float: right;
+}
 .post_body{
 	clear: right;
 	/*border-bottom: 1px dashed black;*/
@@ -139,6 +142,7 @@
 	background-color: white;
 }
 #title{
+	clear: both;
 	padding: 20px;
 	margin-bottom: 30px;
 	border-bottom: 1px dotted;
@@ -351,12 +355,15 @@ $(function(){
 					 ?>
 												 &nbsp;&nbsp;
 				</li>
-				<li class="post_tag">
+				<!-- <li class="post_tag">
 					<span class="glyphicon glyphicon-tag" aria-hidden="true"></span>
 						<?php foreach ($post['Tag'] as $tag): ?>
 							<?php echo $this->Html->link(__($tag['tag']), array('controller' => 'tags', 'action' => 'view', $tag['id'])); ?>
 						<?php endforeach; ?>
 						&nbsp;
+				</li> -->
+				<li class="post_user">
+					<?php echo $post['User']['username']; ?>
 				</li>
 			</ul>
 		</div>

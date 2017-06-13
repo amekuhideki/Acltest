@@ -80,7 +80,7 @@
   nav a{
     text-decoration: none;
   }
-  nav li:hover{
+  nav a:hover{
     color: #69c;
     position: relative;
     top:2px;
@@ -132,9 +132,10 @@
           <?php if (isset($_SESSION['Auth']['User']['username'])): ?>
             <li><?php echo $this->Html->link(__('MyPage'), array('controller' => 'users', 'action' => 'view', $_SESSION['Auth']['User']['id']),
                                                              array('role' => "presentation")); ?> </li>
+            <li><?php echo $this->Html->link(__('Article create'), array('controller' => 'posts', 'action' => 'add'),
+                                                           array('role' => "presentation")); ?></li>
           <?php endif;?>
-          <li><?php echo $this->Html->link(__('Article create'), array('controller' => 'posts', 'action' => 'add'),
-                                                          array('role' => "presentation")); ?></li>
+
       		<li><?php echo $this->Html->link(__('List of articles'), array('controller' => 'posts','action' => 'index'),
                                                          array('role' => "presentation")); ?></li>
       		<li><?php echo $this->Html->link(__('Category'), array('controller' => 'categories', 'action' => 'index'),

@@ -44,6 +44,21 @@ class CategoriesController extends AppController {
 		}
 		$options = array('conditions' => array('Category.' . $this->Category->primaryKey => $id));
 		$this->set('category', $this->Category->find('first', $options));
+		$this->loadModel('Post');
+		$this->loadModel('User');
+		var_dump($this->User->find('all'));
+		exit;
+		// $this->loadModel('User');
+		// $user = $this->User->find('list',array(
+		// 													'fields', array('Use.id', 'User.username'),
+		// 													'recursive'=> -1
+		// 													)
+		// 												);
+		// $user = $this->User->find('all');
+		// echo "<pre>";
+		// var_dump ($user);
+
+
 	}
 
 /**
