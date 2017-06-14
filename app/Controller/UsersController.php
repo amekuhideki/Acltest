@@ -72,7 +72,7 @@ class UsersController extends AppController {
 						$fields = array('error_count', 'error_time');
 						$this->User->save($data, array('callbacks' => false), $fields);
 					} else {
-						$this->Session->setFlash('アカウントをロックしました。10分後にやり直してください。');
+						$this->Session->setFlash(__('アカウントをロックしました。10分後にやり直してください。'));
 						$this->redirect('login');
 					}
 				}

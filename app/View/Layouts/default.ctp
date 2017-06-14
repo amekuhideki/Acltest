@@ -47,7 +47,10 @@ a{ color: #69c;}
       text-align: center;
     }
     #flash_message {
-      width: 960px;
+      margin: 0 auto;
+      text-align: center;
+      height: 50px;
+      width: 400px;
     }
     #wrapper {
       /*width: 960px;*/
@@ -74,10 +77,11 @@ a{ color: #69c;}
     <![endif]-->
   </head>
   <body>
-    <div id='flash_message'>
-      <?php echo $this->Session->flash(); ?>
-    </div>
+
     <div id="wrapper">
+      <div id='flash_message'>
+        <?php echo $this->Session->flash(); ?>
+      </div>
       <?php echo $this->fetch('content'); ?>
       <?php echo $this->element('footer'); ?>
     </div>
