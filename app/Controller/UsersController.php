@@ -57,11 +57,61 @@ class UsersController extends AppController {
 				$this->redirect('/posts', null, false);
 			}
 	    if ($this->request->is('post')) {
+				$error_user = $this->User->find('first', array(
+																				'conditions' => array(
+																					'User.username' => $this->request->data['User']['username'],
+																					'error_count >=' => 10
+																				)
+																			));
+				if (!empty($error_user)) {
+					$now = time();
+					$error_time = strtotime($error_user['User']['error_time']);
+					$tenminutes = 600;
+					if (($now - $error_time) > $tenminutes) {
+						$data = array('id' => $error_user['User']['id'], 'error_count' => 0, 'error_time' => null);
+						$fields = array('error_count', 'error_time');
+						$this->User->save($data, array('callbacks' => false), $fields);
+					} else {
+						$this->Session->setFlash('アカウントをロックしました。10分後にやり直してください。');
+						$this->redirect('login');
+					}
+				}
 	        if ($this->Auth->login()) {
-						session_start();
+						// session_start();
+						$user = $this->User->find('first', array(
+																				'conditions' => array(
+																					'username' => $this->request->data['User']['username'],
+																				)
+																			));
+						$this->User->save(array('id' => $user['User']['id'], 'error_count' => 0, 'error_time' => null),
+															array('callbacks' => false),
+															array('error_count', 'error_time')
+														);
             return $this->redirect($this->Auth->redirect());
-	        }
-	        $this->Session->setFlash(__('Your username or password was incorrect.'));
+	        } else {
+						$user = $this->User->find('first', array(
+																			'conditions' => array(
+																				'User.username' => $this->request->data['User']['username'],
+																			)
+																		));
+						if (!empty($user) && $user['User']['error_count'] >= 10) {
+							$this->Session->setFlash(__('アカウントをロックしました。10分後にやり直してください。'));
+							$this->redirect(['controller' => 'users', 'action' => 'login']);
+						}
+					  if (!empty($user)) {
+							$data = array('id' => $user['User']['id'], 'error_count' => $user['User']['error_count'] + 1, 'error_time' => date('Y-m-d H:i:s'));
+							$fields = array('error_count', 'error_time');
+							$this->User->set($data, array('callbacks' => false), $fields);
+							$this->User->save();
+							
+							if ($user['User']['error_count'] + 1 >= 10){
+								$this->Session->setFlash(__('アカウントをロックしました。10分後にやり直してください。'));
+								$this->redirect(['controller' => 'users', 'action' => 'login']);
+							}
+						}
+																		
+						$this->Session->setFlash(__('Your username or password was incorrect.'));
+					}
 	    }
 	}
 
@@ -218,5 +268,9 @@ class UsersController extends AppController {
 		} else {
 			return $this->redirect(array('action' => 'index'));
 		}
+	}
+	
+	public function authentication($id = null) {
+
 	}
 }
