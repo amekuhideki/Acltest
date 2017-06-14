@@ -38,6 +38,13 @@ class AppController extends Controller {
         'Auth' => array(
             'authorize' => array(
                 'Actions' => array('actionPath' => 'controllers')
+            ),
+            'authenticate' => array(
+              'Form' => array(
+                'fields' => array('username' => 'username', 'password' => 'password'),
+                'userModel' => 'User', 
+                'scope' => array('error_count <=' => 10)
+              )
             )
         ),
         'RequestHandler',
