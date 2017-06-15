@@ -43,7 +43,6 @@ class AppController extends Controller {
               'Form' => array(
                 'fields' => array('username' => 'username', 'password' => 'password'),
                 'userModel' => 'User', 
-                'scope' => array('error_count <=' => 10)
               )
             )
         ),
