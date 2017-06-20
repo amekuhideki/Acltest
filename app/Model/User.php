@@ -1,7 +1,7 @@
 <?php
 App::uses('AppModel', 'Model');
 App::uses('AuthComponent', 'Controller/Component');
-
+App::uses('SimplePasswordHasher', 'Controller/Component/Auth');
 /**
  * User Model
  *
@@ -9,14 +9,18 @@ App::uses('AuthComponent', 'Controller/Component');
  * @property Post $Post
  */
 class User extends AppModel {
-	public function beforeSave($options = array()) {
-		if (!empty($this->data['User']['password'])) {
-			$this->data['User']['password'] = AuthComponent::password(
-				$this->data['User']['password']
-			);
-		}
-			return true;
-	}
+  public function beforeSave($options = array()) {
+    if (!empty($this->data['User']['password'])) {
+      //$this->data['User']['password'] = AuthComponent::password(
+      //  $this->data['User']['password']
+      //);
+      $passwordHasher = new SimplePasswordHasher(array('hashType' => 'sha256'));
+      $this->data['User']['password'] = $passwordHasher->hash(
+        $this->data['User']['password']
+      );
+    }
+    return true;
+  }
 
 	public $belongsTo = array('Group');
 	public $actsAs = array('Acl' => array('type' => 'requester', 'enabled' => false));
