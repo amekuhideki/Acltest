@@ -111,3 +111,11 @@ CakeLog::config('error', array(
 ));
 
 CakePlugin::load(array('DebugKit', 'AclExtras', 'Upload', 'Search', 'TwitterBootstrap'));
+CakePlugin::load('Opauth', array('routes' => true, 'bootstrap' => true));
+
+Configure::write('Opauth.Strategy.Twitter', array(
+                                                  'key' => '3lt7Kylwd9avyFwYlvOAFfUwL',
+                                                  'secret' => 'dTgCPSO4HsoZswKh5v6UmFvFv487ioX2nZSnlssjy3vZtYMuIP'
+                                                  )
+);
+Configure::write('Opauth.path', '/AclTest/auth/');

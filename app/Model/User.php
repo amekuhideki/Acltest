@@ -10,15 +10,20 @@ App::uses('SimplePasswordHasher', 'Controller/Component/Auth');
  */
 class User extends AppModel {
   public function beforeSave($options = array()) {
+    // $passwordHasher = new SimplePasswordHasher(array('hashType' => 'sha256'));
     if (!empty($this->data['User']['password'])) {
-      //$this->data['User']['password'] = AuthComponent::password(
-      //  $this->data['User']['password']
-      //);
-      $passwordHasher = new SimplePasswordHasher(array('hashType' => 'sha256'));
-      $this->data['User']['password'] = $passwordHasher->hash(
-        $this->data['User']['password']
+      $this->data['User']['password'] = AuthComponent::password(
+       $this->data['User']['password']
       );
+      // $this->data['User']['password'] = $passwordHasher->hash(
+      //   $this->data['User']['password']
+      // );
     }
+    // if (!isset($this->data['User']['credentials_secret'])) {
+    //     $this->data['User']['credentials_secret'] = $passwordHasher->hash(
+    //       $this->data['User']['credentials_secret']
+    //     );
+    // }
     return true;
   }
 
@@ -80,6 +85,16 @@ class User extends AppModel {
 				//'on' => 'create', // Limit validation to 'create' or 'update' operations
 			),
 		),
+    'credentials_token' => array(
+      'notBlank' => array(
+        'rule' => array('notBlank'),
+      )
+    ),
+    'credentials_secret' => array(
+      'notBlank' => array(
+        'rule' => array('notBlank'),
+      )
+    ),
 	);
 
 	// The Associations below have been created with all possible keys, those that are not needed can be removed
