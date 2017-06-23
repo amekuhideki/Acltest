@@ -39,16 +39,6 @@ class AppController extends Controller {
             'authorize' => array(
                 'Actions' => array('actionPath' => 'controllers')
             ),
-            'authenticate' => array(
-              'Form' => array(
-                'fields' => array('username' => 'username', 'password' => 'password'),
-                'userModel' => 'User',
-                'passwordHasher' => array(
-                    'className' => 'Simple',
-                    'hashType' => 'sha256'
-                )
-              )
-            )
         ),
         'RequestHandler',
         'Session'
@@ -78,7 +68,25 @@ class AppController extends Controller {
         );
 
         $this->Auth->allow('display');
-
+        if ($this->request->is('post')) {
+            if(isset($this->request->data['User']['username'])){
+              $this->Auth->authenticate = array(
+                                                'Form' => array(
+                                                'fields' => array('username' => 'username', 'password' => 'password'),
+                                                'userModel' => 'User',
+                                            )
+                                          );
+            } else if (isset($this->data['auth']['credentials']['token'])) {
+              $this->Auth->authenticate = array(
+                                                'Form' => array(
+                                                  'userModel' => 'User',
+                                                  'fields' => array('username' => 'credentials_token',
+                                                                    'password' => 'credentials_secret'
+                                                                  )
+                                                )
+                                          );
+            }
+        }
         //言語設定
         if (isset($this->params['named']['parameter'])) {
       		$lang = $this->params['named']['parameter'];

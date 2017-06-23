@@ -13,13 +13,40 @@ class UsersController extends AppController {
 	public function beforeFilter() {
     parent::beforeFilter();
 		$this->Auth->allow('add', 'logout', 'login');
-
+    if ($this->params['action'] == 'opauthComplete') {
+				$token = $this->request->data['auth']['credentials'];
+				$twitter_account = $this->User->find('first',array(
+																							'conditions' => array(
+																									'credentials_token' => $token['token'],
+																									'credentials_secret' => $token['secret']
+																							)
+				));
+				if (empty($twitter_account)) {
+						$this->Session->write('twitter_auth' ,array(
+																				'twitter_token' => $token["token"],
+																				'twitter_secret' => $token["secret"]
+																			)
+																	);
+						$this->redirect('add');
+				} elseif (!empty($twitter_account)) {
+					$t = array_shift($twitter_account);
+					$t = array_merge($t, ['Group' => array_shift($twitter_account)]);
+							if ($this->Auth->login($t)) {
+								return $this->redirect($this->Auth->redirect());
+							} else {
+								$this->Session->setFlash('ログアウトしています。アカウントを作成しますか？');
+							}										return $this->redirect(array('controllers' => 'posts', 'action' => 'index'));
+					}
+    }
     // CakePHP 2.0
     // $this->Auth->allow('*');
 
     // CakePHP 2.1以上
     // $this->Auth->allow();
 }
+  public function opauthComplete() {
+      debug($this->data);
+  }
 	public function initDB() {
 	    $group = $this->User->Group;
 	    //管理者グループには全てを許可する
@@ -153,6 +180,11 @@ class UsersController extends AppController {
 	public function add() {
 		if ($this->request->is('post')) {
 			$this->User->create();
+			if ($this->Session->read()['twitter_auth']){
+					$this->request->data['User']['credentials_token'] = $this->Session->read()['twitter_auth']['twitter_token'];
+					$this->request->data['User']['credentials_secret'] = $this->Session->read()['twitter_auth']['twitter_secret'];
+					$this->Session->delete('twitter_auth');
+			}
 			if ($this->User->save($this->request->data)) {
 				$this->Flash->success(__('The user has been saved.'));
 				return $this->redirect(array('action' => 'index'));

@@ -46,7 +46,8 @@
     </div>
     <div class="form-group">
       <div class="text">
-        <?php echo $this->Html->link(__('アカウントを作成'), array('action' => 'add')); ?>
+        <?php echo $this->Html->link(__('アカウントを作成'), array('action' => 'add')); ?><br>
+        <?php echo $this->Html->link(__('ツイッターでログイン'), array('controller' => '', 'action' => 'auth/twitter')); ?>
       </div>
     </div>
 
