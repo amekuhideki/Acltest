@@ -419,7 +419,11 @@ $(window).load(function () {
 					<?php foreach ($news as $new): ?>
 						<div class="news_contents">
 							<div class="news_img">
-								<a href=<?php echo $new['url'];  ?>><img src="<?php echo $new['img']; ?>" width="260"> </a><br>
+								<?php if ($new['img'] == null): ?>
+									<?php echo $this->Html->image('/images/Noimage.jpg', array('width' => '150')); ?>
+								<?php else: ?>
+									<a href=<?php echo $new['url'];  ?>><img src="<?php echo $new['img']; ?>" width="260"> </a><br>
+								<?php endif; ?>
 							</div>
 							<div class="news_content">
 								<?php echo $i;

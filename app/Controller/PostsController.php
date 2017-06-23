@@ -43,7 +43,11 @@ class PostsController extends AppController {
 			}
 			$url = $element->find('.titlebody a', 0)->href;
 			$title = $element->find('.titlebody text', 0)->outertext;
-			$img = $element->find('.blogbody img', 0)->src;
+			if (isset($element->find('.blogbody img', 0)->src)) {
+				$img = $element->find('.blogbody img', 0)->src;
+			} else {
+				$img = null;
+			}
 			$news[] = ['url' => $url, 'title' => $title, 'img' => $img];
 			$i += 1;
 		}
