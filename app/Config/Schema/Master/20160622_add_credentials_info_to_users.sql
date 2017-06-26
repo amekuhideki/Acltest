@@ -1,2 +1,2 @@
-ALTER TABLE users ADD credentials_token varchar(256) DEFAULT null COMMENT 'twitterトークン' AFTER twitter_id;
+ALTER TABLE users ADD credentials_token varchar(256) DEFAULT null COMMENT 'twitterトークン' AFTER introduction;
 ALTER TABLE users ADD credentials_secret varchar(256) DEFAULT null COMMENT 'twitterシークレット' AFTER credentials_token;

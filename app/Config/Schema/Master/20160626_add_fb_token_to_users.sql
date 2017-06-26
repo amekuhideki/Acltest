@@ -1,0 +1,1 @@
+ALTER TABLE users ADD fb_id varchar(256) DEFAULT null COMMENT 'facebookトークン' AFTER credentials_secret;
