@@ -123,5 +123,5 @@ Configure::write('Opauth.Strategy.Facebook', array(
                                                   'app_secret' => ''
                                                   )
 );
-Configure::write('Opauth.path', '/users/login');
+// Configure::write('Opauth.path', '/users/login');
 Configure::write('Opauth.path', '/AclTest/auth/');
