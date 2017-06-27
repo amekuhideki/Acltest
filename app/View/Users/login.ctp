@@ -49,7 +49,8 @@
         <?php echo $this->Html->link(__('アカウントを作成'), array('action' => 'add')); ?><br>
         <?php echo $this->Html->link(__('twitterでログイン'), array('controller' => '', 'action' => 'auth/twitter')); ?><br>
         <?php echo $this->Html->link(__('Facebookでログイン'), array('controller' => '', 'action' => 'auth/facebook')); ?><br>
-        <?php echo $this->Html->link(__('Googleでログイン'), array('controller' => '', 'action' => 'auth/google')); ?>
+        <?php echo $this->Html->link(__('Googleでログイン'), array('controller' => '', 'action' => 'auth/google')); ?><br>
+        <?php echo $this->Html->link(__('GitHubでログイン'), array('controller' => '', 'action' => 'auth/github')); ?><br>
       </div>
     </div>
 

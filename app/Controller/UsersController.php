@@ -89,6 +89,32 @@ class UsersController extends AppController {
 								}
 								return $this->redirect(array('controllers' => 'posts', 'action' => 'index'));
 						}
+				} elseif ($provider === 'GitHub') {
+						$git_id = $this->request->data['auth']['uid'];
+						$git_url = $this->request->data['auth']['info']['urls']['github'];
+						$github_account = $this->User->find('first', array(
+																										'conditions' => array(
+																												'git_id' => $git_id,
+																												'git_url' => $git_url
+																										)
+						));
+						if (empty($github_account)) {
+								$this->Session->write('github_auth', array(
+																					'git_id' => $git_id,
+																					'git_url' => $git_url
+																				)
+																			);
+								$this->redirect('add');
+						} else {
+								$account = array_shift($github_account);
+								$account = array_merge($account, ['Group' => array_shift($github_account)]);
+								if ($this->Auth->login($account)) {
+										return $this->redirect($this->Auth->redirect());
+								} else {
+										$this->Session->setFlash('ログアウトしています。アカウントを作成しますか？');
+								}
+								return $this->redirect(array('controller' => 'posts', 'action' => 'index'));
+						}
 				}
     }
     // CakePHP 2.0
@@ -242,6 +268,9 @@ class UsersController extends AppController {
 			} elseif (isset($this->Session->read()['google_auth'])) {
 					$this->request->data['User']['g_id'] = $this->Session->read()['google_auth']['g_id'];
 					$this->request->data['User']['gmail'] = $this->Session->read()['google_auth']['gmail'];
+			} elseif (isset($this->Session->read()['github_auth'])) {
+					$this->request->data['User']['git_id'] = $this->Session->read()['github_auth']['git_id'];
+					$this->request->data['User']['git_url'] = $this->Session->read()['github_auth']['git_url'];
 			}
 			if ($this->User->save($this->request->data)) {
 				$this->Flash->success(__('The user has been saved.'));

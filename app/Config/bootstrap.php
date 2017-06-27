@@ -128,5 +128,10 @@ Configure::write('Opauth.Strategy.Google', array(
                                                 'client_secret' => ''
                                                 )
 );
+Configure::write('Opauth.Strategy.GitHub', array(
+                                                'client_id' => '',
+                                                'client_secret' => ''
+                                                )
+);
 // Configure::write('Opauth.path', '/users/login');
 Configure::write('Opauth.path', '/AclTest/auth/');
