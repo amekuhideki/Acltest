@@ -63,6 +63,32 @@ class UsersController extends AppController {
 										}
 								return $this->redirect(array('controllers' => 'posts', 'action' => 'index'));
 						}
+				} elseif ($provider === 'Google') {
+						$g_id = $this->request->data['auth']['raw']['id'];
+						$gmail = $this->request->data['auth']['raw']['id'];
+						$google_account = $this->User->find('first', array(
+																										'conditions' => array(
+																												'g_id' => $g_id,
+																												'gmail' => $gmail
+																										)
+						));
+						if (empty($google_account)) {
+								$this->Session->write('google_auth', array(
+																					'g_id' => $g_id,
+																					'gmail' => $gmail
+																				)
+																			);
+								$this->redirect('add');
+						} else {
+								$account = array_shift($google_account);
+								$account = array_merge($account, ['Group' => array_shift($google_account)]);
+								if ($this->Auth->login($account)) {
+										return $this->redirect($this->Auth->redirect());
+								} else {
+										$this->Session->setFlash('ログアウトしています。アカウントを作成しますか？');
+								}
+								return $this->redirect(array('controllers' => 'posts', 'action' => 'index'));
+						}
 				}
     }
     // CakePHP 2.0
@@ -211,8 +237,11 @@ class UsersController extends AppController {
 					$this->request->data['User']['credentials_token'] = $this->Session->read()['twitter_auth']['twitter_token'];
 					$this->request->data['User']['credentials_secret'] = $this->Session->read()['twitter_auth']['twitter_secret'];
 					$this->Session->delete('twitter_auth');
-			} elseif ($this->Session->read()['facebook_auth']) {
+			} elseif (isset($this->Session->read()['facebook_auth'])) {
 					$this->request->data['User']['fb_id'] = $this->Session->read()['facebook_auth']['fb_id'];
+			} elseif (isset($this->Session->read()['google_auth'])) {
+					$this->request->data['User']['g_id'] = $this->Session->read()['google_auth']['g_id'];
+					$this->request->data['User']['gmail'] = $this->Session->read()['google_auth']['gmail'];
 			}
 			if ($this->User->save($this->request->data)) {
 				$this->Flash->success(__('The user has been saved.'));
