@@ -8,9 +8,6 @@
 	background-color: white;
 	border: 1px solid;
 }
-.actions .btn {
-	margin: 3px;
-}
 .user_details {
 	width: 280px;
 	padding: 20px;
@@ -49,7 +46,7 @@
 }
 .user_introduction {
 	float: left;
-	width: 288px;
+	width: 260px;
 	height: 246px;
 	margin-top: 20px;
 	margin-left: 5px;
@@ -62,18 +59,18 @@
 }
 .actions {
 	float:left;
-	width: 180px;
+	width: 210px;
 	height: 226px;
 	margin: auto;
 	margin-top: 60px;
 	text-align: left;
 	padding-top: 40px;
 }
+.actions li {
+	margin: 5px;
+}
 .actions ul {
 	padding-left: 0px;
-}
-.account_collabo {
-	margin: 0 auto;
 }
 .detail_top {
 	padding-left: 100px;
@@ -180,34 +177,34 @@
 			</div>
 			<div class="actions">
 				<ul>
-					<li><?php echo $this->Html->link(__('New Post'), array('controller' => 'posts', 'action' => 'add'),
-					 																								 array("class" => 'btn btn-default btn-lg active', 'style' => 'width:180px')); ?> </li>
-					<li><?php echo $this->Html->link(__('Edit Account'), array('controller' => 'users', 'action' => 'edit', $user['User']['id']),
-					                                                     array("class" => 'btn btn-default btn-lg active', 'style' => 'width:180px')); ?> </li>
-					<li><?php echo $this->Html->link(__('Delete Account'), array('controller' => 'users', 'action' => 'delete', $user['User']['id']),
-					                                                       array("class" => 'btn btn-default btn-lg active', 'style' => 'width:180px',
-																															 					"confirm" => __('Are you sure you want to delete #%s?', $user['User']['username']))); ?> </li>
+					<li>
+						<?php echo $this->Html->link(__('Twitterと連携'), array('controller' => '', 'action' => 'auth/twitter'), array('class' => "btn", 'style' => "width:200px; background-color:#00aced; color:white;")); ?>
+					</li>
+					<li>
+						<?php echo $this->Html->link(__('Facebookと連携'), array('controller' => '', 'action' => 'auth/facebook'), array('class' => "btn", 'style' => "width:200px; background-color:#305097; color:white;")); ?>
+					</li>
+					<li>
+						<?php echo $this->Html->link(__('Googleと連携'), array('controller' => '', 'action' => 'auth/google'), array('class' => "btn", 'style' => "width:200px; background-color:#db4a39; color:white;")); ?>
+					</li>
+					<li>
+						<?php echo $this->Html->link(__('GitHubと連携'), array('controller' => '', 'action' => 'auth/github'), array('class' => "btn btn-warning", 'style' => "width:200px; background-color:#2c4762; color:white;")); ?>
+					</li>
 				</ul>
 			</div>
 		</div>
 		
-		<div class="account_collabo">
+
+		<div>
 			<ul>
-				<li>
-					<?php echo $this->Html->link(__('Twitterと連携'), array('controller' => '', 'action' => 'auth/twitter')); ?>
-				</li>
-				<li>
-					<?php echo $this->Html->link(__('Facebookと連携'), array('controller' => '', 'action' => 'auth/facebook')); ?>
-				</li>
-				<li>
-					<?php echo $this->Html->link(__('Googleと連携'), array('controller' => '', 'action' => 'auth/google')); ?>
-				</li>
-				<li>
-					<?php echo $this->Html->link(__('GitHubと連携'), array('controller' => '', 'action' => 'auth/github')); ?>
-				</li>
+				<li><?php echo $this->Html->link(__('New Post'), array('controller' => 'posts', 'action' => 'add'),
+																												 array("class" => 'btn btn-default btn-lg active', 'style' => 'width:180px')); ?> </li>
+				<li><?php echo $this->Html->link(__('Edit Account'), array('controller' => 'users', 'action' => 'edit', $user['User']['id']),
+																														 array("class" => 'btn btn-default btn-lg active', 'style' => 'width:180px')); ?> </li>
+				<li><?php echo $this->Html->link(__('Delete Account'), array('controller' => 'users', 'action' => 'delete', $user['User']['id']),
+																															 array("class" => 'btn btn-default btn-lg active', 'style' => 'width:180px',
+																																			"confirm" => __('Are you sure you want to delete #%s?', $user['User']['username']))); ?> </li>
 			</ul>
 		</div>
-		
 		<div class="user_posts">
 			<div class="related">
 				<div class="user_posts_header">
