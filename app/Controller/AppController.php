@@ -69,10 +69,10 @@ class AppController extends Controller {
 
         $this->Auth->allow('display');
         if ($this->request->is('post')) {
-            if(isset($this->request->data['User']['username'])){
+            if(isset($this->request->data['User']['email'])){
               $this->Auth->authenticate = array(
                                                 'Form' => array(
-                                                'fields' => array('username' => 'username', 'password' => 'password'),
+                                                'fields' => array('username' => 'email', 'password' => 'password'),
                                                 'userModel' => 'User',
                                             )
                                           );

@@ -30,8 +30,8 @@
       ));?>
     </div>
     <div class="form-group">
-      <?php
-        echo $this->Form->input('User.username', array('label' => "ユーザー名", 'type' => "username", 'class' => "form-control"));
+      <?php 
+        echo $this->Form->input('User.email', array('label' => "メールアドレス", 'type' => "email", 'class' => "form-control"));
       ?>
     </div>
     <div class="form-group">
@@ -41,16 +41,16 @@
     </div>
     <div class="form-group">
       <?php
-        echo $this->Form->submit(__('サインイン'), array('class' => "btn btn-lg btn-primary btn-block"));
+        echo $this->Form->submit(__('メールアドレスでログイン'), array('class' => "btn btn-lg btn-primary btn-block"));
       ?>
     </div>
     <div class="form-group">
       <div class="text">
         <?php echo $this->Html->link(__('アカウントを作成'), array('action' => 'add')); ?><br>
-        <?php echo $this->Html->link(__('twitterでログイン'), array('controller' => '', 'action' => 'auth/twitter')); ?><br>
-        <?php echo $this->Html->link(__('Facebookでログイン'), array('controller' => '', 'action' => 'auth/facebook')); ?><br>
-        <?php echo $this->Html->link(__('Googleでログイン'), array('controller' => '', 'action' => 'auth/google')); ?><br>
-        <?php echo $this->Html->link(__('GitHubでログイン'), array('controller' => '', 'action' => 'auth/github')); ?><br>
+        <?php echo $this->Html->link(__('twitterでログイン/登録'), array('controller' => '', 'action' => 'auth/twitter')); ?><br>
+        <?php echo $this->Html->link(__('Facebookでログイン/登録'), array('controller' => '', 'action' => 'auth/facebook')); ?><br>
+        <?php echo $this->Html->link(__('Googleでログイン/登録'), array('controller' => '', 'action' => 'auth/google')); ?><br>
+        <?php echo $this->Html->link(__('GitHubでログイン/登録'), array('controller' => '', 'action' => 'auth/github')); ?><br>
       </div>
     </div>
 

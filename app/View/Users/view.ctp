@@ -72,6 +72,9 @@
 .actions ul {
 	padding-left: 0px;
 }
+.account_collabo {
+	margin: 0 auto;
+}
 .detail_top {
 	padding-left: 100px;
 	display: table-cell;
@@ -80,6 +83,7 @@
 }
 .post_details {
 	margin: auto;
+	margin-bottom: 10px;
 	padding: 10px;
 	width: 760px;
 	height: 110px;
@@ -186,6 +190,24 @@
 				</ul>
 			</div>
 		</div>
+		
+		<div class="account_collabo">
+			<ul>
+				<li>
+					<?php echo $this->Html->link(__('Twitterと連携'), array('controller' => '', 'action' => 'auth/twitter')); ?>
+				</li>
+				<li>
+					<?php echo $this->Html->link(__('Facebookと連携'), array('controller' => '', 'action' => 'auth/facebook')); ?>
+				</li>
+				<li>
+					<?php echo $this->Html->link(__('Googleと連携'), array('controller' => '', 'action' => 'auth/google')); ?>
+				</li>
+				<li>
+					<?php echo $this->Html->link(__('GitHubと連携'), array('controller' => '', 'action' => 'auth/github')); ?>
+				</li>
+			</ul>
+		</div>
+		
 		<div class="user_posts">
 			<div class="related">
 				<div class="user_posts_header">

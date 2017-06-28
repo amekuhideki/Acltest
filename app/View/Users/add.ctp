@@ -27,9 +27,22 @@
 					<legend><h2><?php echo __('アカウント作成'); ?></h2></legend>
 				</div>
 				<div class="form-group">
-					<?php
-						echo $this->Form->input('username', array('label' => "アカウント名", 'class' => "form-control"));
-					?>
+					<?php if (isset($this->Session->read()['auth']['username'])): ?>
+						<?php echo $this->Form->input('username', array('label' => "アカウント名", 'class' => "form-control", 'value' => $this->Session->read()['auth']['username'])); ?>
+					<?php else: ?>
+						<?php
+							echo $this->Form->input('username', array('label' => "アカウント名", 'class' => "form-control"));
+						?>
+					<?php endif; ?>
+				</div>
+				<div>
+					<?php if (isset($this->Session->read()['auth']['email'])): ?>
+						<?php echo $this->Form->input('email', array('label' => "メールアドレス", 'class' => "form-control", 'value' => $this->Session->read()['auth']['email'])); ?>
+					<?php else: ?>
+						<?php 
+							echo $this->Form->input('email', array('label' => "メールアドレス", 'class' => "form-control"));
+						?>
+				<?php endif; ?>
 				</div>
 				<div class="form-group">
 					<?php
