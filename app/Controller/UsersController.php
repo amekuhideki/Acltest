@@ -32,6 +32,8 @@ class UsersController extends AppController {
 						$saveField = ['credentials_token', 'credentials_secret'];
 						if ($this->User->save($data, null, $saveField)) {
 							$this->Session->setFlash('Twitterを登録しました。');
+						} else {
+							$this->Session->setFlash('登録できませんでした。もう一度お試しください。');
 						}
 					} else {
 						$this->Session->setFlash('指定したTwitterアカウントは既に使われています。');
@@ -52,6 +54,8 @@ class UsersController extends AppController {
 						$saveField = ['fb_id'];
 						if ($this->User->save($data, null, $saveField)) {
 							$this->Session->setFlash('Facebookを指定しました。');
+						} else {
+							$this->Session->setFlash('登録できませんでした。もう一度お試しください。');
 						}
 					} else {
 						$this->Session->setFlash('指定したFacebookアカウントは既に使われています。');
@@ -151,7 +155,7 @@ class UsersController extends AppController {
 						$account = $this->User->find('first', array(
 																										'conditions' => array(
 																												'g_id' => $g_id,
-																												'email' => $gmail
+																												// 'email' => $gmail
 																										)
 						));
 						if (empty($account)) {
@@ -341,17 +345,19 @@ class UsersController extends AppController {
  */
 	public function add() {
 		if ($this->request->is('post')) {
-			$this->User->create();	
-			if ($this->Session->read()['auth']['provider'] === 'Twitter') {
-					$this->request->data['User']['credentials_token'] = $this->Session->read()['auth']['twitter_token'];
-					$this->request->data['User']['credentials_secret'] = $this->Session->read()['auth']['twitter_secret'];
-			} elseif ($this->Session->read()['auth']['provider'] === 'Facebook') {
-					$this->request->data['User']['fb_id'] = $this->Session->read()['auth']['fb_id'];
-			} elseif ($this->Session->read()['auth']['provider'] === 'Google') {
-					$this->request->data['User']['g_id'] = $this->Session->read()['auth']['g_id'];
-			} elseif (isset($this->Session->read()['auth'])) {
-					$this->request->data['User']['git_id'] = $this->Session->read()['auth']['git_id'];
-					$this->request->data['User']['git_url'] = $this->Session->read()['auth']['git_url'];
+			$this->User->create();
+			if (isset($this->Session->read()['auth'])){
+				if ($this->Session->read()['auth']['provider'] === 'Twitter') {
+						$this->request->data['User']['credentials_token'] = $this->Session->read()['auth']['twitter_token'];
+						$this->request->data['User']['credentials_secret'] = $this->Session->read()['auth']['twitter_secret'];
+				} elseif ($this->Session->read()['auth']['provider'] === 'Facebook') {
+						$this->request->data['User']['fb_id'] = $this->Session->read()['auth']['fb_id'];
+				} elseif ($this->Session->read()['auth']['provider'] === 'Google') {
+						$this->request->data['User']['g_id'] = $this->Session->read()['auth']['g_id'];
+				} elseif (isset($this->Session->read()['auth'])) {
+						$this->request->data['User']['git_id'] = $this->Session->read()['auth']['git_id'];
+						$this->request->data['User']['git_url'] = $this->Session->read()['auth']['git_url'];
+				}
 			}
 			if ($this->User->save($this->request->data)) {
 				$this->Flash->success(__('The user has been saved.'));
