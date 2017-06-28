@@ -27,6 +27,7 @@
 	width: 760px;
 }
 .user_posts_header {
+	clear: both;
 	margin: auto;
 	margin-top: 20px;
 	padding: 0px;
@@ -45,12 +46,11 @@
 
 }
 .user_introduction {
-	float: left;
-	width: 260px;
+	margin: auto;
 	height: 246px;
 	margin-top: 20px;
-	margin-left: 5px;
-	margin-right: 5px;
+	margin-left: 120px;
+	margin-right: 120px;
 	padding-top: 20px;
 }
 .user_introduction h4 {
@@ -58,25 +58,40 @@
 	border-bottom: solid;
 }
 .actions {
-	float:left;
-	width: 210px;
-	height: 226px;
+	float:right;
 	margin: auto;
-	margin-top: 60px;
+	margin-left: 100px;
 	text-align: left;
-	padding-top: 40px;
 }
 .actions li {
-	margin: 5px;
+	margin: 10px;
+}
+.actions h3 {
+	text-align: center;
+
+}
+.btn:hover {
+	filter:alpha(opacity=80);
+	opacity:0.8;
 }
 .actions ul {
 	padding-left: 0px;
 }
+.actions .btn {
+	width:250px;
+}
 .detail_top {
-	padding-left: 100px;
+	padding-left: 160px;
 	display: table-cell;
 	vertical-align: middle;
 	text-align: center;
+}
+.btn-list {
+	text-align: center;
+}
+.btn-list li {
+	display: inline-block;
+	width:180px;
 }
 .post_details {
 	margin: auto;
@@ -167,34 +182,35 @@
 					</tr>
 				</table>
 			</div>
-			<div class="user_introduction">
-				<h4>自己紹介</h4>
-				<?php if(!is_null($user['User']['introduction'])): ?>
-					<?php echo $user['User']['introduction']; ?>
-				<?php else: ?>
-					<p>自己紹介文はありません。</p>
-				<?php endif; ?>
-			</div>
 			<div class="actions">
+				<h3>他アカウントの連携</h3>
 				<ul>
 					<li>
-						<?php echo $this->Html->link(__('Twitterと連携'), array('controller' => '', 'action' => 'auth/twitter'), array('class' => "btn", 'style' => "width:200px; background-color:#00aced; color:white;")); ?>
+						<?php echo $this->Html->link(__('Twitterと連携'), array('controller' => '', 'action' => 'auth/twitter'), array('class' => "btn", 'style' => "background-color:#00aced; color:white;")); ?>
 					</li>
 					<li>
-						<?php echo $this->Html->link(__('Facebookと連携'), array('controller' => '', 'action' => 'auth/facebook'), array('class' => "btn", 'style' => "width:200px; background-color:#305097; color:white;")); ?>
+						<?php echo $this->Html->link(__('Facebookと連携'), array('controller' => '', 'action' => 'auth/facebook'), array('class' => "btn", 'style' => "background-color:#305097; color:white;")); ?>
 					</li>
 					<li>
-						<?php echo $this->Html->link(__('Googleと連携'), array('controller' => '', 'action' => 'auth/google'), array('class' => "btn", 'style' => "width:200px; background-color:#db4a39; color:white;")); ?>
+						<?php echo $this->Html->link(__('Googleと連携'), array('controller' => '', 'action' => 'auth/google'), array('class' => "btn", 'style' => "background-color:#db4a39; color:white;")); ?>
 					</li>
 					<li>
-						<?php echo $this->Html->link(__('GitHubと連携'), array('controller' => '', 'action' => 'auth/github'), array('class' => "btn btn-warning", 'style' => "width:200px; background-color:#2c4762; color:white;")); ?>
+						<?php echo $this->Html->link(__('GitHubと連携'), array('controller' => '', 'action' => 'auth/github'), array('class' => "btn btn-warning", 'style' => "background-color:#2c4762; color:white;")); ?>
 					</li>
 				</ul>
 			</div>
 		</div>
 		
+		<div class="user_introduction">
+			<h4>自己紹介</h4>
+			<?php if(!is_null($user['User']['introduction'])): ?>
+				<?php echo $user['User']['introduction']; ?>
+			<?php else: ?>
+				<p>自己紹介文はありません。</p>
+			<?php endif; ?>
+		</div>
 
-		<div>
+		<div class="btn-list">
 			<ul>
 				<li><?php echo $this->Html->link(__('New Post'), array('controller' => 'posts', 'action' => 'add'),
 																												 array("class" => 'btn btn-default btn-lg active', 'style' => 'width:180px')); ?> </li>
@@ -233,34 +249,6 @@
 							</ul>
 						</div>
 					<?php endforeach; ?>
-				<!-- <table cellpadding = "0" cellspacing = "0" class="table-bordered">
-					<tr>
-						<th><?php echo __('記事ID'); ?></th>
-						<th><?php echo __('カテゴリー'); ?></th>
-						<th><?php echo __('タイトル'); ?></th>
-						<th><?php echo __('作成日'); ?></th>
-						<th><?php echo __('編集日'); ?></th>
-						<th class="actions"><?php echo __('Actions'); ?></th>
-					</tr>
-					<?php foreach ($user['Post'] as $post): ?>
-					<div class="article">
-						<tr>
-							<td><?php echo $post['id']; ?></td>
-							<td><?php echo $post['category_id']; ?></td>
-							<td><?php echo h($post['title']); ?></td>
-							<td><?php echo $post['created']; ?></td>
-							<td><?php echo $post['modified']; ?></td>
-							<td class="actions">
-								<?php echo $this->Html->link(__('View'), array('controller' => 'posts', 'action' => 'view', $post['id']), array("class" => 'btn btn-primary')); ?>
-								<?php echo $this->Html->link(__('Edit'), array('controller' => 'posts', 'action' => 'edit', $post['id']), array("class" => 'btn btn-primary')); ?>
-								<?php echo $this->Form->postLink(__('Delete'), array('controller' => 'posts', 'action' => 'delete', $post['id']),
-																															 array('confirm' => __('Are you sure you want to delete # %s?', $post['id']),
-																														 				 "class" => 'btn btn-danger')); ?>
-							</td>
-						</tr>
-					</div>
-					<?php endforeach; ?>
-				</table> -->
 				<?php else: ?>
 					<div class="not_post">
 						<?php echo "記事はありません。"; ?>
