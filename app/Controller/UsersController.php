@@ -14,182 +14,66 @@ class UsersController extends AppController {
     parent::beforeFilter();
     $this->Auth->allow('add', 'logout', 'login', 'account_clear');
 
-    if ($this->Auth->user() && $this->params['action'] == 'opauthComplete') {
-        $provider = $this->request->data['auth']['provider'];
-        if ($provider === 'Twitter') {
-          $account = $this->User->find('first', array(
-                                                     'conditions' => array(
-                                                          'credentials_token' => $this->request->data['auth']['credentials']['token'],
-                                                          'credentials_secret' => $this->request->data['auth']['credentials']['secret']
-                                                          )
-        ));
+    if ($this->params['action'] == 'opauthComplete') {
+      $provider = $this->request->data['auth']['provider'];
+      if ($provider === 'Twitter') {
+        $saveField = ['credentials_token', 'credentials_secret'];
+        $conditions = [
+                       'credentials_token' => $this->request->data['auth']['credentials']['token'],
+                       'credentials_secret' => $this->request->data['auth']['credentials']['secret']
+                       ];
+      } elseif ($provider === 'Facebook') {
+        $email['sns_auth']['email'] = $this->request->data['auth']['info']['email'];
+        $saveField = ['fb_id'];
+        $conditions = ['fb_id' => $this->request->data['auth']['uid'],];
+
+      } elseif ($provider === 'Google') {
+        $email['sns_auth']['email'] = $this->request->data['auth']['raw']['email'];
+        $saveField = ['g_id'];
+        $conditions = ['g_id' => $this->request->data['auth']['raw']['id']];
+
+      } elseif ($provider === 'GitHub') {
+        $saveField = ['git_id', 'git_url'];
+        $conditions = [
+                       'git_id' => $this->request->data['auth']['uid'],
+                       'git_url' => $this->request->data['auth']['info']['urls']['github']
+                       ];
+      }
+
+      $account = $this->User->find('first', ['conditions' => $conditions]);
+      if ($this->Auth->user()) {
         if (empty($account)) {
-            $data = array('User' => array(
-              'id' => $this->Auth->user()['id'],
-              'credentials_token' => $this->request->data['auth']['credentials']['token'],
-              'credentials_secret' => $this->request->data['auth']['credentials']['secret']
-            ));
-            $saveField = ['credentials_token', 'credentials_secret'];
-            if ($this->User->save($data, null, $saveField)) {
-              $this->Session->setFlash('Twitterを登録しました。');
-            } else {
-              $this->Session->setFlash('登録できませんでした。もう一度お試しください。');
-            }
+          $up_data = ['id' => $this->Auth->user()['id']];
+          $data['User'] = array_merge($up_data, $conditions);
+          if ($this->User->save($data, null, $saveField)) {
+            $this->Session->setFlash($provider . 'を登録しました。');
           } else {
-            $this->Session->setFlash('指定したTwitterアカウントは既に使われています。');
-          }
-          $this->redirect(array('action' => 'view', $this->Auth->user()['id']));
-
-        } elseif ($provider === 'Facebook') {
-          $account = $this->User->find('first', array(
-                                                      'conditions' => array(
-                                                        'fb_id' => $this->request->data['auth']['uid'],
-                                                      )
-          ));
-          if (empty($account)) {
-            $data = array('User' => array(
-              'id' => $this->Auth->user()['id'],
-              'fb_id' => $this->request->data['auth']['uid']
-            ));
-            $saveField = ['fb_id'];
-		        if ($this->User->save($data, null, $saveField)) {
-              $this->Session->setFlash('Facebookを指定しました。');
-            } else {
-              $this->Session->setFlash('登録できませんでした。もう一度お試しください。');
-            }
-          } else {
-            $this->Session->setFlash('指定したFacebookアカウントは既に使われています。');
-          }
-          $this->redirect(array('action' => 'view', $this->Auth->user()['id']));
-
-        } elseif($provider === 'Google') {
-          $account = $this->User->find('first', array(
-                                                      'conditions' => array(
-                                                          'g_id' => $this->request->data['auth']['raw']['id']
-                                                      )
-          ));
-          if (empty($account)) {
-            $data = array('User' => array(
-              'id' => $this->Auth->user()['id'],
-              'g_id' => $this->request->data['auth']['raw']['id']
-            ));
-            $saveField = ['g_id'];
-            if ($this->User->save($data, null, $saveField)) {
-              $this->Session->setFlash('Googleを指定しました。');
-            }
-          } else {
-            $this->Session->setFlash('指定したGoogleアカウントは既に使われています。');
-          }
-          $this->redirect(array('action' => 'view', $this->Auth->user()['id']));
-
-        } elseif ($provider === 'GitHub') {
-          $account = $this->User->find('first', array(
-                                                      'conditions' => array(
-                                                          'git_id' => $this->request->data['auth']['uid'],
-                                                          'git_url' => $this->request->data['auth']['info']['urls']['github']
-                                                      )
-          ));
-          if (empty($account)) {
-            $data = array('User' => array(
-              'id' => $this->Auth->user()['id'],
-              'git_id' => $this->request->data['auth']['uid'],
-              'git_url' => $this->request->data['auth']['info']['urls']['github']
-            ));
-            $saveField = ['git_id', 'git_url'];
-            if ($this->User->save($data, null, $saveField)) {
-              $this->Session->setFlash('GitHubを指定しました。');
-            }
-          } else {
-            $this->Session->setFlash('指定したGitHubのアカウントは既に使われています。');
-          }
-          $this->redirect(array('action' => 'view', $this->Auth->user()['id']));
+            $this->Session->setFlash('登録できませんでした。もう一度試してください。');
+          } 
+        } else {
+          $this->Session->setFlash('指定した' . $provider . 'アカウントは既に使われています。');
         }
+        $this->redirect(array('action' => 'view', $this->Auth->user()['id']));
 
-    } elseif ($this->params['action'] == 'opauthComplete') {
-        $provider = $this->request->data['auth']['provider'];
-        if ($provider === 'Twitter') {
-          $token = $this->request->data['auth']['credentials'];
-          $account = $this->User->find('first', array(
-                                                      'conditions' => array(
-                                                        'credentials_token' => $token['token'],
-                                                        'credentials_secret' => $token['secret']
-                                                      )
-           ));
-           if (empty($account)) {
-             $this->Session->write('auth' ,array(
-                                                 'provider' => $provider,
-                                                 'twitter_token' => $token["token"],
-                                                 'twitter_secret' => $token["secret"],
-                                                 'username' => $this->request->data['auth']['info']['name']
-                                                 )
-             );
-             $this->redirect('add');
-            } elseif (!empty($account)) {
-              $not_empty_account = true;
-            }
-        } elseif ($provider === 'Facebook') {
-          $email = $this->request->data['auth']['info']['email'];
-          $fb_id = $this->request->data['auth']['uid'];
-          $account = $this->User->find('first', array(
-                                                      'conditions' => array(
-                                                        'fb_id' => $fb_id,
-                                       )
-          ));
-          if (empty($account)) {
-            $this->Session->write('auth', array(
-                                                'provider' => $provider,
-                                                'fb_id' => $fb_id,
-                                                'email' => $email,
-                                                'username' => $this->request->data['auth']['info']['name']
-                                                )
-            );
-            $this->redirect('add');
-          } elseif (!empty($account)) {
-            $not_empty_account = true;
+      } else {
+        if (empty($account)) {
+
+          if ($provider === 'GitHub') {
+            $username['sns_auth']['username'] = $this->request->data['auth']['raw']['login'];
+          } else {
+            $username['sns_auth']['username'] = $this->request->data['auth']['info']['name'];
           }
-        } elseif ($provider === 'Google') {
-          $g_id = $this->request->data['auth']['raw']['id'];
-          $gmail = $this->request->data['auth']['raw']['email'];
-          $account = $this->User->find('first', array(
-                                                      'conditions' => array(
-                                                      'g_id' => $g_id,
-                                                       )
-          ));
-          if (empty($account)) {
-            $this->Session->write('auth', array(
-                                                'provider' => $provider,
-                                                'g_id' => $g_id,
-                                                'email' => $gmail,
-                                                'username' => $this->request->data['auth']['info']['name']
-                                                )
-                                 );
-            $this->redirect('add');
-            } else {
-              $not_empty_account = true;
-	          }
-        } elseif ($provider === 'GitHub') {
-          $git_id = $this->request->data['auth']['uid'];
-          $git_url = $this->request->data['auth']['info']['urls']['github'];
-          $account = $this->User->find('first', array(
-                                                      'conditions' => array(
-                                                        'git_id' => $git_id,
-                                                        'git_url' => $git_url
-                                                       )
-          ));
-          if (empty($account)) {
-            $this->Session->write('auth', array(
-                                                'provider' => $provider,
-                                                'git_id' => $git_id,
-                                                'git_url' => $git_url,
-                                                'username' => $this->request->data['auth']['raw']['login']
-                                                )
-                                  );
-            $this->redirect('add');
-            } else {
-              $not_empty_account = true;
-            }
-        }
-        if ($not_empty_account = true) {
+          $this->Session->write('sns_auth', ['provider' => $provider]);
+          $auth_conditions['sns_auth'] = $conditions;
+          $_SESSION = array_merge_recursive($_SESSION, $username);
+          $_SESSION = array_merge_recursive($_SESSION, $auth_conditions);
+
+          if ($provider === 'Google' || $provider === 'Facebook') {
+            $_SESSION = array_merge_recursive($_SESSION, $email);
+          }
+          $this->redirect('add');
+
+        } else {
           $sns_account = array_shift($account);
           $sns_account = array_merge($sns_account, ['Group' => array_shift($account)]);
           if ($this->Auth->login($sns_account)) {
@@ -197,12 +81,11 @@ class UsersController extends AppController {
           } else {
             $this->Session->setFlash('ログアウトしています。アカウントを作成しますか？');
           }
-          unset($not_empty_account);
-          return $this->redirect(array('controller' => 'posts', 'action' => 'index'));
         }
+      }
     }
   }
-	
+
   public function opauthComplete() {
       debug($this->data);
   }
@@ -329,17 +212,17 @@ class UsersController extends AppController {
   public function add() {
     if ($this->request->is('post')) {
       $this->User->create();
-      if (isset($this->Session->read()['auth'])){
-        if ($this->Session->read()['auth']['provider'] === 'Twitter') {
-          $this->request->data['User']['credentials_token'] = $this->Session->read()['auth']['twitter_token'];
-          $this->request->data['User']['credentials_secret'] = $this->Session->read()['auth']['twitter_secret'];
-        } elseif ($this->Session->read()['auth']['provider'] === 'Facebook') {
-          $this->request->data['User']['fb_id'] = $this->Session->read()['auth']['fb_id'];
-        } elseif ($this->Session->read()['auth']['provider'] === 'Google') {
-          $this->request->data['User']['g_id'] = $this->Session->read()['auth']['g_id'];
-        } elseif (isset($this->Session->read()['auth'])) {
-          $this->request->data['User']['git_id'] = $this->Session->read()['auth']['git_id'];
-          $this->request->data['User']['git_url'] = $this->Session->read()['auth']['git_url'];
+      if (isset($this->Session->read()['sns_auth'])){
+        if ($this->Session->read()['sns_auth']['provider'] === 'Twitter') {
+          $this->request->data['User']['credentials_token'] = $this->Session->read()['sns_auth']['twitter_token'];
+          $this->request->data['User']['credentials_secret'] = $this->Session->read()['sns_auth']['twitter_secret'];
+        } elseif ($this->Session->read()['sns_auth']['provider'] === 'Facebook') {
+          $this->request->data['User']['fb_id'] = $this->Session->read()['sns_auth']['fb_id'];
+        } elseif ($this->Session->read()['sns_auth']['provider'] === 'Google') {
+          $this->request->data['User']['g_id'] = $this->Session->read()['sns_auth']['g_id'];
+        } elseif (isset($this->Session->read()['sns_auth'])) {
+          $this->request->data['User']['git_id'] = $this->Session->read()['sns_auth']['git_id'];
+          $this->request->data['User']['git_url'] = $this->Session->read()['sns_auth']['git_url'];
         }
       }
       if ($this->User->save($this->request->data)) {
