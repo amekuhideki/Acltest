@@ -68,6 +68,7 @@
 }
 .actions h3 {
 	text-align: center;
+	padding-bottom: 20px;
 
 }
 .btn:hover {
@@ -87,6 +88,7 @@
 	text-align: center;
 }
 .btn-list {
+	margin-top: 10px;
 	text-align: center;
 }
 .btn-list li {
@@ -186,16 +188,32 @@
 				<h3>他アカウントの連携</h3>
 				<ul>
 					<li>
-						<?php echo $this->Html->link(__('Twitterと連携'), array('controller' => '', 'action' => 'auth/twitter'), array('class' => "btn", 'style' => "background-color:#00aced; color:white;")); ?>
+						<?php if (is_null($user['User']['credentials_token']) && is_null($user['User']['credentials_secret'])): ?>
+							<?php echo $this->Html->link(__('Twitterと連携'), array('controller' => '', 'action' => 'auth/twitter'), array('class' => "btn", 'style' => "background-color:#00aced; color:white;")); ?>
+						<?php else: ?>
+							<?php echo $this->Html->link(__('Twitter連携を解除する'), array('action' => 'account_clear', $user['User']['id'], 'Twitter'), array('class' => "btn", 'style' => "background-color:#00aced; color:white;")); ?>
+						<?php endif; ?>
 					</li>
 					<li>
-						<?php echo $this->Html->link(__('Facebookと連携'), array('controller' => '', 'action' => 'auth/facebook'), array('class' => "btn", 'style' => "background-color:#305097; color:white;")); ?>
+						<?php if (is_null($user['User']['fb_id'])): ?>
+							<?php echo $this->Html->link(__('Facebookと連携'), array('controller' => '', 'action' => 'auth/facebook'), array('class' => "btn", 'style' => "background-color:#305097; color:white;")); ?>
+						<?php else: ?>
+							<?php echo $this->Html->link(__('Facebook連携を解除する'), array('action' => 'account_clear', $user['User']['id'], 'Facebook'), array('class' => "btn", 'style' => "background-color:#305097; color:white;")); ?>
+						<?php endif; ?>
 					</li>
 					<li>
-						<?php echo $this->Html->link(__('Googleと連携'), array('controller' => '', 'action' => 'auth/google'), array('class' => "btn", 'style' => "background-color:#db4a39; color:white;")); ?>
+						<?php if (is_null($user['User']['g_id'])): ?>
+							<?php echo $this->Html->link(__('Googleと連携'), array('controller' => '', 'action' => 'auth/google'), array('class' => "btn", 'style' => "background-color:#db4a39; color:white;")); ?>
+						<?php else: ?>
+							<?php echo $this->Html->link(__('Google連携を解除する'), array('action' => 'account_clear', $user['User']['id'], 'Google'), array('class' => "btn", 'style' => "background-color:#db4a39; color:white;")); ?>
+						<?php endif; ?>
 					</li>
 					<li>
-						<?php echo $this->Html->link(__('GitHubと連携'), array('controller' => '', 'action' => 'auth/github'), array('class' => "btn btn-warning", 'style' => "background-color:#2c4762; color:white;")); ?>
+						<?php if (is_null($user['User']['git_id']) && is_null($user['User']['git_url'])): ?>
+							<?php echo $this->Html->link(__('GitHubと連携'), array('controller' => '', 'action' => 'auth/github'), array('class' => "btn", 'style' => "background-color:#2c4762; color:white;")); ?>
+						<?php else: ?>
+							<?php echo $this->Html->link(__('GitHub連携を解除する'), array('action' => 'account_clear', $user['User']['id'], 'GitHub'), array('class' => "btn", 'style' => "background-color:#2c4762; color:white;")); ?>
+						<?php endif; ?>
 					</li>
 				</ul>
 			</div>

@@ -12,7 +12,7 @@ class UsersController extends AppController {
 
   public function beforeFilter() {
     parent::beforeFilter();
-    $this->Auth->allow('add', 'logout', 'login');
+    $this->Auth->allow('add', 'logout', 'login', 'account_clear');
 
     if ($this->Auth->user() && $this->params['action'] == 'opauthComplete') {
         $provider = $this->request->data['auth']['provider'];
@@ -432,6 +432,37 @@ class UsersController extends AppController {
     }
   }
   
+  public function account_clear($id = null, $provider) {
+    $this->User->id = $id;
+    if (!$this->User->exists()) {
+      throw new NotFoundException(__('Invalid user'));
+    }
+    $user = $this->User->findById($id);
+    if ($provider === 'Twitter') {
+      $up_data['User'] = ['credentials_token' => null, 'credentials_secret' => null];
+      $saveField = ['credentials_token', 'credentials_secret'];
+
+    } elseif ($provider === 'Facebook') {
+      $up_data['User'] = ['fb_id' => null,];
+      $saveField = ['fb_id'];
+
+    } elseif ($provider === 'Google') {
+      $up_data['User'] = ['g_id' => null];
+      $saveField = ['g_id'];
+
+    } elseif ($provider === 'GitHub') {
+      $up_data['User'] = ['git_id' => null, 'git_url' => null];
+      $saveField = ['git_id', 'git_url'];
+
+    }
+    $user_id = ['User' => ['id' => $id]];
+    $data = array_merge_recursive($user_id, $up_data);
+    if ($this->User->save($data, null, $saveField)) {
+      $this->Session->setFlash($provider . '連携を解除しました');
+    }
+    return $this->redirect(array('action' => 'view', $id));
+  }
+
   public function authentication($id = null) {
 
   }
