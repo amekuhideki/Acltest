@@ -7,72 +7,72 @@ App::uses('AppController', 'Controller');
  * @property PaginatorComponent $Paginator
  */
 class UsersController extends AppController {
-	var $users = array('User', 'Group');
-	// var $uses = array('Post', 'User', 'Category', 'Tag', 'PostsTag', 'Attachment', 'Groups');
+  var $users = array('User', 'Group');
+  // var $uses = array('Post', 'User', 'Category', 'Tag', 'PostsTag', 'Attachment', 'Groups');
 
-	public function beforeFilter() {
+  public function beforeFilter() {
     parent::beforeFilter();
-		$this->Auth->allow('add', 'logout', 'login');
-		
-		if ($this->Auth->user() && $this->params['action'] == 'opauthComplete') {
-				$provider = $this->request->data['auth']['provider'];
-				if ($provider === 'Twitter') {
-					$account = $this->User->find('first', array(
-																											'conditions' => array(
-																													'credentials_token' => $this->request->data['auth']['credentials']['token'],
-																													'credentials_secret' => $this->request->data['auth']['credentials']['secret']
-																											)
-					));
-					if (empty($account)) {
-						$data = array('User' => array(
-							'id' => $this->Auth->user()['id'],
-							'credentials_token' => $this->request->data['auth']['credentials']['token'],
-							'credentials_secret' => $this->request->data['auth']['credentials']['secret']
-						));
-						$saveField = ['credentials_token', 'credentials_secret'];
-						if ($this->User->save($data, null, $saveField)) {
-							$this->Session->setFlash('Twitterを登録しました。');
-						} else {
-							$this->Session->setFlash('登録できませんでした。もう一度お試しください。');
-						}
-					} else {
-						$this->Session->setFlash('指定したTwitterアカウントは既に使われています。');
-					}
-					$this->redirect(array('action' => 'view', $this->Auth->user()['id']));
-				
-				} elseif ($provider === 'Facebook') {
-					$account = $this->User->find('first', array(
-																											'conditions' => array(
-																													'fb_id' => $this->request->data['auth']['uid'],
-																											)
-					));
-					if (empty($account)) {
-						$data = array('User' => array(
-							'id' => $this->Auth->user()['id'],
-							'fb_id' => $this->request->data['auth']['uid']
-						));
-						$saveField = ['fb_id'];
-						if ($this->User->save($data, null, $saveField)) {
-							$this->Session->setFlash('Facebookを指定しました。');
-						} else {
-							$this->Session->setFlash('登録できませんでした。もう一度お試しください。');
-						}
-					} else {
-						$this->Session->setFlash('指定したFacebookアカウントは既に使われています。');
-					}
-					$this->redirect(array('action' => 'view', $this->Auth->user()['id']));
-				
-				} elseif($provider === 'Google') {
-					$account = $this->User->find('first', array(
-																											'conditions' => array(
-																													'g_id' => $this->request->data['auth']['raw']['id']
-																											)
-					));
-					if (empty($account)) {
-						$data = array('User' => array(
-							'id' => $this->Auth->user()['id'],
-							'g_id' => $this->request->data['auth']['raw']['id']
-						));
+    $this->Auth->allow('add', 'logout', 'login');
+
+    if ($this->Auth->user() && $this->params['action'] == 'opauthComplete') {
+        $provider = $this->request->data['auth']['provider'];
+        if ($provider === 'Twitter') {
+          $account = $this->User->find('first', array(
+                                                     'conditions' => array(
+                                                          'credentials_token' => $this->request->data['auth']['credentials']['token'],
+                                                          'credentials_secret' => $this->request->data['auth']['credentials']['secret']
+                                                          )
+        ));
+        if (empty($account)) {
+            $data = array('User' => array(
+              'id' => $this->Auth->user()['id'],
+              'credentials_token' => $this->request->data['auth']['credentials']['token'],
+              'credentials_secret' => $this->request->data['auth']['credentials']['secret']
+            ));
+            $saveField = ['credentials_token', 'credentials_secret'];
+            if ($this->User->save($data, null, $saveField)) {
+              $this->Session->setFlash('Twitterを登録しました。');
+            } else {
+              $this->Session->setFlash('登録できませんでした。もう一度お試しください。');
+            }
+          } else {
+            $this->Session->setFlash('指定したTwitterアカウントは既に使われています。');
+          }
+          $this->redirect(array('action' => 'view', $this->Auth->user()['id']));
+
+        } elseif ($provider === 'Facebook') {
+          $account = $this->User->find('first', array(
+                                                      'conditions' => array(
+                                                        'fb_id' => $this->request->data['auth']['uid'],
+                                                      )
+          ));
+          if (empty($account)) {
+            $data = array('User' => array(
+              'id' => $this->Auth->user()['id'],
+              'fb_id' => $this->request->data['auth']['uid']
+            ));
+            $saveField = ['fb_id'];
+		        if ($this->User->save($data, null, $saveField)) {
+              $this->Session->setFlash('Facebookを指定しました。');
+            } else {
+              $this->Session->setFlash('登録できませんでした。もう一度お試しください。');
+            }
+          } else {
+            $this->Session->setFlash('指定したFacebookアカウントは既に使われています。');
+          }
+          $this->redirect(array('action' => 'view', $this->Auth->user()['id']));
+
+        } elseif($provider === 'Google') {
+          $account = $this->User->find('first', array(
+                                                      'conditions' => array(
+                                                          'g_id' => $this->request->data['auth']['raw']['id']
+                                                      )
+          ));
+          if (empty($account)) {
+            $data = array('User' => array(
+              'id' => $this->Auth->user()['id'],
+              'g_id' => $this->request->data['auth']['raw']['id']
+            ));
 						$saveField = ['g_id'];
 						if ($this->User->save($data, null, $saveField)) {
 							$this->Session->setFlash('Googleを指定しました。');
