@@ -1,10 +1,10 @@
 <style>
   .container {
-      width: 300px;
+      width: 400px;
       padding-top: 100px;
   }
   .center   {
-      width: 140%;
+      width: 100%;
       margin: 0 auto;
       padding: 15px;
       border: solid 1px;
@@ -26,7 +26,7 @@
     margin-left: -15px;
     margin-right: -15px;
     padding-bottom: 10px; 
-    border-bottom: solid 1px;
+    /*border-bottom: solid 1px;*/
     text-align: center;
     margin-top: 10px;
   }
@@ -38,7 +38,7 @@
 <div class="container">
   <div class="center">
     <div class="form-group">
-      <h3>ログイン/新規会員登録</h3>
+      <legend><h3>ログイン/新規会員登録</h3></legend>
       <?php
       echo $this->Form->create('User', array(
           'url' => array(

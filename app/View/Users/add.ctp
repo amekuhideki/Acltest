@@ -1,12 +1,12 @@
 <script src="https://ajaxzip3.github.io/ajaxzip3.js" charset="UTF-8"></script>
 <style>
 	.container{
-		width: 300px;
+		width: 400px;
 		padding-top: 100px;
 	}
 	.center{
-			width: 100%;
 			margin: 0 auto;
+			width: 100%;
 			padding: 15px;
 			border: solid 1px;
 	}
@@ -49,13 +49,16 @@
 						echo $this->Form->input('password', array('label' => "パスワード", 'class' => "form-control"));
 					?>
 				</div>
+				<div>
+					<?php 
+						echo $this->Form->input('password_confirm', array('label' => "パスワード(確認)", 'type' => 'password', 'class' => "form-control")); ?>
+				</div>
 				<div class="form-group">
 					<?php
-						echo $this->Form->input('group_id', array('label' => "権限", 'class' => "form-control"));
+						echo $this->Form->input('group_id', array('type' => 'hidden', 'label' => "権限", 'class' => "form-control", 'value' => '3'));
 					?>
 				</div>
 			</fieldset>
-		<!-- <?php echo $this->Form->end(__('Submit')); ?> -->
 			<div class="form-group">
 				<?php echo $this->Form->end(array('label' => "アカウント作成", 'class' => "btn btn-primary form-control")) ?>
 			</div>

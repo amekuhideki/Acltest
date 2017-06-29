@@ -49,6 +49,14 @@ class User extends AppModel {
 	public function bindNode($user) {
     return array('model' => 'Group', 'foreign_key' => $user['User']['group_id']);
 	}
+  
+  public function passwordConfirm($check) {
+    if ($this->data['User']['password'] === $this->data['User']['password_confirm']) {
+      return true;
+    } else {
+      return false;
+    }
+  }
 /**
  * Validation rules
  *
@@ -63,11 +71,6 @@ class User extends AppModel {
     'email' => array(
       'notBlank' => array(
         'rule' => array('notBlank'),
-				//'message' => 'Your custom message here',
-				//'allowEmpty' => false,
-				//'required' => false,
-				//'last' => false, // Stop validation after this rule
-				//'on' => 'create', // Limit validation to 'create' or 'update' operations
 			),
       'unique' => array(
         'rule' => 'isUnique',
@@ -79,21 +82,28 @@ class User extends AppModel {
 		'password' => array(
 			'notBlank' => array(
 				'rule' => array('notBlank'),
-				//'message' => 'Your custom message here',
-				//'allowEmpty' => false,
-				//'required' => false,
-				//'last' => false, // Stop validation after this rule
-				//'on' => 'create', // Limit validation to 'create' or 'update' operations
+        'message' => 'パスワードを入力してください'
 			),
+      'match' => array(
+        'rule' => 'passwordConfirm',
+        'message' => 'パスワードが一致していません'
+      ),
+      'minLength' => array(
+        'rule' => array('minLength', 4),
+        'message' => 'パスワードは4文字以上にしてください'
+      )
 		),
+    'password_confirm' => array(
+      'match' => array(
+        'rule' => array(
+          'notBlank',
+          'message' => 'パスワード(確認)を入力してください'
+        )
+      )
+    ),
 		'group_id' => array(
 			'numeric' => array(
 				'rule' => array('numeric'),
-				//'message' => 'Your custom message here',
-				//'allowEmpty' => false,
-				//'required' => false,
-				//'last' => false, // Stop validation after this rule
-				//'on' => 'create', // Limit validation to 'create' or 'update' operations
 			),
 		),
     'credentials_token' => array(
@@ -107,23 +117,6 @@ class User extends AppModel {
       )
     ),
 	);
-
-	// The Associations below have been created with all possible keys, those that are not needed can be removed
-
-/**
- * belongsTo associations
- *
- * @var array
- */
-	// public $belongsTo = array(
-	// 	'Group' => array(
-	// 		'className' => 'Group',
-	// 		'foreignKey' => 'group_id',
-	// 		'conditions' => '',
-	// 		'fields' => '',
-	// 		'order' => ''
-	// 	)
-	// );
 
 /**
  * hasMany associations
