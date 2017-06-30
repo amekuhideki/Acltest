@@ -7,7 +7,6 @@ class UsersController extends AppController {
   public function beforeFilter() {
     parent::beforeFilter();
     $this->Auth->allow('add', 'logout', 'login', 'account_clear');
-
     if ($this->params['action'] == 'opauthComplete') {
       $provider = $this->request->data['auth']['provider'];
       if ($provider === 'Twitter') {
