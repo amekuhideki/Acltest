@@ -1,15 +1,9 @@
 <?php
 App::uses('AppController', 'Controller');
-/**
- * Users Controller
- *
- * @property User $User
- * @property PaginatorComponent $Paginator
- */
+
 class UsersController extends AppController {
   var $users = array('User', 'Group');
-  // var $uses = array('Post', 'User', 'Category', 'Tag', 'PostsTag', 'Attachment', 'Groups');
-
+  
   public function beforeFilter() {
     parent::beforeFilter();
     $this->Auth->allow('add', 'logout', 'login', 'account_clear');
@@ -89,72 +83,73 @@ class UsersController extends AppController {
   public function opauthComplete() {
       debug($this->data);
   }
+  
   public function initDB() {
-      $group = $this->User->Group;
-      //管理者グループには全てを許可する
-      $group->id = 1;
-      $this->Acl->allow($group, 'controllers');
-      //マネージャグループには posts と widgets に対するアクセスを許可する
-      $group->id = 2;
-      $this->Acl->deny($group, 'controllers');
-      $this->Acl->allow($group, 'controllers/Posts');
-      $this->Acl->allow($group, 'controllers/Widgets');
-      $this->Acl->allow($group, 'controllers/categories');
-      $this->Acl->allow($group, 'controllers/Attachments');
-      $this->Acl->allow($group, 'controllers/Users/index');
-      $this->Acl->allow($group, 'controllers/Users/view');
+    $group = $this->User->Group;
+    //管理者グループには全てを許可する
+    $group->id = 1;
+    $this->Acl->allow($group, 'controllers');
+    //マネージャグループには posts と widgets に対するアクセスを許可する
+    $group->id = 2;
+    $this->Acl->deny($group, 'controllers');
+    $this->Acl->allow($group, 'controllers/Posts');
+    $this->Acl->allow($group, 'controllers/Widgets');
+    $this->Acl->allow($group, 'controllers/categories');
+    $this->Acl->allow($group, 'controllers/Attachments');
+    $this->Acl->allow($group, 'controllers/Users/index');
+    $this->Acl->allow($group, 'controllers/Users/view');
 
-      //ユーザグループには posts と widgets に対する追加と編集を許可する
-      $group->id = 3;
-      $this->Acl->deny($group, 'controllers');
-      $this->Acl->allow($group, 'controllers/Posts/add');
-      $this->Acl->allow($group, 'controllers/Posts/edit');
-      $this->Acl->allow($group, 'controllers/Widgets/add');
-      $this->Acl->allow($group, 'controllers/Widgets/edit');
-      $this->Acl->allow($group, 'controllers/Posts');
-      $this->Acl->allow($group, 'controllers/Attachments');
-      $this->Acl->allow($group, 'controllers/categories/view');
-      $this->Acl->allow($group, 'controllers/Users');
-      //馬鹿げた「ビューが見つからない」というエラーメッセージを表示させないために exit を追加します
-      echo "all done";
-      exit;
+    //ユーザグループには posts と widgets に対する追加と編集を許可する
+    $group->id = 3;
+    $this->Acl->deny($group, 'controllers');
+    $this->Acl->allow($group, 'controllers/Posts/add');
+    $this->Acl->allow($group, 'controllers/Posts/edit');
+    $this->Acl->allow($group, 'controllers/Widgets/add');
+    $this->Acl->allow($group, 'controllers/Widgets/edit');
+    $this->Acl->allow($group, 'controllers/Posts');
+    $this->Acl->allow($group, 'controllers/Attachments');
+    $this->Acl->allow($group, 'controllers/categories/view');
+    $this->Acl->allow($group, 'controllers/Users');
+    //馬鹿げた「ビューが見つからない」というエラーメッセージを表示させないために exit を追加します
+    echo "all done";
+    exit;
   }
 
   public function login() {
-      if ($this->Session->read('Auth.User')) {
-        $this->Session->setFlash('You are logged in!');
-        $this->redirect('/posts', null, false);
-      }
-      if ($this->request->is('post')) {
-          $loginUser = $this->User->find('first', array(
-                                            'conditions' => array(
-                                                'email' => $this->request->data['User']['email']
-                                                )));
-          if (!empty($loginUser)) {
-              $errCnt = $loginUser['User']['error_count'];
-              if ($errCnt >= 10 ) {
-                  if (time() - strtotime($loginUser['User']['error_time']) < 600 ) {
-                      $this->Session->setFlash(__('アカウントはロックしました。10分後にやり直してください。'));
-                      return;
-                  } else {
-                      $errCnt = 0;
-                  }
-              }  
-          }  
-          if ($this->Auth->login()) {
-              if (!empty($loginUser['User']['error_count'])) {
-                  $data = array('id' => $loginUser['User']['id'], 'error_count' => 0, 'error_time' => NULL);
-                  $this->User->save($data, array('collback' => false), array('error_count', 'error_time'));
-              }
-              return $this->redirect($this->Auth->redirect());
+    if ($this->Session->read('Auth.User')) {
+      $this->Session->setFlash('You are logged in!');
+      $this->redirect('/posts', null, false);
+    }
+    if ($this->request->is('post')) {
+      $loginUser = $this->User->find('first', [
+                                        'conditions' => [
+                                            'email' => $this->request->data['User']['email']
+                                            ]]);
+      if (!empty($loginUser)) {
+        $errCnt = $loginUser['User']['error_count'];
+        if ($errCnt >= 10 ) {
+          if (time() - strtotime($loginUser['User']['error_time']) < 600 ) {
+              $this->Session->setFlash(__('アカウントはロックしました。10分後にやり直してください。'));
+              return;
           } else {
-              if (!empty($loginUser)) {
-                $data = array('id' => $loginUser['User']['id'], 'error_count' => $errCnt + 1, 'error_time' => date('Y-m-d H:i:s'));
-                $this->User->save($data, array('callback' => false), array('error_count', 'error_time'));
-            } 
-            $this->Session->setFlash(__('Your username or password was incorrect.'));
+              $errCnt = 0;
           }
+        }  
+      }  
+      if ($this->Auth->login()) {
+        if (!empty($loginUser['User']['error_count'])) {
+            $data = ['id' => $loginUser['User']['id'], 'error_count' => 0, 'error_time' => NULL];
+            $this->User->save($data, null, array('error_count', 'error_time'));
+        }
+        return $this->redirect($this->Auth->redirect());
+      } else {
+        if (!empty($loginUser)) {
+          $data = array('id' => $loginUser['User']['id'], 'error_count' => $errCnt + 1, 'error_time' => date('Y-m-d H:i:s'));
+          $this->User->save($data, null, array('error_count', 'error_time'));
+        } 
+        $this->Session->setFlash(__('Your username or password was incorrect.'));
       }
+    }
   }
 
   public function logout() {
@@ -162,18 +157,9 @@ class UsersController extends AppController {
     session_destroy();
     $this->Session->setFlash('Good-Bye');
     $this->redirect($this->Auth->logout());	}
-/**
- * Components
- *
- * @var array
- */
+
 	public $components = array('Paginator', 'Flash');
 
-/**
- * index method
- *
- * @return void
- */
   public function index() {
     $user = $this->Auth->user();
     $user_group = $user['group_id'];
@@ -185,13 +171,6 @@ class UsersController extends AppController {
     $this->set('users', $this->Paginator->paginate());
 	}
 
-/**
- * view method
- *
- * @throws NotFoundException
- * @param string $id
- * @return void
- */
   public function view($id = null) {
     if (!$this->User->exists($id)) {
     	throw new NotFoundException(__('Invalid user'));
@@ -204,11 +183,7 @@ class UsersController extends AppController {
     $this->set('categories', $categories);
 
   }
-/**
- * add method
- *
- * @return void
- */
+
   public function add() {
     if ($this->request->is('post')) {
       $this->User->create();
@@ -236,13 +211,6 @@ class UsersController extends AppController {
     $this->set(compact('groups'));
   }
 
-/**
- * edit method
- *
- * @throws NotFoundException
- * @param string $id
- * @return void
- */
   public function edit($id = null) {
     if (!$this->User->exists($id)) {
       throw new NotFoundException(__('Invalid user'));
@@ -283,13 +251,6 @@ class UsersController extends AppController {
     $this->set(compact('groups', 'user'));
   }
 
-/**
- * delete method
- *
- * @throws NotFoundException
- * @param string $id
- * @return void
- */
   public function delete($id = null) {
     $this->User->id = $id;
     if (!$this->User->exists()) {
