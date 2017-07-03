@@ -14,7 +14,7 @@ class PostsController extends AppController {
   public $components = array('Paginator', 'Flash', 'Search.Prg');
   public $presetVars = true;
 
-	public function index() {
+  public function index() {
     //まとめサイトのスクレイピング
     $source = file_get_contents('http://blog.livedoor.jp/dqnplus/');
     $source = mb_convert_encoding($source, 'utf8', 'auto');

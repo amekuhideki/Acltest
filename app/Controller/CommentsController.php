@@ -5,9 +5,9 @@ class CommentsController extends AppController {
   public $helper = array('HTML', 'Form');
 
   public function beforeFilter() {
-	    parent::beforeFilter();
-      $this->Auth->allow('add', 'delete', 'edit');
-	}
+    parent::beforeFilter();
+    $this->Auth->allow('add', 'delete', 'edit');
+  }
 
   public $components = array('Paginator', 'Flash', 'Search.Prg');
 
@@ -31,23 +31,23 @@ class CommentsController extends AppController {
     }
     if ($this->request->is(array('post', 'put'))) {
       $post_data = $this->request->data['Comment'];
-  		$data = array('Comment' => array('id' => $id, 'commenter' => $post_data['commenter'], 'body' => $post_data['body']));
-			if ($this->Comment->save($data)) {
+      $data = array('Comment' => array('id' => $id, 'commenter' => $post_data['commenter'], 'body' => $post_data['body']));
+      if ($this->Comment->save($data)) {
         $post_id = $this->Comment->findById($id);
-				$this->Flash->success(__('The tag has been saved.'));
-				return $this->redirect(array('controller' => 'posts', 'action' => 'view/' . $post_id['Comment']['post_id']));
-			} else {
-				$this->Flash->error(__('The tag could not be saved. Please, try again.'));
-			}
-		} else {
+        $this->Flash->success(__('The tag has been saved.'));
+        return $this->redirect(array('controller' => 'posts', 'action' => 'view/' . $post_id['Comment']['post_id']));
+      } else {
+        $this->Flash->error(__('The tag could not be saved. Please, try again.'));
+      }
+    } else {
 
-			$options = array('conditions' => array('Comment.id' . $this->Comment->id => $id));
-			$this->request->data = $this->Comment->find('first', $options);
+      $options = array('conditions' => array('Comment.id' . $this->Comment->id => $id));
+      $this->request->data = $this->Comment->find('first', $options);
 
-		}
-		$comments = $this->Comment->find('first', array('conditions' => array('Comment.id' => $id)));
+    }
+    $comments = $this->Comment->find('first', array('conditions' => array('Comment.id' => $id)));
 
-		$this->set(compact('comments'));
+    $this->set(compact('comments'));
   }
 
   public function delete($id = null) {
@@ -65,6 +65,6 @@ class CommentsController extends AppController {
     } else {
       $this->Flash->error(__('The post could not be deleted. Please, try again.'));
     }
-		return $this->redirect(array('controller' => 'posts', 'action' => 'view/' . $comment['Comment']['post_id']));
+    return $this->redirect(array('controller' => 'posts', 'action' => 'view/' . $comment['Comment']['post_id']));
   }
 }

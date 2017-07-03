@@ -157,7 +157,7 @@ class UsersController extends AppController {
     $this->Session->setFlash('Good-Bye');
     $this->redirect($this->Auth->logout());	}
 
-	public $components = array('Paginator', 'Flash');
+  public $components = array('Paginator', 'Flash');
 
   public function index() {
     $user = $this->Auth->user();
@@ -168,7 +168,7 @@ class UsersController extends AppController {
 
     $this->User->recursive = 0;
     $this->set('users', $this->Paginator->paginate());
-	}
+  }
 
   public function view($id = null) {
     if (!$this->User->exists($id)) {
