@@ -6,7 +6,7 @@ mb_language('Japanese');
 class PostsController extends AppController {
   public function beforeFilter() {
     parent::beforeFilter();
-    $this->Auth->allow('index', 'view');
+    $this->Auth->allow('index', 'view', 'getdate');
 
   }
   var $uses = array('Post', 'User', 'Category', 'Tag', 'PostsTag', 'Attachment', 'Comment', 'SubCategory');
@@ -232,11 +232,29 @@ class PostsController extends AppController {
   }
 
   public function getdate() {
+    $this->autoLayout = false;
     $this->auto_Render = false;
+
     if ($this->request->is('ajax')) {
-      echo json_encode('a');
+      $date = $this->request->data['date'];
+
+      $blog_date = $this->Post->find('first', array(
+                                      'conditions' => array(
+                                      'status' => 0,
+                                      'Post.created LIKE' => $date . "%"
+                                      )
+                                    ));
+      if (!empty($blog_date)) {
+        echo "true";
+      }else {
+        echo "false";
+      }
       exit;
+      // if ($blog_date) {
+      //   json_encode("true");
+      // } else {
+      //   json_encode("false");
+      // }
     }
-    exit;
   }
 }
