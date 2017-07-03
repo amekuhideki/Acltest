@@ -15,8 +15,8 @@ p{
 
 .page-top {
   position: fixed;
-  right: 10px;
-  bottom: 10px;
+  right: 50px;
+  bottom: 20px;
   z-index: 99;
 }
 
@@ -51,5 +51,8 @@ $(function(){
 </div>
 
 <div class="page-top">
-  <a>ページトップへ</a>
+  <button type="button">
+  <img src="/AclTest/images/shesha.png" style="width:50px;"><br>
+  <font size="2">ページトップへ</font>
+  </button>
 </div>
