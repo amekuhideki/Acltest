@@ -1,23 +1,4 @@
-<style>
-.main {
-  width: 960px;
-  margin: auto;
-  margin-top: 40px;
-}
-
-#contact_details {
-  width: 500px;
-	margin: 0 auto;
-  margin-top: 40px;
-  text-align: left;
-  padding: 40px;
-  border: solid 1px;
-}
-.text {
-  margin: 5px;
-}
-</style>
-<!-- <?php echo $this->Html->css('contacts/contact.css') ?> -->
+<?php echo $this->Html->css('common.css'); ?>
 <div id="contact">
   <div class="header">
     <?php echo $this->element('header2'); ?>
@@ -35,7 +16,7 @@
               'label' => '・お名前',
               'maxlength' => 255,
               'style' => 'width:300px;',
-              'class' => 'text',
+              'class' => 'contact_text',
               )
            );
 
@@ -44,7 +25,7 @@
               'label' => '・メールアドレス',
               'maxlength' => 255,
               'style' => 'width:300px;',
-              'class' => 'text',
+              'class' => 'contact_text',
               )
            );
 
@@ -53,7 +34,7 @@
               'label' => '・件名',
               'maxlength' => 255,
               'style' => 'width:300px;',
-              'class' => 'text',
+              'class' => 'contact_text',
               )
           );
 
@@ -62,7 +43,7 @@
               'label' => '・お問い合わせ内容',
               'maxlength' => 3000,
               'style' =>'width:400px;height:200px;',
-              'class' => 'text',
+              'class' => 'contact_text',
               )
           );
 

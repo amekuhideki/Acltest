@@ -1,3 +1,31 @@
+html {
+  margin: 0;
+  padding: 0;
+  font: 16px/20px "ヒラギノ角ゴ Pro W3","Hiragino Kaku Gothic Pro",'メイリオ',Meiryo,Helvetica,Arial,Sans-Serif;
+}
+body {
+background-color:#ffffe0;
+}
+
+a{ color: #69c;}
+ a:hover{color:#069;}
+}
+.starter-template {
+  padding: 40px 15px;
+  text-align: center;
+}
+#flash_message {
+  margin: 0 auto;
+  text-align: center;
+  height: 50px;
+  width: 400px;
+}
+#wrapper {
+  margin-left: 40px;
+  margin-right: 40px;
+  margin: 0 auto;
+}
+
 .main {
 	width: 960px;
 	margin-left: 40px;
@@ -86,7 +114,7 @@
   border-radius: 6px;
   box-shadow: 0 0 3px #ddd;
   white-space: nowrap;
-  background-color: #4169E1;/*青色*/
+  background-color: #4169E1;
 }
 .post_title{
 	clear: both;
@@ -188,3 +216,381 @@
 .paginate{
 	text-align: right;
 }
+
+label {
+	white-space: nowrap;
+}
+
+.center{
+	width: 960px;
+	margin-left: 40px;
+	margin-right: 40px;
+	margin: 0 auto;
+}
+
+.submit_button {
+  position: relative;
+  margin: auto;
+  padding-top: 20px;
+  padding-bottom: 100px;
+}
+#image{
+  margin: auto;
+  padding: 50px;
+}
+#image h4{
+  text-align: center;
+  border-bottom: solid;
+}
+
+.content {
+	width: 800px;
+	margin: 0 auto;
+
+}
+.content_detail {
+	padding: 40px;
+	margin: 10px;
+	margin-top: 30px;
+	border: 1px solid black;
+}
+.annotation {
+	font-size: 12px;
+	text-align: left;
+}
+.user_conf {
+	float: left;
+	margin-right: 100px;
+}
+.user_introduction {
+	float: left;
+}
+.content_footer {
+	clear: left;
+}
+
+.container {
+    width: 400px;
+    padding-top: 100px;
+}
+/*.center   {
+    width: 100%;
+    margin: 0 auto;
+    padding: 15px;
+    border: solid 1px;
+}*/
+.text{
+  text-align: center;
+}
+.text .btn{
+  margin: 5px;
+  width:300px;
+}
+
+.btn:hover{
+  filter:alpha(opacity=80);
+  opacity:0.8;
+}
+.form-group h3{
+  margin: 0 auto;
+  margin-left: -15px;
+  margin-right: -15px;
+  padding-bottom: 10px; 
+  /*border-bottom: solid 1px;*/
+  text-align: center;
+  margin-top: 10px;
+}
+.btn-default {
+margin: auto;
+margin-bottom: 30px;
+}
+
+.details{
+	width: 960px;
+	margin-left: 40px;
+	margin-right: 40px;
+	margin: 0 auto;
+	margin-top: 40px;
+	background-color: white;
+	border: 1px solid;
+}
+.user_details {
+	width: 280px;
+	padding: 20px;
+	margin: 0 auto;
+	margin-top: 20px;
+	border: 1px solid;
+	float: left;
+}
+.user_details h2 {
+	margin: auto;
+	padding: 10px;
+	text-align: center;
+}
+.user_posts {
+	clear: left;
+	margin: 0 auto;
+	width: 760px;
+}
+.user_posts_header {
+	clear: both;
+	margin: auto;
+	margin-top: 20px;
+	padding: 0px;
+	border-style: solid;
+	border-color: #A9A9A9;
+	border-width: 2px;
+}
+.user_posts_header h4 {
+	margin: auto;
+	padding: 10px;
+	background-color: #7BAEB5;
+}
+
+.table th {
+	text-align: right;
+
+}
+.user_introduction {
+	margin: auto;
+  width: 700px;
+	height: 246px;
+	margin-top: 20px;
+	margin-left: 120px;
+	margin-right: 120px;
+	padding-top: 20px;
+}
+.user_introduction h4 {
+	text-align: left;
+	border-bottom: solid;
+}
+.actions {
+	float:right;
+	margin: auto;
+	margin-left: 100px;
+	text-align: left;
+}
+.actions li {
+	margin: 10px;
+}
+.actions h3 {
+	text-align: center;
+	padding-bottom: 20px;
+
+}
+.actions ul {
+	padding-left: 0px;
+}
+.actions .btn-on {
+	width:250px;
+}
+.btn-off {
+	background-color: #bdc3c7;
+	color: #869198;
+	width: 250px;
+}
+.detail_top {
+	padding-left: 160px;
+	display: table-cell;
+	vertical-align: middle;
+	text-align: center;
+}
+.btn-list {
+  clear: both;
+	margin-top: 10px;
+	text-align: center;
+}
+.btn-list li {
+	display: inline-block;
+	width:180px;
+}
+.post_details {
+	margin: auto;
+	margin-bottom: 10px;
+	padding: 10px;
+	width: 760px;
+	height: 110px;
+	border-left-style: solid;
+	border-bottom-style: solid;
+	border-right-style: solid;
+	border-color: #A9A9A9;
+	border-width: 1px;
+}
+.post_details h5 {
+	margin: auto;
+}
+
+.post_details_header {
+	border-bottom: dotted 1px black;
+	height: 34px;
+}
+
+.users_post_category {
+	float: left;
+	padding-right: 10px;
+	margin-left: -26px;
+}
+.post_created {
+	float: left;
+}
+.users_post_body {
+	padding-top: 10px;
+	clear: left;
+	overflow: hidden;
+	white-space:  nowrap;
+	text-overflow: ellipsis;
+	text-align: left;
+}
+.btn_details {
+	margin-left: -30px;
+	float: left;
+	padding-right: 15px;
+}
+.btn_edit {
+	float: left;
+	padding-right: 15px
+}
+.btn_delete {
+	float: left;
+}
+.not_post {
+	text-align: center;
+}
+
+.form-group h2{
+  text-align: center;
+}
+.signin_text{
+  text-align: center;
+}
+
+#contact_details {
+  width: 500px;
+	margin: 0 auto;
+  margin-top: 40px;
+  text-align: left;
+  padding: 40px;
+  border: solid 1px;
+}
+.contact_text{
+  margin: 5px;
+}
+
+.footer{
+  width: 100%;
+  clear: both;
+  max-width: 960px;
+  /*height: 10px;*/
+  margin: 0 auto;
+  padding-top: 100px;
+}
+
+.footer p{
+  text-align: center;
+}
+
+.page-top {
+  position: fixed;
+  right: 50px;
+  bottom: 20px;
+  z-index: 99;
+}
+
+.header_header{
+  height: 200px;
+  width: 960px;
+  margin-left: 40px;
+  margin-right: 40px;
+  margin: 0 auto;
+  margin-top: 20px;
+  padding-top: 20px;
+  background-image: url("/AclTest/images/syurijo.png"),
+										url("/AclTest/images/header_shisa.png"),
+										url("/AclTest/images/header_shisa2.png"),
+                    url("/AclTest/images/haibisukasu.png");
+	background-size: 400px 200px,
+									 140px 140px,
+									 140px 140px,
+                   180px 180px;
+	background-repeat: no-repeat,
+										 no-repeat,
+										 no-repeat,
+                     no-repeat;
+	background-position: center,
+											 138px 56px,
+    									 684px 56px,
+                       10px 0px;
+	background-attachment: local,local,local,local;
+}
+.header_title{
+  float: left;
+  margin-bottom: 100px;
+  padding-top: 14px;
+}
+.search_section{
+  position: relative;
+  float: right;
+  width: 300px;
+  height: auto;
+}
+.search_box{
+  margin: auto;
+  float: left;
+}
+.search_bottun{
+  float: left;
+  padding-top: 16px;
+}
+
+.header_category{
+  /*padding-top: 20px;*/
+  clear: both;
+  margin: 0 auto;
+  background-color: #000;
+
+}
+.header_category_inner{
+  width: 960px;
+  margin: 0 auto;
+}
+  nav ul{
+    display: table;
+    table-layout: fixed;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    table-layout:fixed
+  }
+  nav li{
+    display: table-cell;
+    vertical-align: middle;
+    /*display: inline;*/
+    margin-left: 26px;
+    margin: 0;
+    padding: 10px;
+    border-left: 1px solid white;
+  }
+  .list_logout {
+    border-right: 1px solid white;
+  }
+  nav a{
+    text-decoration: none;
+  }
+  nav a:hover{
+    color: #69c;
+    position: relative;
+    top:2px;
+    left:2px;
+  }
+  nav li a{
+    color: white;
+    font-size: 18px;
+  }
+  #site_name {
+    font-size: 30px
+
+  }
+  .search_section ul{
+    list-style: none;
+  }

@@ -1,26 +1,4 @@
-<style>
-
-.footer{
-  width: 100%;
-  clear: both;
-  max-width: 960px;
-  /*height: 10px;*/
-  margin: 0 auto;
-  padding-top: 100px;
-}
-
-p{
-  text-align: center;
-}
-
-.page-top {
-  position: fixed;
-  right: 50px;
-  bottom: 20px;
-  z-index: 99;
-}
-
-</style>
+<?php echo $this->Html->css('common.css'); ?>
 <script>
 $(function(){
   /*Top-pageボタン制御*/
