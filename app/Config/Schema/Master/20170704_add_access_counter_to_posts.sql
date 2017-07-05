@@ -1,0 +1,1 @@
+ALTER TABLE posts ADD access_counter int DEFAULT 0 COMMENT "アクセス数" AFTER body;

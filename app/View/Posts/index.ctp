@@ -74,13 +74,13 @@ $(window).load(function () {
           async: false,
           scriptCharset: "utf-8",
           success:function(res){
-            console.log(res);
+            // console.log(res);
             if(res == "true"){
               flg = true;
             } else {
               flg = false;
             }
-            console.log(flg);
+            // console.log(flg);
           },});
 
           if (flg)
@@ -89,6 +89,10 @@ $(window).load(function () {
             return [false];
       },
       onSelect: function(dateText, inst) {
+        date = dateText.replace("/", "-");
+        date = date.replace("/", "-");
+        window.location.href = '/AclTest/posts/index/' + date;
+        
         $("#date_val").val(dateText);
       },
       maxDate: $date,
@@ -139,7 +143,7 @@ $(window).load(function () {
               </li>
               <li class="post_date">
                 <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
-                <?php $post_date = date('Y年m月d日', strtotime($post['Post']['modified']));
+                <?php $post_date = date('Y年m月d日', strtotime($post['Post']['created']));
                   echo h($post_date);
                 ?>
                 &nbsp;&nbsp;

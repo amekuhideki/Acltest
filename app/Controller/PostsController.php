@@ -6,7 +6,7 @@ mb_language('Japanese');
 class PostsController extends AppController {
   public function beforeFilter() {
     parent::beforeFilter();
-    $this->Auth->allow('index', 'view', 'getdate');
+    $this->Auth->allow('index', 'view', 'getdate', 'date_post');
 
   }
   var $uses = array('Post', 'User', 'Category', 'Tag', 'PostsTag', 'Attachment', 'Comment', 'SubCategory');
@@ -14,7 +14,7 @@ class PostsController extends AppController {
   public $components = array('Paginator', 'Flash', 'Search.Prg');
   public $presetVars = true;
 
-  public function index() {
+  public function index($data = null) {
     //まとめサイトのスクレイピング
     $source = file_get_contents('http://blog.livedoor.jp/dqnplus/');
     $source = mb_convert_encoding($source, 'utf8', 'auto');
@@ -53,12 +53,16 @@ class PostsController extends AppController {
 
     //SearchPlugin
     $this->Prg->commonProcess();
+    if (!is_null($data)) {
+      $conditions = array($this->Post->parseCriteria($this->passedArgs), 'Post.status' => 0, 'Post.created LIKE' => $data . "%");
+    } else {
+      $conditions = array($this->Post->parseCriteria($this->passedArgs), 'Post.status' => 0);//'Post.status' => 0 で論理削除
+    }
     $this->paginate = array(
-      'conditions' =>array($this->Post->parseCriteria($this->passedArgs), 'Post.status' => 0),//'Post.status' => 0 で論理削除
+      'conditions' => $conditions,
       'order' => array('Post.modified' => 'desc'),//日付順で表示
       'limit' => 15
     );
-
     $this->set('posts', $this->paginate());
     // $tags = $this->Post->Tag->find('list', array(
     // 	'fields' => array('Tag.tag')
@@ -79,6 +83,10 @@ class PostsController extends AppController {
       throw new NotFoundException(__('Invalid post'));
     }
     $options = array('conditions' => array('Post.' . $this->Post->primaryKey => $id));
+    $posts = $this->Post->find('first',$options);
+    $data = array('Post' => array('id' => $id, 'access_counter' => $posts['Post']['access_counter'] + 1));
+    $fields = array('id', 'access_counter');
+    $this->Post->save($data, false, $fields);
     $this->set('post', $this->Post->find('first', $options));
     
     if ($comment_page === null){
@@ -256,5 +264,10 @@ class PostsController extends AppController {
       //   json_encode("false");
       // }
     }
+  }
+  
+  public function date_post() {
+    var_dump('a');
+    exit;
   }
 }
