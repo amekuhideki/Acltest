@@ -34,7 +34,7 @@
             </div>
           </div>
           <div class="post_contents">
-            <ul class="post_header">
+            <ul class="post_header" style="list-style:none;">
               <li class="post_category">
                 <span class="badge_category">
                   <?php echo ($post['Category']['category']) ?>
