@@ -33,7 +33,7 @@
 			</div>
 			<div class="actions">
 				<h3>他アカウントの連携</h3>
-				<ul>
+				<ul style="list-style:none;">
 					<li>
 						<?php if (is_null($user['User']['credentials_token']) && is_null($user['User']['credentials_secret'])): ?>
 							<?php echo $this->Html->link(__('Twitterと連携'), array('controller' => '', 'action' => 'auth/twitter'), array('class' => "btn btn-on", 'style' => "background-color:#00aced; color:white;")); ?>

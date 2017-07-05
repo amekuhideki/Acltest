@@ -1,225 +1,4 @@
-<!-- <?php echo $this->Html->css('posts/view.css'); ?> -->
-<style>
-.header{
-	/*border-bottom: 1px solid #000;*/
-}
-
-#mom_layer{
-	display: none;
-	position: fixed;
-	top: 0;
-	left: 0;
-	height: 100%;
-	width: 100%;
-	background: black;
-	opacity: 0.60;
-	z-index: 1;
-}
-#kids_layer{
-	display: none;
-	position: fixed;
-	top: 50%;
-	left: 50%;
-	margin-top: -240px;
-	margin-left: -320px;
-	z-index: 2;
-}
-#modal_window h4{
-	margin: 0 auto;
-	font-size: large;
-	text-align: center;
-	border-bottom: solid 1px;
-	padding: 10px;
-	width: 600px;
-}
-#modal_window ul{
-	margin: 0 auto;
-	width: 600px;
-	list-style-type: none;
-}
-#modal_window ul li{
-	float: left;
-}
-#modal_window ul li img{
-  border: 0;
-  margin: 10px;
-}
-.slide {
-	margin: 100px;
-  width: 400px;
-  height: 400px;
-  /*border: 10px solid black;*/
-  float: left;
-	pointer-events: none;
-}
-.slider {
-	margin-top: 100px;
-	margin-left: 200px;
-  width: 600px;
-  height: 600px;
-  overflow: hidden;
-  position: absolute;
-	display: none;
-	z-index: 2;
-
-}
-.slideSet {
-  position: absolute;
-}
-.slider-next{
-	top: 300px;
-	right: 60px;
-	position: absolute;
-	z-index: 3;
-}
-.slider-prev{
-	top: 300px;
-	left: 60px;
-	position: absolute;
-	z-index: 3;
-}
-.slider-close{
-	top: 100px;
-	right: 70px;
-	position: absolute;
-	z-index: 3;
-}
-
-#post_header{
-	margin: auto;
-	padding: 1px;
-	padding-top: 10px;
-	padding-bottom: 10px;
-	overflow: hidden;
-	border-bottom: 1px dotted;
-}
-#list{
-	margin: auto;
-	padding-left: 1px;
-}
-.post_category{
-	float: left;
-	font-size: 15px;
-}
-.category_badge {
-	padding: 3px 6px;
-	margin-right: 8px;
-	margin-left: 1px;
-	font-size: 90%;
-	border-radius: 6px;
-	box-shadow: 0 0 3px #ddd;
-	white-space: nowrap;
-	background-color: #4169E1;
-}
-.post_date{
-	float:left;
-	font-size: 14px;
-	margin-left: 10px;
-}
-.post_tags{
-	float: left;
-	font-size: 14px;
-}
-.post_user {
-	float: right;
-}
-.post_body{
-	clear: right;
-	/*border-bottom: 1px dashed black;*/
-	padding-bottom: 40px; /* 内容と線との間隔量 */
-}
-.post_body p {
-	text-align: left;
-}
-#content{
-  width: 960px;
-	margin-left: 40px;
-	margin-right: 40px;
-	margin: 0 auto;
-	margin-top: 40px;
-	padding: 50px;
-	border: 1px solid;
-	background-color: white;
-}
-#title{
-	clear: both;
-	padding: 20px;
-	margin-bottom: 30px;
-	border-bottom: 1px dotted;
-	/*border-left: 10px solid #7BAEB5;
-	border-bottom: 1px solid #7BAEB5;*/
-}
-#title h3 {
-	margin: 0;
-	font-weight: bold;
-	white-space: nowrap;
-	overflow: hidden;
-	text-overflow: ellipsis;
-}
-#social {
-	float: right;
-	height: 100px;
-
-}
-#twitter {
-	float: left;
-	/*height: 80px;*/
-}
-#facebook {
-	margin-left: 20px;
-	float: left;
-}
-#bookmark {
-	margin-left: 20px;
-	float: left;
-}
-#googleplus {
-	margin-left: 20px;
-	float: left;
-}
-#post_comment{
-	clear: both;
-}
-#add_comment{
-	margin: 0 auto;
-	padding: 10px;
-}
-#add_comment_contain{
-	margin: 0 auto;
-}
-.comment_header{
-	text-align: left;
-	border-bottom: 1px solid black;
-	padding-top: 30px;
-	padding-bottom: 10px;
-	font-weight: 900;
-}
-.comment_preview{
-	padding-top: 8px;
-	padding-left: 10px;
-	padding-bottom: 20px;
-	border-bottom: 1px dashed black;
-	font-size: 14px;
-}
-.comment_commenter{
-	float: left;
-}
-li.previous{
-	float: left;
-}
-li.next{
-	margin-left: 20px;
-	float:left;
-}
-#not_comment{
-	padding-left: 10px;
-}
-#item {
-	margin: auto;
-	float: right;
-	padding-right: 5px;
-}
-</style>
+<?php echo $this->Html->css('common.css'); ?>
 <script>
 $(function(){
     $("body").append("<div id='mom_layer'></div><div class='slider'></div>");
@@ -340,10 +119,10 @@ $(function(){
   <div class="header">
   	<?php echo $this->element('header2'); ?>
   </div>
-  <div id="content">
-		<div id="post_header">
-			<ul id="list">
-				<li class="post_category">
+  <div id="view_content">
+		<div id="post_view_header">
+			<ul id="view_list", style="list-style:none;">
+				<li class="post_view_category">
 					<span class="category_badge"><?php echo $this->Html->link($post['Category']['category'],
 																						 array('controller' => 'categories', 'action' => 'view', $post['Category']['id']), array('style' => 'color:white;'));
 																			 ?>
@@ -368,7 +147,7 @@ $(function(){
 			</ul>
 		</div>
 
-  	<div id="title">
+  	<div id="view_title">
   		<div>
   			<h3><?php echo h($post['Post']['title']); ?></h3>
   		</div>
@@ -392,12 +171,12 @@ $(function(){
 			</div>
 		</div>
 
-  	<div class="post_body">
+  	<div class="post_view_body">
   		<?php echo ($post['Post']['body']); ?>
   		&nbsp;
   	</div>
 
-  	<div id="item">
+  	<div id="view_item">
   		<?php if ($user['id'] === $post['User']['id']): ?>
   			<?php echo $this->Html->link(__('編集'), array('action' => 'edit', $post['Post']['id'])); ?>
   			・
