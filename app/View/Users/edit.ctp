@@ -1,35 +1,4 @@
-<style>
-.header{
-	border-bottom: 1px solid #000;
-}
-#edit {
-}
-.content {
-	width: 800px;
-	margin: 0 auto;
-
-}
-.content_detail {
-	padding: 40px;
-	margin: 10px;
-	margin-top: 30px;
-	border: 1px solid black;
-}
-.annotation {
-	font-size: 12px;
-	text-align: left;
-}
-.user_conf {
-	float: left;
-	margin-right: 100px;
-}
-.user_introduction {
-	float: left;
-}
-.content_footer {
-	clear: left;
-}
-</style>
+<?php echo $this->Html->css('common.css'); ?>
 <div id="edit">
 	<div class="users form">
 		<div class="header">

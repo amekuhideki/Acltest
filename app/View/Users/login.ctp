@@ -1,40 +1,4 @@
-<style>
-  .container {
-      width: 400px;
-      padding-top: 100px;
-  }
-  .center   {
-      width: 100%;
-      margin: 0 auto;
-      padding: 15px;
-      border: solid 1px;
-  }
-  .text{
-    text-align: center;
-  }
-  .text .btn{
-    margin: 5px;
-    width:300px;
-  }
-  
-  .btn:hover{
-    filter:alpha(opacity=80);
-    opacity:0.8;
-  }
-  h3{
-    margin: 0 auto;
-    margin-left: -15px;
-    margin-right: -15px;
-    padding-bottom: 10px; 
-    /*border-bottom: solid 1px;*/
-    text-align: center;
-    margin-top: 10px;
-  }
-.btn-default {
-  margin: auto;
-  margin-bottom: 30px;
-}
-</style>
+<?php echo $this->Html->css('common.css'); ?>
 <div class="container">
   <div class="center">
     <div class="form-group">
