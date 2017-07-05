@@ -113,7 +113,7 @@ $(window).load(function () {
           <?php echo $this->Html->image('/images/shisa.png', array('width' => '50')); ?>
         </div>
         <div id="list">
-          <h3>記事一覧</h3>
+          <h3><?php echo(__('List of articles')) ?></h3>
         </div>
 
       </div>

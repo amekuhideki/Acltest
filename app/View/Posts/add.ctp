@@ -1,16 +1,4 @@
-<style>
-
-label {
-	white-space: nowrap;
-}
-
-.center{
-	width: 960px;
-	margin-left: 40px;
-	margin-right: 40px;
-	margin: 0 auto;
-}
-</style>
+<?php echo $this->Html->css('common.css'); ?>
 <?php echo $this->Html->script('tinymce/tinymce.min.js'); ?>
 <script>
 tinymce.init({
@@ -88,11 +76,11 @@ $(function(){
 	<?php echo $this->Form->create('Post', array('type' => 'file')); ?>
 	<?php echo $this->Form->input('status', array('type' => 'hidden', 'value' => 0)); ?>
 	<div class="center">
-		<h3><?php echo __('記事作成'); ?></h3>
+		<h3><?php echo __('New Post'); ?></h3>
 		<table class="table">
 			<tr>
 				<th>
-					<label class="col-sm-3"><?php echo(__('タイトル')); ?></label>
+					<label class="col-sm-3"><?php echo __('Title'); ?></label>
 				</th>
 				<td>
 					<div class="col-sm-9">

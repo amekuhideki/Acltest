@@ -1,31 +1,4 @@
-<style>
-	label {
-		white-space: nowrap;
-	}
-	.header{
-		/*border-bottom: 1px solid #000;*/
-	}
-	.main{
-		width: 960px;
-		margin-left: 40px;
-		margin-right: 40px;
-		margin: 0 auto;
-	}
-	.submit_button {
-		position: relative;
-		margin: auto;
-		padding-top: 20px;
-		padding-bottom: 100px;
-	}
-	#image{
-		margin: auto;
-		padding: 50px;
-	}
-	#image h4{
-		text-align: center;
-		border-bottom: solid;
-	}
-</style>
+<?php echo $this->Html->css('common.css'); ?>
 <?php echo $this->Html->script('tinymce/tinymce.min.js'); ?>
 <script>
 tinymce.init({

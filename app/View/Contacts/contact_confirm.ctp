@@ -1,23 +1,23 @@
 <style>
-  #contact_form {
+  #contact_confirm_form {
     width: 400px;
     margin: 0 auto;
     margin-top: 40px;
     text-align: center;
 
   }
-  #contact_details {
+  #contact_confirm_details {
     border: solid 1px;
   }
-  .contact_name {
+  .contact_confirm_name {
     padding: 10px;
     text-align: left;
     background-color: #A9A9A9;
   }
-  .contact_value{
+  .contact_confirm_value{
     padding: 20px;
   }
-  #contact_bottun {
+  #contact_confirm_bottun {
     margin: 10px;
   }
 </style>
@@ -25,17 +25,17 @@
   <div class="header">
     <?php echo $this->element('header2'); ?>
   </div>
-  <div id="contact_form">
+  <div id="contact_confirm_form">
     <p>以下の内容で作成します。よろしいですか？</p>
-    <div id="contact_details">
+    <div id="contact_confirm_details">
       <dl>
       <?php foreach ($this->request->data['Contact'] as $name => $val): ?>
-          <dt class="contact_name"><?php echo h($name); ?></dt>
-          <dd class="contact_value"><?php echo h($val); ?></dd>
+          <dt class="contact_confirm_name"><?php echo h($name); ?></dt>
+          <dd class="contact_confirm_value"><?php echo h($val); ?></dd>
       <?php endforeach; ?>
       </dl>
     </div>
-    <div id=contact_bottun>
+    <div id=contact_confirm_bottun>
       <?php
       echo $this->Form->create('Contact');
 
