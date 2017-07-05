@@ -1,10 +1,4 @@
-<style>
-.main{
-	width: 960px;
-	margin: 0 auto;
-	margin-top: 40px;
-}
-</style>
+<?php echo $this->Html->css('common.css'); ?>
 
 <div class="tags index">
 	<div class="header">

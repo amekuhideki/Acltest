@@ -1,162 +1,4 @@
-<style>
-.details{
-	width: 960px;
-	margin-left: 40px;
-	margin-right: 40px;
-	margin: 0 auto;
-	margin-top: 40px;
-	background-color: white;
-	border: 1px solid;
-}
-.user_details {
-	width: 280px;
-	padding: 20px;
-	margin: 0 auto;
-	margin-top: 20px;
-	border: 1px solid;
-	float: left;
-}
-.user_details h2 {
-	margin: auto;
-	padding: 10px;
-	text-align: center;
-}
-.user_posts {
-	clear: left;
-	margin: 0 auto;
-	width: 760px;
-}
-.user_posts_header {
-	clear: both;
-	margin: auto;
-	margin-top: 20px;
-	padding: 0px;
-	border-style: solid;
-	border-color: #A9A9A9;
-	border-width: 2px;
-}
-.user_posts_header h4 {
-	margin: auto;
-	padding: 10px;
-	background-color: #7BAEB5;
-}
-
-.table th {
-	text-align: right;
-
-}
-.user_introduction {
-	margin: auto;
-	height: 246px;
-	margin-top: 20px;
-	margin-left: 120px;
-	margin-right: 120px;
-	padding-top: 20px;
-}
-.user_introduction h4 {
-	text-align: left;
-	border-bottom: solid;
-}
-.actions {
-	float:right;
-	margin: auto;
-	margin-left: 100px;
-	text-align: left;
-}
-.actions li {
-	margin: 10px;
-}
-.actions h3 {
-	text-align: center;
-	padding-bottom: 20px;
-
-}
-.btn:hover {
-	filter:alpha(opacity=80);
-	opacity:0.8;
-}
-.actions ul {
-	padding-left: 0px;
-}
-.actions .btn-on {
-	width:250px;
-}
-.btn-off {
-	background-color: #bdc3c7;
-	color: #869198;
-	width: 250px;
-}
-.detail_top {
-	padding-left: 160px;
-	display: table-cell;
-	vertical-align: middle;
-	text-align: center;
-}
-.btn-list {
-	margin-top: 10px;
-	text-align: center;
-}
-.btn-list li {
-	display: inline-block;
-	width:180px;
-}
-.post_details {
-	margin: auto;
-	margin-bottom: 10px;
-	padding: 10px;
-	width: 760px;
-	height: 110px;
-	border-left-style: solid;
-	border-bottom-style: solid;
-	border-right-style: solid;
-	border-color: #A9A9A9;
-	border-width: 1px;
-}
-.post_details h5 {
-	/*margin-left: 24px;*/
-	margin: auto;
-}
-
-.post_details_header {
-	border-bottom: dotted 1px black;
-	height: 34px;
-}
-/*.list_details {
-	border-bottom: dotted 2px black;
-}*/
-
-.post_category {
-	float: left;
-	padding-right: 10px;
-	margin-left: -26px;
-}
-.post_created {
-	float: left;
-}
-.post_body {
-	padding-top: 10px;
-	clear: left;
-	overflow: hidden;
-	white-space:  nowrap;
-	text-overflow: ellipsis;
-	text-align: left;
-}
-.btn_details {
-	margin-left: -30px;
-	float: left;
-	padding-right: 15px;
-}
-.btn_edit {
-	float: left;
-	padding-right: 15px
-}
-.btn_delete {
-	float: left;
-}
-.not_post {
-	text-align: center;
-}
-</style>
+<?php echo $this->Html->css('common.css'); ?>
 <div class="users view">
 	<div class="header">
 		<?php echo $this->element('header2'); ?>
@@ -257,13 +99,13 @@
 								<ul class="list_details">
 									<?php foreach ($categories as $category): ?>
 										<?php if ($category['Category']['id'] === $post['category_id']): ?>
-											<li class="post_category"><?php echo $category['Category']['category']; ?></li>
+											<li class="users_post_category"><?php echo $category['Category']['category']; ?></li>
 										<?php endif; ?>
 									<?php endforeach; ?>
 									<li class="post_created"><?php echo "作成日: ".$post['created']; ?></li>
 								</ul>
 							</div>
-							<p class="post_body"><?php echo strip_tags($post['body']); ?></p>
+							<p class="users_post_body"><?php echo strip_tags($post['body']); ?></p>
 							<ul class="detail_bottun">
 								<li class="btn_details"><?php echo $this->Html->link(__('View'), array('controller' => 'posts', 'action' => 'view', $post['id'])); ?></li>
 								<li class="btn_edit"><?php echo $this->Html->link(__('Edit'), array('controller' => 'posts', 'action' => 'edit', $post['id'])); ?></li>

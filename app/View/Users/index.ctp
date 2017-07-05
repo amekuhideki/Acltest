@@ -1,13 +1,7 @@
-<style>
-#wrapper{
-	width: 960px;
-	margin: 0 auto;
-}
-
-</style>
-<div id="wrapper">
-	<div class="users index">
-		<?php echo $this->element('header2'); ?>
+<?php echo $this->Html->css('common.css'); ?>
+<div class="users index">
+  <?php echo $this->element('header2'); ?>
+  <div class="main">
 		<h3><?php echo __('ユーザー一覧'); ?></h3>
 			<table class="table table-striped">
 				<thead>

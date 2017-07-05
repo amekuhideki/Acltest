@@ -22,52 +22,7 @@
 "></script>
 
   <!-- Le styles -->
-	<style>
-    html {
-      /*padding-top: 50px;*/
-      margin: 0;
-      padding: 0;
-      /*padding-left: 100px;
-      padding-right: 100px;
-      padding-bottom: 100px;*/
-      /*padding-top: 10px;*/
-     /*background: #ebe6d3;*/
-     font: 16px/20px "ヒラギノ角ゴ Pro W3","Hiragino Kaku Gothic Pro",'メイリオ',Meiryo,Helvetica,Arial,Sans-Serif;
-     /*color: #666;*/
-  }
-  body {
-    background-color:#ffffe0;
-  }
-
-a{ color: #69c;}
-     a:hover{color:#069;}
-    }
-    .starter-template {
-      padding: 40px 15px;
-      text-align: center;
-    }
-    #flash_message {
-      margin: 0 auto;
-      text-align: center;
-      height: 50px;
-      width: 400px;
-    }
-    #wrapper {
-      /*width: 960px;*/
-      margin-left: 40px;
-      margin-right: 40px;
-      margin: 0 auto;
-    }
-    /*.footer {
-      position: absolute;
-      bottom: 0;
-      width: 100%;
-      height: 100%;
-    }
-    .content {
-      padding-bottom: 100px;
-    }*/
-	</style>
+  <?php echo $this->Html->css('common.css'); ?>
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
