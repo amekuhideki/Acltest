@@ -1,5 +1,6 @@
 <?php
 App::uses('Controller', 'Controller');
+App::import('Vendor', 'accessLogs');
 
 class AppController extends Controller {
 
@@ -23,6 +24,9 @@ class AppController extends Controller {
     // public $layout = 'TwitterBootstrap.default';
 
     public function beforeFilter() {
+      //logの設定
+      $this->access = new AccessLogs();
+      $this->access->write_log();      
       // AuthComponent の設定
       $this->Auth->loginAction = array(
         'controller' => 'users',
