@@ -221,7 +221,7 @@ label {
 	white-space: nowrap;
 }
 
-.center{
+.add_center{
 	width: 960px;
 	margin-left: 40px;
 	margin-right: 40px;
@@ -273,12 +273,12 @@ label {
     width: 400px;
     padding-top: 100px;
 }
-/*.center   {
+.center  {
     width: 100%;
     margin: 0 auto;
     padding: 15px;
     border: solid 1px;
-}*/
+}
 .text{
   text-align: center;
 }
@@ -296,7 +296,6 @@ label {
   margin-left: -15px;
   margin-right: -15px;
   padding-bottom: 10px; 
-  /*border-bottom: solid 1px;*/
   text-align: center;
   margin-top: 10px;
 }

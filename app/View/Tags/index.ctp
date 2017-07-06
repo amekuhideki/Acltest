@@ -5,7 +5,7 @@
 		<?php echo $this->element('header2'); ?>
 	</div>
 	<div class="main">
-		<h3><?php echo __('タグ一覧'); ?></h3>
+		<h3><?php echo __('List Tags'); ?></h3>
 		<table cellpadding="0" cellspacing="0" class="table table-striped">
 		<thead>
 		<tr>

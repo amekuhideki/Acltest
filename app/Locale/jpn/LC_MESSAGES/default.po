@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2017-04-28 17:00+0900\n"
+"PO-Revision-Date: 2017-07-06 14:00+0900\n"
 "Last-Translator: NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
 "Language: ja\n"
@@ -13,981 +13,640 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Poedit 2.0.1\n"
+"X-Generator: Poedit 2.0.2\n"
 
-#: Controller/AttachmentsController.php:41;73;98
 msgid "Invalid attachment"
 msgstr ""
 
-#: Controller/AttachmentsController.php:56;77
 msgid "The attachment has been saved."
 msgstr ""
 
-#: Controller/AttachmentsController.php:59;80
 msgid "The attachment could not be saved. Please, try again."
 msgstr ""
 
-#: Controller/AttachmentsController.php:102
 msgid "The attachment has been deleted."
 msgstr ""
 
-#: Controller/AttachmentsController.php:104
 msgid "The attachment could not be deleted. Please, try again."
 msgstr ""
 
-#: Controller/CategoriesController.php:43;76;101
 msgid "Invalid category"
 msgstr ""
 
-#: Controller/CategoriesController.php:59;80
 msgid "The category has been saved."
 msgstr ""
 
-#: Controller/CategoriesController.php:62;83
 msgid "The category could not be saved. Please, try again."
 msgstr ""
 
-#: Controller/CategoriesController.php:105
 msgid "The category has been deleted."
 msgstr ""
 
-#: Controller/CategoriesController.php:107
 msgid "The category could not be deleted. Please, try again."
 msgstr ""
 
-#: Controller/CommentsController.php:30;56
-#: Controller/PostsController.php:99;182;187;241;262;267
 msgid "Invalid post"
 msgstr ""
 
-#: Controller/CommentsController.php:37 Controller/TagsController.php:55;78
 msgid "The tag has been saved."
 msgstr ""
 
-#: Controller/CommentsController.php:40 Controller/TagsController.php:58;81
 msgid "The tag could not be saved. Please, try again."
 msgstr ""
 
-#: Controller/CommentsController.php:64 Controller/PostsController.php:252;270
 msgid "The post has been deleted."
 msgstr ""
 
-#: Controller/CommentsController.php:66 Controller/PostsController.php:254;272
 msgid "The post could not be deleted. Please, try again."
 msgstr ""
 
-#: Controller/GroupsController.php:46;78;103
 msgid "Invalid group"
 msgstr ""
 
-#: Controller/GroupsController.php:61;82
 msgid "The group has been saved."
 msgstr ""
 
-#: Controller/GroupsController.php:64;85
 msgid "The group could not be saved. Please, try again."
 msgstr ""
 
-#: Controller/GroupsController.php:107
 msgid "The group has been deleted."
 msgstr ""
 
-#: Controller/GroupsController.php:109
 msgid "The group could not be deleted. Please, try again."
 msgstr ""
 
-#: Controller/PostsController.php:158;206 Controller/ZipcodesController.php:64
 msgid "The post has been saved."
 msgstr ""
 
-#: Controller/PostsController.php:161;210 Controller/ZipcodesController.php:67
 msgid "The post could not be saved. Please, try again."
 msgstr ""
 
-#: Controller/PostsTagsController.php:40;75;103
 msgid "Invalid posts tag"
 msgstr ""
 
-#: Controller/PostsTagsController.php:55;79
 msgid "The posts tag has been saved."
 msgstr ""
 
-#: Controller/PostsTagsController.php:58;82
 msgid "The posts tag could not be saved. Please, try again."
 msgstr ""
 
-#: Controller/PostsTagsController.php:107
 msgid "The posts tag has been deleted."
 msgstr ""
 
-#: Controller/PostsTagsController.php:109
 msgid "The posts tag could not be deleted. Please, try again."
 msgstr ""
 
-#: Controller/TagsController.php:40;74;101
 msgid "Invalid tag"
 msgstr ""
 
-#: Controller/TagsController.php:105
 msgid "The tag has been deleted."
 msgstr ""
 
-#: Controller/TagsController.php:107
 msgid "The tag could not be deleted. Please, try again."
 msgstr ""
 
-#: Controller/UsersController.php:65
 msgid "Your username or password was incorrect."
 msgstr ""
 
-#: Controller/UsersController.php:114;153;183
 msgid "Invalid user"
 msgstr ""
 
-#: Controller/UsersController.php:134;160
 msgid "The user has been saved."
 msgstr ""
 
-#: Controller/UsersController.php:137;163
 msgid "The user could not be saved. Please, try again."
 msgstr ""
 
-#: Controller/UsersController.php:192
 msgid "The user has been deleted."
 msgstr ""
 
-#: Controller/UsersController.php:194
 msgid "The user could not be deleted. Please, try again."
 msgstr ""
 
-#: Controller/WidgetsController.php:40;72;97
 msgid "Invalid widget"
 msgstr ""
 
-#: Controller/WidgetsController.php:55;76
 msgid "The widget has been saved."
 msgstr ""
 
-#: Controller/WidgetsController.php:58;79
 msgid "The widget could not be saved. Please, try again."
 msgstr ""
 
-#: Controller/WidgetsController.php:101
 msgid "The widget has been deleted."
 msgstr ""
 
-#: Controller/WidgetsController.php:103
 msgid "The widget could not be deleted. Please, try again."
 msgstr ""
 
-#: Plugin/AclExtras/Console/Command/AclExtrasShell.php:80
 msgid "Plugin to process"
 msgstr ""
 
-#: Plugin/AclExtras/Console/Command/AclExtrasShell.php:83
 msgid "Better manage, and easily synchronize you application's ACO tree"
 msgstr ""
 
-#: Plugin/AclExtras/Console/Command/AclExtrasShell.php:88
-msgid ""
-"Add new ACOs for new controllers and actions. Does not remove nodes from the "
-"ACO table."
+msgid "Add new ACOs for new controllers and actions. Does not remove nodes from the ACO table."
 msgstr ""
 
-#: Plugin/AclExtras/Console/Command/AclExtrasShell.php:93
-msgid ""
-"Perform a full sync on the ACO table.Will create new ACOs or missing "
-"controllers and actions.Will also remove orphaned entries that no longer "
-"have a matching controller/action"
+msgid "Perform a full sync on the ACO table.Will create new ACOs or missing controllers and actions.Will also remove orphaned entries that no longer have a matching controller/action"
 msgstr ""
 
-#: Plugin/AclExtras/Console/Command/AclExtrasShell.php:97
 msgid "Verify the tree structure of either your Aco or Aro Trees"
 msgstr ""
 
-#: Plugin/AclExtras/Console/Command/AclExtrasShell.php:102
 msgid "The type of tree to verify"
 msgstr ""
 
-#: Plugin/AclExtras/Console/Command/AclExtrasShell.php:108
 msgid "Recover a corrupted Tree"
 msgstr ""
 
-#: Plugin/AclExtras/Console/Command/AclExtrasShell.php:113
 msgid "The type of tree to recover"
 msgstr ""
 
-#: Plugin/AclExtras/Lib/AclExtras.php:124
 msgid "<error>Plugin %s not found or not activated</error>"
 msgstr ""
 
-#: Plugin/AclExtras/Lib/AclExtras.php:137
 msgid "<success>Aco Update Complete</success>"
 msgstr ""
 
-#: Plugin/AclExtras/Lib/AclExtras.php:182
 msgid "Deleted %s and all children"
 msgstr ""
 
-#: Plugin/AclExtras/Lib/AclExtras.php:223
 msgid "Created Aco node: <success>%s</success>"
 msgstr ""
 
-#: Plugin/AclExtras/Lib/AclExtras.php:276
 msgid "Unable to get methods for \"%s\""
 msgstr ""
 
-#: Plugin/AclExtras/Lib/AclExtras.php:297
 msgid "Deleted Aco node: <warning>%s</warning>"
 msgstr ""
 
-#: Plugin/AclExtras/Lib/AclExtras.php:316
 msgid "<success>Tree is valid and strong</success>"
 msgstr ""
 
-#: Plugin/AclExtras/Lib/AclExtras.php:334
 msgid "Tree has been recovered, or tree did not need recovery."
 msgstr ""
 
-#: Plugin/AclExtras/Lib/AclExtras.php:336
 msgid "<error>Tree recovery failed.</error>"
 msgstr ""
 
-#: Plugin/TwitterBootstrap/Console/Command/CopyShell.php:10
 msgid "Set theme to place Bootstrap files in."
 msgstr ""
 
-#: Plugin/TwitterBootstrap/Console/Command/CopyShell.php:15
 msgid "Set file output to webroot Theme dir (use with theme option)."
 msgstr ""
 
-#: Plugin/TwitterBootstrap/Console/Command/CopyShell.php:22
 msgid "TwitterBootstrap Copy Shell Help."
 msgstr ""
 
-#: Plugin/TwitterBootstrap/Console/Command/CopyShell.php:29
-msgid ""
-"Copies Less, Js & Img source from Bootstrap submodule in plugin Vendor dir"
+msgid "Copies Less, Js & Img source from Bootstrap submodule in plugin Vendor dir"
 msgstr ""
 
-#: Plugin/TwitterBootstrap/Console/Command/CopyShell.php:31
 msgid "files will be placed in webroot of App or named Theme"
 msgstr ""
 
-#: Plugin/TwitterBootstrap/Console/Command/CopyShell.php:39
 msgid "Copies Less source from Bootstrap submodule in plugin Vendor dir"
 msgstr ""
 
-#: Plugin/TwitterBootstrap/Console/Command/CopyShell.php:41
 msgid "files will be placed in webroot/css/lib/ of App or named Theme"
 msgstr ""
 
-#: Plugin/TwitterBootstrap/Console/Command/CopyShell.php:49
 msgid "Copies Img source from Bootstrap submodule in plugin Vendor dir"
 msgstr ""
 
-#: Plugin/TwitterBootstrap/Console/Command/CopyShell.php:51
 msgid "files will be placed in webroot/img/ of App or named Theme"
 msgstr ""
 
-#: Plugin/TwitterBootstrap/Console/Command/CopyShell.php:59
 msgid "Copies Js source from Bootstrap submodule in plugin Vendor dir"
 msgstr ""
 
-#: Plugin/TwitterBootstrap/Console/Command/CopyShell.php:61
 msgid "files will be placed in webroot/js/lib of App or named Theme"
 msgstr ""
 
-#: Plugin/TwitterBootstrap/Console/Command/CopyShell.php:108
 msgid "Success."
 msgstr ""
 
-#: Plugin/TwitterBootstrap/Console/Command/CopyShell.php:110
 msgid "Error!"
 msgstr ""
 
-#: Plugin/TwitterBootstrap/Controller/TwitterBootstrapController.php:18
 msgid "Debug setting does not allow access to this url."
 msgstr ""
 
-#: Plugin/TwitterBootstrap/Controller/TwitterBootstrapController.php:24
 msgid "Alert notice message testing..."
 msgstr ""
 
-#: Plugin/TwitterBootstrap/Controller/TwitterBootstrapController.php:27
 msgid "Alert success message testing..."
 msgstr ""
 
-#: Plugin/TwitterBootstrap/Controller/TwitterBootstrapController.php:31
 msgid "Alert error message testing..."
 msgstr ""
 
-#: Plugin/TwitterBootstrap/View/Layouts/default.ctp:6
-#: View/Layouts/bootstrap.ctp:6 View/Layouts/default.ctp:8
 msgid "CakePHP: the rapid development php framework:"
 msgstr ""
 
-#: Plugin/TwitterBootstrap/View/Layouts/default.ctp:51
-#: View/Layouts/bootstrap.ctp:51
 msgid "CakePHP"
 msgstr ""
 
-#: Plugin/Upload/Console/Command/ThumbnailShell.php:34
 msgid "Which model would you like to regenerate thumbnails for?"
 msgstr ""
 
-#: Plugin/Upload/Console/Command/ThumbnailShell.php:39
 msgid "<error>"
 msgstr ""
 
-#: Plugin/Upload/Model/Behavior/UploadBehavior.php:1091
 msgid "No filename after parsing. Function %s returned an invalid filename"
 msgstr ""
 
-#: View/Attachments/add.ctp:4
 msgid "Add Attachment"
 msgstr ""
 
-#: View/Attachments/add.ctp:16 View/Attachments/edit.ctp:17
-#: View/Categories/add.ctp:9 View/Categories/edit.ctp:10 View/Groups/add.ctp:9
-#: View/Groups/edit.ctp:10 View/PostsTags/add.ctp:10 View/PostsTags/edit.ctp:11
-#: View/Tags/add.ctp:11 View/Tags/edit.ctp:12 View/Users/add.ctp:45
-#: View/Users/edit.ctp:13 View/Widgets/add.ctp:11 View/Widgets/edit.ctp:12
 msgid "Submit"
 msgstr ""
 
-#: View/Attachments/add.ctp:19 View/Attachments/edit.ctp:20
-#: View/Attachments/index.ctp:15;54 View/Attachments/view.ctp:52
-#: View/Categories/add.ctp:12 View/Categories/edit.ctp:13
-#: View/Categories/index.ctp:18;59 View/Categories/view.ctp:27;47
-#: View/Groups/add.ctp:12 View/Groups/edit.ctp:13 View/Groups/index.ctp:10;44
-#: View/Groups/view.ctp:27;48 View/PostsTags/add.ctp:13
-#: View/PostsTags/edit.ctp:14 View/PostsTags/index.ctp:11;50
-#: View/PostsTags/view.ctp:32 View/Tags/add.ctp:14 View/Tags/edit.ctp:15
-#: View/Tags/index.ctp:19;60 View/Tags/view.ctp:32;54 View/Users/edit.ctp:16
-#: View/Users/index.ctp:20 View/Users/view.ctp:192 View/Widgets/add.ctp:14
-#: View/Widgets/edit.ctp:15 View/Widgets/index.ctp:10;44
-#: View/Widgets/view.ctp:27
 msgid "Actions"
 msgstr ""
 
-#: View/Attachments/add.ctp:22 View/Attachments/edit.ctp:24
-#: View/Attachments/view.ctp:56
 msgid "List Attachments"
 msgstr ""
 
-#: View/Attachments/edit.ctp:4 View/Attachments/view.ctp:54
 msgid "Edit Attachment"
 msgstr ""
 
-#: View/Attachments/edit.ctp:23 View/Attachments/index.ctp:33
-#: View/Categories/edit.ctp:16 View/Categories/index.ctp:33
-#: View/Categories/view.ctp:61 View/Groups/edit.ctp:16 View/Groups/index.ctp:23
-#: View/Groups/view.ctp:61 View/PostsTags/edit.ctp:17
-#: View/PostsTags/index.ctp:29 View/Tags/edit.ctp:18 View/Tags/index.ctp:35
-#: View/Tags/view.ctp:68 View/Users/edit.ctp:19 View/Users/view.ctp:180;205
-#: View/Widgets/edit.ctp:18 View/Widgets/index.ctp:23
 msgid "Delete"
-msgstr ""
+msgstr "削除"
 
-#: View/Attachments/edit.ctp:23 View/Attachments/index.ctp:33
-#: View/Attachments/view.ctp:55 View/Categories/edit.ctp:16
-#: View/Categories/index.ctp:34 View/Categories/view.ctp:30;61
-#: View/Groups/edit.ctp:16 View/Groups/index.ctp:23 View/Groups/view.ctp:30;61
-#: View/Posts/edit.ctp:134;148 View/PostsTags/edit.ctp:17
-#: View/PostsTags/index.ctp:29 View/PostsTags/view.ctp:35 View/Tags/edit.ctp:18
-#: View/Tags/index.ctp:36 View/Tags/view.ctp:35;68 View/Users/edit.ctp:19
-#: View/Users/index.ctp:40 View/Users/view.ctp:181;206 View/Widgets/edit.ctp:18
-#: View/Widgets/index.ctp:23 View/Widgets/view.ctp:30
 msgid "Are you sure you want to delete # %s?"
 msgstr ""
 
-#: View/Attachments/index.ctp:2
 msgid "Attachments"
 msgstr ""
 
-#: View/Attachments/index.ctp:31 View/Categories/index.ctp:29
-#: View/Categories/view.ctp:59 View/Groups/index.ctp:21 View/Groups/view.ctp:59
-#: View/PostsTags/index.ctp:27 View/Tags/index.ctp:31 View/Tags/view.ctp:66
-#: View/Users/view.ctp:178;203 View/Widgets/index.ctp:21
 msgid "View"
-msgstr ""
+msgstr "詳細"
 
-#: View/Attachments/index.ctp:32 View/Categories/index.ctp:31
-#: View/Categories/view.ctp:60 View/Groups/index.ctp:22 View/Groups/view.ctp:60
-#: View/PostsTags/index.ctp:28 View/Tags/index.ctp:33 View/Tags/view.ctp:67
-#: View/Users/view.ctp:179;204 View/Widgets/index.ctp:22
 msgid "Edit"
+msgstr "編集"
+
+msgid "Page {:page} of {:pages}, showing {:current} records out of {:count} total, starting on record {:start}, ending on {:end}"
 msgstr ""
 
-#: View/Attachments/index.ctp:42 View/Categories/index.ctp:45
-#: View/Groups/index.ctp:32 View/PostsTags/index.ctp:38 View/Tags/index.ctp:46
-#: View/Users/index.ctp:50 View/Widgets/index.ctp:32
-msgid ""
-"Page {:page} of {:pages}, showing {:current} records out of {:count} total, "
-"starting on record {:start}, ending on {:end}"
-msgstr ""
-
-#: View/Attachments/index.ctp:47 View/Groups/index.ctp:37
-#: View/Posts/index.ctp:292 View/PostsTags/index.ctp:43
-#: View/Widgets/index.ctp:37
 msgid "previous"
 msgstr ""
 
-#: View/Attachments/index.ctp:49 View/Groups/index.ctp:39
-#: View/Posts/index.ctp:298 View/PostsTags/index.ctp:45
-#: View/Widgets/index.ctp:39
 msgid "next"
 msgstr ""
 
-#: View/Attachments/index.ctp:56 View/Attachments/view.ctp:57
 msgid "New Attachment"
 msgstr ""
 
-#: View/Attachments/view.ctp:2;24
 msgid "Attachment"
 msgstr ""
 
-#: View/Attachments/view.ctp:4 View/Categories/view.ctp:4;40
-#: View/Groups/view.ctp:4;42 View/PostsTags/view.ctp:4 View/Tags/view.ctp:4;47
-#: View/Widgets/view.ctp:4
 msgid "Id"
 msgstr ""
 
-#: View/Attachments/view.ctp:9
 msgid "Model"
 msgstr ""
 
-#: View/Attachments/view.ctp:14
 msgid "Foreign Key"
 msgstr ""
 
-#: View/Attachments/view.ctp:19 View/Groups/view.ctp:9 View/Widgets/view.ctp:9
 msgid "Name"
-msgstr ""
+msgstr "名前"
 
-#: View/Attachments/view.ctp:29
 msgid "Dir"
 msgstr ""
 
-#: View/Attachments/view.ctp:34
 msgid "Type"
 msgstr ""
 
-#: View/Attachments/view.ctp:39
 msgid "Size"
 msgstr ""
 
-#: View/Attachments/view.ctp:44
 msgid "Active"
 msgstr ""
 
-#: View/Attachments/view.ctp:55
 msgid "Delete Attachment"
 msgstr ""
 
-#: View/Categories/add.ctp:4
 msgid "Add Category"
 msgstr ""
 
-#: View/Categories/add.ctp:15 View/Categories/edit.ctp:17
-#: View/Categories/view.ctp:31
 msgid "List Categories"
 msgstr ""
 
-#: View/Categories/add.ctp:16 View/Categories/view.ctp:70
-#: View/Groups/add.ctp:19 View/Groups/index.ctp:50 View/PostsTags/add.ctp:18
-#: View/PostsTags/edit.ctp:20 View/PostsTags/index.ctp:54
-#: View/PostsTags/view.ctp:39 View/Tags/add.ctp:19 View/Tags/edit.ctp:21
-#: View/Tags/index.ctp:64 View/Tags/view.ctp:39;77 View/Users/edit.ctp:24
-#: View/Users/view.ctp:151
 msgid "New Post"
 msgstr "記事作成"
 
-#: View/Categories/add.ctp:17
 msgid "List Post"
 msgstr ""
 
-#: View/Categories/edit.ctp:4 View/Categories/view.ctp:29
 msgid "Edit Category"
 msgstr ""
 
-#: View/Categories/index.ctp:10
-msgid "カテゴリ一覧"
-msgstr ""
-
-#: View/Categories/index.ctp:51 View/Tags/index.ctp:52 View/Users/index.ctp:56
-msgid "前へ"
-msgstr ""
-
-#: View/Categories/index.ctp:53 View/Tags/index.ctp:54 View/Users/index.ctp:58
-msgid "次へ"
-msgstr ""
-
-#: View/Categories/index.ctp:61 View/Categories/view.ctp:32
-#: View/Groups/add.ctp:21 View/Groups/index.ctp:52
 msgid "New Category"
 msgstr ""
 
-#: View/Categories/index.ctp:62
 msgid "New Post "
 msgstr ""
 
-#: View/Categories/index.ctp:63
 msgid "List Post "
 msgstr ""
 
-#: View/Categories/view.ctp:2;9 View/Elements/header.ctp:12
-#: View/Elements/header2.ctp:97 View/Elements/indexheader.ctp:21
 msgid "Category"
 msgstr "カテゴリー"
 
-#: View/Categories/view.ctp:14;45 View/Groups/view.ctp:14;46
-#: View/PostsTags/view.ctp:19 View/Tags/view.ctp:19;52
 msgid "Created"
-msgstr ""
+msgstr "作成日"
 
-#: View/Categories/view.ctp:19;46 View/Groups/view.ctp:19;47
-#: View/PostsTags/view.ctp:24 View/Tags/view.ctp:24;53
 msgid "Modified"
 msgstr ""
 
-#: View/Categories/view.ctp:30
 msgid "Delete Category"
 msgstr ""
 
-#: View/Categories/view.ctp:36 View/Tags/view.ctp:43
 msgid "Related Posts"
 msgstr ""
 
-#: View/Categories/view.ctp:41 View/Tags/view.ctp:48
 msgid "User Id"
 msgstr ""
 
-#: View/Categories/view.ctp:42
 msgid "Category_id"
 msgstr ""
 
-#: View/Categories/view.ctp:43 View/Tags/view.ctp:50
 msgid "Title"
-msgstr ""
+msgstr "タイトル"
 
-#: View/Categories/view.ctp:44 View/Tags/view.ctp:51
 msgid "Body"
-msgstr ""
+msgstr "本文"
 
-#: View/Elements/header.ctp:6 View/Elements/header2.ctp:93
-#: View/Elements/indexheader.ctp:15
 msgid "Article create"
 msgstr "記事作成"
 
-#: View/Elements/header.ctp:8 View/Elements/header2.ctp:95
-#: View/Elements/indexheader.ctp:17
 msgid "List of articles"
 msgstr "記事一覧"
 
-#: View/Elements/header.ctp:10 View/Elements/indexheader.ctp:19
 msgid "User"
 msgstr "ユーザー"
 
-#: View/Elements/header.ctp:14 View/Elements/header2.ctp:99
-#: View/Elements/indexheader.ctp:23 View/PostsTags/view.ctp:14
-#: View/Tags/view.ctp:2;9
 msgid "Tag"
 msgstr "タグ"
 
-#: View/Elements/header.ctp:16 View/Elements/header2.ctp:101
-#: View/Elements/indexheader.ctp:25
 msgid "Contact"
 msgstr "コンタクト"
 
-#: View/Elements/header.ctp:18 View/Elements/header2.ctp:135
-#: View/Elements/indexheader.ctp:27
 msgid "Logout"
 msgstr "ログアウト"
 
-#: View/Elements/header.ctp:19 View/Elements/header2.ctp:136
-#: View/Elements/indexheader.ctp:28
-msgid "本当にログアウトしますか？"
-msgstr "本当にログアウトしますか？"
-
-#: View/Elements/header2.ctp:90
 msgid "MyPage"
 msgstr "マイページ"
 
-#: View/Elements/header2.ctp:111;114
 msgid "japanese"
 msgstr ""
 
-#: View/Elements/header2.ctp:125;128
 msgid "English"
 msgstr ""
 
-#: View/Elements/header2.ctp:133
 msgid "Login"
 msgstr "ログイン"
 
-#: View/Groups/add.ctp:4
 msgid "Add Group"
 msgstr ""
 
-#: View/Groups/add.ctp:15 View/Groups/edit.ctp:17 View/Groups/view.ctp:31
-#: View/Users/edit.ctp:21
 msgid "List Groups"
 msgstr ""
 
-#: View/Groups/add.ctp:16 View/Groups/edit.ctp:18 View/Groups/index.ctp:47
-#: View/Groups/view.ctp:33 View/Users/edit.ctp:20
 msgid "List Users"
 msgstr ""
 
-#: View/Groups/add.ctp:17 View/Groups/edit.ctp:19 View/Groups/index.ctp:48
-#: View/Groups/view.ctp:34;70
 msgid "New User"
 msgstr ""
 
-#: View/Groups/add.ctp:18 View/Groups/index.ctp:49 View/PostsTags/add.ctp:17
-#: View/PostsTags/edit.ctp:19 View/PostsTags/index.ctp:53
-#: View/PostsTags/view.ctp:38 View/Tags/add.ctp:18 View/Tags/edit.ctp:20
-#: View/Tags/index.ctp:63 View/Tags/view.ctp:38 View/Users/edit.ctp:23
 msgid "List Posts"
 msgstr ""
 
-#: View/Groups/add.ctp:20 View/Groups/index.ctp:51
 msgid "List Category"
 msgstr ""
 
-#: View/Groups/add.ctp:22 View/Groups/index.ctp:53 View/PostsTags/add.ctp:19
-#: View/PostsTags/edit.ctp:21 View/PostsTags/index.ctp:55
-#: View/PostsTags/view.ctp:40 View/Tags/add.ctp:17 View/Tags/edit.ctp:19
-#: View/Tags/view.ctp:36
 msgid "List Tags"
-msgstr ""
+msgstr "タグ一覧"
 
-#: View/Groups/add.ctp:23 View/Groups/index.ctp:54
 msgid "New Tags"
 msgstr ""
 
-#: View/Groups/add.ctp:24 View/Groups/index.ctp:55
 msgid "List PostsTag"
 msgstr ""
 
-#: View/Groups/add.ctp:25 View/Groups/index.ctp:56 View/Tags/index.ctp:66
 msgid "New PostsTags"
 msgstr ""
 
-#: View/Groups/edit.ctp:4 View/Groups/view.ctp:29
 msgid "Edit Group"
 msgstr ""
 
-#: View/Groups/index.ctp:2
 msgid "Groups"
 msgstr ""
 
-#: View/Groups/index.ctp:46 View/Groups/view.ctp:32 View/Users/edit.ctp:22
 msgid "New Group"
 msgstr ""
 
-#: View/Groups/view.ctp:2
 msgid "Group"
-msgstr ""
+msgstr "グループ"
 
-#: View/Groups/view.ctp:30
 msgid "Delete Group"
 msgstr ""
 
-#: View/Groups/view.ctp:38
 msgid "Related Users"
 msgstr ""
 
-#: View/Groups/view.ctp:43
 msgid "Username"
 msgstr ""
 
-#: View/Groups/view.ctp:44
 msgid "Password"
 msgstr ""
 
-#: View/Groups/view.ctp:45
 msgid "Group Id"
 msgstr ""
 
-#: View/Posts/add.ctp:53
-msgid "記事作成"
-msgstr ""
-
-#: View/Posts/add.ctp:57 View/Posts/edit.ctp:74 View/Users/view.ctp:189
-msgid "タイトル"
-msgstr ""
-
-#: View/Posts/add.ctp:69 View/Posts/edit.ctp:86 View/Users/view.ctp:188
-msgid "カテゴリー"
-msgstr ""
-
-#: View/Posts/add.ctp:81 View/Posts/edit.ctp:98
-msgid "本文"
-msgstr ""
-
-#: View/Posts/add.ctp:93
-msgid "タグ"
-msgstr ""
-
-#: View/Posts/add.ctp:104
-msgid "画像選択"
-msgstr ""
-
-#: View/Posts/add.ctp:120 View/Posts/edit.ctp:129
-msgid "投稿する"
-msgstr ""
-
-#: View/Posts/comment.ctp:14 View/Posts/edit.ctp:133;146
-#: View/Posts/index.ctp:281 View/Posts/view.ctp:148;209 View/Users/index.ctp:39
-msgid "削除"
-msgstr ""
-
-#: View/Posts/comment.ctp:15 View/Posts/view.ctp:210
 msgid "Are you sure you want to delete"
 msgstr ""
 
-#: View/Posts/edit.ctp:70
-msgid "記事編集"
-msgstr ""
-
-#: View/Posts/edit.ctp:110
-msgid "画像ファイルの追加"
-msgstr ""
-
-#: View/Posts/edit.ctp:139 View/Posts/view.ctp:157
-msgid "画像一覧"
-msgstr ""
-
-#: View/Posts/index.ctp:274
-msgid "続きを読む＞"
-msgstr ""
-
-#: View/Posts/index.ctp:279 View/Posts/view.ctp:146;207 View/Users/index.ctp:37
-msgid "編集"
-msgstr ""
-
-#: View/Posts/index.ctp:308
-msgid "まとめニュース"
-msgstr ""
-
-#: View/Posts/view.ctp:133
-msgid "カテゴリー："
-msgstr ""
-
-#: View/Posts/view.ctp:191
-msgid "コメント"
-msgstr ""
-
-#: View/Posts/view.ctp:218
-msgid "コメントはまだありません。"
-msgstr ""
-
-#: View/Posts/view.ctp:251
-msgid "記事一覧に戻る"
-msgstr ""
-
-#: View/PostsTags/add.ctp:4
 msgid "Add Posts Tag"
 msgstr ""
 
-#: View/PostsTags/add.ctp:16 View/PostsTags/edit.ctp:18
-#: View/PostsTags/view.ctp:36
 msgid "List Posts Tags"
 msgstr ""
 
-#: View/PostsTags/add.ctp:20 View/PostsTags/edit.ctp:22
-#: View/PostsTags/index.ctp:56 View/PostsTags/view.ctp:41
-#: View/Tags/index.ctp:62 View/Tags/view.ctp:37
 msgid "New Tag"
 msgstr ""
 
-#: View/PostsTags/edit.ctp:4 View/PostsTags/view.ctp:34
 msgid "Edit Posts Tag"
 msgstr ""
 
-#: View/PostsTags/index.ctp:2
 msgid "Posts Tags"
 msgstr ""
 
-#: View/PostsTags/index.ctp:52 View/PostsTags/view.ctp:37
 msgid "New Posts Tag"
 msgstr ""
 
-#: View/PostsTags/view.ctp:2
 msgid "Posts Tag"
 msgstr ""
 
-#: View/PostsTags/view.ctp:9
 msgid "Post"
-msgstr ""
+msgstr "投稿する"
 
-#: View/PostsTags/view.ctp:35
 msgid "Delete Posts Tag"
 msgstr ""
 
-#: View/Tags/add.ctp:4
 msgid "Add Tag"
 msgstr ""
 
-#: View/Tags/edit.ctp:4 View/Tags/view.ctp:34
 msgid "Edit Tag"
 msgstr ""
 
-#: View/Tags/index.ctp:10
 msgid "タグ一覧"
 msgstr ""
 
-#: View/Tags/index.ctp:65
 msgid "List PostsTags"
 msgstr ""
 
-#: View/Tags/view.ctp:14
 msgid "TagSlug"
 msgstr ""
 
-#: View/Tags/view.ctp:35
 msgid "Delete Tag"
 msgstr ""
 
-#: View/Tags/view.ctp:49
 msgid "Category Id"
 msgstr ""
 
-#: View/Users/add.ctp:27
-msgid "アカウント作成"
-msgstr ""
-
-#: View/Users/add.ctp:51 View/Users/login.ctp:44
-msgid "サインイン"
-msgstr ""
-
-#: View/Users/edit.ctp:5
 msgid "Edit User"
 msgstr ""
 
-#: View/Users/index.ctp:11
-msgid "ユーザー一覧"
-msgstr ""
-
-#: View/Users/index.ctp:34
-msgid "詳細"
-msgstr ""
-
-#: View/Users/login.ctp:49
-msgid "アカウントを作成"
-msgstr ""
-
-#: View/Users/view.ctp:126
-msgid "ユーザID:"
-msgstr ""
-
-#: View/Users/view.ctp:130
-msgid "グループ:"
-msgstr ""
-
-#: View/Users/view.ctp:140
-msgid "ユーザー作成日:"
-msgstr ""
-
-#: View/Users/view.ctp:152
 msgid "Edit Account"
 msgstr "アカウント編集"
 
-#: View/Users/view.ctp:153
 msgid "Delete Account"
 msgstr "アカウントの削除"
 
-#: View/Users/view.ctp:160
-msgid "記事一覧"
-msgstr ""
-
-#: View/Users/view.ctp:187
-msgid "記事ID"
-msgstr ""
-
-#: View/Users/view.ctp:190
-msgid "作成日"
-msgstr ""
-
-#: View/Users/view.ctp:191
-msgid "編集日"
-msgstr ""
-
-#: View/Widgets/add.ctp:4
 msgid "Add Widget"
 msgstr ""
 
-#: View/Widgets/add.ctp:17 View/Widgets/edit.ctp:19 View/Widgets/view.ctp:31
 msgid "List Widgets"
 msgstr ""
 
-#: View/Widgets/edit.ctp:4 View/Widgets/view.ctp:29
 msgid "Edit Widget"
 msgstr ""
 
-#: View/Widgets/index.ctp:2
 msgid "Widgets"
 msgstr ""
 
-#: View/Widgets/index.ctp:46 View/Widgets/view.ctp:32
 msgid "New Widget"
 msgstr ""
 
-#: View/Widgets/view.ctp:2
 msgid "Widget"
 msgstr ""
 
-#: View/Widgets/view.ctp:14
 msgid "Part No"
 msgstr ""
 
-#: View/Widgets/view.ctp:19
 msgid "Quantity"
 msgstr ""
 
-#: View/Widgets/view.ctp:30
 msgid "Delete Widget"
 msgstr ""
 
-#: Model/Attachment.php:validation for field model
-#: Model/Category.php:validation category Model/Group.php:validation name
-#: Model/Post.php:validation category_id;validation title
-#: Model/Tag.php:validation tag;validation tagSlug Model/User.php:validation
-#: username;validation password Model/Widget.php:validation
 msgid "notBlank"
 msgstr ""
 
-#: Model/Attachment.php:validation for field foreign_key
-#: Model/Post.php:validation user_id Model/PostsTag.php:validation
-#: post_id;validation tag_id Model/User.php:validation group_id
 msgid "numeric"
 msgstr ""
 
-#: Model/Comment.php:validation for field commenter
-msgid "記入してください。"
-msgstr ""
+msgid "Image selection"
+msgstr "画像選択"
 
-#: Model/Contact.php:validation for field name;validation email;validation
-#: subject;validation body
-msgid "未入力です。"
-msgstr ""
+msgid "Image list"
+msgstr "画像一覧"
 
-#: Model/Contact.php:validation for field name;validation email;validation
-#: subject
-msgid "255文字以内で入力してくだい。"
-msgstr ""
+msgid "Other account collaboration"
+msgstr "他アカウントの連携"
 
-#: Model/Contact.php:validation for field email
-msgid "メールアドレス以外が入力されています。"
-msgstr ""
+msgid "Twitter cooperation"
+msgstr "Twitterと連携"
 
-#: Model/Contact.php:validation for field body
-msgid "3000文字以内で入力してくだい。"
-msgstr ""
+msgid "Cancel Twitter linkage"
+msgstr "Twitter連携を解除する"
 
-#: Model/Post.php:validation for field title
-msgid "24文字以内で収めてください。"
-msgstr ""
+msgid "Facebook cooperation"
+msgstr "Facebookと連携"
+
+msgid "Cancel Facebook linkage"
+msgstr "Facebook連携を解除する"
+
+msgid "Google cooperation"
+msgstr "Googleと連携"
+
+msgid "Cancel Google linkage"
+msgstr "Google連携を解除する"
+
+msgid "GitHub cooperation"
+msgstr "GitHubと連携"
+
+msgid "Cancel GitHub linkage"
+msgstr "GitHub連携を解除する"
+
+msgid "Self-introduction"
+msgstr "自己紹介"
+
+msgid "Self-introduction none"
+msgstr "自己紹介文はありません"
+
+msgid "No article"
+msgstr "記事はありません"
+
+msgid "Please select"
+msgstr "選択してください"
+
+msgid "Child category"
+msgstr "子カテゴリー"
+
+msgid "Calender"
+msgstr "カレンダー"
+
+msgid "Read more"
+msgstr "続きを読む"
+
+msgid "News Summary"
+msgstr "まとめニュース"
+
+msgid "Comments"
+msgstr "コメント"
+
+msgid "No comment"
+msgstr "コメントはまだありません"
+
+msgid "Write a comment"
+msgstr "コメントを書く"
+
+msgid "Back to article list"
+msgstr "記事一覧に戻る"
+
+msgid "Edit Post"
+msgstr "記事編集"
+
+msgid "Mail Address"
+msgstr "メールアドレス"
+
+msgid "Subject"
+msgstr "件名"
+
+msgid "Content of inquiry"
+msgstr "お問い合わせ内容"
+
+msgid "Confirm"
+msgstr "確認する"
+
+msgid "Administrators"
+msgstr "管理者"
+
+msgid "Managers"
+msgstr "マネージャー"
+
+msgid "Top of page"
+msgstr "ページトップへ"

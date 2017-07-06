@@ -12,7 +12,7 @@
           <?php echo $this->Html->image('/images/shisa.png', array('width' => '50')); ?>
         </div>
         <div id="list">
-          <h3><?php echo(__('List of articles')) ?></h3>
+          <h3><?php echo(__('List of articles')); ?></h3>
         </div>
 
       </div>
@@ -34,7 +34,7 @@
             </div>
           </div>
           <div class="post_contents">
-            <ul class="post_header">
+            <ul class="post_header" style="list-style:none;">
               <li class="post_category">
                 <span class="badge_category">
                   <?php echo ($post['Category']['category']) ?>
@@ -75,14 +75,14 @@
 
             <div class="contents_footer">
               <div class="action_view">
-                <?php echo $this->Html->link(__('続きを読む＞'), array('action' => "view", $post['Post']['id'])); ?><br>
+                <?php echo $this->Html->link(__('Read more') . '＞', array('action' => "view", $post['Post']['id'])); ?><br>
               </div>
 
               <div id="item">
                 <?php if ($user['id'] == $post['User']['id'] || $user['Group']['id'] == 1): ?>
-                  <?php echo $this->Html->link(__('編集'), array('action' => 'edit', $post['Post']['id'])); ?>
+                  <?php echo $this->Html->link(__('Edit'), array('action' => 'edit', $post['Post']['id'])); ?>
                   ・
-                  <?php echo $this->Html->link(__('削除'), array('action' => 'delete', $post['Post']['id']),array('confirm' => '本当にこの記事を削除しますか？')); ?>
+                  <?php echo $this->Html->link(__('Delete'), array('action' => 'delete', $post['Post']['id']),array('confirm' => '本当にこの記事を削除しますか？')); ?>
                 <?php endif; ?>
               </div>
             </div>
@@ -115,7 +115,7 @@
               <img src="/AclTest/images/sidebar_img.png", width="30">
             </div>
             <div id="calender_title">
-              <h4 style="text-align:left;"><?php echo __('カレンダー'); ?></h4>
+              <h4 style="text-align:left;"><?php echo __('Calender'); ?></h4>
             </div>
           </div>
           <input type=”text” name=”demo” id="date_val">
@@ -127,7 +127,7 @@
               <img src="/AclTest/images/sidebar_img.png", width="30">
             </div>
             <div id="news_title">
-              <h4><?php echo __('まとめニュース'); ?></h4>
+              <h4><?php echo __('News Summary'); ?></h4>
             </div>
           </div>
           <?php $i = 1 ?>
