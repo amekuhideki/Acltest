@@ -178,9 +178,9 @@ $(function(){
 
   	<div id="view_item">
   		<?php if ($user['id'] === $post['User']['id']): ?>
-  			<?php echo $this->Html->link(__('編集'), array('action' => 'edit', $post['Post']['id'])); ?>
+  			<?php echo $this->Html->link(__('Edit'), array('action' => 'edit', $post['Post']['id'])); ?>
   			・
-  			<?php echo $this->Html->link(__('削除'), array('action' => 'delete', $post['Post']['id']),
+  			<?php echo $this->Html->link(__('Delete'), array('action' => 'delete', $post['Post']['id']),
   																							 array('confirm' => '本当にこの記事を削除しますか？')); ?>
   		<?php endif; ?>
   	</div>
@@ -189,7 +189,7 @@ $(function(){
   		<div class="image">
   			<?php if(!empty($post['Image'])): ?>
   			<div id="modal_window">
-  				<h4><?php echo __('画像一覧'); ?></h4>
+  				<h4><?php echo __('Image list'); ?></h4>
   				<ul>
   					<?php $i = 0; ?>
   					<?php foreach ($post['Image'] as $image): ?>
@@ -223,7 +223,7 @@ $(function(){
   	</div>
 
   	<div id="post_comment">
-  		<h4 class='comment_header'><?php echo __('コメント'); ?></h4>
+  		<h4 class='comment_header'><?php echo __('Comments'); ?></h4>
   		<div class="comment">
   			<div class="comment_comment">
   				<?php if (isset($comments[0])): ?>
@@ -250,7 +250,7 @@ $(function(){
   			</div>
   			&nbsp;&nbsp;
   			<div id="not_comment">
-  				<?php echo __('コメントはまだありません。'); ?>
+  				<?php echo __('No comment'); ?>
   			</div>
   			<?php endif; ?>
   		</div>
@@ -265,7 +265,7 @@ $(function(){
 
   		<div id='add_comment'>
   			<div class="add_comment_contain">
-  				<h4>コメントを書く</h4>
+  				<h4><?php echo __('Write a comment'); ?></h4>
   				<?php if (!isset($user['id'])): ?>
   					<?php $user['id'] = -1; ?>
   				<?php endif;?>
@@ -273,17 +273,17 @@ $(function(){
   				echo $this->Form->create('Comment', array('url' => array(
   																							'controller' => 'comments', 'action' => 'add'),
   																							));
-  				echo $this->Form->input('commenter', array('label' => '名前'));
-  				echo $this->Form->input('body', array('label' => '本文', 'row'=>3));
+  				echo $this->Form->input('commenter', array('label' => __('Name')));
+  				echo $this->Form->input('body', array('label' => __('Body'), 'row'=>3));
   				echo $this->Form->input('Comment.post_id', array('type'=>'hidden', 'value'=>$post['Post']['id']));
   				echo $this->Form->input('status', array('type' => 'hidden', 'value' => 0));
   				echo $this->Form->input('user_id', array('type' => 'hidden', 'value' => $user['id']));
-  				echo $this->Form->end('投稿する');
+  				echo $this->Form->end(__('Post'));
   				?>
   			</div>
   		</div>
 
-  		<p><?php echo $this->Html->link(__('記事一覧に戻る'), array('action' => "index")); ?></p>
+  		<p><?php echo $this->Html->link(__('Back to article list'), array('action' => "index")); ?></p>
   	</div>
   </div>
 </div>

@@ -29,7 +29,7 @@
 	</div>
 	<div id="main">
 		<div id="category_title">
-			<h3><?php echo __('カテゴリ一'); ?></h3>
+			<h3><?php echo __('Category'); ?></h3>
 		</div>
 		<div id="category_list">
 			<ul>

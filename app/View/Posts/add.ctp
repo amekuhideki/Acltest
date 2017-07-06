@@ -45,7 +45,7 @@ $(function(){
 		}).then(function(data){
 
 			if ($.isArray(data)){
-				var tag = '<tr class="sub_categories"><th><label class="col-sm-3"><?php echo(__('子カテゴリ')); ?></label></th>';
+				var tag = '<tr class="sub_categories"><th><label class="col-sm-3"><?php echo(__('Child category')); ?></label></th>';
 				tag += '<td><div class="col-sm-9"><select name="data[Post][sub_category_id]">';
 				var key;
 				var value;
@@ -75,12 +75,12 @@ $(function(){
 	</div>
 	<?php echo $this->Form->create('Post', array('type' => 'file')); ?>
 	<?php echo $this->Form->input('status', array('type' => 'hidden', 'value' => 0)); ?>
-	<div class="center">
+	<div class="add_center">
 		<h3><?php echo __('New Post'); ?></h3>
 		<table class="table">
 			<tr>
 				<th>
-					<label class="col-sm-3"><?php echo __('Title'); ?></label>
+					<label class="col-sm-3"><?php echo (__('Title')); ?></label>
 				</th>
 				<td>
 					<div class="col-sm-9">
@@ -92,19 +92,19 @@ $(function(){
 			</tr>
 			<tr class="categories">
 				<th>
-					<label class="col-sm-3"><?php echo(__('カテゴリ')); ?></label>
+					<label class="col-sm-3"><?php echo(__('Category')); ?></label>
 				</th>
 				<td>
 					<div class="col-sm-9">
 						<?php
-							echo $this->Form->input('Post.category_id', array('label' => false, "class" => 'category', "empty" => '選択してください'));
+							echo $this->Form->input('Post.category_id', array('label' => false, "class" => 'category', "empty" => __('Please select')));
 						?>
 					</div>
 				</td>
 			</tr>
 			<tr>
 				<th>
-					<label class="col-sm-3"><?php echo(__('本文')); ?></label>
+					<label class="col-sm-3"><?php echo(__('Body')); ?></label>
 				</th>
 				<td>
 					<div class="col-sm-9">
@@ -114,20 +114,9 @@ $(function(){
 					</div>
 				</td>
 			</tr>
-			<!-- <tr>
-				<th>
-					<lavel class="col-sm-3"><?php echo(__('タグ')); ?></lavel>
-				</th>
-				<td>
-					<div class="col-sm-9">
-						<?php
-							echo $this->Form->input('Tag.tag', array('label' => false));
-							?>
-				</td>
-			</tr> -->
 			<tr>
 				<th>
-					<label class="col-sm-3"><?php echo(__('画像選択')); ?></label>
+					<label class="col-sm-3"><?php echo(__('Image selection')); ?></label>
 				</th>
 				<td>
 					<div class="col-sm-9">
@@ -143,7 +132,7 @@ $(function(){
 			?>
 		</table>
 			<div align="center">
-				<?php echo $this->Form->submit(__('投稿する'), array('class' => "btn btn-primary")); ?>
+				<?php echo $this->Form->submit(__('Post'), array('class' => "btn btn-primary")); ?>
 			</div>
 	</div>
 </div>

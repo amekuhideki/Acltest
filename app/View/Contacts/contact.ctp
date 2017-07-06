@@ -13,7 +13,7 @@
 
       echo $this->Form->input('name', array(
               'type' => 'text',
-              'label' => '・お名前',
+              'label' => '・' . __('Name'),
               'maxlength' => 255,
               'style' => 'width:300px;',
               'class' => 'contact_text',
@@ -22,7 +22,7 @@
 
       echo $this->Form->input('email', array(
               'type' => 'email',
-              'label' => '・メールアドレス',
+              'label' => '・' . __('Mail Address'),
               'maxlength' => 255,
               'style' => 'width:300px;',
               'class' => 'contact_text',
@@ -31,7 +31,7 @@
 
       echo $this->Form->input('subject', array(
               'type' => 'text',
-              'label' => '・件名',
+              'label' => '・' . __('Subject'),
               'maxlength' => 255,
               'style' => 'width:300px;',
               'class' => 'contact_text',
@@ -40,14 +40,14 @@
 
       echo $this->Form->input('ContactUs', array(
               'type' => 'textarea',
-              'label' => '・お問い合わせ内容',
+              'label' => '・' . __('Content of inquiry'),
               'maxlength' => 3000,
               'style' =>'width:400px;height:200px;',
               'class' => 'contact_text',
               )
           );
 
-      echo $this->Form->button('確認する', array(
+      echo $this->Form->button(__('Confirm'), array(
               'type' => 'submit',
               'name' => 'confirm',
               'value' => 'confirm',

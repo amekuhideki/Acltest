@@ -31,6 +31,6 @@ $(function(){
 <div class="page-top">
   <button type="button">
   <img src="/AclTest/images/shesha.png" style="width:50px;"><br>
-  <font size="2">ページトップへ</font>
+  <font size="2"><?php echo __('Top of page'); ?></font>
   </button>
 </div>
