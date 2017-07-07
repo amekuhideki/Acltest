@@ -2,7 +2,7 @@
 <script src="https://ajaxzip3.github.io/ajaxzip3.js" charset="UTF-8"></script>
 
 <div class="users form">
-	<div class="container">
+	<div class="login_container">
 		<div class="center">
 			<?php echo $this->Form->create('User'); ?>
 			<fieldset>
