@@ -1,5 +1,5 @@
 <?php echo $this->Html->css('common.css'); ?>
-<div class="container">
+<div class="login_container">
   <div class="center">
     <div class="form-group">
       <legend><h3>ログイン/新規会員登録</h3></legend>

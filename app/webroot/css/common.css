@@ -269,7 +269,8 @@ label {
 	clear: left;
 }
 
-.container {
+.login_container {
+    margin: 0 auto;
     width: 400px;
     padding-top: 100px;
 }
