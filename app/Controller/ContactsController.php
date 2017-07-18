@@ -7,34 +7,39 @@ class ContactsController extends AppController {
 
     $this->Auth->allow();
 }
-// public $components = array('Paginator', 'Flash', 'Search.Prg');
+// public $components = array('RequestHandler' => array('className' => 'MyRequestHandler'));
 
 public function contact()
 {
     if (!$this->request->is('post') || !$this->request->data) {
-        return;
+      $this->RequestHandler->isSmartPhone() === true ? $this->render('contact_sm') : $this->render('contact');
+    }
+    if (!empty($this->request->data)) {
+      $this->Contact->set($this->request->data);
+      
+      if (!$this->Contact->validates()) {
+          $this->Session->setFlash('入力内容に不備があります。');
+          $this->RequestHandler->isSmartPhone() === true ? $this->render('contact_sm') : $this->render('contact');
+          return;
+      }
+      switch ($this->request->data['confirm']) {
+          case 'confirm':
+              $this->RequestHandler->isSmartPhone() === true ? $this->render('contact_confirm_sm') : $this->render('contact_confirm');
+              break;
+          case 'send':
+              if ($this->sendContact($this->request->data['Contact'])) {
+                  $this->Session->setFlash('お問い合わせを受け付けました。');
+                  $this->redirect('/Posts');
+              } else {
+                  $this->Session->setFlash('エラーが発生しました。');
+              }
+              break;
+          case 'revise':
+              $this->RequestHandler->isSmartPhone() === true ? $this->render('contact_sm') : $this->render('contact');
+              break;
+      }
     }
 
-    $this->Contact->set($this->request->data);
-
-    if (!$this->Contact->validates()) {
-        $this->Session->setFlash('入力内容に不備があります。');
-        return;
-    }
-
-    switch ($this->request->data['confirm']) {
-        case 'confirm':
-            $this->render('contact_confirm');
-            break;
-        case 'send':
-            if ($this->sendContact($this->request->data['Contact'])) {
-                $this->Session->setFlash('お問い合わせを受け付けました。');
-                $this->redirect('/Posts');
-            } else {
-                $this->Session->setFlash('エラーが発生しました。');
-            }
-            break;
-    }
 }
 
 private function sendContact($content)

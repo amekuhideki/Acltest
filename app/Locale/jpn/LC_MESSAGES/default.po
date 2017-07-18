@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2017-07-06 14:00+0900\n"
+"PO-Revision-Date: 2017-07-13 17:12+0900\n"
 "Last-Translator: NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
 "Language: ja\n"
@@ -415,7 +415,7 @@ msgid "List Groups"
 msgstr ""
 
 msgid "List Users"
-msgstr ""
+msgstr "ユーザー一覧"
 
 msgid "New User"
 msgstr ""
@@ -460,7 +460,7 @@ msgid "Username"
 msgstr ""
 
 msgid "Password"
-msgstr ""
+msgstr "パスワード"
 
 msgid "Group Id"
 msgstr ""
@@ -650,3 +650,9 @@ msgstr "マネージャー"
 
 msgid "Top of page"
 msgstr "ページトップへ"
+
+msgid "It creates it with the following contents. Is it OK?"
+msgstr "以下の内容で作成します。よろしいですか"
+
+msgid "Article"
+msgstr "記事"

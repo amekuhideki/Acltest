@@ -11,8 +11,8 @@ class AppController extends Controller {
               'Actions' => array('actionPath' => 'controllers')
           ),
       ),
-      'RequestHandler',
-      'Session'
+      'RequestHandler' => array('className' => 'MyRequestHandler'),
+      'Session',
     );
     public $helpers = array(
       'Html' => array('className' => 'TwitterBootstrap.BootstrapHtml'),

@@ -2,6 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>
@@ -32,11 +33,17 @@
     <![endif]-->
   </head>
   <body>
-
-    <div id="wrapper">
+    
+    <?php $ua = env('HTTP_USER_AGENT'); ?>
+    <?php if ((strpos($ua, 'iPhone') !== false) || (strpos($ua, 'iPad') !== false) || strpos($ua, 'Android') !== false): ?>
+      <div id="wrapper_sm">
+    <?php else: ?>
       <div id='flash_message'>
         <?php echo $this->Session->flash(); ?>
       </div>
+      <div id="wrapper">
+      <?php endif; ?>
+      
       <?php echo $this->fetch('content'); ?>
       <?php echo $this->element('footer'); ?>
     </div>

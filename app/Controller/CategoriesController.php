@@ -15,16 +15,21 @@ class CategoriesController extends AppController {
     // $this->set(compact('categoryList'));
     $this->Category->recursive = 0;
     $this->set('categories', $this->Paginator->paginate());
+    $this->RequestHandler->isSmartPhone() === true ? $this->render('index_sm') : $this->render('index');
   }
 
   public function view($id = null) {
     if (!$this->Category->exists($id)) {
       throw new NotFoundException(__('Invalid category'));
     }
+    // $this->Category->recursive = 2;
     $options = array('conditions' => array('Category.' . $this->Category->primaryKey => $id));
     $this->set('category', $this->Category->find('first', $options));
     $this->loadModel('Post');
     $this->loadModel('User');
+    $posts = $this->Post->find('all', array('conditions' => array('category_id' => $id), 'order' => 'Post.id DESC'));
+    $this->set('posts', $posts);
+    $this->RequestHandler->isSmartPhone() === true ? $this->render('view_sm') : $this->render('view');
     // $this->loadModel('User');
     // $user = $this->User->find('list',array(
     // 													'fields', array('Use.id', 'User.username'),

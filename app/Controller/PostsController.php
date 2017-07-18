@@ -6,7 +6,7 @@ mb_language('Japanese');
 class PostsController extends AppController {
   public function beforeFilter() {
     parent::beforeFilter();
-    $this->Auth->allow('index', 'view', 'getdate', 'date_post');
+    $this->Auth->allow('index', 'view', 'getdate', 'date_post', 'postUser');
 
   }
   var $uses = array('Post', 'User', 'Category', 'Tag', 'PostsTag', 'Attachment', 'Comment', 'SubCategory');
@@ -48,7 +48,7 @@ class PostsController extends AppController {
     // unset($this->Post->validate['category_id']);
     // unset($this->Post->validate['tag']);
     // unset($this->Post->validate['posts_tags']);
-    $this->Post->recursive = 0;
+    $this->Post->recursive = 1;
     // $this->set('posts', $this->paginate());
 
     //SearchPlugin
@@ -60,7 +60,7 @@ class PostsController extends AppController {
     }
     $this->paginate = array(
       'conditions' => $conditions,
-      'order' => array('Post.modified' => 'desc'),//日付順で表示
+      'order' => array('Post.created' => 'desc'),//日付順で表示
       'limit' => 15
     );
     $this->set('posts', $this->paginate());
@@ -74,6 +74,8 @@ class PostsController extends AppController {
 
     $images = $this->Post->Image->find('all');
     $this->set('images', $images);
+    
+    $this->RequestHandler->isSmartPhone() === true ? $this->render('index_sm') : $this->render('index');
   }
 
   public function view($id = null, $comment_page = null) {
@@ -101,6 +103,8 @@ class PostsController extends AppController {
     $comment_total_page = ceil($comment_total / 10);
 
     $this->set(compact('comments', 'comment_page', 'comment_total', 'comment_total_page', 'user'));
+    
+    $this->RequestHandler->isSmartPhone() === true ? $this->render('view_sm') : $this->render('view');
   }
 
   public function comment() {
@@ -148,6 +152,8 @@ class PostsController extends AppController {
     $categories = $this->Post->Category->find('list', array(
                                               'fields' => array('Category.category')));
     $this->set(compact('users', 'categories'));
+    
+    $this->RequestHandler->isSmartPhone() === true ? $this->render('add_sm') : $this->render('add');
   }
 
   public function edit($id = null) {
@@ -200,6 +206,7 @@ class PostsController extends AppController {
     // 	'fields' => array('Image.dir')
     // ));
     $this->set(compact('users', 'categories', 'post', 'sub_categories'));
+    $this->RequestHandler->isSmartPhone() === true ? $this->render('edit_sm') : $this->render('edit');
   }
 
   public function delete($id = null) {
@@ -269,5 +276,17 @@ class PostsController extends AppController {
   public function date_post() {
     var_dump('a');
     exit;
+  }
+  
+  public function postUser($id) {
+    $user = $this->Auth->user();
+    
+    if (!$this->User->exists($id)) {
+      throw new NotFoundException(__('Invalid post'));
+    }
+
+    $post_user = $this->Post->find('all', array('conditions' => array('user_id' => $id), 'order' => 'Post.created DESC')); 
+    $this->set('posts', $post_user);
+    $this->set('user', $user);
   }
 }

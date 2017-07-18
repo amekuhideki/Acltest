@@ -4,6 +4,8 @@ App::uses('AppController', 'Controller');
 class UsersController extends AppController {
   var $users = array('User', 'Group');
   
+  public $components = array('Paginator', 'Flash');
+  
   public function beforeFilter() {
     parent::beforeFilter();
     $this->Auth->allow('add', 'logout', 'login', 'account_clear');
@@ -149,6 +151,8 @@ class UsersController extends AppController {
         $this->Session->setFlash(__('Your username or password was incorrect.'));
       }
     }
+
+    $this->RequestHandler->isSmartPhone() === true ? $this->render('login_sm') : $this->render('login');
   }
 
   public function logout() {
@@ -157,7 +161,6 @@ class UsersController extends AppController {
     $this->Session->setFlash('Good-Bye');
     $this->redirect($this->Auth->logout());	}
 
-  public $components = array('Paginator', 'Flash');
 
   public function index() {
     $user = $this->Auth->user();
@@ -168,19 +171,23 @@ class UsersController extends AppController {
 
     $this->User->recursive = 0;
     $this->set('users', $this->Paginator->paginate());
+    
+    $this->RequestHandler->isSmartPhone() === true ? $this->render('index_sm') : $this->render('index');
   }
 
   public function view($id = null) {
     if (!$this->User->exists($id)) {
     	throw new NotFoundException(__('Invalid user'));
     }
+    $this->User->recursive = 2;
     $options = array('conditions' => array('User.' . $this->User->primaryKey => $id));
     $this->set('user', $this->User->find('first', $options));
     #カテゴリの呼び出し
     $this->loadModel('Category');
     $categories = $this->Category->find('all');
     $this->set('categories', $categories);
-
+    
+    $this->RequestHandler->isSmartPhone() === true ? $this->render('view_sm') : $this->render('view');
   }
 
   public function add() {
@@ -208,9 +215,12 @@ class UsersController extends AppController {
     }
     $groups = $this->User->Group->find('list');
     $this->set(compact('groups'));
+    
+    $this->RequestHandler->isSmartPhone() === true ? $this->render('add_sm') : $this->render('add');
   }
 
   public function edit($id = null) {
+    
     if (!$this->User->exists($id)) {
       throw new NotFoundException(__('Invalid user'));
     }
@@ -248,6 +258,8 @@ class UsersController extends AppController {
 
     $groups = $this->User->Group->find('list');
     $this->set(compact('groups', 'user'));
+    
+    $this->RequestHandler->isSmartPhone() === true ? $this->render('edit_sm') : $this->render('edit');
   }
 
   public function delete($id = null) {
