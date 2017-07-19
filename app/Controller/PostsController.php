@@ -6,7 +6,7 @@ mb_language('Japanese');
 class PostsController extends AppController {
   public function beforeFilter() {
     parent::beforeFilter();
-    $this->Auth->allow('index', 'view', 'getdate', 'date_post', 'postUser');
+    $this->Auth->allow('index', 'view', 'getdate', 'date_post', 'postUser', 'popularArticles');
 
   }
   var $uses = array('Post', 'User', 'Category', 'Tag', 'PostsTag', 'Attachment', 'Comment', 'SubCategory');
@@ -287,5 +287,17 @@ class PostsController extends AppController {
     $post_user = $this->Post->find('all', array('conditions' => array('user_id' => $id), 'order' => 'Post.created DESC')); 
     $this->set('posts', $post_user);
     $this->set('user', $user);
+  }
+  
+  public function popularArticles() {
+    
+    $this->paginate = array(
+      'conditions' => array('Post.status' => 0, 'Post.access_counter >' => 0),
+      'order' => array('Post.access_counter' => 'desc'),
+      'limit' => 15
+    );
+    // pr($this->paginate());
+    $this->set('posts', $this->paginate());
+    $this->RequestHandler->isSmartPhone() === true ? $this->render('popular_articles_sm') : $this->render('popular_articles');
   }
 }

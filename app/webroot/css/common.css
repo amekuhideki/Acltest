@@ -886,9 +886,9 @@ margin-bottom: 30px;
   width: 100%;
 }
 .content_detail_sm {
-  padding-top: 2%;
-  padding-right: 2%;
-  padding-bottom: 2%;
+  padding-top: 5%;
+  padding-right: 3%;
+  padding-bottom: 5%;
   border-bottom: dotted 1px;
   overflow: hidden;
   position: relative;

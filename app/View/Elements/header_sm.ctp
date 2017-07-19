@@ -36,7 +36,8 @@
           <li><?php echo $this->Html->link(__('Article create'), array('controller' => 'posts', 'action' => 'add'), array('role' => "presentation")); ?></li>
         <?php endif;?>
         <li><?php echo $this->Html->link(__('List of articles'), array('controller' => 'posts','action' => 'index'), array('role' => "presentation")); ?></li>
-        <li><?php echo $this->Html->link(__('List Users'), array('controller' => 'users', 'action' => 'index'), array('role' => "presentation")); ?></li>
+        <li><?php echo $this->Html->link(__('Popular articles list'), array('controller' => 'posts', 'action' => 'popularArticles'), array('role' => "presentation")); ?></li>
+        <!-- <li><?php echo $this->Html->link(__('List Users'), array('controller' => 'users', 'action' => 'index'), array('role' => "presentation")); ?></li> -->
         <li><?php echo $this->Html->link(__('Category'), array('controller' => 'categories', 'action' => 'index'), array('role' => "presentation")); ?> </li>
         <li><?php echo $this->Html->link(__('Contact'), array('controller' => 'contacts', 'action' => 'contact'), array('role' => "presentation")); ?> </li>
         <?php if (!isset($_SESSION['Auth']['User']['username'])): ?>
