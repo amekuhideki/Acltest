@@ -23,7 +23,7 @@
               <?php $image_flag = 0; ?>
               <?php foreach ($images as $image): ?>
                 <?php if ($image['Image']['foreign_key'] === $post['Post']['id']): ?>
-                  <?php echo $this->Html->image('/files/image/attachment/'. $image['Image']['dir']. '/' . $image['Image']['attachment'], array('width' => '150')); ?>
+                  <?php echo $this->Html->image('/files/image/attachment/'. $image['Image']['dir']. '/' . $image['Image']['attachment'], array('width' => '150', 'height' => '150')); ?>
                   <?php $image_flag = 1; break; ?>
                 <?php endif; ?>
               <?php endforeach; ?>

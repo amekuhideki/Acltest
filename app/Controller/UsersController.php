@@ -2,7 +2,7 @@
 App::uses('AppController', 'Controller');
 
 class UsersController extends AppController {
-  var $users = array('User', 'Group');
+  var $users = array('User', 'Group', 'Post');
   
   public $components = array('Paginator', 'Flash');
   
@@ -186,7 +186,8 @@ class UsersController extends AppController {
     $this->loadModel('Category');
     $categories = $this->Category->find('all');
     $this->set('categories', $categories);
-    
+    $posts = $this->User->Post->find('all', array('conditions' => array('user_id' => $id, 'status' => 0), 'order' => 'Post.created DESC'));
+    $this->set('posts', $posts);
     $this->RequestHandler->isSmartPhone() === true ? $this->render('view_sm') : $this->render('view');
   }
 

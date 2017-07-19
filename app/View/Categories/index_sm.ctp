@@ -15,8 +15,8 @@
           <div class="category_name_sm">
             <?php echo ($category['Category']['category']); ?><br>
           </div>
-          <div class="post_link_sm">
-            <?php echo $this->Html->link('', array('controller' => "category", 'action' => "view", $category['Category']['id'])); ?><br>
+          <div class="category_link_sm">
+            <?php echo $this->Html->link('', array('controller' => "categories", 'action' => "view", $category['Category']['id'])); ?><br>
           </div>
         </div>
       <?php endforeach; ?>

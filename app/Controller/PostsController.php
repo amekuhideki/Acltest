@@ -160,7 +160,6 @@ class PostsController extends AppController {
     if (!$this->Post->exists($id)) {
       throw new NotFoundException(__('Invalid post'));
     }
-
     $post = $this->Post->findById($id);
     if (!$post) {
       throw new NotFoundException(__('Invalid post'));

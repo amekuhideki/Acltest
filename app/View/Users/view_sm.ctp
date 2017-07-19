@@ -37,14 +37,13 @@
         <?php echo $this->Html->link(__('Edit Account'), array('action' => 'edit', $user['User']['id']), array('class' => 'btn btn-success btn-sm', 'style' => "width:90%;")); ?>
       </div>
     </div>
-    
+
     <div class="main_header_sm">
       <h4><?php echo (__('作成記事')); ?></h4>
     </div>
-    
     <div class="user_post_sm">
       <div class="content_details_sm">
-        <?php foreach ($user['Post'] as $post): ?>
+        <?php foreach ($posts as $post): ?>
           <div class="content_detail_sm">
             <?php if (!empty($post['Image'])): ?>
               <?php 
@@ -64,14 +63,14 @@
                   </span>
                 </li>
                 <li class="post_created_sm">
-                  <?php echo h(date('Y年m月d日', strtotime($post['created']))); ?><br>
+                  <?php echo h(date('Y年m月d日', strtotime($post['Post']['created']))); ?><br>
                 </li>
               </ul>
               <div class="post_title_sm">
-                <?php echo h($post['title']); ?><br>
+                <?php echo h($post['Post']['title']); ?><br>
               </div>
               <div class="post_link_sm">
-                <?php echo $this->Html->link('', array('controller' => "posts", 'action' => "view", $post['id'])); ?><br>
+                <?php echo $this->Html->link('', array('controller' => "posts", 'action' => "view", $post['Post']['id'])); ?><br>
               </div>
             </div>
           </div>

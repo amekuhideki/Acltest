@@ -1,6 +1,15 @@
 <?php echo $this->Html->css('common.css'); ?>
 <?php echo $this->Html->script('tinymce/tinymce.min.js'); ?>
 
+<script>
+tinymce.init({
+	selector: "#text_box_sm",
+	language: "ja",
+  toolbar: false,
+  menubar: false,
+  statusbar: false,
+});
+</script>
 <div class="posts_add_sm">
   <div class="header_sm">
     <?php echo $this->element('header_sm'); ?>
@@ -25,7 +34,7 @@
         </div>
         <div class="form-group">
           <label class="col-sm-2"><?php echo(__('Body')); ?></label>
-          <?php echo $this->Form->input('Post.body', array('label' => false, 'style' => "width:80%;", 'id' => "text_box", 'class' => "text_form_sm")); ?>
+          <?php echo $this->Form->input('Post.body', array('label' => false, 'style' => "width:80%;", 'id' => "text_box_sm", 'class' => "text_form_sm")); ?>
         </div>
         <div class="form-group">
           <label class="col-sm-2"><?php echo(__('Image selection')); ?></label>

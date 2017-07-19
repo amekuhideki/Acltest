@@ -27,7 +27,7 @@ class CategoriesController extends AppController {
     $this->set('category', $this->Category->find('first', $options));
     $this->loadModel('Post');
     $this->loadModel('User');
-    $posts = $this->Post->find('all', array('conditions' => array('category_id' => $id), 'order' => 'Post.id DESC'));
+    $posts = $this->Post->find('all', array('conditions' => array('category_id' => $id, 'status' => 0), 'order' => 'Post.id DESC'));
     $this->set('posts', $posts);
     $this->RequestHandler->isSmartPhone() === true ? $this->render('view_sm') : $this->render('view');
     // $this->loadModel('User');
