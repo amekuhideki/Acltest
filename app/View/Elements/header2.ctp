@@ -6,8 +6,7 @@
     </div>
     <div class="search_section">
       <ul>
-        <?php echo $this->Form->create('Post', array('novalidate' => true, 'url' => array_merge(
-          array('action' => 'index'), $this->params['pass']) )); ?>
+        <?php echo $this->Form->create('Post', array('novalidate' => true, 'url' => array('controller' => 'posts', 'action' => 'index') )); ?>
         <li class="search_box">
           <?php
             echo $this->Form->input('keyword', array('label' => '', 'empty' => true, 'placeholder' => 'キーワード検索', 'size' => '25'));
