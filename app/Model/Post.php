@@ -92,7 +92,7 @@ class Post extends AppModel {
 		'Image' => array(
 			'className' => 'Attachment',
 			'foreignKey' => 'foreign_key',
-			'cinditions' => array(
+			'conditions' => array(
 				'Image.model' => 'Post',
 			),
 		),

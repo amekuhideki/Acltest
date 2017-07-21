@@ -15,7 +15,7 @@
         <div class="content_detail_sm">
             <?php if (!empty($post['Image'])): ?>
               <?php 
-                echo $this->Html->image('/files/image/attachment/' . $post['Image'][0]['dir'] . '/' . $post['Image'][0]['attachment'], array('width' => '26%')); 
+                echo $this->Html->image('/files/image/attachment/' . $post['Image'][0]['dir'] . '/' . $post['Image'][0]['attachment'], array('width' => '26%', 'height' => '26%')); 
               ?>
             <?php else: ?>
               <?php

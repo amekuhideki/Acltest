@@ -13,7 +13,7 @@ class CategoriesController extends AppController {
   public function index() {
     // $categoryList = $this->Category->generateTreeList(null, null, null, '---->');
     // $this->set(compact('categoryList'));
-    $this->Category->recursive = 0;
+    $this->Category->recursive = 1;
     $this->set('categories', $this->Paginator->paginate());
     $this->RequestHandler->isSmartPhone() === true ? $this->render('index_sm') : $this->render('index');
   }

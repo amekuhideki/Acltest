@@ -20,9 +20,10 @@ tinymce.init({
       <h4><?php echo (__('New Post')); ?></h4>
     </div>
     <div class="add_details_sm">
-      <input type="file" accept="image/*;capture=camera">
       <?php echo $this->Form->create('Post', array('type' => 'file')); ?>
       <?php echo $this->Form->input('status', array('type' => 'hidden', 'value' => 0)); ?>
+      <input type="file" accept="image/*;capture=camera">
+
       <form class="add_table_sm">
         <div class="form-group">
           <label class="col-sm-2"><?php echo (__('Title')); ?></label>
