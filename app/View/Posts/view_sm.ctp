@@ -1,6 +1,14 @@
 <?php echo $this->Html->css('common.css'); ?>
-
+<?php echo $this->Html->script('tinymce/tinymce.min.js'); ?>
 <script>
+tinymce.init({
+	selector: ".text_box_sm",
+	language: "ja",
+  toolbar: false,
+  menubar: false,
+  statusbar: false,
+});
+
 $(function() {
   var comment_page = 1 ;
   if (comment_page === <?php echo $comment_page ?>){
@@ -190,7 +198,7 @@ $(function() {
               </div>
                 <label class="col-sm-2"><?php echo (__('Body')); ?></label>
               <div class="form-group">
-              <?php echo $this->Form->input('body', array('label' => false, 'class' => "text_form_sm comment_sm", 'row'=>3)); ?>
+              <?php echo $this->Form->input('body', array('label' => false, 'class' => "text_form_sm comment_sm text_box_sm")); ?>
               </div>
               <div class="form-group">
               <?php echo $this->Form->input('Comment.post_id', array('type'=>'hidden', 'value'=>$post['Post']['id'])); ?>

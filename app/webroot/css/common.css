@@ -885,6 +885,12 @@ margin-bottom: 30px;
   height:100%;
   width: 100%;
 }
+.content_user_details_sm {
+  margin: 0 auto;
+  background-color: white;
+  padding-left: 4%;
+  padding-right: 4%;
+}
 .content_detail_sm {
   padding-top: 5%;
   padding-right: 3%;
@@ -920,6 +926,10 @@ margin-bottom: 30px;
   margin-top: 10%;
   font-size: 100%;
   font-weight: 800;
+}
+.post_access_sm {
+  float: right;
+  font-size: 20%;
 }
 .navbar {
   margin-bottom: 0px;
@@ -1000,6 +1010,8 @@ margin-bottom: 30px;
 }
 .user_info_form_sm {
   margin: 2%;
+  margin-left: 8%;
+  margin-right: 8%;
 }
 .user_post_sm {
   margin-bottom: 5%;
