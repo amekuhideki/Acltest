@@ -2,7 +2,7 @@
 App::uses('AppController', 'Controller');
 
 class UsersController extends AppController {
-  var $users = array('User', 'Group', 'Post');
+  var $users = array('User', 'Group', 'Post', 'UserImage');
   
   public $components = array('Paginator', 'Flash');
   
@@ -169,7 +169,8 @@ class UsersController extends AppController {
     $user_auth = ['user_group' => $user_group, 'user_name' => $user_name];
     $this->set('user_auth', $user_auth);
 
-    $this->User->recursive = 0;
+    $this->User->recursive = 1;
+    $this->paginate = array('order' => 'User.created DESC');
     $this->set('users', $this->Paginator->paginate());
     
     $this->RequestHandler->isSmartPhone() === true ? $this->render('index_sm') : $this->render('index');
@@ -177,7 +178,7 @@ class UsersController extends AppController {
 
   public function view($id = null) {
     if (!$this->User->exists($id)) {
-    	throw new NotFoundException(__('Invalid user'));
+      throw new NotFoundException(__('Invalid user'));
     }
     $this->User->recursive = 2;
     $options = array('conditions' => array('User.' . $this->User->primaryKey => $id));
@@ -230,7 +231,6 @@ class UsersController extends AppController {
     }
     if ($this->request->is(array('post', 'put'))) {
       $data = $this->request->data;
-
       //パスワード変更
       if(empty($data['User']['password_edit'])){
         $data = array('User' =>
@@ -244,7 +244,8 @@ class UsersController extends AppController {
         $saveField = ['username', 'password', 'introduction'];
         unset($this->request->data['User']['password_edit']);
       }
-      if ($this->User->save($data, null, $saveField)) {
+      
+      if ($this->User->saveAll($this->request->data)) {
         $this->Flash->success(__('The user has been saved.'));
         return $this->redirect(array('action' => 'view', $id));
       } else {

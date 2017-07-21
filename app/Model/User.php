@@ -138,5 +138,15 @@ class User extends AppModel {
 			'counterQuery' => ''
 		)
 	);
+  
+  public $hasOne = array(
+    'userImage' => array(
+      'className' => 'UserImage',
+      'foreignKey' => 'foreign_key',
+      'conditions' => array(
+        'userImage.model' => 'User'
+      )
+    )
+  );
 
 }

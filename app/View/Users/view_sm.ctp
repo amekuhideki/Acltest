@@ -8,9 +8,16 @@
     <div class="main_header_sm">
       <h4><?php echo (__('MyPage')); ?></h4>
     </div>
-    
     <div class="user_info_sm">
       <form class="user_info_form_sm">
+        <div class="form-group">
+          <label>アイコン</label><br>
+          <?php if (!empty($user['userImage']['id'])): ?>
+            <?php echo $this->Html->image('/files/user_image/user_image/' . $user['userImage']['dir'] . '/' . $user['userImage']['user_image'], array('width' => '30%')); ?>
+          <?php else: ?>
+            <?php echo $this->Html->image('/images/no_user.png', array('width' => '26%')); ?>
+          <?php endif; ?>
+        </div>
         <div class="form-group">
           <label>会員ID</label><br>
           <?php echo $user['User']['id']; ?>
@@ -47,11 +54,11 @@
           <div class="content_detail_sm">
             <?php if (!empty($post['Image'])): ?>
               <?php 
-                echo $this->Html->image('/files/image/attachment/' . $post['Image'][0]['dir'] . '/' . $post['Image'][0]['attachment'], array('width' => '26%')); 
+                echo $this->Html->image('/files/image/attachment/' . $post['Image'][0]['dir'] . '/' . $post['Image'][0]['attachment'], array('width' => '26%', 'height' => '26%')); 
               ?>
             <?php else: ?>
               <?php
-                echo $this->Html->image('/images/Noimage.jpg', array('class' => "con_image", 'width' => '26%'));
+                echo $this->Html->image('/images/Noimage.jpg', array('class' => "con_image", 'width' => '26%', 'height' => '26%'));
               ?>
             <?php endif; ?>
             

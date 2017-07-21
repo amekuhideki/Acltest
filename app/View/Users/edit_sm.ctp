@@ -11,8 +11,16 @@
     </div>
     
     <div class="add_details_sm">
-      <?php echo $this->Form->create('User', array('url' => array('action' => 'edit'), 'type' => 'post')); ?>
+      <?php echo $this->Form->create('User', array('url' => array('action' => 'edit'), 'type' => 'file')); ?>
       <form> 
+        <div class="form-group">
+          <label class="col-sm-2"><?php echo(__('Image selection')); ?></label>
+          <?php echo $this->Form->input('userImage.user_image', array('type' => "file", 'label' => false, 'accept' => "user_image/*", 'id' => "add_user_image_sm", 'class' => "text_form_sm")); ?>
+          <?php echo $this->Form->input('dir', array('type' => 'hidden')); ?>
+        </div>
+        <?php 
+          echo $this->Form->input('userImage.model', array('type' => "hidden", 'value' => "User"));
+        ?>
         <?php echo $this->Form->input('id'); ?>
         <div class="form-group">
           <label><?php echo (__('Name')); ?></label>
