@@ -1,0 +1,1 @@
+CREATE TABLE user_images (id int(10) not null primary key auto_increment , model varchar(20), foreign_key int(11), user_image varchar(255), dir varchar(255), type varchar(255), size int(11) DEFAULT 0, active tinyint(1) DEFAULT 1);
