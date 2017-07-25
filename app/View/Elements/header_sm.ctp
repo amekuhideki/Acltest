@@ -10,7 +10,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <div class="navbar-brand disabled">AMEブロ！！！</div>
+      <div class="navbar-brand disabled nav_title">AMEブロ！！！</div>
     </div>
     
     <div id="navbar_search" class="navbar-collapse collapse">

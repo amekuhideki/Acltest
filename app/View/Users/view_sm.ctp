@@ -49,41 +49,53 @@
       <h4><?php echo (__('作成記事')); ?></h4>
     </div>
     <div class="user_post_sm">
-      <div class="content_details_sm">
-        <?php foreach ($posts as $post): ?>
-          <div class="content_detail_sm">
-            <?php if (!empty($post['Image'])): ?>
-              <?php 
-                echo $this->Html->image('/files/image/attachment/' . $post['Image'][0]['dir'] . '/' . $post['Image'][0]['attachment'], array('width' => '26%', 'height' => '26%')); 
-              ?>
-            <?php else: ?>
-              <?php
-                echo $this->Html->image('/images/Noimage.jpg', array('class' => "con_image", 'width' => '26%', 'height' => '26%'));
-              ?>
-            <?php endif; ?>
-            
-            <div class="post_content_sm">
-              <ul class="post_content_header_sm" style="list-style:none;">
-                <li class="post_category_sm">
-                  <span class="category_badge">
-                    <?php echo $post['Category']['category']; ?>
-                  </span>
-                </li>
-                <li class="post_created_sm">
-                  <?php echo h(date('Y年m月d日', strtotime($post['Post']['created']))); ?><br>
-                </li>
-              </ul>
-              <div class="post_title_sm">
-                <?php echo h($post['Post']['title']); ?><br>
-              </div>
-              <div class="post_link_sm">
-                <?php echo $this->Html->link('', array('controller' => "posts", 'action' => "view", $post['Post']['id'])); ?><br>
+      <?php if (!empty($posts)): ?>
+        <div class="content_details_sm">
+          <?php foreach ($posts as $post): ?>
+            <div class="content_detail_sm">
+              <?php if (!empty($post['Image'])): ?>
+                <?php 
+                  echo $this->Html->image('/files/image/attachment/' . $post['Image'][0]['dir'] . '/' . $post['Image'][0]['attachment'], array('width' => '26%', 'max-height' => '26%')); 
+                ?>
+              <?php else: ?>
+                <?php
+                  echo $this->Html->image('/images/Noimage.jpg', array('class' => "con_image", 'width' => '26%', 'max-height' => '26%'));
+                ?>
+              <?php endif; ?>
+              
+              <div class="post_content_sm">
+                <ul class="post_content_header_sm" style="list-style:none;">
+                  <li class="post_category_sm">
+                    <span class="category_badge">
+                      <?php echo $post['Category']['category']; ?>
+                    </span>
+                  </li>
+                  <li class="post_created_sm">
+                    <?php echo h(date('Y年m月d日', strtotime($post['Post']['created']))); ?><br>
+                  </li>
+                </ul>
+                <div class="post_title_sm">
+                  <?php echo h($post['Post']['title']); ?><br>
+                </div>
+                <div class="post_link_sm">
+                  <?php echo $this->Html->link('', array('controller' => "posts", 'action' => "view", $post['Post']['id'])); ?><br>
+                </div>
               </div>
             </div>
+          <?php endforeach; ?>
+        </div>
+
+        <nav class="post_paginate_sm">
+          <div class="paginate">
+            <div class="pagination">
+                <?php echo $this->Paginator->prev('< ', array(), null, array('class' => 'prev disabled')); ?>
+                <?php echo $this->Paginator->numbers(array('modulus' => '2', 'separator' => '')); ?>
+                <?php echo $this->Paginator->next('>', array(), null, array('class' => 'next disabled')); ?>
+            </div>
           </div>
-        <?php endforeach; ?>
-      </div>
-      
+        </nav>
+      <?php else: ?>
+      <?php endif; ?>
       <div class="user_post_footer_sm">
         <div class="user_item_other_sm">
           <?php echo $this->Html->link(__('Article create'), array('controller' => 'Posts', 'action' => 'add'), array('class' => 'btn btn-primary btn-sm', 'style' => 'width:90%;')); ?>
