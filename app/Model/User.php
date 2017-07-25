@@ -67,6 +67,10 @@ class User extends AppModel {
 			'notBlank' => array(
 				'rule' => array('notBlank'),
       ),
+      'check_character' => array(
+        'rule' => array('check_char'),
+        'message' => '同じ書式に統一してください'
+      )
     ),
     'email' => array(
       'notBlank' => array(
@@ -117,7 +121,19 @@ class User extends AppModel {
       )
     ),
 	);
-
+  public function check_char($check) {
+    $character = array_shift($check);
+    $first_char = mb_substr($character, 0, 1);
+    if (preg_match("/^[ぁ-ゞ]+$/u", $first_char)) {
+      return preg_match("/^[ぁ-ゞ]+$/u", $character);
+    }
+    if (preg_match("/^[ァ-ヾ]+$/u", $first_char)) {
+      return preg_match("/^[ァ-ヾ]+$/u", $character);
+    }
+    if (preg_match("/^[a-zA-Z]+$/", $first_char)) {
+      return preg_match("/^[a-zA-Z]+$/", $character);
+    }
+  }
 /**
  * hasMany associations
  *
@@ -144,7 +160,8 @@ class User extends AppModel {
       'className' => 'UserImage',
       'foreignKey' => 'foreign_key',
       'conditions' => array(
-        'userImage.model' => 'User'
+        'userImage.model' => 'User',
+        'active' => '1'
       )
     )
   );
