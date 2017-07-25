@@ -180,14 +180,16 @@ class UsersController extends AppController {
     if (!$this->User->exists($id)) {
       throw new NotFoundException(__('Invalid user'));
     }
-    $this->User->recursive = 2;
+    $this->User->recursive = 1;
     $options = array('conditions' => array('User.' . $this->User->primaryKey => $id));
     $this->set('user', $this->User->find('first', $options));
     #カテゴリの呼び出し
     $this->loadModel('Category');
     $categories = $this->Category->find('all');
     $this->set('categories', $categories);
-    $posts = $this->User->Post->find('all', array('conditions' => array('user_id' => $id, 'status' => 0), 'order' => 'Post.created DESC'));
+    // $posts = $this->User->Post->find('all', array('conditions' => array('user_id' => $id, 'status' => 0), 'order' => 'Post.created DESC'));
+    $this->paginate = array('Post' => array('limit' => 15, 'order' => 'Post.created DESC'));
+    $posts = $this->Paginator->paginate('Post', array('Post.user_id' => $id));
     $this->set('posts', $posts);
     $this->RequestHandler->isSmartPhone() === true ? $this->render('view_sm') : $this->render('view');
   }
@@ -245,7 +247,19 @@ class UsersController extends AppController {
         unset($this->request->data['User']['password_edit']);
       }
       
+      if (isset($this->request->data['userImage'])) {
+        if ($this->request->data['userImage']['user_image']['size'] === 0) {
+          unset($this->request->data['userImage']);
+        } else {
+          $user = $this->User->find('first',array('conditions' => array('User.id' => $id)));
+          $image_id = $user['userImage']['id'];
+          $data = array('userImage' => array('id' => $image_id, 'active' => 0));
+          $fields = array('id', 'active');
+          $this->User->userImage->save($data, false, $fields);
+        }
+      }
       if ($this->User->saveAll($this->request->data)) {
+        
         $this->Flash->success(__('The user has been saved.'));
         return $this->redirect(array('action' => 'view', $id));
       } else {
@@ -257,7 +271,8 @@ class UsersController extends AppController {
     }
     $options = array('conditions' => array('User.' . $this->User->primaryKey => $id));
     $user = $this->User->find('first', $options);
-
+    // pr($user);
+    // exit;
     $groups = $this->User->Group->find('list');
     $this->set(compact('groups', 'user'));
     
