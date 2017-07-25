@@ -822,8 +822,8 @@ margin-bottom: 30px;
   margin: 0 auto;
   text-align: center;
 }
-.navbar-brand {
-  /*padding-left: 10%;*/
+.nav_title {
+  width:61%;
   margin: 0 auto;
   text-align: center;
 }
@@ -878,12 +878,12 @@ margin-bottom: 30px;
   padding-right: 4%;
 }
 .content_details_sm a {
-  display: block;
+  /*display: block;
   position: absolute;
   top: 0;
   left: 0;
   height:100%;
-  width: 100%;
+  width: 100%;*/
 }
 .content_user_details_sm {
   margin: 0 auto;
@@ -1023,6 +1023,7 @@ margin-bottom: 30px;
 .user_item_sm {
   margin: 2%;
   padding: 4px;
+  padding-top: 4%;
   text-align: center;
   border-top: 1px dotted;
 }
@@ -1159,4 +1160,13 @@ margin-bottom: 30px;
   width: 100%;
   height: 100%;
   text-indent: -999px;
+}
+
+input:focus {
+  border: 2px solid red;
+  outline: 0;
+}
+textarea:focus {
+  outline:none;
+  outline: 2px solid red;
 }
