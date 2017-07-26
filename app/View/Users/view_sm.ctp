@@ -31,6 +31,10 @@
           <?php echo $user['User']['email']; ?>
         </div>
         <div class="form-group">
+          <label>電話番号</label><br>
+          <?php echo $user['User']['phone_number']; ?>
+        </div>
+        <div class="form-group">
           <label>自己紹介</label><br>
           <?php if (isset($user['User']['introduction'])): ?>
             <?php echo $user['User']['introduction']; ?>
