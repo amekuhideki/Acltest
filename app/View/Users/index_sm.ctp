@@ -13,29 +13,37 @@
     <div class="content_user_details_sm">
       <?php foreach($users as $user): ?>
         <div class="content_detail_sm">
-          <div class="user_image_sm">
-            <?php if (isset($user['userImage']['id'])): ?>
-              <?php 
-                echo $this->Html->image('/files/user_image/user_image/' .  $user['userImage']['dir']. '/' . $user['userImage']['user_image'], array('width' => '26%', 'height' => '26%')); 
-              ?>
-            <?php else: ?>
-              <?php 
-                echo $this->Html->image('/images/no_user.png', array('class' => 'con_image', 'width' => '26%'));
-              ?>
-            <?php endif; ?>
+          <div class="content_left_sm">
+            <!-- <div class="user_image_sm"> -->
+              <?php if (isset($user['userImage']['id'])): ?>
+                <?php 
+                  echo $this->Html->image('/files/user_image/user_image/' .  $user['userImage']['dir']. '/' . $user['userImage']['user_image'], array('width' => '90%', 'height' => '26%')); 
+                ?>
+              <?php else: ?>
+                <?php 
+                  echo $this->Html->image('/images/no_user.png', array('class' => 'con_image', 'width' => '90%'));
+                ?>
+              <?php endif; ?>
+            <!-- </div> -->
+            <div class="user_name_sm">
+              <?php echo $this->Html->link($user['User']['username'], array('controller' => 'posts', 'action' => 'postUser', $user['User']['id'])) . 'さん'; ?>
+            </div>
+            <div class="user_sns_sm">
+              <?php if (isset($user['User']['git_id']) && isset($user['User']['git_url'])): ?>
+                <?php echo $this->Html->image('/images/icon_github.png', array('url' => $user['User']['git_url'])); ?>
+              <?php else: ?>
+                <?php echo $this->Html->image('/images/icon_gray_github.png', array('url' => $user['User']['git_url'])); ?>
+              <?php endif; ?>
+            </div>
+            <div class="access_post_sm">
+              <?php echo '記事数:' . (count($user['Post']) . '件'); ?>
+            </div>
           </div>
-          <div class="user_name_sm">
-            <?php echo $this->Html->link($user['User']['username'], array('controller' => 'posts', 'action' => 'postUser', $user['User']['id'])) . 'さん'; ?>
-          </div>
-          <div class="user_sns_sm">
-            <?php if (isset($user['User']['git_id']) && isset($user['User']['git_url'])): ?>
-              <?php echo $this->Html->image('/images/icon_github.png', array('url' => $user['User']['git_url'])); ?>
-            <?php else: ?>
-              <?php echo $this->Html->image('/images/icon_gray_github.png', array('url' => $user['User']['git_url'])); ?>
-            <?php endif; ?>
-          </div>
-          <div class="access_post_sm">
-            <?php echo '記事数:' . (count($user['Post']) . '件'); ?>
+          <div class="content_right_sm">
+            <div class="user_introduction_sm">
+              <label>自己紹介:</label><br>
+              <?php echo $user['User']['introduction']; ?>
+            </div>
           </div>
         </div>
       <?php endforeach; ?>

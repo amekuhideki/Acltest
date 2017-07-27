@@ -5,13 +5,16 @@
     <meta name="viewport" content="width=device-width">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
 	<title>
 		<?php echo __('CakePHP: the rapid development php framework:'); ?>
 		<?php echo $title_for_layout; ?>
 	</title>
     <!-- Bootstrap -->
 	<?php echo $this->Html->css('bootstrap.min'); ?>
-
+  <?php echo $this->Html->css('bootstrap.min.css'); ?>
   <!-- JQuery -->
   <!-- <?php echo $this->Html->css('lightbox.css') ?> -->
   <!-- <script type="text/javascript" src="http://code.jquery.com/jquery-1.9.0.js"></script> -->
@@ -24,7 +27,7 @@
 
   <!-- Le styles -->
   <?php echo $this->Html->css('common.css'); ?>
-
+  <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" rel="stylesheet">
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -45,7 +48,12 @@
       <?php endif; ?>
       
       <?php echo $this->fetch('content'); ?>
-      <?php echo $this->element('footer'); ?>
+      <!-- <?php $ua = env('HTTP_USER_AGENT'); ?>
+      <?php if ((strpos($ua, 'iPhone') !== false) || (strpos($ua, 'iPad') !== false) || strpos($ua, 'Android') !== false): ?>
+        <?php echo $this->element('footer_sm'); ?>
+      <?php else: ?>
+        <?php echo $this->element('footer'); ?>
+      <?php endif; ?> -->
     </div>
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script> -->
