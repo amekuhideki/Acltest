@@ -1,13 +1,13 @@
 <?php echo $this->Html->css('common.css'); ?>
 <?php echo $this->Html->script('tinymce/tinymce.min.js'); ?>
 <script>
-tinymce.init({
-	selector: ".text_box_sm",
-	language: "ja",
-  toolbar: false,
-  menubar: false,
-  statusbar: false,
-});
+// tinymce.init({
+// 	selector: ".text_box_sm",
+// 	language: "ja",
+//   toolbar: false,
+//   menubar: false,
+//   statusbar: false,
+// });
 
 $(function() {
   var comment_page = 1 ;

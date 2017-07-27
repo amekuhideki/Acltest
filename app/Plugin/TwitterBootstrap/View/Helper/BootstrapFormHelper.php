@@ -342,7 +342,7 @@ class BootstrapFormHelper extends FormHelper {
 			if (false !== $error) {
 				$options['error'] = array_merge($error, array(
 					'attributes' => array(
-						'wrap' => 'span',
+						'wrap' => 'div',
 						'class' => 'help-inline error-message',
 					),
 				));

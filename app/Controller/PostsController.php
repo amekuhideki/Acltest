@@ -278,13 +278,14 @@ class PostsController extends AppController {
   }
   
   public function postUser($id) {
-    $user = $this->Auth->user();
-    
+    $this->User->id = $id;
+    $user = $this->User->find('first', array('conditions' => array('User.id' => $id)));
+
     if (!$this->User->exists($id)) {
       throw new NotFoundException(__('Invalid post'));
     }
 
-    $post_user = $this->Post->find('all', array('conditions' => array('user_id' => $id), 'order' => 'Post.created DESC')); 
+    $post_user = $this->Post->find('all', array('conditions' => array('user_id' => $id), 'order' => 'Post.created DESC'));
     $this->set('posts', $post_user);
     $this->set('user', $user);
   }

@@ -7,7 +7,7 @@
   
   <div class="main_sm">
     <div class="main_header_sm">
-      <h4><?php echo $user['username'] . (__('List of articles')); ?></h4>
+      <h4><?php echo $user['User']['username'] . (__('List of articles')); ?></h4>
     </div>
     
     <div class="content_details_sm">
