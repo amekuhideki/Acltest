@@ -35,3 +35,4 @@ Thumbs.db
 *.jpg
 *.png
 app/webroot/files/image
+app/webroot/files/user_image
