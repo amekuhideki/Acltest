@@ -102,24 +102,35 @@ class User extends AppModel {
     ),
     'password' => array(
       'notBlank' => array(
-        'rule' => array('notBlank'),
-        'message' => 'パスワードを入力してください'
+        'rule' => 'notBlank',
+        'message' => 'パスワードを入力してください',
+        'on' => 'create'
       ),
       'match' => array(
+        'required' => false,
+        'allowEmpty' => true,
         'rule' => 'passwordConfirm',
-        'message' => 'パスワードが一致していません'
+        'message' => 'パスワードが一致していません',
       ),
       'minLength' => array(
+        'required' => false,
+        'allowEmpty' => true,
         'rule' => array('minLength', 4),
         'message' => 'パスワードは4文字以上にしてください'
       )
     ),
     'password_confirm' => array(
-      'match' => array(
-        'rule' => array(
-          'notBlank',
-          'message' => 'パスワード(確認)を入力してください'
-        )
+      'notBlank' => array(
+        'rule' => 'notBlank',
+        'message' => 'パスワード(確認)を入力してください',
+        'on' => 'create'
+      ),
+      'only_confirm' => array(
+        'required' => false,
+        'allowEmpty' => true,
+        'rule' => 'passwordConfirm',
+        'message' => 'パスワードが一致していません',
+        'on' => 'update'
       )
     ),
     'group_id' => array(
@@ -140,7 +151,7 @@ class User extends AppModel {
   );
   public function check_char($check) {
     $character = array_shift($check);
-    return preg_match("/^\p{Hiragana}+$|^\p{Katakana}+$|^[a-zA-Z]+$|\p{Han}/u", $character);
+    return preg_match("/^\p{Hiragana}+$|^\p{Katakana}+$|^[a-zA-Z]+$|^\p{Han}+$/u", $character);
   }
   
   public function number_check($check) {

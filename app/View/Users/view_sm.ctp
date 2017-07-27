@@ -32,7 +32,11 @@
         </div>
         <div class="form-group">
           <label>電話番号</label><br>
-          <?php echo $user['User']['phone_number']; ?>
+          <?php if (!empty($user['User']['phone_number'])): ?>
+            <?php echo $user['User']['phone_number']; ?>
+          <?php else: ?>
+            <?php echo (__('未登録')); ?>
+          <?php endif; ?>
         </div>
         <div class="form-group">
           <label>自己紹介</label><br>

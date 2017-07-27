@@ -1,0 +1,1 @@
+ALTER TABLE users ADD phone_number varchar(20) COMMENT "電話番号" AFTER email;

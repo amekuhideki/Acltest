@@ -234,32 +234,30 @@ class UsersController extends AppController {
     if ($this->request->is(array('post', 'put'))) {
       $data = $this->request->data;
       //パスワード変更
-      if(empty($data['User']['password_edit'])){
-        $data = array('User' =>
-                array('id' => $id,
-                      'username' => $this->request->data['User']['username'],
-                      'introduction' => $this->request->data['User']['introduction']
-                      ));
-        $saveField = ['username', 'introduction'];
-      } else {
-        $data['User']['password'] = $this->request->data['User']['password_edit'];
-        $saveField = ['username', 'password', 'introduction'];
-        unset($this->request->data['User']['password_edit']);
+      if(empty($this->request->data['User']['password']) || empty($this->request->data['User']['password_confirm'])){
+        unset($this->request->data['User']['password']);
+        unset($this->request->data['User']['password_confirm']);
       }
-      
       if (isset($this->request->data['userImage'])) {
         if ($this->request->data['userImage']['user_image']['size'] === 0) {
           unset($this->request->data['userImage']);
         } else {
           $user = $this->User->find('first',array('conditions' => array('User.id' => $id)));
-          $image_id = $user['userImage']['id'];
-          $data = array('userImage' => array('id' => $image_id, 'active' => 0));
-          $fields = array('id', 'active');
-          $this->User->userImage->save($data, false, $fields);
+          if(!is_null($user['userImage']['id'])) {
+            // $data = array('userImage' => array('id' => $image_id, 'active' => 0));
+            // $fields = array('id', 'active');
+            // $this->User->userImage->save($data, false, $fields);
+          }
         }
       }
       if ($this->User->saveAll($this->request->data)) {
-        
+        $this->loadModel('UserImage');
+        $user_image = $this->UserImage->find('all',array('conditions' => array('foreign_key' => $id, 'active' => 1)));
+        if (count($user_image) >= 2) {
+          $data = array('userImage' => array('id' => $user_image[0]['userImage']['id'], 'active' => 0));
+          $fields = array('id', 'active');
+          $this->UserImage->save($data, false, $fields);
+        }
         $this->Flash->success(__('The user has been saved.'));
         return $this->redirect(array('action' => 'view', $id));
       } else {

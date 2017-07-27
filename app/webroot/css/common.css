@@ -878,12 +878,12 @@ margin-bottom: 30px;
   padding-right: 4%;
 }
 .content_details_sm a {
-  /*display: block;
+  display: block;
   position: absolute;
   top: 0;
   left: 0;
   height:100%;
-  width: 100%;*/
+  width: 100%;
 }
 .content_user_details_sm {
   margin: 0 auto;
