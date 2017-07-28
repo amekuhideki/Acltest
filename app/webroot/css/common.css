@@ -240,10 +240,10 @@ label {
   padding-top: 20px;
   padding-bottom: 100px;
 }
-#image{
+/*#image{
   margin: auto;
   padding: 50px;
-}
+}*/
 /*#image h4{
   text-align: center;
   border-bottom: solid;
@@ -263,6 +263,7 @@ label {
 .annotation {
   font-size: 12px;
   text-align: left;
+  margin: 0;
 }
 .user_conf {
   float: left;
@@ -481,6 +482,7 @@ margin-bottom: 30px;
 .contact_text{
   margin: 5px;
 }
+
 #wrapper_footer_sm {
   margin-top: 2%;
 }
@@ -991,6 +993,9 @@ margin-bottom: 30px;
   padding: 2%;
   border: solid 1px;
 }
+.add_details_sm label {
+  margin: 0;
+}
 .post_paginate_sm {
   margin: 0 auto;
 }
@@ -1026,6 +1031,9 @@ margin-bottom: 30px;
   clear:both;
   padding-bottom: 10%;
 }
+.view_item_sm {
+  text-align: center;
+}
 .image_sm h4{
   text-align: center;
 }
@@ -1046,9 +1054,9 @@ margin-bottom: 30px;
 .picture_sm {
   margin: 1%;
 }
-.text_form_sm {
+/*.text_form_sm {
   border: medium #c0c0c0 double;
-}
+}*/
 .pagination {
   text-align: center;
 }
@@ -1210,18 +1218,24 @@ margin-bottom: 30px;
   text-indent: -999px;
 }
 
-input:focus {
+/*input:focus {
   border: 2px solid red;
   outline: 0;
 }
 textarea:focus {
   outline:none;
   outline: 2px solid red;
-}
+}*/
 .content_left_sm {
   float:left;
   margin: 0 auto;
   width: 40%;
+}
+.user_edit_sm {
+  padding-top: 2%;
+}
+.thumbnail {
+  margin: 0;
 }
 /*.content_left_sm {
   float: left;

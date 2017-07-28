@@ -8,7 +8,7 @@ class UsersController extends AppController {
   
   public function beforeFilter() {
     parent::beforeFilter();
-    $this->Auth->allow('add', 'logout', 'login', 'account_clear');
+    $this->Auth->allow('add', 'logout', 'login', 'account_clear', 'deleteUserImage');
     if ($this->params['action'] == 'opauthComplete') {
       $provider = $this->request->data['auth']['provider'];
       if ($provider === 'Twitter') {
@@ -335,5 +335,25 @@ class UsersController extends AppController {
 
   public function authentication($id = null) {
 
+  }
+  
+  public function deleteUserImage($id = null, $user_id = null) {
+    $this->loadModel('UserImage');
+    if (!$this->UserImage->exists($id)) {
+      throw new NotFoundException(__('Invalid post'));
+    }
+    $this->request->allowMethod('post', 'delete');
+    $image = $this->UserImage->findById($id);
+    if (!$image) {
+      throw new NotFoundException(__('Invalid user image'));
+    }
+    $data = array('UserImage' => array('id' => $id, 'active' => 0));
+    
+    if ($this->UserImage->save($data)) {
+      $this->Flash->success(__('The user image has been deleted.'));
+    } else {
+      $this->Flash->error(__('The user image could not be deleted. Please, try again.'));
+    }
+    return $this->redirect(array('action' => 'edit/'. $user_id));
   }
 }
