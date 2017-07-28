@@ -106,7 +106,6 @@ $(function() {
           <h4><?php echo h($post['Post']['title']); ?></h4>
         </div>
       </div>
-      
       <div class="social_sm">
         <div class="twitter_sm">
           <a href="https://twitter.com/share" class="twitter-share-button" data-lang="ja" data-count="vertical">ツイート</a>
@@ -192,13 +191,13 @@ $(function() {
             <?php endif;?>
             <?php echo $this->Form->create('Comment', array('url' => array('controller' => 'comments', 'action' => 'add'),)); ?>
             <form>
-              <div class="form-group">
+              <div class="input-group">
                 <label class="col-sm-2"><?php echo (__('Name')); ?></label>
-                <?php echo $this->Form->input('commenter', array('label' => false, 'class' => "text_form_sm comment_sm")); ?>
+                <?php echo $this->Form->input('commenter', array('type' => 'text', 'label' => false, 'class' => "form-control comment_sm")); ?>
               </div>
                 <label class="col-sm-2"><?php echo (__('Body')); ?></label>
-              <div class="form-group">
-              <?php echo $this->Form->input('body', array('label' => false, 'class' => "text_form_sm comment_sm text_box_sm")); ?>
+              <div class="input-group">
+              <?php echo $this->Form->input('body', array('type' => 'textarea', 'label' => false, 'class' => "form-control comment_sm text_box_sm")); ?>
               </div>
               <div class="form-group">
               <?php echo $this->Form->input('Comment.post_id', array('type'=>'hidden', 'value'=>$post['Post']['id'])); ?>
@@ -210,7 +209,7 @@ $(function() {
               <?php echo $this->Form->input('user_id', array('type' => 'hidden', 'value' => $user['id'])); ?>
               </div>
               <div class="form-group">
-                <?php echo $this->Form->submit(__('Post'), array('class' => "btn btn-primary btn-xs comment_sm")); ?>
+                <?php echo $this->Form->submit(__('Post'), array('class' => "btn btn-primary btn-sm comment_sm")); ?>
               <?php echo $this->Form->end(); ?>
               </div>
             </form>
