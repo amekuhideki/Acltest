@@ -85,7 +85,7 @@ $(function() {
           </div>
           <div class="input-group user_edit_sm">
             <label><?php echo (__('Password Confirm')); ?></label>
-            <?php echo $this->Form->input('password_confirm', array('label' => false, 'type' => 'password', 'class' => "form-control contact_text"));?>
+            <?php echo $this->Form->input('password_confirm', array('label' => false, 'value' => '', 'type' => 'password', 'class' => "form-control contact_text"));?>
           </div>
           <p class="annotation">
             <?php
