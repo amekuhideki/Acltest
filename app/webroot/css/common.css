@@ -1245,3 +1245,9 @@ textarea:focus {
 .content_right_sm {
   float: left;
 }*/
+.form-error {
+  border: 1px solid red;
+}
+.error-message{
+color:red;
+}
