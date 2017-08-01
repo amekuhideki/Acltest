@@ -233,6 +233,10 @@ class UsersController extends AppController {
     }
     if ($this->request->is(array('post', 'put'))) {
       $data = $this->request->data;
+      if(empty($this->request->data['User']['password']) && empty($this->request->data['User']['password_confirm'])){
+        unset($this->request->data['User']['password']);
+        unset($this->request->data['User']['password_confirm']);
+      }
       if (isset($this->request->data['userImage'])) {
         if ($this->request->data['userImage']['user_image']['size'] === 0) {
           unset($this->request->data['userImage']);
