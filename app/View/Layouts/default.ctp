@@ -48,12 +48,12 @@
       <?php endif; ?>
       
       <?php echo $this->fetch('content'); ?>
-      <!-- <?php $ua = env('HTTP_USER_AGENT'); ?>
+      <?php $ua = env('HTTP_USER_AGENT'); ?>
       <?php if ((strpos($ua, 'iPhone') !== false) || (strpos($ua, 'iPad') !== false) || strpos($ua, 'Android') !== false): ?>
-        <?php echo $this->element('footer_sm'); ?>
+        <!-- <?php echo $this->element('footer_sm'); ?> -->
       <?php else: ?>
         <?php echo $this->element('footer'); ?>
-      <?php endif; ?> -->
+      <?php endif; ?>
     </div>
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script> -->

@@ -240,15 +240,6 @@ label {
   padding-top: 20px;
   padding-bottom: 100px;
 }
-/*#image{
-  margin: auto;
-  padding: 50px;
-}*/
-/*#image h4{
-  text-align: center;
-  border-bottom: solid;
-}*/
-
 .content {
   width: 800px;
   margin: 0 auto;
@@ -269,9 +260,7 @@ label {
   float: left;
   margin-right: 100px;
 }
-.user_introduction {
-  float: left;
-}
+
 .content_footer {
   clear: left;
 }
@@ -312,6 +301,22 @@ margin: auto;
 margin-bottom: 30px;
 }
 
+.user_sidebar {
+  width: 320px;
+  padding: 20px;
+  margin: 0 auto;
+  float:left;
+}
+.user_info_image {
+  text-align: center;
+  margin-bottom: 10px;
+}
+.user_info_btn {
+  text-align: center;
+}
+.post_create_btn {
+  margin-top: 20px;
+}
 .details{
   width: 960px;
   margin-left: 40px;
@@ -321,37 +326,24 @@ margin-bottom: 30px;
   background-color: white;
   border: 1px solid;
 }
-.user_details {
-  width: 280px;
-  padding: 20px;
-  margin: 0 auto;
-  margin-top: 20px;
-  border: 1px solid;
-  float: left;
+.user_post_detail {
+  border-bottom: 1px solid #C7C7C7;
+  padding-top: 20px;
+  padding-bottom: 10px;
 }
-.user_details h2 {
-  margin: auto;
-  padding: 10px;
-  text-align: center;
-}
-.user_posts {
-  clear: left;
-  margin: 0 auto;
-  width: 760px;
-}
-.user_posts_header {
+.details_footer{
   clear: both;
-  margin: auto;
-  margin-top: 20px;
-  padding: 0px;
-  border-style: solid;
-  border-color: #A9A9A9;
-  border-width: 2px;
+  text-align: center;
+  padding-top: 20px;
+  margin: 20px;
+  border-top: 1px dotted;
 }
-.user_posts_header h4 {
-  margin: auto;
-  padding: 10px;
-  background-color: #7BAEB5;
+
+.user_posts {
+  float: left;
+  margin: 0 auto;
+  margin: 20px;
+  width: 598px;
 }
 
 .table th {
@@ -360,48 +352,24 @@ margin-bottom: 30px;
 }
 .user_introduction {
   margin: auto;
-  width: 700px;
-  height: 246px;
-  margin-top: 20px;
-  margin-left: 120px;
-  margin-right: 120px;
-  padding-top: 20px;
-}
-.user_introduction h4 {
-  text-align: left;
-  border-bottom: solid;
-}
-.actions {
-  float:right;
-  margin: auto;
-  margin-left: 100px;
-  text-align: left;
+  width: 280px;
+  margin-bottom: 20px;
 }
 .actions li {
-  margin: 10px;
-}
-.actions h3 {
-  text-align: center;
-  padding-bottom: 20px;
-
+  margin-top: 10px;
 }
 .actions ul {
   padding-left: 0px;
 }
 .actions .btn-on {
-  width:250px;
+  width:248px;
 }
 .btn-off {
   background-color: #bdc3c7;
   color: #869198;
-  width: 250px;
+  width: 248px;
 }
-.detail_top {
-  padding-left: 160px;
-  display: table-cell;
-  vertical-align: middle;
-  text-align: center;
-}
+.user_box {}
 .btn-list {
   clear: both;
   margin-top: 10px;
@@ -412,41 +380,29 @@ margin-bottom: 30px;
   width:180px;
 }
 .post_details {
-  margin: auto;
-  margin-bottom: 10px;
-  padding: 10px;
-  width: 760px;
-  height: 110px;
-  border-left-style: solid;
-  border-bottom-style: solid;
-  border-right-style: solid;
-  border-color: #A9A9A9;
-  border-width: 1px;
+  padding-top: 0;
 }
-.post_details h5 {
-  margin: auto;
-}
+.post_details h4 {
+  font-weight: 600;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  border-top: 1px dotted;
+  border-bottom: 1px dotted;
 
-.post_details_header {
-  border-bottom: dotted 1px black;
-  height: 34px;
 }
-
 .users_post_category {
   float: left;
-  padding-right: 10px;
-  margin-left: -26px;
+  margin-left: -40px;
 }
 .post_created {
-  float: left;
+  float: right;
+}
+.user_post_title {
+  clear: both;
 }
 .users_post_body {
   padding-top: 10px;
-  clear: left;
-  overflow: hidden;
-  white-space:  nowrap;
-  text-overflow: ellipsis;
-  text-align: left;
+  height: 68px;
 }
 .btn_details {
   margin-left: -30px;
@@ -462,6 +418,7 @@ margin-bottom: 30px;
 }
 .not_post {
   text-align: center;
+  padding-top: 15px;
 }
 
 .form-group h2{
@@ -470,7 +427,15 @@ margin-bottom: 30px;
 .signin_text{
   text-align: center;
 }
-
+.add_center {
+  width: 700px;
+  margin: 0 auto;
+  margin-top: 40px;
+  text-align: left;
+  padding: 40px;
+  border: solid 1px;
+  background-color: white;
+}
 #contact_details {
   width: 500px;
   margin: 0 auto;
@@ -478,6 +443,7 @@ margin-bottom: 30px;
   text-align: left;
   padding: 40px;
   border: solid 1px;
+  background-color: white;
 }
 .contact_text{
   margin: 5px;
@@ -601,7 +567,6 @@ margin-bottom: 30px;
 }
 
 .header_category{
-  /*padding-top: 20px;*/
   clear: both;
   margin: 0 auto;
   background-color: #000;
@@ -623,7 +588,6 @@ margin-bottom: 30px;
   nav li{
     display: table-cell;
     vertical-align: middle;
-    /*display: inline;*/
     margin-left: 26px;
     margin: 0;
     padding: 10px;
@@ -697,7 +661,6 @@ margin-bottom: 30px;
     margin: 100px;
     width: 400px;
     height: 400px;
-    /*border: 10px solid black;*/
     float: left;
     pointer-events: none;
   }
@@ -760,6 +723,26 @@ margin-bottom: 30px;
     white-space: nowrap;
     background-color: #4169E1;
   }
+  .ellipsis {
+    position: relative;
+    height: 70px;
+    overflow: hidden;
+    line-height: 20px;
+  }
+  .ellipsis:before, .ellipsis:after {
+    position:absolute;
+    background: #fff;
+  }
+  .ellipsis:before {
+    content: "...";
+    bottom: 0;
+    right: 0;
+  }
+  .ellipsis:after {
+    content: "";
+    width: 100%;
+    height: 100%;
+  }
   .post_tags{
     float: left;
     font-size: 14px;
@@ -769,7 +752,6 @@ margin-bottom: 30px;
   }
   .post_view_body{
     clear: right;
-    /*border-bottom: 1px dashed black;*/
     padding-bottom: 40px; /* 内容と線との間隔量 */
   }
   .post_view_body p {
@@ -790,8 +772,6 @@ margin-bottom: 30px;
     padding: 20px;
     margin-bottom: 30px;
     border-bottom: 1px dotted;
-    /*border-left: 10px solid #7BAEB5;
-    border-bottom: 1px solid #7BAEB5;*/
   }
   #view_title h3 {
     margin: 0;
@@ -807,7 +787,6 @@ margin-bottom: 30px;
   }
   #twitter {
     float: left;
-    /*height: 80px;*/
   }
   #facebook {
     margin-left: 20px;
@@ -910,10 +889,6 @@ margin-bottom: 30px;
   margin-top: 4%;
   text-align: center;
 }
-/*.btn_sns_login {
-  margin: 1%;
-  width: 90%;
-}*/
 .main_header_sm {
   margin: 0 auto;
   color: white;
@@ -1058,9 +1033,7 @@ margin-bottom: 30px;
 .picture_sm {
   margin: 1%;
 }
-/*.text_form_sm {
-  border: medium #c0c0c0 double;
-}*/
+
 .pagination {
   text-align: center;
 }
@@ -1248,6 +1221,6 @@ textarea:focus {
 .form-error {
   border: 1px solid red;
 }
-.error-message{
-color:red;
+.error-message {
+  color: red;
 }

@@ -52,7 +52,7 @@ $(function() {
           </div>
           <div class="form-group">
             <label><?php echo (__('Category')); ?></label>
-            <?php echo $this->Form->input('Post.category_id', array('type' => 'select', 'label' => false, 'class' => "form-control", 'empty' => __('Please select'), 'options' => $categories));?>
+            <?php echo $this->Form->input('Post.category_id', array('type' => 'select', 'label' => false, 'class' => "form-control select-box01", 'empty' => __('Please select')));?>
           </div>
           <div class="form-group">
             <label><?php echo(__('Body')); ?></label>
@@ -85,3 +85,4 @@ $(function() {
     
   </div>
 </div>
+

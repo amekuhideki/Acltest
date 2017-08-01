@@ -38,8 +38,8 @@ $(function() {
         <form> 
           <div class="input-group user_edit_sm">
             <label><?php echo(__('Image selection')); ?></label>
-            <div class="edit_user_image">
-              <?php echo $this->Form->input('userImage.user_image', array('type' => "file", 'label' => false, 'accept' => "user_image/*", 'id' => "add_user_image_sm")); ?>
+            <div class="edit_user_image form-group">
+              <?php echo $this->Form->input('userImage.user_image', array('type' => "file", 'label' => false, 'accept' => "user_image/*", 'id' => "add_user_image_sm exampleInputFile")); ?>
               <?php echo $this->Form->input('dir', array('type' => 'hidden')); ?>
               <div class="control-group">
                 <label class="control-label" for="fileInput">サムネイル画像</label>
