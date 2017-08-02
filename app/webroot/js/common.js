@@ -2,7 +2,7 @@
 $(window).load(function () {
 
       //該当のセレクタなどを代入
-  var mainArea = $("#contents"); //メインコンテンツ
+  var mainArea = $(".contents"); //メインコンテンツ
   var sideWrap = $(".wrapper_sidebar"); //サイドバーの外枠
   var sideArea = $(".sidebar"); //サイドバー
   var sideCale = $("#calender");
@@ -66,7 +66,7 @@ $(window).load(function () {
         $.ajax({
           type: 'post',
           url: "http://blog.dev/AclTest/posts/getdate/",
-          // clossDomain: false,
+          clossDomain: false,
           data: {"date": check_date},
           async: false,
           scriptCharset: "utf-8",

@@ -25,7 +25,7 @@
 
 <div class="categories index">
 	<div class="header">
-		<?php echo $this->element('header2'); ?>
+		<?php echo $this->element('header'); ?>
 	</div>
 	<div id="main">
 		<div id="category_title">

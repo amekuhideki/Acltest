@@ -4,7 +4,8 @@ html {
   font: 16px/20px "ヒラギノ角ゴ Pro W3","Hiragino Kaku Gothic Pro",'メイリオ',Meiryo,Helvetica,Arial,Sans-Serif;
 }
 body {
-background-color:#ffffe0;
+/*background-color:#ffffe0;*/
+background-color: white;
 }
 
 a{ color: #69c;}
@@ -14,12 +15,14 @@ a{ color: #69c;}
   padding: 40px 15px;
   text-align: center;
 }
-#flash_message {
-  margin: 0 auto;
-  text-align: center;
-  height: 50px;
-  width: 100%;
+.navbar-nav{
+  padding-left: 60px;
+    /*margin: 0 auto;
+    display: table;
+    table-layout: fixed;
+    float:none;*/
 }
+
 #wrapper {
   margin-left: 40px;
   margin-right: 40px;
@@ -39,54 +42,52 @@ a{ color: #69c;}
   margin: 0 auto;
 }
 
-#contents{
-  width: 650px;
+.contents{
+  width: 652px;
   margin: 0 auto;
   margin-top: 40px;
   float: left;
 }
-#contents_title {
+.contents_title {
   width:650px;
   margin: 0;
   padding: 0;
-  height: 70px;
-  padding-top: 20px;
-  border-bottom: 2px dotted;
+  padding-top: 6px;
   padding-bottom: 10px;
+  height: 50px;
 
 }
-#contents_img {
-  float: left;
+.posts_contents .panel-body{
+  padding-top: 0;
 }
 #list {
   float: left;
+  margin-left: 20px;
 }
-#contents_title h3 {
+.contents_title h3 {
   padding-top: 8px;
   margin: 0;
   float:left;
 }
 #content_details{
-  clear: left;
-  margin-top: 50px;
-  border: 1px solid Silver;
-  background-color: white;
+  margin-top: 40px;
   height: 200px;
+  border-bottom: 1px dotted;
 }
-.image {
+/*.image {
   float: left;
   margin: 0 auto;
   margin: 10px;
-}
-.post_contents {
+}*/
+/*.post_contents {
   float: left;
-}
-.post_image{
+}*/
+/*.post_image{
   width: 180px;
   float: left;
   padding: 10px;
   margin-top: 5px;
-}
+}*/
 
 .header{
   margin: 0 auto;
@@ -96,8 +97,8 @@ a{ color: #69c;}
   margin: 0;
   height: 60px;
   padding: 0;
-  padding-top: 20px;
   border-bottom: 1px dotted;
+  height: 30px;
 }
 .post_category{
   float: left;
@@ -129,7 +130,7 @@ a{ color: #69c;}
   font-weight: bold;
   text-align: left;
   border-bottom: 1px dotted;
-  width: 440px;
+  width: 460px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -139,10 +140,7 @@ a{ color: #69c;}
   padding: 10px;
   font-size: 14px;
   text-align: left;
-
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  height: 68px;
 }
 
 .contents_footer{
@@ -151,49 +149,35 @@ a{ color: #69c;}
   clear: both;
   width: 440px;
   text-align: right;
+  margin-top: 10px;
 }
 #item {
   padding-right: 5px;
 }
 .sidebar {
-  padding-top:   50px;
-  padding-left: 30px;
-  padding-right: 10px;
+  padding-top:   40px;
+  /*padding-left: 0px;*/
   width: 300px;
   float: right;
 }
-#calender {
-  font-size: 14px;
-}
-#calender_header {
-  margin-bottom: 10px;
-  height: 40px;
-  padding-bottom: 1px;
-  border-bottom: 1px solid;
 
-}
-#calender_icon {
-  float: left;
+#calender_header {
+  height: 50px;
 }
 #calender_title {
   float: left;
   margin: 0;
+  padding: 0;
   margin-bottom: 10px;
 }
-#calender h4 {
+
+/*#calender h4 {
   width: 200px;
   margin: 0;
   margin-top: 5px;
-}
+}*/
 #news_header {
-  margin-top: 20px;
-  margin-bottom: 10px;
   height: 40px;
-  padding-bottom: 1px;
-  border-bottom: 1px solid;
-}
-#news_icon {
-  float: left;
 }
 #news_title {
   float: left;
@@ -201,9 +185,7 @@ a{ color: #69c;}
   margin-bottom: 10px;
 }
 #news h4 {
-  width: 200px;
   margin: 0;
-  margin-top: 5px;
 }
 .news_contents {
   clear: left;
@@ -212,11 +194,12 @@ a{ color: #69c;}
   font-size: 14px;
 }
 .news_img{
-  margin: auto;
+text-align: center;
 }
 .news_content {
   padding-top: 4px;
   padding-bottom: 2px;
+  padding: 10px;
   border-bottom: dashed 1px;
 }
 .paginate{
@@ -302,10 +285,10 @@ margin-bottom: 30px;
 }
 
 .user_sidebar {
-  width: 320px;
+  width: 340px;
   padding: 20px;
   margin: 0 auto;
-  float:left;
+  float: right;
 }
 .user_info_image {
   text-align: center;
@@ -324,7 +307,6 @@ margin-bottom: 30px;
   margin: 0 auto;
   margin-top: 40px;
   background-color: white;
-  border: 1px solid;
 }
 .user_post_detail {
   border-bottom: 1px solid #C7C7C7;
@@ -342,7 +324,9 @@ margin-bottom: 30px;
 .user_posts {
   float: left;
   margin: 0 auto;
-  margin: 20px;
+  margin-top: 20px;
+  margin-left: 20px;
+  margin-bottom: 20px;
   width: 598px;
 }
 
@@ -352,7 +336,7 @@ margin-bottom: 30px;
 }
 .user_introduction {
   margin: auto;
-  width: 280px;
+  width: 300px;
   margin-bottom: 20px;
 }
 .actions li {
@@ -362,12 +346,12 @@ margin-bottom: 30px;
   padding-left: 0px;
 }
 .actions .btn-on {
-  width:248px;
+  width:268px;
 }
 .btn-off {
   background-color: #bdc3c7;
   color: #869198;
-  width: 248px;
+  width: 268px;
 }
 .user_box {}
 .btn-list {
@@ -557,14 +541,14 @@ margin-bottom: 30px;
   width: 300px;
   height: auto;
 }
-.search_box{
+/*.search_box{
   margin: auto;
   float: left;
-}
-.search_bottun{
+}*/
+/*.search_bottun{
   float: left;
   padding-top: 16px;
-}
+}*/
 
 .header_category{
   clear: both;
@@ -576,7 +560,7 @@ margin-bottom: 30px;
   width: 960px;
   margin: 0 auto;
 }
-  nav ul{
+  /*nav ul{
     display: table;
     table-layout: fixed;
     width: 100%;
@@ -608,11 +592,11 @@ margin-bottom: 30px;
   nav li a{
     color: white;
     font-size: 18px;
-  }
-  #site_name {
+  }*/
+  /*#site_name {
     font-size: 30px
 
-  }
+  }*/
   .search_section ul{
     list-style: none;
   }

@@ -8,7 +8,7 @@ class UsersController extends AppController {
   
   public function beforeFilter() {
     parent::beforeFilter();
-    $this->Auth->allow('add', 'logout', 'login', 'account_clear', 'deleteUserImage');
+    $this->Auth->allow('add', 'logout', 'login', 'account_clear', 'deleteUserImage', 'view');
     if ($this->params['action'] == 'opauthComplete') {
       $provider = $this->request->data['auth']['provider'];
       if ($provider === 'Twitter') {
@@ -191,6 +191,9 @@ class UsersController extends AppController {
     $this->paginate = array('Post' => array('limit' => 15, 'order' => 'Post.created DESC'));
     $posts = $this->Paginator->paginate('Post', array('Post.user_id' => $id));
     $this->set('posts', $posts);
+    $this->loadModel('Post');
+    $popular_posts = $this->Post->find('all', array('conditions' => array('user_id' => $id), 'order' => 'access_counter DESC', 'limit' => 5));
+    $this->set('popular_posts', $popular_posts);
     $this->RequestHandler->isSmartPhone() === true ? $this->render('view_sm') : $this->render('view');
   }
 
