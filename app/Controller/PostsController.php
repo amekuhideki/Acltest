@@ -19,7 +19,7 @@ class PostsController extends AppController {
     $source = file_get_contents('http://blog.livedoor.jp/dqnplus/');
     $source = mb_convert_encoding($source, 'utf8', 'auto');
     $html = str_get_html($source);
-    sleep(rand(0.1, 0.7));
+    sleep(rand(0.1, 0.2));
     $i = 0;
     foreach ($html->find('.fullbody') as $element) {
       if ($i === 10) {
@@ -299,6 +299,6 @@ class PostsController extends AppController {
     );
     // pr($this->paginate());
     $this->set('posts', $this->paginate());
-    $this->RequestHandler->isSmartPhone() === true ? $this->render('popular_articles_sm') : $this->render('popular_articles');
+    $this->RequestHandler->isSmartPhone() === true ? $this->render('popular_article_sm') : $this->render('popular_article');
   }
 }
