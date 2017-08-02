@@ -2,24 +2,21 @@
 <?php echo $this->Html->script('common.js'); ?>
 <div class="posts index">
   <div class="header">
-    <?php echo $this->element('header2'); ?>
+    <?php echo $this->element('header'); ?>
   </div>
-  <div class="main">
-    <div id="contents">
-      <div id="contents_title">
+  <div class="row main">
+    <div class="contents posts_contents panel panel-default">
+      <div class="contents_title panel-heading">
 
-        <div id="contents_img">
-          <?php echo $this->Html->image('/images/shisa.png', array('width' => '50')); ?>
-        </div>
         <div id="list">
           <h3><?php echo(__('List of articles')); ?></h3>
         </div>
 
       </div>
-      <?php foreach ($posts as $post): ?>
-        <div id="content_details">
-          <div class="image">
-            <div class="post_image">
+      <div class="panel-body">
+        <?php foreach ($posts as $post): ?>
+          <div id="content_details" class="media">
+            <div class="image media-left">
               <?php $image_flag = 0; ?>
               <?php foreach ($images as $image): ?>
                 <?php if ($image['Image']['foreign_key'] === $post['Post']['id']): ?>

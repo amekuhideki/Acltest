@@ -117,7 +117,7 @@ $(function(){
 
 <div class="posts view">
   <div class="header">
-    <?php echo $this->element('header2'); ?>
+    <?php echo $this->element('header'); ?>
   </div>
   <div id="view_content">
     <div id="post_view_header">
@@ -134,13 +134,6 @@ $(function(){
            ?>
                          &nbsp;&nbsp;
         </li>
-        <!-- <li class="post_tag">
-          <span class="glyphicon glyphicon-tag" aria-hidden="true"></span>
-            <?php foreach ($post['Tag'] as $tag): ?>
-              <?php echo $this->Html->link(__($tag['tag']), array('controller' => 'tags', 'action' => 'view', $tag['id'])); ?>
-            <?php endforeach; ?>
-            &nbsp;
-        </li> -->
         <li class="post_user">
           <?php echo $post['User']['username']; ?>
         </li>

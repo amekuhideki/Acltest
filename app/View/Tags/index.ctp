@@ -2,7 +2,7 @@
 
 <div class="tags index">
 	<div class="header">
-		<?php echo $this->element('header2'); ?>
+		<?php echo $this->element('header'); ?>
 	</div>
 	<div class="main">
 		<h3><?php echo __('List Tags'); ?></h3>

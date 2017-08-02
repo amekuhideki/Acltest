@@ -1,6 +1,6 @@
 <?php echo $this->Html->css('common.css'); ?>
 <div class="users index">
-  <?php echo $this->element('header2'); ?>
+  <?php echo $this->element('header'); ?>
   <div class="main">
 		<h3><?php echo __('ユーザー一覧'); ?></h3>
 			<table class="table table-striped">
