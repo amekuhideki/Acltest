@@ -29,63 +29,56 @@
               <?php endif; ?>
               <?php unset($image_flag); ?>
             </div>
-          </div>
-          <div class="post_contents">
-            <ul class="post_header" style="list-style:none;">
-              <li class="post_category">
-                <span class="badge_category">
-                  <?php echo ($post['Category']['category']) ?>
-                </span>
-              </li>
-              <li class="post_date">
-                <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
-                <?php $post_date = date('Y年m月d日', strtotime($post['Post']['created']));
-                  echo h($post_date);
-                ?>
-                &nbsp;&nbsp;
-              </li>
-              <li class="post_writer">
-                <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
-                <?php if (isset($post['User']['username'])): ?>
-                  <?php echo __($post['User']['username']); ?>
-                <?php else: ?>
-                  <?php echo __('未登録者'); ?>
-                <?php endif; ?>
-                &nbsp;&nbsp;
-              </li>
-            </ul>
+            <div class="post_contents media-body">
+              <ul class="post_header" style="list-style:none;">
+                <li class="post_category">
+                  <span class="badge_category">
+                    <?php echo ($post['Category']['category']) ?>
+                  </span>
+                </li>
+                <li class="post_date">
+                  <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
+                  <?php $post_date = date('Y年m月d日', strtotime($post['Post']['created']));
+                    echo h($post_date);
+                  ?>
+                  &nbsp;&nbsp;
+                </li>
+                <li class="post_writer">
+                  <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+                  <?php if (isset($post['User']['username'])): ?>
+                    <?php echo $this->Html->link(__($post['User']['username']), array('controller' => 'users', 'action' => 'view', $post['User']['id'])); ?>
+                  <?php else: ?>
+                    <?php echo __('未登録者'); ?>
+                  <?php endif; ?>
+                  &nbsp;&nbsp;
+                </li>
+              </ul>
 
-            <div class="post_title">
-              <?php echo h($post['Post']['title']); ?><br>
-            </div>
-
-            <div class="post_body">
-              <?php
-                $body = strip_tags($post['Post']['body']);
-                $limit_body = mb_substr($body, 0, 100, 'utf-8');
-                if (mb_strlen($body, 'utf-8') > '100'){
-                  $limit_body = $limit_body . '...';
-                }
-                echo ($limit_body);
-              ?>
-            </div>
-
-            <div class="contents_footer">
-              <div class="action_view">
-                <?php echo $this->Html->link(__('Read more') . '＞', array('action' => "view", $post['Post']['id'])); ?><br>
+              <div class="post_title">
+                <?php echo h($post['Post']['title']); ?><br>
               </div>
 
-              <div id="item">
-                <?php if ($user['id'] == $post['User']['id'] || $user['Group']['id'] == 1): ?>
-                  <?php echo $this->Html->link(__('Edit'), array('action' => 'edit', $post['Post']['id'])); ?>
-                  ・
-                  <?php echo $this->Html->link(__('Delete'), array('action' => 'delete', $post['Post']['id']),array('confirm' => '本当にこの記事を削除しますか？')); ?>
-                <?php endif; ?>
+              <div class="post_body ellipsis">
+                <?php echo $post['Post']['body']; ?>
+              </div>
+
+              <div class="contents_footer">
+                <div class="action_view">
+                  <?php echo $this->Html->link(__('Read more') . '＞', array('action' => "view", $post['Post']['id'])); ?><br>
+                </div>
+
+                <div id="item">
+                  <?php if ($user['id'] == $post['User']['id'] || $user['Group']['id'] == 1): ?>
+                    <?php echo $this->Html->link(__('Edit'), array('action' => 'edit', $post['Post']['id'])); ?>
+                    ・
+                    <?php echo $this->Html->link(__('Delete'), array('action' => 'delete', $post['Post']['id']),array('confirm' => '本当にこの記事を削除しますか？')); ?>
+                  <?php endif; ?>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      <?php endforeach; ?>
+        <?php endforeach; ?>
+      </div>
       <nav>
         <div class="paginate">
           <ul class="pagination">
@@ -106,23 +99,21 @@
     <div class="wrapper_sidebar">
       <div class="sidebar">
 
-        <div id="calender">
-          <div id="calender_header">
-            <div id="calender_icon">
-              <img src="/AclTest/images/sidebar_img.png", width="30">
-            </div>
+        <div class="panel panel-default">
+          <div id="calender_header" class="panel-heading">
             <div id="calender_title">
               <h4 style="text-align:left;"><?php echo __('Calender'); ?></h4>
             </div>
           </div>
-          <input type=”text” name=”demo” id="date_val">
+          <div class="panel-body">
+            <div id="calender">
+            </div>
+          </div>
+          <!-- <input type=”text” name=”demo” id="date_val"> -->
         </div>
 
-        <div id="news">
-          <div id="news_header">
-            <div id="news_icon">
-              <img src="/AclTest/images/sidebar_img.png", width="30">
-            </div>
+        <div id="news" class="panel panel-default">
+          <div id="news_header" class="panel-heading">
             <div id="news_title">
               <h4><?php echo __('News Summary'); ?></h4>
             </div>
@@ -138,12 +129,13 @@
                 <?php endif; ?>
               </div>
               <div class="news_content">
-                <?php echo $i;
+                <!-- <?php echo $i;
                 $limit_title = mb_substr($new['title'], 0, 20, 'utf-8');
                 if (mb_strlen($new['title'], 'utf-8') > '20'){
                   $limit_title = $limit_title . '. . .';
-                } ?>
-                <?php echo $this->Html->link(__($limit_title), $new['url'], array('target' => '_blank')); ?><br>
+                } ?> -->
+                <?php echo $i; ?>
+                <?php echo $this->Html->link(__($new['title']), $new['url'], array('target' => '_blank')); ?><br>
                 <?php $i += 1; ?>
               </div>
             </div>
