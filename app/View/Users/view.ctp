@@ -28,12 +28,18 @@
                   <h4 class="media-heading user_post_title"><?php echo h($post['Post']['title']); ?></h4>
 
                   <p class="users_post_body ellipsis"><?php echo strip_tags($post['Post']['body']); ?></p>
-                  <ul class="detail_bottun" style="list-style:none;">
-                    <li class="btn_details"><?php echo $this->Html->link(__('View'), array('controller' => 'posts', 'action' => 'view', $post['Post']['id'])); ?></li>
-                    <li class="btn_edit"><?php echo $this->Html->link(__('Edit'), array('controller' => 'posts', 'action' => 'edit', $post['Post']['id'])); ?></li>
-                    <li class="btn_dlete"><?php echo $this->Form->postLink(__('Delete'), array('controller' => 'posts', 'action' => 'delete', $post['Post']['id']),
-                                                                   array('confirm' => __('Are you sure you want to delete # %s?', $post['Post']['id']))); ?></li>
-                  </ul>
+                  <?php if (!empty($_SESSION['Auth']['User']['id']) && $_SESSION['Auth']['User']['id'] === $post['User']['id']): ?>
+                    <ul class="detail_bottun" style="list-style:none;">
+                      <li class="btn_details"><?php echo $this->Html->link(__('View'), array('controller' => 'posts', 'action' => 'view', $post['Post']['id'])); ?></li>
+                      <li class="btn_edit"><?php echo $this->Html->link(__('Edit'), array('controller' => 'posts', 'action' => 'edit', $post['Post']['id'])); ?></li>
+                      <li class="btn_dlete"><?php echo $this->Form->postLink(__('Delete'), array('controller' => 'posts', 'action' => 'delete', $post['Post']['id']),
+                                                                     array('confirm' => __('Are you sure you want to delete # %s?', $post['Post']['id']))); ?></li>
+                    </ul>
+                  <?php else: ?>
+                    <div class="user_view_btn">
+                      <?php echo $this->Html->link(__('Read more') . '＞', array('controller' => 'posts', 'action' => "view", $post['Post']['id'])); ?><br>
+                    </div>
+                  <?php endif; ?>
                 </div>
               </div>
             <?php endforeach; ?>
@@ -166,19 +172,29 @@
           </div>
         <?php endif; ?>
         <div class="panel panel-default">
-          <div class="panel-heading"><?php echo $user['User']['username'] . (__('人気記事')); ?>
+          <div class="panel-heading"><?php echo $user['User']['username'] . (__('の人気記事')); ?>
           </div>
           <div class="panel-body">
             <?php foreach ($popular_posts as $popular): ?>
               <div class="media">
                 <div class="media-left">
-                  <?php if (!empty($popular['Image'])): ?>                    
+                  <?php if (!empty($popular['Image'])): ?>
                     <?php echo $this->Html->image('/files/image/attachment/' . $popular['Image'][0]['dir'] . '/' . $popular['Image'][0]['attachment'], array('width' => '100', 'height' => '100', 'class' => 'media-object')); ?>
                   <?php else: ?>
                     <?php echo $this->Html->image('/images/Noimage.jpg', array('width' => '100', 'class' => 'media-object')); ?>
                   <?php endif; ?>
                 </div>
                 <div class="media-body">
+                  <div class="user_view_popular_creat">
+                    <?php echo (__('作成日')); ?>
+                    <?php echo date("Y/m/d", strtotime($popular['Post']['created'])); ?>
+                  </div>
+                  <div class="user_view_popular_title ellipsis">
+                    <?php echo $popular['Post']['title']; ?>
+                  </div>
+                  <div class="user_view_btn">
+                    <?php echo $this->Html->link(__('Read more') . '＞', array('controller' => 'posts', 'action' => "view", $popular['Post']['id']), array('style' => 'font-size:12px;')); ?><br>
+                  </div>
                 </div>
               </div>
             <?php endforeach; ?>
