@@ -1231,3 +1231,19 @@ textarea:focus {
 .error-message {
   color: red;
 }
+.carousel{
+  width: 100%;
+  margin: 0 auto;
+  height: 400px;
+}
+.carousel,
+.carousel .item,
+.carousel .item-mask,
+.carousel-inner > .item > img {
+	height:400px;
+}
+
+.carousel .item-mask {
+	width:100%;
+	overflow:hidden;
+}
