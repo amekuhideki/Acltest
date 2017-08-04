@@ -1,57 +1,44 @@
 <?php echo $this->Html->css('common.css'); ?>
 <div class="users index">
   <?php echo $this->element('header'); ?>
-  <div class="main">
-		<h3><?php echo __('ユーザー一覧'); ?></h3>
-			<table class="table table-striped">
-				<thead>
-					<tr>
-							<th>id</th>
-							<th>username</th>
-							<th>group_id</th>
-							<th>created</th>
-							<th>modified</th>
-							<th class="actions"><?php echo __('Actions'); ?></th>
-					</tr>
-				</thead>
-				<tbody>
-					<?php foreach ($users as $user): ?>
-					<tr>
-						<td><?php echo h($user['User']['id']); ?>&nbsp;</td>
-						<td><?php echo h($user['User']['username']); ?>&nbsp;</td>
-						<td>
-							<?php echo $this->Html->link($user['Group']['name'], array('controller' => 'groups', 'action' => 'view', $user['Group']['id'])); ?>
-						</td>
-						<td><?php echo h($user['User']['created']); ?>&nbsp;</td>
-						<td><?php echo h($user['User']['modified']); ?>&nbsp;</td>
-						<td class="actions">
-							<?php echo $this->Html->link(__('詳細'), array('action' => 'view', $user['User']['id']),
-																											 array('type' => "button", 'class' => "btn btn-primary")); ?>
-						　<?php if ($user_auth['user_group'] == 1 || $user_auth['user_name'] == $user['User']['username']): ?>
-							<?php echo $this->Html->link(__('編集'), array('action' => 'edit', $user['User']['id']),
-																											 array('type' => "button", 'class' => "btn btn-primary")); ?>
-							<?php echo $this->Form->postLink(__('削除'), array('action' => 'delete', $user['User']['id']),
-							 																							 array('confirm' => __('Are you sure you want to delete # %s?', $user['User']['id']), 'type' => "button", 'class' => "btn btn-danger")); ?>
-							<?php endif; ?>
-						</td>
-					</tr>
-					<?php endforeach; ?>
-				</tbody>
-			</table>
-		<p>
-		<?php
-		echo $this->Paginator->counter(array(
-			'format' => __('Page {:page} of {:pages}, showing {:current} records out of {:count} total, starting on record {:start}, ending on {:end}')
-		));
-		?>	</p>
-		<nav>
-			<ul class="pagination">
-		         <?php
-		             echo $this->Paginator->prev(__('前へ'), array('tag' => 'li'), null, array('tag' => 'li','class' => 'disabled','disabledTag' => 'a'));
-		             echo $this->Paginator->numbers(array('separator' => '','currentTag' => 'a', 'currentClass' => 'active','tag' => 'li','first' => 1));
-		             echo $this->Paginator->next(__('次へ'), array('tag' => 'li','currentClass' => 'disabled'), null, array('tag' => 'li','class' => 'disabled','disabledTag' => 'a'));
-		             ?>
-		  </ul>
-		</nav>
-	</div>
+  <div class="row main">
+    <div class="contents">
+      <p><?php echo (__('List Users')); ?></p>
+      <?php foreach ($users as $user): ?>
+        <div class="col-sm-6 col-md-4">
+          <div class="thumbnail_user">
+            <div class="thumbnail">
+              <?php if (!empty($user['userImage']['id'])): ?>
+                <?php echo $this->Html->image('/files/user_image/user_image/' . $user['userImage']['dir'] . '/' . $user['userImage']['user_image'], array('class' => 'img-rounded', 'width' => '200px', 'height' => '200px')); ?>
+              <?php else: ?>
+                <?php echo $this->Html->image('/images/no_user.png', array('class' => 'img-rounded', 'width' => '200px', 'height' => '200px')); ?>
+              <?php endif; ?>
+              <div class="caption">
+                 <h4><?php echo $user['User']['username']; ?></h4>
+                 <div class="user_caption_introduction">
+                   <?php if (!empty($user['User']['introduction'])): ?>
+                     <?php echo $user['User']['introduction']; ?>
+                   <?php else: ?>
+                     <p><?php echo (__('自己紹介はありません')); ?></p>
+                   <?php endif; ?>
+                 </div>
+                 <p><?php echo $this->Html->link(__('View'), array('action' => 'view', $user['User']['id']), array('class' => 'btn btn-primary btn-sm')); ?></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      <?php endforeach; ?>
+      
+      <nav class="post_paginate_sm">
+        <div class="paginate">
+          <div class="pagination">
+              <?php echo $this->Paginator->prev('< ', array(), null, array('class' => 'prev disabled')); ?>
+              <?php echo $this->Paginator->numbers(array('modulus' => '2', 'separator' => '')); ?>
+              <?php echo $this->Paginator->next('>', array(), null, array('class' => 'next disabled')); ?>
+          </div>
+        </div>
+      </nav>
+      
+    </div>
+  </div>
 </div>
