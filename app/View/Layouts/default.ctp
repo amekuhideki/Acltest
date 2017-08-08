@@ -12,9 +12,13 @@
 		<?php echo __('CakePHP: the rapid development php framework:'); ?>
 		<?php echo $title_for_layout; ?>
 	</title>
+  <?php echo $this->Html->css('common.css'); ?>
+
     <!-- Bootstrap -->
 	<?php echo $this->Html->css('bootstrap.min'); ?>
   <?php echo $this->Html->css('bootstrap.min.css'); ?>
+
+
   <!-- JQuery -->
   <!-- <?php echo $this->Html->css('lightbox.css') ?> -->
   <!-- <script type="text/javascript" src="http://code.jquery.com/jquery-1.9.0.js"></script> -->

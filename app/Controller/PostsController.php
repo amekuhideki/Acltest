@@ -6,7 +6,7 @@ mb_language('Japanese');
 class PostsController extends AppController {
   public function beforeFilter() {
     parent::beforeFilter();
-    $this->Auth->allow('index', 'view', 'getdate', 'date_post', 'postUser', 'popularArticles');
+    $this->Auth->allow('index', 'view', 'getdate', 'date_post', 'postUser', 'popularArticles', 'home');
 
   }
   var $uses = array('Post', 'User', 'Category', 'Tag', 'PostsTag', 'Attachment', 'Comment', 'SubCategory');
@@ -14,6 +14,26 @@ class PostsController extends AppController {
   public $components = array('Paginator', 'Flash', 'Search.Prg');
   public $presetVars = true;
 
+  public function home() {
+    $this->paginate = array(
+      'conditions' => array('Post.status' => 0),
+      'order' => array('Post.created' => 'desc'),
+      'limit' => 15
+    );
+    $this->set('posts', $this->paginate());
+    $pickup = $this->Post->find('first', array('conditions' => array('status' => 0), 'order' => 'rand()', 'limit' => 1));
+    $culture = $this->Post->find('all', array('conditions' => array('status' => 0, 'category_id' => 1), 'order' => 'access_counter DESC', 'limit' => 3));
+    $play = $this->Post->find('all', array('conditions' => array('status' => 0, 'category_id' => 2), 'order' => 'access_counter DESC', 'limit' => 3));
+    $work = $this->Post->find('all', array('conditions' => array('status' => 0, 'category_id' => 3), 'order' => 'access_counter DESC', 'limit' => 3));
+    $tv = $this->Post->find('all', array('conditions' => array('status' => 0, 'category_id' => 4), 'order' => 'access_counter DESC', 'limit' => 3));
+    $popular_posts = $this->Post->find('all', array('conditions' => array('status' => 0), 'order' => 'access_counter DESC', 'limit' => 10));
+    $this->loadModel('Category');
+    $categories = $this->Category->find('all');
+    
+    $this->set(compact("pickup", "culture", "play", "work", "tv", "popular_posts", "categories"));
+
+  }
+  
   public function index($data = null) {
     //まとめサイトのスクレイピング
     $source = file_get_contents('http://blog.livedoor.jp/dqnplus/');
@@ -299,6 +319,9 @@ class PostsController extends AppController {
     );
     // pr($this->paginate());
     $this->set('posts', $this->paginate());
+    $this->loadModel('User');
+    $users = $this->User->find('all', array('order' => 'rand()', 'limit' => 10));
+    $this->set('users', $users);
     $this->RequestHandler->isSmartPhone() === true ? $this->render('popular_article_sm') : $this->render('popular_article');
   }
 }

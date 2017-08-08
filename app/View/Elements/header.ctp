@@ -2,7 +2,12 @@
 
 <nav class="navbar-inverse navbar-collapse" id="nav_targets">
   <div class="header_nav">
-    <a class="navbar-brand" href="#">AMEブロ！！！</a>
+    <h1 class="navbar-brand"><?php echo $this->Html->link(__('AMEブロ！！！'), array('controller' => 'posts', 'action' => 'home'), array('class' => 'title')); ?></h1>
+  </div>
+  </div>
+</nav>
+<nav class="navbar-inverse navbar-collapse" id="nav_targets_sub">
+  <div class="header_nav">
   </div>
   <ul class="nav navbar-nav list_nav">
     <?php if (isset($_SESSION['Auth']['User']['username'])): ?>
