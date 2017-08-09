@@ -37,9 +37,6 @@ $(function(){
 });
 </script>
 <div class="posts form">
-  <div class="header">
-    <?php echo $this->element('header'); ?>
-  </div>
   <?php echo $this->Form->create('Post', array('type' => 'file')); ?>
   <div class="add_center">
     <h2><?php echo __('Edit Post'); ?></h2>

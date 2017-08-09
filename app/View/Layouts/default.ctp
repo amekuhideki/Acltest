@@ -49,6 +49,9 @@
         <?php echo $this->Session->flash(); ?>
       </div>
       <div id="wrapper">
+      <div class="header">
+        <?php echo $this->element('header'); ?>
+      </div>
       <?php endif; ?>
       
       <?php echo $this->fetch('content'); ?>

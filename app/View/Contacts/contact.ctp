@@ -1,8 +1,5 @@
 <?php echo $this->Html->css('common.css'); ?>
 <div id="contact">
-  <div class="header">
-    <?php echo $this->element('header'); ?>
-  </div>
   <div class="main">
     <div id="contact_details">
     <legend><?php echo __('Contact'); ?></legend>

@@ -33,9 +33,6 @@ $(function() {
 
 </script>
 <div class="posts index">
-  <div class="header">
-    <?php echo $this->element('header'); ?>
-  </div>
   <div class="box">
     <ul class="multiple-item">
       <?php foreach ($carousel_image as $calousel): ?>

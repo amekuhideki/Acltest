@@ -31,9 +31,6 @@ $(function() {
 
 </script>
 <div class="posts index">
-  <div class="header">
-    <?php echo $this->element('header'); ?>
-  </div>
   <div class="main_header">
   </div>
   <!-- ↓スライダー本体 -->

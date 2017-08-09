@@ -116,9 +116,6 @@ $(function(){
 
 
 <div class="posts view">
-  <div class="header">
-    <?php echo $this->element('header'); ?>
-  </div>
   <div id="view_content">
     <div id="post_view_header">
       <ul class="view_list", style="list-style:none;">

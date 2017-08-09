@@ -1,9 +1,6 @@
 <?php echo $this->Html->css('common.css'); ?>
 
 <div class="post popular">
-  <div class="header">
-    <?php echo $this->element('header'); ?>
-  </div>
   <div class="row main">
     <div class="contents panel panel-default">
       <div class="panel-heading">

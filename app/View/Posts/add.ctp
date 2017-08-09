@@ -72,9 +72,6 @@ $(function(){
 });
 </script>
 <div class="posts form">
-  <div class="header">
-    <?php echo $this->element('header'); ?>
-  </div>
   <?php echo $this->Form->create('Post', array('type' => 'file')); ?>
   <?php echo $this->Form->input('status', array('type' => 'hidden', 'value' => 0)); ?>
   <div class="add_center">

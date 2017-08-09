@@ -1,8 +1,5 @@
 <?php echo $this->Html->css('common.css'); ?>
 <div class="categories view">
-  <div class="header">
-    <?php echo $this->element('header'); ?>
-  </div>
   <div class="row main">
     <div class="row home_contents">
       <div class="home_contents panel panel-default home_panel_title">

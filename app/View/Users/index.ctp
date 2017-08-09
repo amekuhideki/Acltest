@@ -1,6 +1,5 @@
 <?php echo $this->Html->css('common.css'); ?>
 <div class="users index">
-  <?php echo $this->element('header'); ?>
   <div class="row main">
     <div class="contents">
       <p><?php echo (__('List Users')); ?></p>

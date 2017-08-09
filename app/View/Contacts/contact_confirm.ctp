@@ -22,9 +22,6 @@
   }
 </style>
 <div id="contact">
-  <div class="header">
-    <?php echo $this->element('header'); ?>
-  </div>
   <div id="contact_confirm_form">
     <p>以下の内容で作成します。よろしいですか？</p>
     <div id="contact_confirm_details">
