@@ -1,3 +1,4 @@
+table, th, td {border-style:none!important;}
 html {
   margin: 0;
   padding: 0;
@@ -43,6 +44,9 @@ a:hover{
 
 .navbar-nav{
   float: right;
+}
+.navbar-brand {
+  padding-top: 20px;
 }
 .list_nav{
   /*padding-top: 16px;*/
@@ -295,10 +299,17 @@ a:hover{
   height: 60px;
   padding-left: 10px;
   padding-top: 20px;
+  border-left: 1px solid red;
 }
 .latest_article_category li a{
   color: black;
   display: block;
+  text-decoration: none;
+}
+.latest_article_category li:hover {
+  transition: all .2s;
+  letter-spacing: 5px;
+  background-color: #59b1eb;
 }
 .contents_footer{
   margin: auto;
@@ -447,6 +458,9 @@ margin-bottom: 30px;
   margin: 0 auto;
   float: right;
 }
+.user_details {
+  background-color: white;
+}
 .user_info_image {
   text-align: center;
   margin-bottom: 10px;
@@ -467,8 +481,12 @@ margin-bottom: 30px;
 }
 .user_post_detail {
   border-bottom: 1px solid #C7C7C7;
-  padding-top: 20px;
-  padding-bottom: 10px;
+  margin-top: 20px;
+  /*padding-bottom: 10px;*/
+  background-color: white;
+}
+.user_post_detail_right {
+  padding: 10px;
 }
 .details_footer{
   clear: both;
@@ -496,6 +514,10 @@ margin-bottom: 30px;
   width: 300px;
   margin-bottom: 20px;
 }
+.intro_details {
+  background-color: white;
+  padding: 10px;
+}
 .actions li {
   margin-top: 10px;
 }
@@ -520,8 +542,15 @@ margin-bottom: 30px;
   display: inline-block;
   width:180px;
 }
+.popular_article {
+  background-color: white;
+}
+.popular_article_right {
+  padding-right: 10px;
+  padding-top: 10px;
+}
 .post_details {
-  padding-top: 0;
+  padding-top: 15px;
 }
 .post_details h4 {
   font-weight: 600;
@@ -554,7 +583,7 @@ margin-bottom: 30px;
 }
 .user_view_popular_title {
   clear: right;
-  padding-top: 30px;
+  padding-top: 20px;
   text-align: center;
   height: 60px;
   font-size: 16px;
@@ -720,15 +749,16 @@ margin-bottom: 30px;
   float: right;
   width: 300px;
   height: auto;
+  margin-bottom: 10px;
 }
-/*.search_box{
+.search_box{
   margin: auto;
   float: left;
-}*/
-/*.search_bottun{
+}
+.search_bottun{
   float: left;
   padding-top: 16px;
-}*/
+}
 
 .header_category{
   clear: both;

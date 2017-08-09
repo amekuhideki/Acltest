@@ -1,28 +1,25 @@
 <?php echo $this->Html->css('common.css'); ?>
 <div class="users view">
-  <div class="header">
-    <?php echo $this->element('header'); ?>
-  </div>
   <div class="row details">
     <div class="user_posts">
       <div class="panel panel-default">
-        <div class="panel-heading">
-          <h4 class="panel-title"><?php echo __('作成記事'); ?></h4>
+        <div class="panel-body">
+          <h4 class="panel-title"><?php echo __('Created Articles'); ?></h4>
         </div>
-        <div class="panel-body post_details">
+        <div class="panel-footer post_details">
           <?php if (!empty($posts)): ?>
             <?php foreach ($posts as $post): ?>
               <div class="user_post_detail media">
                 <div class="media-left">
                   <?php if (!empty($post['Image'])): ?>
-                    <?php  echo $this->Html->image('/files/image/attachment/' . $post['Image'][0]['dir'] . '/' . $post['Image'][0]['attachment'], array('width' => '140px', 'height' => '140px')); ?>
+                    <?php  echo $this->Html->image('/files/image/attachment/' . $post['Image'][0]['dir'] . '/' . $post['Image'][0]['attachment'], array('width' => '220px', 'height' => '196px')); ?>
                   <?php else: ?>
-                    <?php echo $this->Html->image('/images/Noimage.jpg', array('class' => "con_image", 'width' => '140px', 'height' => '140px')); ?>
+                    <?php echo $this->Html->image('/images/Noimage.jpg', array('class' => "con_image", 'width' => '220px', 'height' => '196px')); ?>
                   <?php endif; ?>
                 </div>
-                <div class="media-body">
+                <div class="media-body user_post_detail_right">
                   <ul class="" style="list-style:none;">
-                    <li class="users_post_category"><?php echo $post['Category']['category']; ?></li>
+                    <li class="users_post_category"><?php echo $this->Html->link($post['Category']['category'], array('controller' => 'categories', 'action' => 'view', $post['Category']['id'])); ?></li>
                     <li class="post_created"><?php echo date("Y/m/d", strtotime($post['Post']['created'])); ?></li>
                   </ul>
                   <h4 class="media-heading user_post_title"><?php echo h($post['Post']['title']); ?></h4>
@@ -72,72 +69,76 @@
     
     <div class="user_sidebar">
       <div class="detail_top">
-        <div class="panel panel-default user_details">
-          <div class="panel-heading">
+        <div class="panel panel-default">
+          <div class="panel-body">
             <h2 class="panel-title"><?php echo (__('User')); ?></h2>
           </div>
-          <div class="panel-body">
-            <div class="user_info_image">
-              <?php if (!empty($user['userImage']['id'])): ?>
-                <?php echo  $this->Html->image('/files/user_image/user_image/' . $user['userImage']['dir'] . '/' . $user['userImage']['user_image'], array('class' => 'img-rounded', 'width' => '200px')); ?>
-              <?php else: ?>
-                <?php echo $this->Html->image('/images/no_user.png', array('class' => 'img-rounded', 'width' => '200px')); ?>
+          <div class="panel-footer">
+            <div class="user_details">
+              <div class="user_info_image">
+                <?php if (!empty($user['userImage']['id'])): ?>
+                  <?php echo  $this->Html->image('/files/user_image/user_image/' . $user['userImage']['dir'] . '/' . $user['userImage']['user_image'], array('class' => 'img-rounded', 'width' => '200px')); ?>
+                <?php else: ?>
+                  <?php echo $this->Html->image('/images/no_user.png', array('class' => 'img-rounded', 'width' => '200px')); ?>
+                <?php endif; ?>
+              </div>
+              <table class="table user_info_table">
+                <tr>
+                  <th><?php echo __('Account name') . ':'; ?></th>
+                  <td><?php echo h($user['User']['username']); ?>&nbsp;</td>
+                </tr>
+                <tr>
+                  <th><?php echo __('ID:'); ?></th>
+                  <td><?php echo h($user['User']['id']); ?>&nbsp;</td>
+                </tr>
+                <tr>
+                  <th><?php echo __('Group') . ':'; ?></th>
+                  <?php if ($user['Group']['name'] === 'administrators'): ?>
+                    <td><?php echo __('Administrators'); ?>&nbsp;</td>
+                  <?php elseif ($user['Group']['name'] === 'managers'): ?>
+                    <td><?php echo __('Managers'); ?></td>
+                  <?php else: ?>
+                    <td><?php echo __('User'); ?></td>
+                  <?php endif; ?>
+                </tr>
+                <tr>
+                  <th><?php echo __('Created') . ':'; ?></th>
+                  <td>
+                    <?php echo h(date("Y/m/d", strtotime($user['User']['created']))); ?>
+                    &nbsp;
+                  </td>
+                </tr>
+              </table>
+              <?php if (!empty($_SESSION['Auth']['User']['id']) && $_SESSION['Auth']['User']['id'] === $user['User']['id']): ?>
+                <div class="user_info_btn">
+                  <?php echo $this->Html->link(__('Edit Account'), array('controller' => 'users', 'action' => 'edit', $user['User']['id']), array("class" => 'btn btn-success btn-sm', 'style' => 'width:270px;')); ?> 
+                </div>
               <?php endif; ?>
             </div>
-            <table class="table user_info_table">
-              <tr>
-                <th><?php echo __('Account name') . ':'; ?></th>
-                <td><?php echo h($user['User']['username']); ?>&nbsp;</td>
-              </tr>
-              <tr>
-                <th><?php echo __('ID:'); ?></th>
-                <td><?php echo h($user['User']['id']); ?>&nbsp;</td>
-              </tr>
-              <tr>
-                <th><?php echo __('Group') . ':'; ?></th>
-                <?php if ($user['Group']['name'] === 'administrators'): ?>
-                  <td><?php echo __('Administrators'); ?>&nbsp;</td>
-                <?php elseif ($user['Group']['name'] === 'managers'): ?>
-                  <td><?php echo __('Managers'); ?></td>
-                <?php else: ?>
-                  <td><?php echo __('User'); ?></td>
-                <?php endif; ?>
-              </tr>
-              <tr>
-                <th><?php echo __('Created') . ':'; ?></th>
-                <td>
-                  <?php echo h(date("Y/m/d", strtotime($user['User']['created']))); ?>
-                  &nbsp;
-                </td>
-              </tr>
-            </table>
-            <?php if (!empty($_SESSION['Auth']['User']['id']) && $_SESSION['Auth']['User']['id'] === $user['User']['id']): ?>
-              <div class="user_info_btn">
-                <?php echo $this->Html->link(__('Edit Account'), array('controller' => 'users', 'action' => 'edit', $user['User']['id']), array("class" => 'btn btn-success btn-sm', 'style' => 'width:270px;')); ?> 
-              </div>
-            <?php endif; ?>
           </div>
         </div>
         
         <div class="panel panel-default user_introduction">
-          <div class="panel-heading">
+          <div class="panel-body">
             <h4 class="panel-title"><?php echo __('Self-introduction'); ?></h4>
           </div>
-          <div class="panel-body">
-            <?php if(!is_null($user['User']['introduction'])): ?>
-              <?php echo $user['User']['introduction']; ?>
-            <?php else: ?>
-              <p><?php echo __('Self-introduction none'); ?></p>
-            <?php endif; ?>
+          <div class="panel-footer">
+            <div class="intro_details">
+              <?php if(!is_null($user['User']['introduction'])): ?>
+                <?php echo $user['User']['introduction']; ?>
+              <?php else: ?>
+                <p><?php echo __('Self-introduction none'); ?></p>
+              <?php endif; ?>
+            </div>
           </div>
         </div>  
         
         <?php if (!empty($_SESSION['Auth']['User']['id']) && $_SESSION['Auth']['User']['id'] === $user['User']['id']): ?>
           <div class="panel panel-default actions">
-            <div class="panel-heading">
+            <div class="panel-body">
               <h4 class="panel-title"><?php echo __('Other account collaboration'); ?></h4>
             </div>
-            <div class="panel-body">
+            <div class="panel-footer">
               <ul style="list-style:none;">
                 <li>
                   <?php if (is_null($user['User']['credentials_token']) && is_null($user['User']['credentials_secret'])): ?>
@@ -172,19 +173,19 @@
           </div>
         <?php endif; ?>
         <div class="panel panel-default">
-          <div class="panel-heading"><?php echo $user['User']['username'] . (__('の人気記事')); ?>
+          <div class="panel-body"><?php echo $user['User']['username'] . (__('の人気記事')); ?>
           </div>
-          <div class="panel-body">
+          <div class="panel-footer">
             <?php foreach ($popular_posts as $popular): ?>
-              <div class="media">
+              <div class="media popular_article">
                 <div class="media-left">
                   <?php if (!empty($popular['Image'])): ?>
-                    <?php echo $this->Html->image('/files/image/attachment/' . $popular['Image'][0]['dir'] . '/' . $popular['Image'][0]['attachment'], array('width' => '100', 'height' => '100', 'class' => 'media-object')); ?>
+                    <?php echo $this->Html->image('/files/image/attachment/' . $popular['Image'][0]['dir'] . '/' . $popular['Image'][0]['attachment'], array('width' => '110', 'height' => '120', 'class' => 'media-object')); ?>
                   <?php else: ?>
-                    <?php echo $this->Html->image('/images/Noimage.jpg', array('width' => '100', 'class' => 'media-object')); ?>
+                    <?php echo $this->Html->image('/images/Noimage.jpg', array('width' => '110', 'height' => '120', 'class' => 'media-object')); ?>
                   <?php endif; ?>
                 </div>
-                <div class="media-body">
+                <div class="media-body popular_article_right">
                   <div class="user_view_popular_creat">
                     <?php echo (__('作成日')); ?>
                     <?php echo date("Y/m/d", strtotime($popular['Post']['created'])); ?>

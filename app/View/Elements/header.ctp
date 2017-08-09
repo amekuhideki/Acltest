@@ -4,6 +4,19 @@
   <div class="header_nav">
     <h1 class="navbar-brand"><?php echo $this->Html->link(__('AMEブロ！！！'), array('controller' => 'posts', 'action' => 'home'), array('class' => 'title')); ?></h1>
   </div>
+  <div class="search_section">
+    <ul>
+      <?php echo $this->Form->create('Post', array('novalidate' => true, 'url' => array('controller' => 'posts', 'action' => 'index') )); ?>
+      <li class="search_box">
+        <?php
+          echo $this->Form->input('keyword', array('label' => '', 'empty' => true, 'placeholder' => 'キーワード検索', 'size' => '25'));
+        ?>
+      </li>
+      <li class="search_bottun">
+        <?php echo $this->Form->end(array('label' => '検索')); ?>
+      </li>
+    </ul>
+  </div>
   </div>
 </nav>
 <nav class="navbar-inverse navbar-collapse" id="nav_targets_sub">

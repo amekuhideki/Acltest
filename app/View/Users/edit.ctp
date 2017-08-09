@@ -26,7 +26,7 @@ $(function() {
 <div id="edit">
   <div class="users form">
     <div class="header">
-      <?php echo $this->element('header2'); ?>
+      <?php echo $this->element('header'); ?>
     </div>
     <div class="content">
       <div class="add_center">

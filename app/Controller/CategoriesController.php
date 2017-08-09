@@ -5,7 +5,7 @@ class CategoriesController extends AppController {
   public function beforeFilter() {
     parent::beforeFilter();
 
-    $this->Auth->allow('index');
+    $this->Auth->allow('index', 'view');
 }
 
   public $components = array('Paginator', 'Flash');
@@ -24,21 +24,20 @@ class CategoriesController extends AppController {
     }
     // $this->Category->recursive = 2;
     $options = array('conditions' => array('Category.' . $this->Category->primaryKey => $id));
-    $this->set('category', $this->Category->find('first', $options));
+    $category = $this->Category->find('first', $options);
+    $category_name = $category['Category']['category'];
     $this->loadModel('Post');
     $this->loadModel('User');
-    $posts = $this->Post->find('all', array('conditions' => array('category_id' => $id, 'status' => 0), 'order' => 'Post.id DESC'));
-    $this->set('posts', $posts);
+    $this->paginate = array('Post' =>array(
+      'conditions' => array('Post.status' => 0, 'Post.category_id' => $id),
+      'order' => array('Post.created' => 'DESC'),
+      'limit' => 10
+    ));
+    $posts = $this->paginate('Post');
+    $popular_posts = $this->Post->find('all', array('conditions' => array('status' => 0), 'order' => 'access_counter DESC', 'limit' => 10));
+    $categories = $this->Category->find('all');
+    $this->set(compact("category", "category_name", "posts", "popular_posts", "categories"));
     $this->RequestHandler->isSmartPhone() === true ? $this->render('view_sm') : $this->render('view');
-    // $this->loadModel('User');
-    // $user = $this->User->find('list',array(
-    // 													'fields', array('Use.id', 'User.username'),
-    // 													'recursive'=> -1
-    // 													)
-    // 												);
-    // $user = $this->User->find('all');
-    // echo "<pre>";
-    // var_dump ($user);
   }
 
   public function add() {
