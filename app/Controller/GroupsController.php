@@ -7,7 +7,7 @@ class GroupsController extends AppController {
     // CakePHP 2.0
     // $this->Auth->allow('*');
     // CakePHP 2.1以上
-    $this->Auth->allow();
+    // $this->Auth->allow();
 }
 
   public $components = array('Paginator', 'Flash');

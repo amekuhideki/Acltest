@@ -168,7 +168,16 @@ class UsersController extends AppController {
     $user_name = $user['username'];
     $user_auth = ['user_group' => $user_group, 'user_name' => $user_name];
     $this->set('user_auth', $user_auth);
-
+    $this->loadModel('Category');
+    $categories = $this->Category->find('all');
+    $this->set('categories', $categories);
+    $this->loadModel('Post');
+    $popular_posts = $this->Post->find('all', array(
+      'conditions' => array('Post.status' => 0),
+      'order' => 'access_counter DESC',
+      'limit' => 10
+    ));
+    $this->set('popular_posts', $popular_posts);
     $this->User->recursive = 1;
     $this->paginate = array('limit' => 15, 'order' => 'User.created DESC');
     $this->set('users', $this->Paginator->paginate());

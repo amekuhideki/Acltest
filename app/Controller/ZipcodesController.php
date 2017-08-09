@@ -9,7 +9,7 @@ class ZipcodesController extends AppController {
 
   public function beforeFilter() {
     parent::beforeFilter();
-    $this->Auth->allow('index', 'getdata', 'add');
+    // $this->Auth->allow('index', 'getdata', 'add');
   }
 
   public function index() {

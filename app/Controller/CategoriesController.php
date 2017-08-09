@@ -13,8 +13,12 @@ class CategoriesController extends AppController {
   public function index() {
     // $categoryList = $this->Category->generateTreeList(null, null, null, '---->');
     // $this->set(compact('categoryList'));
-    $this->Category->recursive = 1;
+    $this->Category->recursive = 2;
+    $this->Category->hasMany['Post']['order'] = array('created' => 'DESC');
     $this->set('categories', $this->Paginator->paginate());
+    $this->loadModel('Post');
+    $popular_posts = $this->Post->find('all', array('conditions' => array('status' => 0), 'order' => 'access_counter DESC', 'limit' => 10));
+    $this->set('popular_posts', $popular_posts);
     $this->RequestHandler->isSmartPhone() === true ? $this->render('index_sm') : $this->render('index');
   }
 

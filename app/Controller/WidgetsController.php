@@ -4,7 +4,7 @@ App::uses('AppController', 'Controller');
 class WidgetsController extends AppController {
   public function beforeFilter() {
     parent::beforeFilter();
-    $this->Auth->allow('index', 'view');
+    // $this->Auth->allow('index', 'view');
 }
 
 public $components = array('Paginator', 'Flash');
