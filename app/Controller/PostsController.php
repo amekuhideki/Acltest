@@ -6,7 +6,7 @@ mb_language('Japanese');
 class PostsController extends AppController {
   public function beforeFilter() {
     parent::beforeFilter();
-    $this->Auth->allow('index', 'view', 'getdate', 'postUser', 'popularArticles', 'home');
+    $this->Auth->allow('index', 'view', 'getdate', 'postUser', 'popularArticles', 'home', 'comment');
 
   }
   var $uses = array('Post', 'User', 'Category', 'Tag', 'PostsTag', 'Attachment', 'Comment', 'SubCategory');

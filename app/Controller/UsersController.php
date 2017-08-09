@@ -8,7 +8,7 @@ class UsersController extends AppController {
   
   public function beforeFilter() {
     parent::beforeFilter();
-    $this->Auth->allow('add', 'logout', 'login', 'account_clear', 'deleteUserImage', 'view', 'index');
+    $this->Auth->allow('add', 'logout', 'login', 'view', 'index', 'initDB');
     if ($this->params['action'] == 'opauthComplete') {
       $provider = $this->request->data['auth']['provider'];
       if ($provider === 'Twitter') {
@@ -105,10 +105,18 @@ class UsersController extends AppController {
     $this->Acl->deny($group, 'controllers');
     $this->Acl->allow($group, 'controllers/Posts/add');
     $this->Acl->allow($group, 'controllers/Posts/edit');
-    $this->Acl->allow($group, 'controllers/Widgets/add');
-    $this->Acl->allow($group, 'controllers/Widgets/edit');
-    $this->Acl->allow($group, 'controllers/Posts');
-    $this->Acl->allow($group, 'controllers/Attachments');
+    $this->Acl->allow($group, 'controller/Posts/delete');
+    $this->Acl->allow($group, 'controller/Posts/deleteImage');
+    $this->Acl->allow($group, 'controller/Users/edit');
+    $this->Acl->allow($group, 'controller/Users/delete');
+    $this->Acl->allow($group, 'controller/Users/account_clear');
+    $this->Acl->allow($group, 'controller/Users/deleteUserImage');
+    $this->Acl->allow($group, 'controller/comments/delete');
+    $this->Acl->allow($group, 'controller/comments/edit');
+    // $this->Acl->allow($group, 'controllers/Widgets/add');
+    // $this->Acl->allow($group, 'controllers/Widgets/edit');
+    // $this->Acl->allow($group, 'controllers/Posts');
+    // $this->Acl->allow($group, 'controllers/Attachments');
     $this->Acl->allow($group, 'controllers/categories/view');
     $this->Acl->allow($group, 'controllers/Users');
     //馬鹿げた「ビューが見つからない」というエラーメッセージを表示させないために exit を追加します

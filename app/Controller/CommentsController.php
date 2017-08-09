@@ -6,7 +6,7 @@ class CommentsController extends AppController {
 
   public function beforeFilter() {
     parent::beforeFilter();
-    $this->Auth->allow('add', 'delete', 'edit');
+    $this->Auth->allow('add');
   }
 
   public $components = array('Paginator', 'Flash', 'Search.Prg');
