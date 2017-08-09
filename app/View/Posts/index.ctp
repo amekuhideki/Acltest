@@ -13,17 +13,18 @@ $(function() {
           autoplay: true,
           speed: 1200,
           centerMode: true,
+          dots: false,
           responsive: [{
                breakpoint: 768,
                     settings: {
-                         slidesToShow: 3,
-                         slidesToScroll: 3,
+                         slidesToShow: 2,
+                         slidesToScroll: 1,
                }
           },{
                breakpoint: 480,
                     settings: {
-                         slidesToShow: 2,
-                         slidesToScroll: 2,
+                         slidesToShow: 1,
+                         slidesToScroll: 1,
                     }
                }
           ]
@@ -37,11 +38,11 @@ $(function() {
   </div>
   <div class="box">
     <ul class="multiple-item">
-      <?php foreach ($posts as $post): ?>
-        <?php if (!empty($post['Image'])): ?>
-          <li><?php echo $this->Html->image('/files/image/attachment/' . $post['Image'][0]['dir'] . '/' . $post['Image'][0]['attachment'], array('url' => array('controller' => 'posts', 'action' => 'view', $post['Post']['id']), 'width' => '100%', 'height' => '300')); ?></li>
+      <?php foreach ($carousel_image as $calousel): ?>
+        <?php if (!empty($calousel['Image'])): ?>
+          <li><?php echo $this->Html->image('/files/image/attachment/' . $calousel['Image'][0]['dir'] . '/' . $calousel['Image'][0]['attachment'], array('url' => array('controller' => 'posts', 'action' => 'view', $calousel['Post']['id']), 'width' => '100%', 'height' => '300')); ?></li>
         <?php else: ?>
-          <li><?php echo $this->Html->image('/images/Noimage.jpg', array('url' => array('controller' => 'posts', 'action' => 'view', $post['Post']['id']), 'width' => '100%', 'height' => '300')); ?></li>
+          <li><?php echo $this->Html->image('/images/Noimage.jpg', array('url' => array('controller' => 'posts', 'action' => 'view', $calousel['Post']['id']), 'width' => '100%', 'height' => '300')); ?></li>
         <?php endif; ?>
       <?php endforeach; ?>
     </ul>
@@ -126,13 +127,13 @@ $(function() {
         <div class="paginate">
           <ul class="pagination">
             <li>
-              <?php echo $this->Paginator->prev('< ' . __('previous'), array(), null, array('class' => 'prev disabled')); ?>
+              <?php echo $this->Paginator->prev('<', array(), null, array('class' => 'prev disabled')); ?>
             </li>
             <li>
               <?php echo $this->Paginator->numbers(array('separator' => '')); ?>
             </li>
             <li>
-              <?php echo $this->Paginator->next(__('next') . ' >', array(), null, array('class' => 'next disabled')); ?>
+              <?php echo $this->Paginator->next('>', array(), null, array('class' => 'next disabled')); ?>
             </li>
           </ul>
         </div>

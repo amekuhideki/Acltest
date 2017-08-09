@@ -64,12 +64,7 @@ class PostsController extends AppController {
     $user_name = $user['username'];
     $user_auth = ['user_group' => $user_group, 'user_name' => $user_name];
     $this->set('user_auth', $user_auth);
-    // unset($this->Post->validate['title']);
-    // unset($this->Post->validate['category_id']);
-    // unset($this->Post->validate['tag']);
-    // unset($this->Post->validate['posts_tags']);
     $this->Post->recursive = 1;
-    // $this->set('posts', $this->paginate());
 
     //SearchPlugin
     $this->Prg->commonProcess();
@@ -84,6 +79,11 @@ class PostsController extends AppController {
       'limit' => 15
     );
     $this->set('posts', $this->paginate());
+    $carousel_image = $this->Post->find('all', array(
+      'conditions' => array('Post.status' => 0),
+      'order' => array('Post.created' => 'DESC')
+    ));
+    $this->set('carousel_image', $carousel_image);
     // $tags = $this->Post->Tag->find('list', array(
     // 	'fields' => array('Tag.tag')
     // ));

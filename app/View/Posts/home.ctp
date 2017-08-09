@@ -11,17 +11,18 @@ $(function() {
           autoplay: true,
           speed: 1200,
           centerMode: true,
+          dots: false,
           responsive: [{
                breakpoint: 768,
                     settings: {
-                         slidesToShow: 3,
-                         slidesToScroll: 3,
+                         slidesToShow: 2,
+                         slidesToScroll: 1,
                }
           },{
                breakpoint: 480,
                     settings: {
-                         slidesToShow: 2,
-                         slidesToScroll: 2,
+                         slidesToShow: 1,
+                         slidesToScroll: 1,
                     }
                }
           ]
@@ -219,7 +220,7 @@ $(function() {
         <div class="footer_contents latest_articles">
           <div class="panel panel-default">
             <div class="panel-body panel_title article_title">
-              最新記事
+              <?php echo (__('Latest Articles')); ?>
             </div>
             <div class="panel-footer">
               <?php foreach ($posts as $post): ?>
@@ -274,7 +275,7 @@ $(function() {
     <div class="home_side">
       <div class="panel panel-default">
         <div class="panel-body">
-          人気記事
+          <?php echo (__('Popular Articles')); ?>
         </div>
         <div class="panel-footer">
           <?php foreach ($popular_posts as $popular_post): ?>
@@ -300,7 +301,7 @@ $(function() {
           <ul class="latest_article_category" style="list-style:none;">
             <?php foreach ($categories as $category): ?>
               <li>
-                <?php echo $this->Html->link($category['Category']['category'], array('url' => array('controller' => 'category', 'action' => 'view', $category['Category']['id']))); ?>
+                <?php echo $this->Html->link($category['Category']['category'], array('controller' => 'categories', 'action' => 'view', $category['Category']['id']), array('class' => 'category_btn')); ?>
               </li>
             <?php endforeach; ?>
           </ul>
