@@ -74,12 +74,12 @@
             <h2 class="panel-title"><?php echo (__('User')); ?></h2>
           </div>
           <div class="panel-footer">
-            <div class="user_details">
+            <div>
               <div class="user_info_image">
                 <?php if (!empty($user['userImage']['id'])): ?>
-                  <?php echo  $this->Html->image('/files/user_image/user_image/' . $user['userImage']['dir'] . '/' . $user['userImage']['user_image'], array('class' => 'img-rounded', 'width' => '200px')); ?>
+                  <?php echo  $this->Html->image('/files/user_image/user_image/' . $user['userImage']['dir'] . '/' . $user['userImage']['user_image'], array('class' => 'img-rounded', 'width' => '200px', 'height' => '200px')); ?>
                 <?php else: ?>
-                  <?php echo $this->Html->image('/images/no_user.png', array('class' => 'img-rounded', 'width' => '200px')); ?>
+                  <?php echo $this->Html->image('/images/no_user.png', array('class' => 'img-rounded', 'width' => '200px', 'height' => '200px')); ?>
                 <?php endif; ?>
               </div>
               <table class="table user_info_table">
@@ -123,7 +123,7 @@
             <h4 class="panel-title"><?php echo __('Self-introduction'); ?></h4>
           </div>
           <div class="panel-footer">
-            <div class="intro_details">
+            <div class="">
               <?php if(!is_null($user['User']['introduction'])): ?>
                 <?php echo $user['User']['introduction']; ?>
               <?php else: ?>

@@ -8,7 +8,7 @@ $(function() {
     $('.multiple-item').slick({
           infinite: true,
           dots:true,
-          slidesToShow: 2,
+          slidesToShow: 3,
           slidesToScroll: 1,
           autoplay: true,
           speed: 1200,
@@ -45,80 +45,82 @@ $(function() {
     </ul>
   </div>
   <div class="row main">
-    
-    <div class="contents posts_contents panel panel-default">
-      <div class="contents_title panel-heading">
+    <div class="contents">
+      <div class="posts_contents panel panel-default">
+        <div class="contents_title panel-body">
 
-        <div id="list">
-          <h3><?php echo(__('List of articles')); ?></h3>
+          <div id="list">
+            <h3><?php echo(__('List of articles')); ?></h3>
+          </div>
+
+        </div>
+        <div class="panel-footer">
+          <?php foreach ($posts as $post): ?>
+            <div id="content_details" class="media">
+              <div class="image media-left">
+                <?php $image_flag = 0; ?>
+                <?php foreach ($images as $image): ?>
+                  <?php if ($image['Image']['foreign_key'] === $post['Post']['id']): ?>
+                    <?php echo $this->Html->image('/files/image/attachment/'. $image['Image']['dir']. '/' . $image['Image']['attachment'], array('width' => '240', 'height' => '200')); ?>
+                    <?php $image_flag = 1; break; ?>
+                  <?php endif; ?>
+                <?php endforeach; ?>
+                <?php if ($image_flag === 0): ?>
+                  <?php echo $this->Html->image('/images/Noimage.jpg', array('width' => '240', 'height' => '200')); ?>
+                <?php endif; ?>
+                <?php unset($image_flag); ?>
+              </div>
+              <div class="post_contents media-body">
+                <ul class="post_header" style="list-style:none;">
+                  <li class="post_category">
+                    <span class="badge_category">
+                      <?php echo ($post['Category']['category']) ?>
+                    </span>
+                  </li>
+                  <li class="post_date">
+                    <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
+                    <?php $post_date = date('Y年m月d日', strtotime($post['Post']['created']));
+                      echo h($post_date);
+                    ?>
+                    &nbsp;&nbsp;
+                  </li>
+                  <li class="post_writer">
+                    <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+                    <?php if (isset($post['User']['username'])): ?>
+                      <?php echo $this->Html->link(__($post['User']['username']), array('controller' => 'users', 'action' => 'view', $post['User']['id'])); ?>
+                    <?php else: ?>
+                      <?php echo __('未登録者'); ?>
+                    <?php endif; ?>
+                    &nbsp;&nbsp;
+                  </li>
+                </ul>
+
+                <div class="post_title">
+                  <?php echo h($post['Post']['title']); ?><br>
+                </div>
+
+                <div class="post_body ellipsis">
+                  <?php echo $post['Post']['body']; ?>
+                </div>
+
+                <div class="contents_footer">
+                  <div class="action_view">
+                    <?php echo $this->Html->link(__('Read more') . '＞', array('action' => "view", $post['Post']['id'])); ?><br>
+                  </div>
+
+                  <div id="item">
+                    <?php if ($user['id'] == $post['User']['id'] || $user['Group']['id'] == 1): ?>
+                      <?php echo $this->Html->link(__('Edit'), array('action' => 'edit', $post['Post']['id'])); ?>
+                      ・
+                      <?php echo $this->Html->link(__('Delete'), array('action' => 'delete', $post['Post']['id']),array('confirm' => '本当にこの記事を削除しますか？')); ?>
+                    <?php endif; ?>
+                  </div>
+                </div>
+              </div>
+            </div>
+          <?php endforeach; ?>
         </div>
 
-      </div>
-      <div class="panel-body">
-        <?php foreach ($posts as $post): ?>
-          <div id="content_details" class="media">
-            <div class="image media-left">
-              <?php $image_flag = 0; ?>
-              <?php foreach ($images as $image): ?>
-                <?php if ($image['Image']['foreign_key'] === $post['Post']['id']): ?>
-                  <?php echo $this->Html->image('/files/image/attachment/'. $image['Image']['dir']. '/' . $image['Image']['attachment'], array('width' => '150', 'height' => '150')); ?>
-                  <?php $image_flag = 1; break; ?>
-                <?php endif; ?>
-              <?php endforeach; ?>
-              <?php if ($image_flag === 0): ?>
-                <?php echo $this->Html->image('/images/Noimage.jpg', array('width' => '150')); ?>
-              <?php endif; ?>
-              <?php unset($image_flag); ?>
-            </div>
-            <div class="post_contents media-body">
-              <ul class="post_header" style="list-style:none;">
-                <li class="post_category">
-                  <span class="badge_category">
-                    <?php echo ($post['Category']['category']) ?>
-                  </span>
-                </li>
-                <li class="post_date">
-                  <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
-                  <?php $post_date = date('Y年m月d日', strtotime($post['Post']['created']));
-                    echo h($post_date);
-                  ?>
-                  &nbsp;&nbsp;
-                </li>
-                <li class="post_writer">
-                  <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
-                  <?php if (isset($post['User']['username'])): ?>
-                    <?php echo $this->Html->link(__($post['User']['username']), array('controller' => 'users', 'action' => 'view', $post['User']['id'])); ?>
-                  <?php else: ?>
-                    <?php echo __('未登録者'); ?>
-                  <?php endif; ?>
-                  &nbsp;&nbsp;
-                </li>
-              </ul>
-
-              <div class="post_title">
-                <?php echo h($post['Post']['title']); ?><br>
-              </div>
-
-              <div class="post_body ellipsis">
-                <?php echo $post['Post']['body']; ?>
-              </div>
-
-              <div class="contents_footer">
-                <div class="action_view">
-                  <?php echo $this->Html->link(__('Read more') . '＞', array('action' => "view", $post['Post']['id'])); ?><br>
-                </div>
-
-                <div id="item">
-                  <?php if ($user['id'] == $post['User']['id'] || $user['Group']['id'] == 1): ?>
-                    <?php echo $this->Html->link(__('Edit'), array('action' => 'edit', $post['Post']['id'])); ?>
-                    ・
-                    <?php echo $this->Html->link(__('Delete'), array('action' => 'delete', $post['Post']['id']),array('confirm' => '本当にこの記事を削除しますか？')); ?>
-                  <?php endif; ?>
-                </div>
-              </div>
-            </div>
-          </div>
-        <?php endforeach; ?>
       </div>
       <nav>
         <div class="paginate">
@@ -136,17 +138,17 @@ $(function() {
         </div>
       </nav>
     </div>
-
+    
     <div class="wrapper_sidebar">
       <div class="sidebar">
 
         <div class="panel panel-default">
-          <div id="calender_header" class="panel-heading">
+          <div id="calender_header" class="panel-body">
             <div id="calender_title">
               <h4 style="text-align:left;"><?php echo __('Calender'); ?></h4>
             </div>
           </div>
-          <div class="panel-body">
+          <div class="panel-footer">
             <div id="calender">
             </div>
           </div>

@@ -6,7 +6,7 @@ $(function() {
     $('.multiple-item').slick({
           infinite: true,
           dots:true,
-          slidesToShow: 2,
+          slidesToShow: 3,
           slidesToScroll: 1,
           autoplay: true,
           speed: 1200,
