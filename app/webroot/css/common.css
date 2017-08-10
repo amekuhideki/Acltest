@@ -9,10 +9,10 @@ body {
 background-color: white;
 }
 a{ 
-  color: #69c;
+  color: black;
 }
 a:hover{
-  color:#069;
+  color: red;
 }
 .starter-template {
   padding: 40px 15px;
@@ -218,6 +218,7 @@ a:hover{
   margin: 0 auto;
 }
 .pickup_head {
+  font-size: 14px;
   margin: 0 auto;
   height: 30px;
   width: 400px;
@@ -391,6 +392,11 @@ a:hover{
 }
 .purple {
   border-left: 1px solid purple ;
+}
+.purple:hover {
+  transition: all .2s;
+  letter-spacing: 5px;
+  background-color: purple; 
 }
 .latest_article_category li a{
   color: black;
@@ -1175,6 +1181,7 @@ margin-bottom: 30px;
   width:61%;
   margin: 0 auto;
   text-align: center;
+  color: white;
 }
 .nav_bar_left {
   float: left;

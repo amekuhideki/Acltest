@@ -2,7 +2,7 @@
 
 <nav class="navbar-inverse navbar-collapse" id="nav_targets">
   <div class="header_nav">
-    <h1 class="navbar-brand"><?php echo $this->Html->link(__('AMEブロ！！！'), array('controller' => 'posts', 'action' => 'home'), array('class' => 'title')); ?></h1>
+    <h1 class="navbar-brand"><?php echo $this->Html->link(__('AMEブロ！！！'), array('controller' => 'posts', 'action' => 'home'), array('class' => 'title', 'style' => 'color:white')); ?></h1>
   </div>
   <div class="search_section">
     <ul>

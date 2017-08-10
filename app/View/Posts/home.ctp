@@ -436,7 +436,7 @@ $(function() {
                   <?php echo $this->Html->link($category['Category']['category'], array('controller' => 'categories', 'action' => 'view', $category['Category']['id']), array('class' => 'category_btn')); ?>
                 </li>
               <?php elseif ($category['Category']['category'] === 'テレビ'): ?>
-                <li class="green">
+                <li class="purple">
                   <?php echo $this->Html->link($category['Category']['category'], array('controller' => 'categories', 'action' => 'view', $category['Category']['id']), array('class' => 'category_btn')); ?>
                 </li>
               <?php else: ?>
