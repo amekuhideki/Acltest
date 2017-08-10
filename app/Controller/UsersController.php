@@ -43,10 +43,10 @@ class UsersController extends AppController {
           if ($this->User->save($data, null, $saveField)) {
             $this->Session->setFlash($provider . 'を登録しました。');
           } else {
-            $this->Session->setFlash('登録できませんでした。もう一度試してください。');
+            $this->Flash->error('登録できませんでした。もう一度試してください。');
           } 
         } else {
-          $this->Session->setFlash('指定した' . $provider . 'アカウントは既に使われています。');
+          $this->Flash->error('指定した' . $provider . 'アカウントは既に使われています。');
         }
         $this->redirect(array('action' => 'view', $this->Auth->user()['id']));
 
@@ -103,14 +103,31 @@ class UsersController extends AppController {
     //ユーザグループには posts と widgets に対する追加と編集を許可する
     $group->id = 3;
     $this->Acl->deny($group, 'controllers');
+    $this->Acl->allow($group, 'controllers/Posts/home');
+    $this->Acl->allow($group, 'controllers/Posts/index');
+    $this->Acl->allow($group, 'controllers/Posts/view');
+    $this->Acl->allow($group, 'controllers/Posts/getdate');
+    $this->Acl->allow($group, 'controllers/Posts/postUser');
+    $this->Acl->allow($group, 'controllers/Posts/comment');
     $this->Acl->allow($group, 'controllers/Posts/add');
     $this->Acl->allow($group, 'controllers/Posts/edit');
     $this->Acl->allow($group, 'controller/Posts/delete');
     $this->Acl->allow($group, 'controller/Posts/deleteImage');
+
+    $this->Acl->allow($group, 'controller/Users/index');
+    $this->Acl->allow($group, 'controller/Users/view');
+    $this->Acl->allow($group, 'controller/Users/login');
+    $this->Acl->allow($group, 'controller/Users/add');
+    $this->Acl->allow($group, 'controller/Users/logout');
     $this->Acl->allow($group, 'controller/Users/edit');
     $this->Acl->allow($group, 'controller/Users/delete');
     $this->Acl->allow($group, 'controller/Users/account_clear');
     $this->Acl->allow($group, 'controller/Users/deleteUserImage');
+    
+    $this->Acl->allow($group, 'controller/Categoriew/index');
+    $this->Acl->allow($group, 'controller/Categoriew/view');
+    $this->Acl->allow($group, 'controller/contact');
+    $this->Acl->allow($group, 'controller/comments/add');
     $this->Acl->allow($group, 'controller/comments/delete');
     $this->Acl->allow($group, 'controller/comments/edit');
     // $this->Acl->allow($group, 'controllers/Widgets/add');
@@ -126,7 +143,7 @@ class UsersController extends AppController {
 
   public function login() {
     if ($this->Session->read('Auth.User')) {
-      $this->Session->setFlash('You are logged in!');
+      $this->Flash->success('You are logged in!');
       $this->redirect('/posts', null, false);
     }
     if ($this->request->is('post')) {
@@ -138,7 +155,7 @@ class UsersController extends AppController {
         $errCnt = $loginUser['User']['error_count'];
         if ($errCnt >= 10 ) {
           if (time() - strtotime($loginUser['User']['error_time']) < 600 ) {
-              $this->Session->setFlash(__('アカウントはロックしました。10分後にやり直してください。'));
+              $this->Flash->error(__("アカウントはロックしました。10分後にやり直してください。"));
               return;
           } else {
               $errCnt = 0;
@@ -156,7 +173,7 @@ class UsersController extends AppController {
           $data = array('id' => $loginUser['User']['id'], 'error_count' => $errCnt + 1, 'error_time' => date('Y-m-d H:i:s'));
           $this->User->save($data, null, array('error_count', 'error_time'));
         } 
-        $this->Session->setFlash(__('Your username or password was incorrect.'));
+        $this->Flash->error(__('Your username or password was incorrect.'));
       }
     }
 
@@ -166,7 +183,7 @@ class UsersController extends AppController {
   public function logout() {
     $_SESSION = array();
     session_destroy();
-    $this->Session->setFlash('Good-Bye');
+    //$this->Session->setFlash('Good-Bye');
     $this->redirect($this->Auth->logout());	}
 
 
@@ -232,7 +249,7 @@ class UsersController extends AppController {
       }
       if ($this->User->save($this->request->data)) {
         $this->Flash->success(__('The user has been saved.'));
-        return $this->redirect(array('action' => 'index'));
+        return $this->redirect(array('action' => 'login'));
       } else {
         $this->Flash->error(__('The user could not be saved. Please, try again.'));
       }
@@ -347,7 +364,7 @@ class UsersController extends AppController {
     $user_id = ['User' => ['id' => $id]];
     $data = array_merge_recursive($user_id, $up_data);
     if ($this->User->save($data, null, $saveField)) {
-      $this->Session->setFlash($provider . '連携を解除しました');
+      $this->Flash->success($provider . '連携を解除しました');
     }
     return $this->redirect(array('action' => 'view', $id));
   }
