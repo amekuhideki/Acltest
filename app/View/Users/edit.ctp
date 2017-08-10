@@ -25,13 +25,23 @@ $(function() {
 </script>
 <div id="edit">
   <div class="users form">
-    <div class="header">
-      <?php echo $this->element('header'); ?>
-    </div>
     <div class="content">
       <div class="add_center">
         <fieldset>
           <legend><h2><?php echo __('Edit Account'); ?></h2></legend>
+          
+          <?php if (!empty($this->Session->read()['Message']['flash'])): ?>
+            <?php if ($this->Session->read()['Message']['flash']['element'] === 'Flash/error'): ?>
+              <div id="flash_message" class="alert alert-danger">
+                <?php echo $this->Session->flash(); ?>
+              </div>
+            <?php else: ?>
+              <div id="flash_message" class="alert alert-success">
+                <?php echo $this->Session->flash(); ?>
+              </div>
+            <?php endif; ?>
+          <?php endif; ?>
+          
           <div class="user_conf">
             <?php echo $this->Form->create('User', array('url' => array('action' => 'edit'), 'type' => 'file')); ?>
             <form>

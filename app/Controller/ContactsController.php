@@ -18,7 +18,7 @@ public function contact()
       $this->Contact->set($this->request->data);
       
       if (!$this->Contact->validates()) {
-          $this->Session->setFlash('入力内容に不備があります。');
+          $this->Flash->error('入力内容に不備があります。');
           $this->RequestHandler->isSmartPhone() === true ? $this->render('contact_sm') : $this->render('contact');
           return;
       }
@@ -29,9 +29,9 @@ public function contact()
           case 'send':
               if ($this->sendContact($this->request->data['Contact'])) {
                   $this->Session->setFlash('お問い合わせを受け付けました。');
-                  $this->redirect('/Posts');
+                  $this->redirect('/contacts/contact');
               } else {
-                  $this->Session->setFlash('エラーが発生しました。');
+                  $this->Flash->error('エラーが発生しました。');
               }
               break;
           case 'revise':

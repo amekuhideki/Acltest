@@ -1,6 +1,19 @@
 <?php echo $this->Html->css('common.css'); ?>
 <div class="users view">
   <div class="row details">
+    
+    <?php if (!empty($this->Session->read()['Message']['flash'])): ?>
+      <?php if ($this->Session->read()['Message']['flash']['element'] === 'Flash/error'): ?>
+        <div id="flash_message" class="alert alert-danger">
+          <?php echo $this->Session->flash(); ?>
+        </div>
+      <?php else: ?>
+        <div id="flash_message" class="alert alert-success">
+          <?php echo $this->Session->flash(); ?>
+        </div>
+      <?php endif; ?>
+    <?php endif; ?>
+    
     <div class="user_posts">
       <div class="panel panel-default">
         <div class="panel-body">

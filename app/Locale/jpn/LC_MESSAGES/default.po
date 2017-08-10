@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2017-08-09 12:00+0900\n"
+"PO-Revision-Date: 2017-08-10 15:53+0900\n"
 "Last-Translator: NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
 "Language: ja\n"
@@ -76,7 +76,7 @@ msgid "The group could not be deleted. Please, try again."
 msgstr ""
 
 msgid "The post has been saved."
-msgstr ""
+msgstr "記事を作成しました"
 
 msgid "The post could not be saved. Please, try again."
 msgstr ""
@@ -106,16 +106,18 @@ msgid "The tag could not be deleted. Please, try again."
 msgstr ""
 
 msgid "Your username or password was incorrect."
-msgstr ""
+msgstr "ユーザー名またはパスワードが正しくありません"
 
 msgid "Invalid user"
 msgstr ""
 
 msgid "The user has been saved."
-msgstr ""
+msgstr "アカウントを登録しました。"
 
 msgid "The user could not be saved. Please, try again."
 msgstr ""
+"ユーザー登録できませんでした. \n"
+"もう一度試してください."
 
 msgid "The user has been deleted."
 msgstr ""

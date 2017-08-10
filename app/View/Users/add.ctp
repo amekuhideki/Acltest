@@ -9,6 +9,19 @@
 				<div class="form-group">
 					<legend><h2><?php echo __('アカウント作成'); ?></h2></legend>
 				</div>
+        
+        <?php if (!empty($this->Session->read()['Message']['flash'])): ?>
+          <?php if ($this->Session->read()['Message']['flash']['element'] === 'Flash/error'): ?>
+            <div id="flash_message" class="alert alert-danger">
+              <?php echo $this->Session->flash(); ?>
+            </div>
+          <?php else: ?>
+            <div id="flash_message" class="alert alert-success">
+              <?php echo $this->Session->flash(); ?>
+            </div>
+          <?php endif; ?>
+        <?php endif; ?>
+        
 				<div class="form-group">
 					<?php if (isset($this->Session->read()['sns_auth']['username'])): ?>
 						<?php echo $this->Form->input('username', array('label' => "アカウント名", 'class' => "form-control", 'value' => $this->Session->read()['sns_auth']['username'])); ?>

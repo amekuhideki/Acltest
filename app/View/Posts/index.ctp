@@ -45,6 +45,19 @@ $(function() {
     </ul>
   </div>
   <div class="row main">
+    
+    <?php if (!empty($this->Session->read()['Message']['flash'])): ?>
+      <?php if ($this->Session->read()['Message']['flash']['element'] === 'Flash/error'): ?>
+        <div id="flash_message" class="alert alert-danger">
+          <?php echo $this->Session->flash(); ?>
+        </div>
+      <?php else: ?>
+        <div id="flash_message" class="alert alert-success">
+          <?php echo $this->Session->flash(); ?>
+        </div>
+      <?php endif; ?>
+    <?php endif; ?>
+    
     <div class="contents">
       <div class="posts_contents panel panel-default">
         <div class="contents_title panel-body">
