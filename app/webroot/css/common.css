@@ -8,7 +8,6 @@ body {
 /*background-color:#ffffe0;*/
 background-color: white;
 }
-
 a{ 
   color: #69c;
 }
@@ -84,8 +83,11 @@ a:hover{
   border-top: 2px solid red;
 }
 .home_panel_body{
+  margin: 0 auto;
   background-color: white;
   padding: 14px;
+  text-align: center;
+  height: 80px;
 }
 .sub_panel_title {
   margin-top: 40px;
@@ -126,6 +128,31 @@ a:hover{
 }
 .category_media {
   background-color: white;
+}
+.popular_post_details {
+  padding-top: 10px;
+}
+.popular_post_username {
+  font-size: 12px;
+}
+.popular_post_title {
+  padding-top: 6px;
+}
+.category_details {
+  padding-top: 10px;
+  width: 178px;
+  height: 100px;
+}
+.category_detail_category{
+  float: left;
+}
+.category_detail_user {
+  float: right;
+  padding-right: 10px;
+}
+.category_detail_post {
+  clear: both;
+  padding-top: 16px;
 }
 .category_blue {
   color: blue;
@@ -190,7 +217,12 @@ a:hover{
   margin-right: 40px;
   margin: 0 auto;
 }
-
+.pickup_head {
+  margin: 0 auto;
+  height: 30px;
+  width: 400px;
+  text-align: center;
+}
 .contents{
   width: 680px;
   margin: 0 auto;

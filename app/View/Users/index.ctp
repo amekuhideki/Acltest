@@ -60,30 +60,40 @@
                   <?php echo $this->Html->image('/images/Noimage.jpg', array('url' => array('controller' => 'posts', 'action' => 'view', $popular_post['Post']['id']), 'width' => '120', 'height' => '100')); ?>
                 <?php endif; ?> 
               </div>
-              <div class="media-body">
-                <?php if ($popular_post['Category']['category'] === 'カルチャー'): ?>
-                  <div class="category_blue">
-                    <?php echo $popular_post['Category']['category']; ?><br>
-                  </div>
-                <?php elseif ($popular_post['Category']['category'] === '遊び'): ?>
-                  <div class="category_green">
-                    <?php echo $popular_post['Category']['category']; ?><br>
-                  </div>
-                <?php elseif ($popular_post['Category']['category'] === '仕事'): ?>
-                  <div class="category_red">
-                    <?php echo $popular_post['Category']['category']; ?><br>
-                  </div>
-                <?php elseif ($popular_post['Category']['category'] === 'テレビ'): ?>
-                  <div class="category_purple">
-                    <?php echo $popular_post['Category']['category']; ?><br>
-                  </div>
-                <?php else: ?>
-                  <div class="category_color">
-                    <?php echo $popular_post['Category']['category']; ?><br>
-                  </div>
-                <?php endif; ?>
-
-                <?php echo h($popular_post['Post']['title']); ?><br>
+              <div class="media-body popular_post_details">
+                <div class="popular_post_category">
+                  <?php if ($popular_post['Category']['category'] === 'カルチャー'): ?>
+                    <div class="category_blue">
+                      <?php echo $popular_post['Category']['category']; ?><br>
+                    </div>
+                  <?php elseif ($popular_post['Category']['category'] === '遊び'): ?>
+                    <div class="category_green">
+                      <?php echo $popular_post['Category']['category']; ?><br>
+                    </div>
+                  <?php elseif ($popular_post['Category']['category'] === '仕事'): ?>
+                    <div class="category_red">
+                      <?php echo $popular_post['Category']['category']; ?><br>
+                    </div>
+                  <?php elseif ($popular_post['Category']['category'] === 'テレビ'): ?>
+                    <div class="category_purple">
+                      <?php echo $popular_post['Category']['category']; ?><br>
+                    </div>
+                  <?php else: ?>
+                    <div class="category_color">
+                      <?php echo $popular_post['Category']['category']; ?><br>
+                    </div>
+                  <?php endif; ?>
+                </div>
+                <div class="popular_post_username">
+                  <?php if (!empty($popular_post['User']['username'])): ?>
+                    <?php echo $popular_post['User']['username']; ?>
+                  <?php else: ?>
+                    <?php echo (__('退会済み')); ?>
+                  <?php endif; ?>
+                </div>
+                <div class="popular_post_title">
+                  <?php echo h($popular_post['Post']['title']); ?><br>
+                </div>
               </div>
             </div>
           <?php endforeach; ?>

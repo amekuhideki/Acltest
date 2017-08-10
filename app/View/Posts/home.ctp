@@ -59,7 +59,18 @@ $(function() {
             <?php echo $this->Html->image('/images/Noimage.jpg', array('url' => array('controller' => 'posts', 'action' => 'view', $pickup['Post']['id']), 'width' => '668', 'height' => '400')); ?>
           <?php endif; ?>
           <div class="home_panel_body">
-            <?php echo $pickup['Post']['title']; ?>
+            <div class="pickup_head">
+                <?php echo $this->Html->link($pickup['Category']['category'], array('controller' => 'categories', 'action' => 'view', $pickup['Category']['id'])); ?>・
+
+                <?php if (!empty($pickup['User']['username'])): ?>
+                  <?php echo $this->Html->link($pickup['User']['username'], array('controller' => 'users', 'action' => 'view', $pickup['User']['id'])); ?>
+                <?php else: ?>
+                  <?php echo (__('退会済み')); ?>
+                <?php endif; ?>
+            </div>
+            <div>
+              <?php echo $this->Html->link($pickup['Post']['title'], array('controller' => 'posts', 'action' => 'view', $pickup['Post']['id'])); ?>
+            </div>
           </div>
         </div>
       </div>
@@ -80,7 +91,17 @@ $(function() {
                     <?php echo $this->Html->image('/images/Noimage.jpg', array('url' => array('controller' => 'posts', 'action' => 'view', $culture_contents['Post']['id']), 'width' => '306', 'height' => '200')); ?>
                   <?php endif; ?>
                   <div class="pannel-body category_title">
-                    <?php echo $culture_contents['Post']['title']; ?>
+                    <div class="culteru_contents_head">
+                      <?php echo $this->Html->link($culture_contents['Category']['category'], array('controller' => 'categories', 'action' => 'view', $culture_contents['Category']['id'])); ?>・
+                      <?php if (!empty($culture_contents['User']['username'])): ?>
+                        <?php echo $this->Html->link($culture_contents['User']['username'], array('controller' => 'users', 'action' => 'view', $culture_contents['User']['id'])); ?>
+                      <?php else: ?>
+                        <?php echo (__('退会済み')); ?>
+                      <?php endif; ?>
+                    </div>
+                    <div>
+                      <?php echo $this->Html->link($culture_contents['Post']['title'], array('controller' => 'posts', 'action' => 'view', $culture_contents['Post']['id'])); ?>
+                    </div>
                   </div>
                 </div>
               <?php else: ?>
@@ -92,8 +113,20 @@ $(function() {
                       <?php echo $this->Html->image('/images/Noimage.jpg', array('url' => array('controller' => 'posts', 'action' => 'view', $culture_contents['Post']['id']), 'width' => '120', 'height' => '100')); ?>
                     <?php endif; ?>
                   </div>
-                  <div class="media-body">
-                    <?php echo $culture_contents['Post']['title']; ?>
+                  <div class="media-body category_details">
+                    <div class="category_detail_category">
+                      <?php echo $this->Html->link($culture_contents['Category']['category'], array('controller' => 'categories', 'action' => 'view', $culture_contents['Category']['id'])); ?>
+                    </div>
+                    <div class="category_detail_user">
+                      <?php if (!empty($culture_contents['User']['username'])): ?>
+                        <?php echo $this->Html->link($culture_contents['User']['username'], array('controller' => 'users', 'action' => 'view', $culture_contents['User']['id'])); ?>
+                      <?php else: ?>
+                        <?php echo (__('退会済み')); ?>
+                      <?php endif; ?>
+                    </div>
+                    <div class="category_detail_post">
+                      <?php echo $this->Html->link($culture_contents['Post']['title'], array('controller' => 'posts', 'action' => 'view', $culture_contents['Post']['id'])); ?>
+                    </div>
                   </div>
                 </div>
               <?php endif; ?>
@@ -117,7 +150,17 @@ $(function() {
                     <?php echo $this->Html->image('/images/Noimage.jpg', array('url' => array('controller' => 'posts', 'action' => 'view', $play_contents['Post']['id']), 'width' => '306', 'height' => '200')); ?>
                   <?php endif; ?>
                   <div class="pannel-body category_title">
-                    <?php echo $play_contents['Post']['title']; ?>
+                    <div class="play_contents_head">
+                      <?php echo $this->Html->link($play_contents['Category']['category'], array('controller' => 'categories', 'action' => 'view', $play_contents['Category']['id'])); ?>・
+                      <?php if (!empty($play_contents['User']['username'])): ?>
+                        <?php echo $this->Html->link($play_contents['User']['username'], array('controller' => 'users', 'action' => 'view', $play_contents['User']['id'])); ?>
+                      <?php else: ?>
+                        <?php echo (__('退会済み')); ?>
+                      <?php endif; ?>
+                    </div>
+                    <div>
+                      <?php echo $this->Html->link($play_contents['Post']['title'], array('controller' => 'posts', 'action' => 'view', $play_contents['Post']['id'])); ?>
+                    </div>
                   </div>
                 </div>
               <?php else: ?>
@@ -129,8 +172,20 @@ $(function() {
                       <?php echo $this->Html->image('/images/Noimage.jpg', array('url' => array('controller' => 'posts', 'action' => 'view', $play_contents['Post']['id']), 'width' => '120', 'height' => '100')); ?>
                     <?php endif; ?>
                   </div>
-                  <div class="media-body">
-                    <?php echo $play_contents['Post']['title']; ?>
+                  <div class="media-body category_details">
+                    <div class="category_detail_category">
+                      <?php echo $this->Html->link($play_contents['Category']['category'], array('controller' => 'categories', 'action' => 'view', $play_contents['Category']['id'])); ?>
+                    </div>
+                    <div class="category_detail_user">
+                      <?php if (!empty($play_contents['User']['username'])): ?>
+                        <?php echo $this->Html->link($play_contents['User']['username'], array('controller' => 'users', 'action' => 'view', $play_contents['User']['id'])); ?>
+                      <?php else: ?>
+                        <?php echo (__('退会済み')); ?>
+                      <?php endif; ?>
+                    </div>
+                    <div class="category_detail_post">
+                      <?php echo $this->Html->link($play_contents['Post']['title'], array('controller' => 'posts', 'action' => 'view', $play_contents['Post']['id'])); ?>
+                    </div>
                   </div>
                 </div>
               <?php endif; ?>
@@ -154,8 +209,17 @@ $(function() {
                     <?php echo $this->Html->image('/images/Noimage.jpg', array('url' => array('controller' => 'posts', 'action' => 'view', $work_contents['Post']['id']), 'width' => '306', 'height' => '200')); ?>
                   <?php endif; ?>
                   <div class="pannel-body category_title">
-                    <?php echo $work_contents['Post']['title']; ?>
-                  </div>
+                    <div class="work_contents_head">
+                      <?php echo $this->Html->link($work_contents['Category']['category'], array('controller' => 'categories', 'action' => 'view', $work_contents['Category']['id'])); ?>・
+                      <?php if (!empty($work_contents['User']['id'])): ?>
+                        <?php echo $this->Html->link($work_contents['User']['username'], array('controller' => 'users', 'action' => 'view', $work_contents['User']['id'])); ?>
+                      <?php else: ?>
+                        <?php echo (__('退会済み')); ?>
+                      <?php endif; ?>
+                    </div>
+                    <div>
+                      <?php echo $this->Html->link($work_contents['Post']['title'], array('controller' => 'posts', 'action' => 'view', $work_contents['Post']['id'])); ?>
+                    </div>                  </div>
                 </div>
               <?php else: ?>
                 <div class="media category_media">
@@ -166,8 +230,20 @@ $(function() {
                       <?php echo $this->Html->image('/images/Noimage.jpg', array('url' => array('controller' => 'posts', 'action' => 'view', $work_contents['Post']['id']), 'width' => '120', 'height' => '100')); ?>
                     <?php endif; ?>
                   </div>
-                  <div class="media-body">
-                    <?php echo $work_contents['Post']['title']; ?>
+                  <div class="media-body category_details">
+                    <div class="category_detail_category">
+                      <?php echo $this->Html->link($work_contents['Category']['category'], array('controller' => 'categories', 'action' => 'view', $work_contents['Category']['id'])); ?>
+                    </div>
+                    <div class="category_detail_user">
+                      <?php if (!empty($work_contents['User']['username'])): ?>
+                        <?php echo $this->Html->link($work_contents['User']['username'], array('controller' => 'users', 'action' => 'view', $work_contents['User']['id'])); ?>
+                      <?php else: ?>
+                        <?php echo (__('退会済み')); ?>
+                      <?php endif; ?>
+                    </div>
+                    <div class="category_detail_post">
+                      <?php echo $this->Html->link($work_contents['Post']['title'], array('controller' => 'posts', 'action' => 'view', $work_contents['Post']['id'])); ?>
+                    </div>
                   </div>
                 </div>
               <?php endif; ?>
@@ -191,7 +267,17 @@ $(function() {
                     <?php echo $this->Html->image('/images/Noimage.jpg', array('url' => array('controller' => 'posts', 'action' => 'view', $tv_contents['Post']['id']), 'width' => '306', 'height' => '200')); ?>
                   <?php endif; ?>
                   <div class="pannel-body category_title">
-                    <?php echo $tv_contents['Post']['title']; ?>
+                    <div class="tv_head">
+                      <?php echo $this->Html->link($tv_contents['Category']['category'], array('controller' => 'categories', 'action' => 'view', $tv_contents['Category']['id'])); ?>・
+                      <?php if (!empty($tv_contents['User']['username'])): ?>
+                        <?php echo $this->Html->link($tv_contents['User']['username'], array('controller' => 'users', 'action' => 'view', $tv_contents['User']['id'])); ?>
+                      <?php else: ?>
+                        <?php echo (__('退会済み')); ?>
+                      <?php endif; ?>
+                    </div>
+                    <div>
+                      <?php echo $this->Html->link($tv_contents['Post']['title'], array('controller' => 'posts', 'actioin' => 'view', $tv_contents['Post']['id'])); ?>
+                    </div>
                   </div>
                 </div>
               <?php else: ?>
@@ -203,8 +289,16 @@ $(function() {
                       <?php echo $this->Html->image('/images/Noimage.jpg', array('url' => array('controller' => 'posts', 'action' => 'view', $tv_contents['Post']['id']), 'width' => '120', 'height' => '100')); ?>
                     <?php endif; ?>
                   </div>
-                  <div class="media-body">
-                    <?php echo $tv_contents['Post']['title']; ?>
+                  <div class="media-body category_details">
+                    <div class="category_detail_category">
+                      <?php echo $this->Html->link($tv_contents['Category']['category'], array('controller' => 'categories', 'action' => 'view', $tv_contents['Category']['id'])); ?>
+                    </div>
+                    <div class="category_detail_user">
+                      <?php echo $this->Html->link($tv_contents['User']['username'], array('controller' => 'users', 'action' => 'view', $tv_contents['User']['id'])); ?>
+                    </div>
+                    <div class="category_detail_post">
+                      <?php echo $this->Html->link($tv_contents['Post']['title'], array('controller' => 'posts', 'action' => 'view', $tv_contents['Post']['id'])); ?>
+                    </div>
                   </div>
                 </div>
               <?php endif; ?>
@@ -284,8 +378,40 @@ $(function() {
                   <?php echo $this->Html->image('/images/Noimage.jpg', array('url' => array('controller' => 'posts', 'action' => 'view', $popular_post['Post']['id']), 'width' => '120', 'height' => '100')); ?>
                 <?php endif; ?> 
               </div>
-              <div class="media-body">
-                <?php echo h($popular_post['Post']['title']); ?><br>
+              <div class="media-body popular_post_details">
+                <div class="popular_post_category">
+                  <?php if ($popular_post['Category']['category'] === 'カルチャー'): ?>
+                    <div class="category_blue">
+                      <?php echo $popular_post['Category']['category']; ?><br>
+                    </div>
+                  <?php elseif ($popular_post['Category']['category'] === '遊び'): ?>
+                    <div class="category_green">
+                      <?php echo $popular_post['Category']['category']; ?><br>
+                    </div>
+                  <?php elseif ($popular_post['Category']['category'] === '仕事'): ?>
+                    <div class="category_red">
+                      <?php echo $popular_post['Category']['category']; ?><br>
+                    </div>
+                  <?php elseif ($popular_post['Category']['category'] === 'テレビ'): ?>
+                    <div class="category_purple">
+                      <?php echo $popular_post['Category']['category']; ?><br>
+                    </div>
+                  <?php else: ?>
+                    <div class="category_color">
+                      <?php echo $popular_post['Category']['category']; ?><br>
+                    </div>
+                  <?php endif; ?>
+                </div>
+                <div class="popular_post_username">
+                  <?php if (!empty($popular_post['User']['username'])): ?>
+                    <?php echo $popular_post['User']['username']; ?>
+                  <?php else: ?>
+                    <?php echo (__('退会済み')); ?>
+                  <?php endif; ?>
+                </div>
+                <div class="popular_post_title">
+                  <?php echo h($popular_post['Post']['title']); ?><br>
+                </div>
               </div>
             </div>
           <?php endforeach; ?>
@@ -297,9 +423,28 @@ $(function() {
         <div class="panel-footer panel_footer">
           <ul class="latest_article_category" style="list-style:none;">
             <?php foreach ($categories as $category): ?>
-              <li>
-                <?php echo $this->Html->link($category['Category']['category'], array('controller' => 'categories', 'action' => 'view', $category['Category']['id']), array('class' => 'category_btn')); ?>
-              </li>
+              <?php if ($category['Category']['category'] === 'カルチャー'): ?>
+                <li class="blue">
+                  <?php echo $this->Html->link($category['Category']['category'], array('controller' => 'categories', 'action' => 'view', $category['Category']['id']), array('class' => 'category_btn')); ?>
+                </li>
+              <?php elseif ($category['Category']['category'] === '遊び'): ?>
+                <li class="green">
+                  <?php echo $this->Html->link($category['Category']['category'], array('controller' => 'categories', 'action' => 'view', $category['Category']['id']), array('class' => 'category_btn')); ?>
+                </li>
+              <?php elseif ($category['Category']['category'] === '仕事'): ?>
+                <li class="yellow">
+                  <?php echo $this->Html->link($category['Category']['category'], array('controller' => 'categories', 'action' => 'view', $category['Category']['id']), array('class' => 'category_btn')); ?>
+                </li>
+              <?php elseif ($category['Category']['category'] === 'テレビ'): ?>
+                <li class="green">
+                  <?php echo $this->Html->link($category['Category']['category'], array('controller' => 'categories', 'action' => 'view', $category['Category']['id']), array('class' => 'category_btn')); ?>
+                </li>
+              <?php else: ?>
+                <li class="red">
+                  <?php echo $this->Html->link($category['Category']['category'], array('controller' => 'categories', 'action' => 'view', $category['Category']['id']), array('class' => 'category_btn')); ?>
+                </li>
+              <?php endif; ?>
+
             <?php endforeach; ?>
           </ul>
         </div>

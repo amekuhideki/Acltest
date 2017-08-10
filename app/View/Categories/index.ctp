@@ -34,7 +34,7 @@
     <div class="home_side">
       <div class="panel panel-default">
         <div class="panel-body">
-          人気記事
+          <?php echo (__('Popular Articles')); ?>
         </div>
         <div class="panel-footer">
           <?php foreach ($popular_posts as $popular_post): ?>
@@ -46,8 +46,40 @@
                   <?php echo $this->Html->image('/images/Noimage.jpg', array('url' => array('controller' => 'posts', 'action' => 'view', $popular_post['Post']['id']), 'width' => '120', 'height' => '100')); ?>
                 <?php endif; ?> 
               </div>
-              <div class="media-body">
-                <?php echo h($popular_post['Post']['title']); ?><br>
+              <div class="media-body popular_post_details">
+                <div class="popular_post_category">
+                  <?php if ($popular_post['Category']['category'] === 'カルチャー'): ?>
+                    <div class="category_blue">
+                      <?php echo $popular_post['Category']['category']; ?><br>
+                    </div>
+                  <?php elseif ($popular_post['Category']['category'] === '遊び'): ?>
+                    <div class="category_green">
+                      <?php echo $popular_post['Category']['category']; ?><br>
+                    </div>
+                  <?php elseif ($popular_post['Category']['category'] === '仕事'): ?>
+                    <div class="category_red">
+                      <?php echo $popular_post['Category']['category']; ?><br>
+                    </div>
+                  <?php elseif ($popular_post['Category']['category'] === 'テレビ'): ?>
+                    <div class="category_purple">
+                      <?php echo $popular_post['Category']['category']; ?><br>
+                    </div>
+                  <?php else: ?>
+                    <div class="category_color">
+                      <?php echo $popular_post['Category']['category']; ?><br>
+                    </div>
+                  <?php endif; ?>
+                </div>
+                <div class="popular_post_username">
+                  <?php if (!empty($popular_post['User']['username'])): ?>
+                    <?php echo $popular_post['User']['username']; ?>
+                  <?php else: ?>
+                    <?php echo (__('退会済み')); ?>
+                  <?php endif; ?>
+                </div>
+                <div class="popular_post_title">
+                  <?php echo h($popular_post['Post']['title']); ?><br>
+                </div>
               </div>
             </div>
           <?php endforeach; ?>
@@ -59,9 +91,28 @@
         <div class="panel-footer panel_footer">
           <ul class="latest_article_category" style="list-style:none;">
             <?php foreach ($categories as $category): ?>
-              <li>
-                <?php echo $this->Html->link($category['Category']['category'], array('controller' => 'categories', 'action' => 'view', $category['Category']['id'])); ?>
-              </li>
+              <?php if ($category['Category']['category'] === 'カルチャー'): ?>
+                <li class="blue">
+                  <?php echo $this->Html->link($category['Category']['category'], array('controller' => 'categories', 'action' => 'view', $category['Category']['id']), array('class' => 'category_btn')); ?>
+                </li>
+              <?php elseif ($category['Category']['category'] === '遊び'): ?>
+                <li class="green">
+                  <?php echo $this->Html->link($category['Category']['category'], array('controller' => 'categories', 'action' => 'view', $category['Category']['id']), array('class' => 'category_btn')); ?>
+                </li>
+              <?php elseif ($category['Category']['category'] === '仕事'): ?>
+                <li class="yellow">
+                  <?php echo $this->Html->link($category['Category']['category'], array('controller' => 'categories', 'action' => 'view', $category['Category']['id']), array('class' => 'category_btn')); ?>
+                </li>
+              <?php elseif ($category['Category']['category'] === 'テレビ'): ?>
+                <li class="green">
+                  <?php echo $this->Html->link($category['Category']['category'], array('controller' => 'categories', 'action' => 'view', $category['Category']['id']), array('class' => 'category_btn')); ?>
+                </li>
+              <?php else: ?>
+                <li class="red">
+                  <?php echo $this->Html->link($category['Category']['category'], array('controller' => 'categories', 'action' => 'view', $category['Category']['id']), array('class' => 'category_btn')); ?>
+                </li>
+              <?php endif; ?>
+
             <?php endforeach; ?>
           </ul>
         </div>
